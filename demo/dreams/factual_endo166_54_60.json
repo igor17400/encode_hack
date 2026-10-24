@@ -1,0 +1,169 @@
+{
+ "_id": "factual_endo166_54_60",
+ "name": "factual_endo166_54_60",
+ "kind": "factual",
+ "run_id": "dreams_1792866996",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo166",
+  "t": 54,
+  "t_end": 60
+ },
+ "anchor_images": [
+  "factual_endo166_54_60.anchor0.jpg",
+  "factual_endo166_54_60.anchor1.jpg"
+ ],
+ "prompt": "Real laparoscopic cholecystectomy footage. The FIRST image is the opening frame and the SECOND image is the closing frame of the same continuous shot, a few seconds apart. Generate only the motion that connects them: the clip must start exactly on the first image and end exactly on the second image.\n\nWhat is in the scene (taken from the real frames):\nThe view is through a circular laparoscopic port framed by a solid black mask. A metallic grasping forceps with serrated jaws enters from the left edge, holding the pale pink and yellowish fatty tissue near the neck of the gallbladder. A monopolar hook cautery instrument, featuring a matte black shaft, a conical white ceramic collar, and a short silver metallic tip, enters from the lower right edge. The hook tip engages and dissects the connective tissue and lobular yellow fat, opening a small dark window in the center of the frame. Above the instruments, the gallbladder wall appears pale bluish-white and purple with a network of fine red capillaries. Behind and below the dissected pedicle, smooth dark reddish-brown liver lobes with bright white specular highlights and pale tan surface patches are visible. There is no surgical smoke, active red bleeding, or metallic surgical clips present anywhere in the scene.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands.",
+ "patient_id": null,
+ "action": null,
+ "changes": [],
+ "risk_level": null,
+ "violations": [],
+ "note": "Control clip: two real frames of the same shot, the model fills the gap. Compared with the real footage between them. Never a training sample.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 77,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": true,
+    "score": 7.0,
+    "issues": [
+     "Generated frames show a large metal hook tip protruding from the right instrument (frames 3-7) which is not visible in the anchor frames."
+    ]
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 1.0,
+     "instrument_match_rate": 1.0,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  }
+ ],
+ "video": "factual_endo166_54_60.mp4",
+ "fidelity": {
+  "pass": true,
+  "score": 7.0,
+  "issues": [
+   "Generated frames show a large metal hook tip protruding from the right instrument (frames 3-7) which is not visible in the anchor frames."
+  ]
+ },
+ "consistency": {
+  "passed": null,
+  "factual": {
+   "n": 6,
+   "phase_match_rate": 1.0,
+   "instrument_match_rate": 1.0,
+   "errors": false
+  },
+  "agreement": {}
+ },
+ "accepted": false,
+ "created_at": 1792867552.150111,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID13/000490.png",
+    "video_id": "VID13",
+    "t": 490,
+    "phase": "gallbladder-dissection",
+    "score": 0.988170862197876
+   },
+   {
+    "path": "VID36/000660.png",
+    "video_id": "VID36",
+    "t": 660,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9874584674835205
+   },
+   {
+    "path": "VID04/000630.png",
+    "video_id": "VID04",
+    "t": 630,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.987191915512085
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 36, frame 6825 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9896376132965088,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 11, frame 26275 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9887380599975586,
+    "retrieved_for": [
+     "C2 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 3, frame 15650 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "score": 0.9878496527671814,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   }
+  ]
+ },
+ "reason": "control clip (never a training sample)",
+ "text": "factual dream clip; patient None; action None; risk None; no rule violations; changes: none; rejected; anchor endoscapes"
+}

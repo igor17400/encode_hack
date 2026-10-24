@@ -1,0 +1,223 @@
+{
+ "_id": "factual_endo198_147_153",
+ "name": "factual_endo198_147_153",
+ "kind": "factual",
+ "run_id": "dreams_1792868147",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo198",
+  "t": 147,
+  "t_end": 153
+ },
+ "anchor_images": [
+  "factual_endo198_147_153.anchor0.jpg",
+  "factual_endo198_147_153.anchor1.jpg"
+ ],
+ "prompt": "Real laparoscopic cholecystectomy footage. The FIRST image is the opening frame and the SECOND image is the closing frame of the same continuous shot, a few seconds apart. Generate only the motion that connects them: the clip must start exactly on the first image and end exactly on the second image.\n\nWhat is in the scene (taken from the real frames):\nA circular laparoscopic view with black borders shows the hepatocystic region. A silver metallic fenestrated grasper enters from the lower-left edge, holding the pale pink and yellowish gallbladder neck to maintain leftward traction. A bipolar dissector with a ribbed translucent grey shaft and angled metallic jaws enters from the lower-right edge, working inside a dissected window. The gallbladder wall extends from the top-center to the center-left, displaying fine red vessels over a pale pink surface. The dark reddish-brown liver parenchyma occupies the upper-right and upper-left background, while yellowish-orange adipose tissue rests at the bottom. A dark dissected window between the gallbladder neck and liver bed reveals a tubular structure and charred, reddish-brown tissue. There are no surgical clips, active bleeding, or cautery smoke present in the scene.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands.",
+ "patient_id": null,
+ "action": null,
+ "changes": [],
+ "risk_level": null,
+ "violations": [],
+ "note": "Control clip: two real frames of the same shot, the model fills the gap. Compared with the real footage between them. Never a training sample.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 76,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Generated clip does not start near the opening frame; the right instrument is retracted in frames 1-2 instead of inside the tissue.",
+     "Sudden jump in instrument position and shape between frame 2 and frame 3."
+    ]
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 0.5,
+     "instrument_match_rate": 0.167,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  },
+  {
+   "attempt": 2,
+   "seconds_taken": 76,
+   "prompt_feedback": [
+    "Generated clip does not start near the opening frame; the right instrument is retracted in frames 1-2 instead of inside the tissue.",
+    "Sudden jump in instrument position and shape between frame 2 and frame 3."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Frame 1: The right instrument jaws open unnaturally wide and change shape compared to the opening anchor.",
+     "Frame 6: The right instrument position does not match the closing anchor frame."
+    ]
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 0.333,
+     "instrument_match_rate": 0.333,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try2.mp4"
+  },
+  {
+   "attempt": 3,
+   "seconds_taken": 74,
+   "prompt_feedback": [
+    "Generated clip does not start near the opening frame; the right instrument is retracted in frames 1-2 instead of inside the tissue.",
+    "Sudden jump in instrument position and shape between frame 2 and frame 3.",
+    "Frame 1: The right instrument jaws open unnaturally wide and change shape compared to the opening anchor.",
+    "Frame 6: The right instrument position does not match the closing anchor frame."
+   ],
+   "fidelity": {
+    "pass": true,
+    "score": 7.0,
+    "issues": []
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 0.667,
+     "instrument_match_rate": 0.667,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try3.mp4"
+  }
+ ],
+ "video": "factual_endo198_147_153.mp4",
+ "fidelity": {
+  "pass": true,
+  "score": 7.0,
+  "issues": []
+ },
+ "consistency": {
+  "passed": null,
+  "factual": {
+   "n": 6,
+   "phase_match_rate": 0.667,
+   "instrument_match_rate": 0.667,
+   "errors": false
+  },
+  "agreement": {}
+ },
+ "accepted": false,
+ "created_at": 1792869107.037607,
+ "kept_attempt": 3,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID35/000820.png",
+    "video_id": "VID35",
+    "t": 820,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9879884719848633
+   },
+   {
+    "path": "VID18/000260.png",
+    "video_id": "VID18",
+    "t": 260,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9879255294799805
+   },
+   {
+    "path": "VID15/000660.png",
+    "video_id": "VID15",
+    "t": 660,
+    "phase": "clipping-and-cutting",
+    "score": 0.987643837928772
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 57, frame 36275 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "score": 0.9879064559936523,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 15, frame 28275 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.9876490831375122,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 104, frame 38225 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 1.0,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "score": 0.9872967004776001,
+    "retrieved_for": [
+     "C2 met"
+    ]
+   }
+  ]
+ },
+ "reason": "control clip (never a training sample)",
+ "text": "factual dream clip; patient None; action None; risk None; no rule violations; changes: none; rejected; anchor endoscapes"
+}

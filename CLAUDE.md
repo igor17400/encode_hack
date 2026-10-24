@@ -11,9 +11,13 @@ Research simulation on public data. Never present output as clinical advice.
 backend/   config, schema (State/Action/...), rules.py (hard facts, CVS proxy), gemini.py (cached, strict),
            db.py (Atlas: indexes, vector/hybrid search, retries), world_model.py (step), perception.py (Watch),
            agent.py + simulator.py (robot, lessons), reports.py, endoscapes.py (Igor's runs -> our state),
-           experts.py (Igor's expert library, READ-ONLY), stats.py, api.py (FastAPI + SSE)
+           experts.py (Igor's expert library, READ-ONLY), videogen.py (dream data: prompt compiler, Omni Flash
+           render, fidelity + consistency gates), stats.py, api.py (FastAPI + SSE)
 pipeline/  01_download .. 07_expert_views   (data -> states -> transitions -> Atlas; image embeddings; expert views)
+           08_dream_clips (world-model steps -> AI-generated training video, verified, -> Atlas dream_clips)
+demo/record_forecasts.py   VID74 forecasts (E1-identical calls) + truth -> precomputed/forecast_VID74.json
 eval/      next_step_eval (E1/E2 + bootstrap), trained_baseline, perception_eval (E3), agent_eval (E5), merge_e5,
+           dream_eval (E6 -> demo/precomputed/dreams.json + eval_E6_dreams.json), export_dreams (JSONL manifest),
            live_acceptance, splits
 demo/      record.py (--mode offline|live), record_endoscapes.py, precomputed/*.json (recorded live runs),
            clips/ (mp4 + JPEG frames), endoscapes/ (Igor's runs + clips, vendored, credited)
@@ -34,6 +38,9 @@ cd frontend && ./scripts/build_static.sh               # static demo -> dist-sta
 python demo/record.py --mode live --t-from 381 --t-to 561   # re-record demo (costs Gemini calls)
 python -m eval.next_step_eval --split test --n 200 --workers 4
 python -m eval.agent_eval --patients P2 P4 --episodes 5 --dynamics world_model --name <name>
+python pipeline/08_dream_clips.py --dry-run                 # compiled prompts only, no video calls
+python pipeline/08_dream_clips.py --max-renders 36          # Omni Flash renders (~75 s each) + gates; resumable
+python -m eval.dream_eval && python -m eval.export_dreams   # E6 numbers, gallery JSON, training manifest
 ```
 `.env` (gitignored, never commit or print): `GEMINI_API_KEY`, `MONGODB_URI`, `DB_NAME`, `EXPERT_MONGODB_URI` (Igor's
 cluster), optional `GEMINI_MAX_CALLS`, `DEMO_MODE`.
@@ -58,6 +65,12 @@ cluster), optional `GEMINI_MAX_CALLS`, `DEMO_MODE`.
   - Current truth: a gradient-boosting baseline beats Argon on next-action (67.5% vs 56% top-3).
   - The lessons mechanism is untested (the agent was never unsafe).
 - **UI numbers come from data** (eval JSON, `/stats`), never hand-typed. Approximations are labelled ("approximate boxes", "closest real frame", "AI-generated").
+- **Dream clips are synthetic.** Labelled "AI-generated" everywhere, never fed to the rules or evals as real footage.
+  Every attempt is kept (rejected ones too). A failed render / QC / perception call is a failure, never a pass.
+  The consistency gate needs the exact predicted triplet; do not loosen gates after seeing results.
+- **Forecast → reality.** Truth is shown only when the video reaches it (`lib/forecast.js`). Forecasts come from
+  state_before + current action + train-split retrieval only; every forecast is shown, misses included.
+- **Plain language in the UI.** Use `lib/describe.js` (`actionShort`, `actionSentence`, `stateLines`), not raw triplets.
 - **Igor's database is read-only.** `experts._ReadOnly` exposes only `aggregate`, with no `$out`/`$merge`. Never write to it.
 
 ## Domain gotchas
@@ -87,9 +100,16 @@ cluster), optional `GEMINI_MAX_CALLS`, `DEMO_MODE`.
 - Before committing: run the tests, then a secret scan (no keys, URIs with passwords, or cluster hosts in tracked files).
 - End commit messages with: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 
+- Gemini Omni Flash (`gemini-omni-1.1-flash`) is reached through `client.interactions.create(..., background=True)`
+  and polled; Veo 3.1 on the API key is `veo-3.1-generate-preview` (the `-001` name is Vertex only).
+- Video models morph an instrument already in view into the requested one; `videogen.handover()` adds an explicit
+  rule built from what the eyes see in the anchor frame.
+
 ## Ideas for next iterations
 - **Test lessons where the agent can fail:** harder patients, a weaker policy, or longer horizons.
 - **Use a trained model where it wins:** the gradient-boosting predictor for next-action suggestions, with Argon kept for grounded explanations.
 - **Score the eyes on more Endoscapes test operations** (needs the 6.3 GB dataset); feed multi-frame clips to the CVS judge.
 - **Better image embeddings** (surgical-domain) for frame similarity and the expert library.
+- **Dream data:** an inverse-dynamics model to turn accepted clips into tool-motion labels; more video models
+  (Veo 3.1) on the same gates; feed accepted counterfactual clips to the perception eval as hard negatives.
 - **Atlas:** Automated Embedding; per-second outputs as time series; decisions as an audit log.

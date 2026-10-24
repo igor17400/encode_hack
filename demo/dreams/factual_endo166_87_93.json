@@ -1,0 +1,229 @@
+{
+ "_id": "factual_endo166_87_93",
+ "name": "factual_endo166_87_93",
+ "kind": "factual",
+ "run_id": "dreams_1792868147",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo166",
+  "t": 87,
+  "t_end": 93
+ },
+ "anchor_images": [
+  "factual_endo166_87_93.anchor0.jpg",
+  "factual_endo166_87_93.anchor1.jpg"
+ ],
+ "prompt": "Real laparoscopic cholecystectomy footage. The FIRST image is the opening frame and the SECOND image is the closing frame of the same continuous shot, a few seconds apart. Generate only the motion that connects them: the clip must start exactly on the first image and end exactly on the second image.\n\nWhat is in the scene (taken from the real frames):\nA circular laparoscopic view is framed by a black border. A brushed metallic grasper with dark circumferential shaft bands and serrated, fenestrated jaws enters from the right edge, touching the pale yellow-pink connective tissue and engaging a dissected window below the gallbladder. A second metallic grasper tip enters from the lower-left edge, holding the pale yellow-pink fatty tissue at the gallbladder neck. A third thin metallic shaft is barely visible at the top-center edge against the superior gallbladder fat. The gallbladder occupies the upper-left quadrant, showing a bluish-purple wall covered with fine dark red vessels and lobulated yellow-orange fat. The smooth, reddish-brown liver parenchyma fills the right half of the frame, displaying small pale yellowish-white patches on its glistening surface. Below the dissected tissue bridge, a dark brown fluid pool and pale yellow-pink omental fat sit at the bottom of the field. No surgical clips, no cautery hooks, no smoke, and no active red bleeding are present.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands.",
+ "patient_id": null,
+ "action": null,
+ "changes": [],
+ "risk_level": null,
+ "violations": [],
+ "note": "Control clip: two real frames of the same shot, the model fills the gap. Compared with the real footage between them. Never a training sample.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 75,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Generated clip does not start at the opening anchor frame (image 3 shows the instrument displaced downward and white marks on the liver not present in image 1).",
+     "Left surgical forceps warps and changes shape implausibly in generated frames 1 and 2 (images 3 and 4)."
+    ]
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 0.5,
+     "instrument_match_rate": 0.333,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  },
+  {
+   "attempt": 2,
+   "seconds_taken": 76,
+   "prompt_feedback": [
+    "Generated clip does not start at the opening anchor frame (image 3 shows the instrument displaced downward and white marks on the liver not present in image 1).",
+    "Left surgical forceps warps and changes shape implausibly in generated frames 1 and 2 (images 3 and 4)."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Clip does not start near the opening frame; frame 3 abruptly shows cautery marks on the liver and different instrument positions matching the closing frame.",
+     "The left grasper warps and changes shape in frame 3 before snapping back to its anchor state in frame 4."
+    ]
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 0.667,
+     "instrument_match_rate": 0.167,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try2.mp4"
+  },
+  {
+   "attempt": 3,
+   "seconds_taken": 75,
+   "prompt_feedback": [
+    "Generated clip does not start at the opening anchor frame (image 3 shows the instrument displaced downward and white marks on the liver not present in image 1).",
+    "Left surgical forceps warps and changes shape implausibly in generated frames 1 and 2 (images 3 and 4).",
+    "Clip does not start near the opening frame; frame 3 abruptly shows cautery marks on the liver and different instrument positions matching the closing frame.",
+    "The left grasper warps and changes shape in frame 3 before snapping back to its anchor state in frame 4."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Frame 1: Pale liver patches from the closing anchor appear prematurely behind the instrument.",
+     "Frames 3-4: The tissue strand in the center disappears and reappears inconsistently instead of smoothly deforming."
+    ]
+   },
+   "consistency": {
+    "passed": null,
+    "factual": {
+     "n": 6,
+     "phase_match_rate": 0.5,
+     "instrument_match_rate": 0.167,
+     "errors": false
+    },
+    "agreement": {}
+   },
+   "accepted": false,
+   "file": "try3.mp4"
+  }
+ ],
+ "video": "factual_endo166_87_93.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 4.0,
+  "issues": [
+   "Generated clip does not start at the opening anchor frame (image 3 shows the instrument displaced downward and white marks on the liver not present in image 1).",
+   "Left surgical forceps warps and changes shape implausibly in generated frames 1 and 2 (images 3 and 4)."
+  ]
+ },
+ "consistency": {
+  "passed": null,
+  "factual": {
+   "n": 6,
+   "phase_match_rate": 0.5,
+   "instrument_match_rate": 0.333,
+   "errors": false
+  },
+  "agreement": {}
+ },
+ "accepted": false,
+ "created_at": 1792868376.9546912,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID13/000090.png",
+    "video_id": "VID13",
+    "t": 90,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9860763549804688
+   },
+   {
+    "path": "VID04/000700.png",
+    "video_id": "VID04",
+    "t": 700,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9859151840209961
+   },
+   {
+    "path": "VID49/000140.png",
+    "video_id": "VID49",
+    "t": 140,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9853655695915222
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 42, frame 48650 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9885594844818115,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 71, frame 14175 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9884215593338013,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 42, frame 46525 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "score": 0.9876501560211182,
+    "retrieved_for": [
+     "C2 met"
+    ]
+   }
+  ]
+ },
+ "reason": "control clip (never a training sample)",
+ "text": "factual dream clip; patient None; action None; risk None; no rule violations; changes: none; rejected; anchor endoscapes"
+}

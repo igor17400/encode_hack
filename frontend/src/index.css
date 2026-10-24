@@ -33,9 +33,13 @@ h1, h2, h3, .font-display {
 @keyframes flash-change { 0% { opacity: 1; } 100% { opacity: 0; } }
 @keyframes drip { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(14px); opacity: 0; } }
 .anim-pulse { animation: pulse-ring 1.4s ease-in-out infinite; }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(143, 156, 255, 0.0); } 50% { box-shadow: 0 0 22px 4px rgba(143, 156, 255, 0.55); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-6px); } 40% { transform: translateX(6px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(3px); } }
+.anim-glow { animation: glow 1s ease-in-out infinite; }
+.anim-shake { animation: shake 0.45s ease-in-out 1; }
 .anim-flash { animation: flash-change 1.8s ease-out forwards; }
 .anim-drip { animation: drip 1.2s ease-in infinite; }
-@media (prefers-reduced-motion: reduce) { .anim-pulse, .anim-flash, .anim-drip { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .anim-pulse, .anim-flash, .anim-drip, .anim-glow, .anim-shake { animation: none; } }
 
 @layer components {
   .card {

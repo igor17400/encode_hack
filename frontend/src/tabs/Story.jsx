@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { get, actionLabel, niceName, videoUrl } from "../api";
+import { Engine } from "../components/ForecastOverlay";
+import { get, niceName, videoUrl, dreamUrl } from "../api";
+import { actionShort } from "../lib/describe";
 import AnatomyMap, { CvsRing, diffStates } from "../components/AnatomyMap";
 import { FutureTree } from "../components/StateSpaceMap";
 import VideoHUD from "../components/VideoHUD";
@@ -30,13 +32,19 @@ export default function Story({ onOpen }) {
           get(`/recorded/imagine_P2_${k(ACT_CLIP)}_${CLIP}_${T_EARLY}`), get(`/recorded/imagine_P2_${k(ACT_DISSECT)}_${CLIP}_${T_EARLY}`),
           get(`/recorded/imagine_P2_${k(ACT_CLIP)}_${CLIP}_${T_LATE}`), get("/eval/latest", { name: "E5_world_model" }).catch(() => null),
         ]);
+        const forecast = await get("/forecasts/VID74").catch(() => null);
+        const dreams = await get("/dreams").catch(() => []);
+        const pref = ["counterfactual", "robot", "safe"]; // first accepted clip in this order (no hand-picking)
+        const dream = pref.map((kind) => dreams.find((x) => x.kind === kind && x.accepted)).find(Boolean) || null;
+        const dreamStats = { accepted: dreams.filter((x) => x.accepted).length,
+          total: dreams.filter((x) => ["safe", "counterfactual", "robot"].includes(x.kind)).length };
         const clip = clips.find((c) => c.video_id === CLIP);
         const obs = watch.events.filter(([c]) => c === "observations").map(([, o]) => o);
         const states = watch.events.filter(([c, x]) => c === "world_state" && x.state).map(([, x]) => x);
         const near = (arr, t) => arr.reduce((a, b) => (Math.abs(b.t - t) < Math.abs(a.t - t) ? b : a));
         const experts = obs.filter((o) => o.expert).map((o) => o.expert);
         setD({ clip, obs: near(obs, T_EARLY), state: near(states, T_EARLY).state, views, clipEarly, dissectEarly, clipLate, e5,
-               expertNow: [...experts].reverse().find((e) => e.t <= T_EARLY), stateLate: near(states, T_LATE).state });
+               forecast, dream, dreamStats, expertNow: [...experts].reverse().find((e) => e.t <= T_EARLY), stateLate: near(states, T_LATE).state });
       } catch (e) {
         setError(e.message);
       }
@@ -152,7 +160,7 @@ const STEPS = [
           {d.clipEarly.neighbours.slice(0, 5).map((n) => (
             <div key={n.id} className={`rounded-lg p-2 text-sm ${d.clipEarly.cited_transition_ids.includes(n.id) ? "bg-surface-2" : "opacity-60"}`}>
               <div className="flex justify-between font-mono text-xs text-ink-3"><span>{n.id}</span><span>sim {n.score?.toFixed(3)}</span></div>
-              <div className="text-ink-2">surgeon then: {actionLabel(n.next_action)}</div>
+              <div className="text-ink-2">surgeon then: {actionShort(n.next_action)}</div>
             </div>
           ))}
         </div>
@@ -172,6 +180,43 @@ const STEPS = [
     ),
   },
   {
+    kicker: "Forecast → reality", who: "data",
+    title: "Does it come true?",
+    text: (d) => {
+      const c = d.forecast?.clip_score;
+      return c ? <>On a held-out real operation (VID74, never used for retrieval or training), the world model forecast each next move before it happened. The surgeon's real next action was in its top 3 <b>{c.world_model.top3} of {c.n}</b> times; a trained model managed {c.trained.top3}, a simple bigram {c.bigram.top3}. The predicted anatomy matched reality {c.anatomy_all_match} of {c.n} times.</> : "Forecasts on a held-out operation, checked against what really happened.";
+    },
+    note: () => "Across 200 held-out moments a trained gradient-boosting model forecasts the next action better (67.5% vs 56% in the top 3). Risk can't be checked: CholecT50 has no complication labels.",
+    visual: (d, onOpen) => (
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+      {d.forecast?.forecasts?.[0] && (
+        <div className="flex flex-col gap-1">
+          <div className="label">The engine at work: the first forecast on the clip</div>
+          <Engine s={{ mode: "reveal", f: d.forecast.forecasts[0] }} animate={false} />
+        </div>
+      )}
+      <div className="card flex flex-col gap-2">
+        <div className="label">Every forecast on the clip, in order</div>
+        <ol className="flex flex-col gap-1 text-sm">
+          {(d.forecast?.forecasts || []).map((f) => {
+            const r = f.scores.world_model.rank;
+            return (
+              <li key={f.id} className="flex flex-col border-b border-line/50 pb-1">
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="font-mono text-xs text-ink-3">{fmtT(f.t)}</span>
+                  <span className={`text-xs font-semibold ${r === 1 ? "text-status-good" : r ? "text-status-warning" : "text-status-serious"}`}>{r === 1 ? "✓ top pick" : r ? `✓ in top 3 (#${r})` : "✗ miss"}</span>
+                </div>
+                <span><span className="text-ink-3">engine: </span>{actionShort(f.world_model.top3[0]?.action)} <span className="text-ink-3">· surgeon: </span>{actionShort(f.truth.next_action)}</span>
+              </li>
+            );
+          })}
+        </ol>
+        <button className="btn-primary self-start" onClick={() => onOpen("watch")}>Watch the forecasts play on the video →</button>
+      </div>
+      </div>
+    ),
+  },
+  {
     kicker: "Why a world model", who: "data",
     title: "A crash-test dummy for surgical robots",
     text: (d) => {
@@ -184,6 +229,30 @@ const STEPS = [
         <p className="text-ink-2">See every episode as a path through the world model's state space.</p>
         <button className="btn-primary" onClick={() => onOpen("robot")}>Open Train the robot →</button>
         <button className="btn" onClick={() => onOpen("watch")}>Watch the model build itself on a real video →</button>
+      </div>
+    ),
+  },
+  {
+    kicker: "Dream data", who: "data",
+    title: "Imagined futures become verified training video",
+    text: (d) => <>The world model writes the video prompt from its own prediction, Gemini renders it from a real frame, and two gates check it: an Argon inspector against the real frame, and our eyes must see what the world model predicted. <b>{d.dreamStats.accepted} of {d.dreamStats.total}</b> world-model clips passed both.</>,
+    note: () => "Every clip is AI-generated and labelled so. Samples pair video with an action and outcome, not robot joint motion.",
+    visual: (d, onOpen) => (
+      <div className="grid gap-3 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        {d.dream ? (
+          <figure className="card relative flex flex-col gap-2">
+            <div className="label">{d.dream.kind === "counterfactual" ? "Unsafe branch" : d.dream.kind === "robot" ? "Robot episode" : "Safe branch"} · {actionShort(d.dream.action)}</div>
+            <video src={dreamUrl(d.dream.video)} autoPlay loop muted playsInline className="aspect-video w-full max-w-full rounded-lg bg-black object-cover" />
+            <span className="absolute left-6 top-14 rounded bg-black/70 px-2 py-0.5 text-xs font-semibold text-[#ffd479]">AI-generated</span>
+            <figcaption className="text-xs text-ink-3">From the real {d.dream.anchor?.clip} frame at {d.dream.anchor?.t}s. Predicted: {(d.dream.changes || []).join("; ") || "no visible change"}.</figcaption>
+          </figure>
+        ) : (
+          <div className="card text-ink-3">No world-model clip has passed both gates yet; the rejected attempts and their reasons are on Train the robot.</div>
+        )}
+        <div className="card flex flex-col items-start gap-3">
+          {d.dream && <AnatomyMap state={d.dream.state_after_predicted} prev={d.dream.state_before} mini />}
+          <button className="btn-primary" onClick={() => onOpen("robot")}>See all dream clips →</button>
+        </div>
       </div>
     ),
   },

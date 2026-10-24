@@ -1,0 +1,461 @@
+{
+ "_id": "robot_endo166_93_P2_6x10s_step5",
+ "name": "robot_endo166_93_P2_6x10s_step5",
+ "kind": "robot",
+ "run_id": "dreams_1792868193",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 10,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "generated",
+  "from": "robot_endo166_93_P2_6x10s_step4.mp4",
+  "note": "last frame of the previous AI-generated step"
+ },
+ "anchor_images": [
+  "robot_endo166_93_P2_6x10s_step5.anchor0.jpg"
+ ],
+ "prompt": "Continue this exact laparoscopic cholecystectomy footage for 10 seconds. Same camera, viewpoint, lighting, colours, image quality and anatomy as the input image.\n\nWhat is in the scene (taken from the real frame):\nA circular laparoscopic view shows the gallbladder and liver during a cholecystectomy. A silver metallic grasper enters from the top center edge and holds the pinkish peritoneal membrane near the top of the gallbladder. The gallbladder on the left is bluish-white with visible red capillaries and yellow fatty tissue. The liver on the right is smooth, glossy, and reddish-brown with a few small whitish patches. Below the gallbladder, a dissected window reveals two tubular structures, the cystic duct and artery, surrounded by yellow fat. A single silver metallic surgical clip is clamped around the upper tubular structure in the center. Dark red pooled blood or liver tissue is visible beneath the dissected window. There is no surgical smoke, active bleeding, or cautery tool present in the scene.\n\nOne surgical step happens (chosen by a patient world model): Laparoscopic scissors on a long straight shaft comes into view along its shaft (or, if it is already in view, moves to the cystic artery). It cuts across the cystic artery between the clips.\n\nInstruments already in view: the grasper. An instrument never changes into another instrument. Before the scissors arrives, any instrument in its way slides straight back out of view along its own shaft; the others stay where they are.\n\nBy the end of the clip: the cystic artery is divided between its clips.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands; bleeding; clips.",
+ "patient_id": "P2",
+ "action": "scissors,cut,cystic_artery",
+ "state_before": {
+  "t": 143,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "cut",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "clipped",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": true,
+   "c2_plate_exposed": true,
+   "c3_two_structures": true
+  },
+  "bleeding": true,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {
+   "scissors,cut,cystic_duct": 10
+  },
+  "last_bleed_t": 133,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
+ },
+ "state_after_predicted": {
+  "t": 153,
+  "phase": "gallbladder-dissection",
+  "phase_idx": 3,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "cut",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "cut",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": true,
+   "c2_plate_exposed": true,
+   "c3_two_structures": true
+  },
+  "bleeding": true,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {
+   "scissors,cut,cystic_artery": 10
+  },
+  "last_bleed_t": 133,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
+ },
+ "changes": [
+  "cystic artery: clipped \u2192 cut"
+ ],
+ "risk_level": "low",
+ "violations": [],
+ "cited_transition_ids": [
+  "VID35_01390",
+  "VID49_00518",
+  "VID02_01329",
+  "VID103_00845"
+ ],
+ "world_model_source": "argon",
+ "explanation": "Dividing the clipped cystic artery with a complete critical view of safety transitions the procedure into gallbladder dissection (VID35_01390), and none of the matched artery cuts caused new bleeding (VID35_01390, VID49_00518, VID02_01329, VID103_00845), though prior bleeding persists in this inflamed patient. Because the cystic duct is already divided, the most likely next action is retracting the gallbladder with a grasper (VID35_01390, VID02_01329) rather than cutting the duct as in cases where it remained intact (VID49_00518, VID103_00845).",
+ "episode": "robot_endo166_93_P2_6x10s",
+ "step": 5,
+ "agent_reason": "The cystic artery is already doubly clipped and skeletonised, so cutting it completes the clipping-and-cutting phase for the vessels.",
+ "policy": "agent (Flash)",
+ "world_model_record": null,
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 92,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.",
+     "Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": false,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "scissors"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "clipper,clip,cystic_duct",
+      "grasper,retract,gallbladder",
+      "scissors,cut,cystic_artery",
+      "scissors,cut,cystic_duct"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 10
+     },
+     "anchor_instruments": [
+      "grasper"
+     ],
+     "expected_phase": "gallbladder-dissection",
+     "expected_action": "scissors,cut,cystic_artery"
+    }
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  },
+  {
+   "attempt": 2,
+   "seconds_taken": 98,
+   "prompt_feedback": [
+    "Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.",
+    "Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frames 2-4: An unprompted clip applier instrument appears with a severely deformed tip and places a second clip.",
+     "Frames 6-9: Scissors enter and close over the tissue, but fail to actually cut or sever the cystic artery."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": false,
+     "no_new_instruments": false,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "scissors"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "grasper,retract,gallbladder",
+      "scissors,cut,cystic_duct",
+      "scissors,cut,peritoneum",
+      "scissors,dissect,cystic_duct"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 10
+     },
+     "anchor_instruments": [
+      "grasper"
+     ],
+     "expected_phase": "gallbladder-dissection",
+     "expected_action": "scissors,cut,cystic_artery"
+    }
+   },
+   "accepted": false,
+   "file": "try2.mp4"
+  },
+  {
+   "attempt": 3,
+   "seconds_taken": 93,
+   "prompt_feedback": [
+    "Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.",
+    "Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip.",
+    "Frames 2-4: An unprompted clip applier instrument appears with a severely deformed tip and places a second clip.",
+    "Frames 6-9: Scissors enter and close over the tissue, but fail to actually cut or sever the cystic artery."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Abrupt instrument swap in frames 4-6: a metallic grasper/clip applier appears in frame 4, changes into large white-bladed scissors in frame 5, and then into black-shafted laparoscopic scissors in frame 6.",
+     "Implausible jumps in instrument position and appearance across frames 3 to 6."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": false,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "scissors"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "grasper,retract,gallbladder",
+      "scissors,cut,cystic_artery",
+      "scissors,cut,cystic_duct"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 10
+     },
+     "anchor_instruments": [
+      "grasper"
+     ],
+     "expected_phase": "gallbladder-dissection",
+     "expected_action": "scissors,cut,cystic_artery"
+    }
+   },
+   "accepted": false,
+   "file": "try3.mp4"
+  }
+ ],
+ "video": "robot_endo166_93_P2_6x10s_step5.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 4.0,
+  "issues": [
+   "Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.",
+   "Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip."
+  ]
+ },
+ "consistency": {
+  "agreement": {
+   "instrument_seen": true,
+   "action_seen": true,
+   "no_new_instruments": false,
+   "phase_matches": false,
+   "view_clear": true
+  },
+  "errors": [],
+  "passed": false,
+  "observed": {
+   "instruments": [
+    "clipper",
+    "grasper",
+    "scissors"
+   ],
+   "triplets": [
+    "clipper,clip,cystic_artery",
+    "clipper,clip,cystic_duct",
+    "grasper,retract,gallbladder",
+    "scissors,cut,cystic_artery",
+    "scissors,cut,cystic_duct"
+   ],
+   "phase_late": "clipping-and-cutting",
+   "view_quality": {
+    "clear": 10
+   },
+   "anchor_instruments": [
+    "grasper"
+   ],
+   "expected_phase": "gallbladder-dissection",
+   "expected_action": "scissors,cut,cystic_artery"
+  }
+ },
+ "accepted": false,
+ "created_at": 1792870250.707503,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID27/000760.png",
+    "video_id": "VID27",
+    "t": 760,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9854569435119629
+   },
+   {
+    "path": "VID04/000760.png",
+    "video_id": "VID04",
+    "t": 760,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9842721223831177
+   },
+   {
+    "path": "VID27/000940.png",
+    "video_id": "VID27",
+    "t": 940,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9841384291648865
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 76, frame 56475 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.9840989112854004,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 met",
+     "C3 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 33, frame 22325 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9834308624267578,
+    "retrieved_for": [
+     "C2 not met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 49, frame 29475 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9828797578811646,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   }
+  ]
+ },
+ "reason": "fidelity failed: Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.; Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip.; eyes disagree with the world model: no_new_instruments, phase_matches",
+ "text": "robot dream clip; patient P2; action scissors,cut,cystic_artery; risk low; no rule violations; changes: cystic artery: clipped \u2192 cut; rejected; anchor generated"
+}

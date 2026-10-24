@@ -1,0 +1,458 @@
+{
+ "_id": "robot_endo166_93_P2_6x10s_step3",
+ "name": "robot_endo166_93_P2_6x10s_step3",
+ "kind": "robot",
+ "run_id": "dreams_1792868193",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 10,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "generated",
+  "from": "robot_endo166_93_P2_6x10s_step2.mp4",
+  "note": "last frame of the previous AI-generated step"
+ },
+ "anchor_images": [
+  "robot_endo166_93_P2_6x10s_step3.anchor0.jpg"
+ ],
+ "prompt": "Continue this exact laparoscopic cholecystectomy footage for 10 seconds. Same camera, viewpoint, lighting, colours, image quality and anatomy as the input image.\n\nWhat is in the scene (taken from the real frame):\nA circular laparoscopic view shows the dissection of Calot's triangle. A metallic grasper with a black insulated shaft enters from the top center edge, holding the whitish peritoneal fold near the upper gallbladder wall. The gallbladder occupies the left side, displaying a bluish-grey wall covered in fine red vessels and yellow adipose tissue. To the right is the dark reddish-brown liver lobe with small pale patches and glossy highlights. Below the gallbladder, a dissected window reveals two isolated tubular structures, with a single silver metallic clip fastened around the upper cystic artery. Small traces of dark red blood rest near the clipped vessel and in the lower background recess. No second surgical instrument, electrocautery smoke, or active bleeding is visible in the frame.\n\nOne surgical step happens (chosen by a patient world model): A laparoscopic clip applier: a long shaft with two jaws holding one small metal clip comes into view along its shaft (or, if it is already in view, moves to the cystic artery). It closes its jaws across the cystic artery, leaving one small metal clip on it, then opens and withdraws.\n\nInstruments already in view: the grasper. An instrument never changes into another instrument. Before the clipper arrives, any instrument in its way slides straight back out of view along its own shaft; the others stay where they are.\n\nBy the end of the clip: the cystic artery has 2 small metal clips across it.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands; bleeding; cutting.",
+ "patient_id": "P2",
+ "action": "clipper,clip,cystic_artery",
+ "state_before": {
+  "t": 123,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "clipped",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "clipped",
+    "exposure": 1.0,
+    "clips": 1,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": true,
+   "c2_plate_exposed": true,
+   "c3_two_structures": true
+  },
+  "bleeding": true,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {
+   "clipper,clip,cystic_artery": 10
+  },
+  "last_bleed_t": 123,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
+ },
+ "state_after_predicted": {
+  "t": 133,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "clipped",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "clipped",
+    "exposure": 1.0,
+    "clips": 2,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": true,
+   "c2_plate_exposed": true,
+   "c3_two_structures": true
+  },
+  "bleeding": true,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {
+   "clipper,clip,cystic_artery": 10
+  },
+  "last_bleed_t": 133,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
+ },
+ "changes": [
+  "cystic artery: 2 clips"
+ ],
+ "risk_level": "moderate",
+ "violations": [],
+ "cited_transition_ids": [
+  "VID22_00473",
+  "VID13_00396",
+  "VID70_00557",
+  "VID70_00564",
+  "VID02_01296"
+ ],
+ "world_model_source": "argon",
+ "explanation": "Placing an additional clip on the exposed cystic artery with a complete critical view of safety is a standard step supported by the reference cases (VID22_00473, VID70_00564). Although clipping the artery resolved active bleeding in VID22_00473, bleeding persists in this acutely inflamed patient, and four of the five retrieved transitions indicate that retracting the gallbladder is the most likely next action (VID22_00473, VID70_00557, VID70_00564, VID02_01296).",
+ "episode": "robot_endo166_93_P2_6x10s",
+ "step": 3,
+ "agent_reason": "The cystic artery currently has only one clip and requires a second clip before division.",
+ "policy": "agent (Flash)",
+ "world_model_record": null,
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 111,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Wrong instrument generated: a toothed grasper enters instead of a clipper (frames 3-9).",
+     "The instrument grabs an existing clip and pinches it without applying a new clip (frames 5-8)."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": true,
+     "phase_matches": true,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": true,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "grasper,retract,gallbladder"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 10
+     },
+     "anchor_instruments": [
+      "grasper"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "clipper,clip,cystic_artery"
+    }
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  },
+  {
+   "attempt": 2,
+   "seconds_taken": 99,
+   "prompt_feedback": [
+    "Wrong instrument generated: a toothed grasper enters instead of a clipper (frames 3-9).",
+    "The instrument grabs an existing clip and pinches it without applying a new clip (frames 5-8)."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Wrong instrument used: a serrated grasper enters instead of a clipper (frames 3-9).",
+     "Intended action not completed: the instrument squeezes an existing clip rather than applying a new clip to the cystic artery (frames 5-8)."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": false,
+     "phase_matches": true,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "hook",
+      "scissors"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "grasper,dissect,cystic_pedicle",
+      "grasper,retract,gallbladder",
+      "hook,dissect,cystic_plate"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 10
+     },
+     "anchor_instruments": [
+      "grasper"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "clipper,clip,cystic_artery"
+    }
+   },
+   "accepted": false,
+   "file": "try2.mp4"
+  },
+  {
+   "attempt": 3,
+   "seconds_taken": 99,
+   "prompt_feedback": [
+    "Wrong instrument generated: a toothed grasper enters instead of a clipper (frames 3-9).",
+    "The instrument grabs an existing clip and pinches it without applying a new clip (frames 5-8).",
+    "Wrong instrument used: a serrated grasper enters instead of a clipper (frames 3-9).",
+    "Intended action not completed: the instrument squeezes an existing clip rather than applying a new clip to the cystic artery (frames 5-8)."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Frames 3-6: Instrument enters as a malformed grasper holding a circular wire loop rather than a standard surgical clip applier.",
+     "Frames 6-9: The new clip morphs into the pre-existing clip and vanishes as the jaws close, failing to leave a second clip on the artery."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": false,
+     "phase_matches": true,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "scissors"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "clipper,clip,cystic_duct",
+      "grasper,retract,gallbladder",
+      "scissors,dissect,cystic_artery"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 10
+     },
+     "anchor_instruments": [
+      "grasper"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "clipper,clip,cystic_artery"
+    }
+   },
+   "accepted": false,
+   "file": "try3.mp4"
+  }
+ ],
+ "video": "robot_endo166_93_P2_6x10s_step3.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 4.0,
+  "issues": [
+   "Wrong instrument used: a serrated grasper enters instead of a clipper (frames 3-9).",
+   "Intended action not completed: the instrument squeezes an existing clip rather than applying a new clip to the cystic artery (frames 5-8)."
+  ]
+ },
+ "consistency": {
+  "agreement": {
+   "instrument_seen": true,
+   "action_seen": true,
+   "no_new_instruments": false,
+   "phase_matches": true,
+   "view_clear": true
+  },
+  "errors": [],
+  "passed": false,
+  "observed": {
+   "instruments": [
+    "clipper",
+    "grasper",
+    "hook",
+    "scissors"
+   ],
+   "triplets": [
+    "clipper,clip,cystic_artery",
+    "grasper,dissect,cystic_pedicle",
+    "grasper,retract,gallbladder",
+    "hook,dissect,cystic_plate"
+   ],
+   "phase_late": "clipping-and-cutting",
+   "view_quality": {
+    "clear": 10
+   },
+   "anchor_instruments": [
+    "grasper"
+   ],
+   "expected_phase": "clipping-and-cutting",
+   "expected_action": "clipper,clip,cystic_artery"
+  }
+ },
+ "accepted": false,
+ "created_at": 1792869581.982833,
+ "kept_attempt": 2,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID04/000740.png",
+    "video_id": "VID04",
+    "t": 740,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.98456871509552
+   },
+   {
+    "path": "VID13/000440.png",
+    "video_id": "VID13",
+    "t": 440,
+    "phase": "gallbladder-dissection",
+    "score": 0.9843015670776367
+   },
+   {
+    "path": "VID13/000420.png",
+    "video_id": "VID13",
+    "t": 420,
+    "phase": "clipping-and-cutting",
+    "score": 0.9841368198394775
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 24, frame 21850 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9857757091522217,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 76, frame 56475 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.9848332405090332,
+    "retrieved_for": [
+     "C2 met",
+     "C3 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 111, frame 25000 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "score": 0.9845389127731323,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   }
+  ]
+ },
+ "reason": "fidelity failed: Wrong instrument used: a serrated grasper enters instead of a clipper (frames 3-9).; Intended action not completed: the instrument squeezes an existing clip rather than applying a new clip to the cystic artery (frames 5-8).; eyes disagree with the world model: no_new_instruments",
+ "text": "robot dream clip; patient P2; action clipper,clip,cystic_artery; risk moderate; no rule violations; changes: cystic artery: 2 clips; rejected; anchor generated"
+}

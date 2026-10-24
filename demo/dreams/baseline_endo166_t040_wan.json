@@ -1,0 +1,190 @@
+{
+ "_id": "baseline_endo166_t040_wan",
+ "name": "baseline_endo166_t040_wan",
+ "kind": "baseline",
+ "run_id": "dreams_1792868147",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "Wan 2.2 TI2V-5B (Igor, local)",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo166",
+  "t": 40
+ },
+ "anchor_images": [
+  "baseline_endo166_t040_wan.anchor0.jpg"
+ ],
+ "prompt": "(hand-written: worldmodel/run_demo.sh (first prompt: early dissection))",
+ "patient_id": null,
+ "action": null,
+ "changes": [],
+ "risk_level": null,
+ "violations": [],
+ "hand_prompted": true,
+ "prompt_ref": "worldmodel/run_demo.sh (first prompt: early dissection)",
+ "source_model": "Wan 2.2 TI2V-5B (Igor, local)",
+ "note": "Hand-written prompt, no world model: only the intent-free checks apply.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "The cautery hook disappears abruptly between frames 3 and 4.",
+     "Specular highlights morph into unnatural metallic-looking artifacts across frames 2-4.",
+     "Tissue texture degrades and blurs progressively."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "no_new_instruments": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": null,
+    "observed": {
+     "instruments": [
+      "grasper",
+      "hook",
+      "scissors"
+     ],
+     "anchor_instruments": [
+      "grasper",
+      "hook"
+     ]
+    }
+   },
+   "accepted": false,
+   "file": "clip.mp4"
+  }
+ ],
+ "video": "baseline_endo166_t040_wan.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 3.0,
+  "issues": [
+   "The cautery hook disappears abruptly between frames 3 and 4.",
+   "Specular highlights morph into unnatural metallic-looking artifacts across frames 2-4.",
+   "Tissue texture degrades and blurs progressively."
+  ]
+ },
+ "consistency": {
+  "agreement": {
+   "no_new_instruments": false,
+   "view_clear": true
+  },
+  "errors": [],
+  "passed": null,
+  "observed": {
+   "instruments": [
+    "grasper",
+    "hook",
+    "scissors"
+   ],
+   "anchor_instruments": [
+    "grasper",
+    "hook"
+   ]
+  }
+ },
+ "accepted": false,
+ "created_at": 1792869138.779135,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID36/001100.png",
+    "video_id": "VID36",
+    "t": 1100,
+    "phase": "clipping-and-cutting",
+    "score": 0.987744927406311
+   },
+   {
+    "path": "VID04/000740.png",
+    "video_id": "VID04",
+    "t": 740,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9875481128692627
+   },
+   {
+    "path": "VID13/000090.png",
+    "video_id": "VID13",
+    "t": 90,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9873981475830078
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 2, frame 31050 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "score": 0.9862762093544006,
+    "retrieved_for": [
+     "C1 met",
+     "C2 met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 49, frame 29475 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9860962629318237,
+    "retrieved_for": [
+     "C2 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 41, frame 975 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.9860934019088745,
+    "retrieved_for": [
+     "C3 met"
+    ]
+   }
+  ]
+ },
+ "reason": "hand-prompted comparison (never a training sample)",
+ "text": "baseline dream clip; patient None; action None; risk None; no rule violations; changes: none; rejected; anchor endoscapes"
+}

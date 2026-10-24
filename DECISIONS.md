@@ -2,6 +2,30 @@
 
 Newest first. Each entry: what changed, why.
 
+## 2026-10-24 (pass 6: forecast → reality, the prediction engine shown next to the video)
+
+- **What is shown.**
+  - On VID74 (test split, never retrieved from or trained on), each real transition gets the world model's next-action forecast, recorded with exactly the E1 call (`run_one`, strict).
+  - It sits next to the forecasts of the trained gradient-boosting model and the bigram, and the surgeons' real next action.
+  - `lib/forecast.js` reveals the truth only when the video reaches it (node-tested).
+- **Result on the clip.** 11 forecasts, including the action already in progress when the clip starts. The real move was in the top 3: engine 6, trained 7, bigram 6. Predicted anatomy matched the labels 10 of 11. All forecasts are shown, misses included.
+- **One differing sample.** 1 of the 3 items that overlap E1 (VID74_00466) gave a different 2nd/3rd choice than in E1. E1 ran before the sensed-CVS fields changed Argon's prompt for some states, so this is a fresh Argon sample. Its top pick, and therefore its score, is the same.
+- **Plain language.** Actions are written as sentences ("Lift the gallbladder") from vocabulary templates (`lib/describe.js`, tested on every real triplet), and the state as a checklist. This came from user feedback that the triplet notation hid what was being predicted.
+- **The engine panel shows its inputs.** It shows the 5 retrieved real moments and what surgeons did next in each (a vote tally); the forecast usually follows the majority. The eyes (Flash) and the engine (labels) are labelled separately, with a note when the eyes misread a clip or cut.
+- **Imagine** now lays out rules → real cases → Argon → predicted patient, with no auto-popup and a "counterfactual, can't be checked" banner. The live `/clips` lists the VID74 demo window that has video. World3D falls back to the 2D map without WebGL instead of crashing the page.
+
+## 2026-10-24 (pass 5: dream data, synthetic training video from world-model steps)
+
+- **Recipe.** World-model step → deterministic prompt compiler (`videogen.compile_prompt`) → Gemini Omni Flash from a real frame → fidelity gate (Argon QC, from Igor's `generate.py`) + consistency gate (our Flash eyes vs the predicted outcome) → Atlas `dream_clips`. Retries feed the QC defects back into the prompt, up to 3.
+- **Smoke test.** The first render (hook morphing into a clip applier) led to `handover()`, which names the instruments the eyes see in the anchor frame and forbids morphing. That smoke-test attempt's log is kept in `.cache`; the clip was re-rendered under the final prompt.
+- **Results (all attempts kept).**
+  - 12 world-model clips (3 safe, 3 unsafe, 6 robot steps), 36 render attempts (35 succeeded, 1 API error), **0 accepted**.
+  - Fidelity failures throughout, mostly instrument morphing.
+  - Consistency agreement: instrument seen 12/12, action seen 10/12, no invented instruments 6/12, phase 9/12.
+  - Controls (real → real interpolation): fidelity 2/3. Igor's Wan clips: 0/3.
+- **Gates are not loosened after seeing results.** On the safe clips the eyes saw "hook dissects" but named a different target (pedicle/peritoneum), so they fail the exact-action check, and they stay failed.
+- **The robot episode continues past rejected steps** from the best attempt's last frame, so the video has no gaps. Those steps are marked and excluded from the training export.
+
 ## 2026-10-24 (pass 4b: boxes on our own clip)
 
 - The Flash perception schema gains optional display-only `boxes` (structures + instruments, `[ymin, xmin, ymax, xmax]` 0–1000). The rules never read them.

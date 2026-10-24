@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { actionLabel, niceName } from "../api";
+import { niceName } from "../api";
+import { actionShort } from "../lib/describe";
 import AnatomyMap, { CvsRing } from "./AnatomyMap";
 import { fmtT } from "./AnatomyPanel";
 
@@ -11,7 +12,8 @@ const BOX_COLOR = {
   hepatocystic_window: "#3ddc84", common_bile_duct: "#5cc8d8",
 };
 
-export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner, alert, playing, speed, done, children }) {
+export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner, alert, playing, speed, done, children,
+                                   overlay = null, onTime, hold = false }) {
   const ref = useRef(null);
   const [toasts, setToasts] = useState([]);
 
@@ -19,9 +21,9 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
     const v = ref.current;
     if (!v) return;
     v.playbackRate = Number(speed) || 1;
-    if (playing) v.play().catch(() => {});
+    if (playing && !hold) v.play().catch(() => {});
     else v.pause();
-  }, [playing, speed]);
+  }, [playing, speed, hold]);
   useEffect(() => {
     const v = ref.current;
     if (!v || !obs) return;
@@ -38,7 +40,7 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
 
   const boxes = (obs?.boxes || []).filter((b) => (b.confidence ?? 1) >= 0.5);
   const chips = obs?.labels?.length
-    ? obs.labels.map((l) => ({ text: actionLabel(l), conf: l.confidence }))
+    ? obs.labels.map((l) => ({ text: actionShort(l), conf: l.confidence }))
     : [...(obs?.instruments || []).map((i) => ({ text: niceName(i), conf: null })),
        ...(obs?.structures || []).filter((s) => (s.confidence ?? 0) >= 0.5).map((s) => ({ text: niceName(s.name), conf: s.confidence }))];
   const isError = banner?.startsWith("perception error");
@@ -47,7 +49,8 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
     <figure className={`relative overflow-hidden rounded-xl border-2 bg-black transition-colors ${alert ? "border-status-critical" : "border-line"}`}>
       <div className="relative aspect-video w-full max-w-full">
         {src ? (
-          <video ref={ref} src={src} muted playsInline preload="auto" className="absolute inset-0 h-full w-full object-cover" />
+          <video ref={ref} src={src} muted playsInline preload="auto" className="absolute inset-0 h-full w-full object-cover"
+            onTimeUpdate={(e) => onTime?.(t0 + e.currentTarget.currentTime)} />
         ) : (
           <div className="absolute inset-0 grid place-items-center text-ink-3">no video for this clip</div>
         )}
@@ -94,7 +97,7 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
         <div className="absolute bottom-14 left-3 flex flex-col gap-1">
           {toasts.flatMap((t) => t.items.map((c, j) => (
             <span key={`${t.id}-${j}`} className="rounded-md border border-accent/60 bg-surface-0/90 px-2.5 py-1 text-sm text-ink-1">
-              <span className="text-accent">world model · </span>{c}
+              <span className="text-accent">eyes · </span>{c}
             </span>
           )))}
         </div>
@@ -114,6 +117,8 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
             ))}
           </div>
         )}
+
+        {overlay}
 
         {/* veils */}
         {banner && (

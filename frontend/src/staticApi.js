@@ -11,7 +11,7 @@ const LIVE_ONLY = "Not in the recorded demo. This runs in the live demo (laptop 
 
 // --- in-page event bus (replaces Atlas change streams) -------------------------------------------
 const STREAM = { world_state: "state", predictions: "prediction", alerts: "alert", observations: "observation",
-  episode_steps: "episode_step", episodes: "episode", report_events: "report" };
+  episode_steps: "episode_step", episodes: "episode", report_events: "report", dream_events: "dream" };
 const bus = new Map(); // sid -> {subs:Set, history:[]}
 const chan = (sid) => (bus.get(sid) ?? bus.set(sid, { subs: new Set(), history: [] }).get(sid));
 function publish(sid, collection, doc) {
@@ -72,6 +72,10 @@ export async function get(path, params = {}) {
   if (simple[path]) return (await load(simple[path])) ?? fail(`missing recorded data: ${simple[path]}`);
   if (path === "/usage") return (await load("usage")) ?? {};
   if (path === "/lessons") return (await load("lessons")) ?? [];
+  if (path === "/dreams") return (await load("dreams")) ?? [];
+  if (path.startsWith("/forecasts/")) return (await load(`forecast_${path.split("/")[2]}`)) ?? fail("no recorded forecasts for this clip");
+  if (path === "/forecast_ledger") return (await load("forecast_ledger")) ?? { items: [] };
+  if (path === "/dreams/search") return fail(LIVE_ONLY);
   if (path === "/eval/latest") {
     const r = await load(params.name ? `eval_${params.name}` : "eval_latest");
     return r ?? fail("404: no eval run recorded");

@@ -41,6 +41,10 @@ More routes:
 - `GET /clip_video/{name}`: mp4 for a clip (`clips[i].video`).
 - `GET /expert_views?clip=&t=`: how surgeons judged visually similar views (nearest cached second; verdicts per criterion, `score`, `source`).
 - `GET /recorded/{name}`: a recorded demo file from `demo/precomputed` (used by the Story screen), read-only.
+- `GET /dreams`: every attempted dream clip (AI-generated training video from world-model steps), accepted and rejected: `kind` (safe | counterfactual | robot | factual | baseline), `action`, `state_before`, `state_after_predicted`, `changes`, `risk_level`, `violations`, `prompt`, `attempts[]`, `fidelity {pass, score, issues}`, `consistency {agreement{field: bool}, observed}`, `accepted`, `reason`, `video`, `anchor_images`.
+- `GET /dream_media/{name}`: a dream clip `.mp4` or its anchor `.jpg`. Static build: `./dreams/{name}`.
+- `GET /dreams/search?q=`: Atlas `$rankFusion` (full text + vector) over `dream_clips`; live only. `/search` also covers `dream_clips`.
+- `GET /eval/latest?name=E6_dreams`: the E6 summary. SSE: `dream` events from `dream_events` (pipeline progress, `session_id` = run id).
 - `GET /similar_frames?path=VID74/000501.png&k=3`: closest real train frames by image similarity (`score`, `path`, `video_id`, `t`).
 - `GET /reports?session_id=`: Argon session and batch reports.
 - `GET /episodes?patient_id=&dynamics=rules|world_model` and `GET /episodes/{episode_id}` (full `trace`).

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { get, niceName } from "../api";
+import { get, niceName} from "../api";
+import { actionShort } from "../lib/describe";
 import { HBars } from "../components/charts";
 import { POLICIES } from "./Robot";
 
@@ -197,6 +198,90 @@ function SafetyCard({ runs }) {
   );
 }
 
+function ForecastLedger() {
+  const [led, setLed] = useState(null);
+  const [filter, setFilter] = useState("all");
+  const [open, setOpen] = useState(false);
+  useEffect(() => { if (open && !led) get("/forecast_ledger").then(setLed).catch(() => setLed({ items: [] })); }, [open]);
+  const items = (led?.items || []).filter((it) => {
+    const hit = it.model.slice(0, 3).includes(it.truth);
+    return filter === "all" || (filter === "hits" ? hit : filter === "misses" ? !hit : it.confidence >= 0.7);
+  });
+  return (
+    <div className="card min-w-0">
+      <button className="flex w-full items-center justify-between text-left" onClick={() => setOpen(!open)}>
+        <span className="label">Forecast ledger · all 200 held-out next-action forecasts, each with what really happened</span>
+        <span className="text-sm text-accent">{open ? "hide" : "show"}</span>
+      </button>
+      {open && led && (
+        <>
+          <div className="my-2 flex flex-wrap gap-1">
+            {[["all", "All"], ["hits", "In top 3"], ["misses", "Missed"], ["confident", "Confident (≥70%)"]].map(([k, l]) => (
+              <button key={k} onClick={() => setFilter(k)} className={`rounded-lg px-3 py-1 text-sm ${filter === k ? "bg-accent text-surface-0" : "border border-line text-ink-2"}`}>{l}</button>
+            ))}
+            <span className="ml-auto self-center text-xs text-ink-3">{items.length} shown</span>
+          </div>
+          <div className="max-h-96 overflow-auto">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead className="sticky top-0 bg-surface-1 text-left text-xs text-ink-3">
+                <tr><th className="py-1">moment</th><th>action now</th><th>world model top 3</th><th>what really came next</th><th className="text-right">conf.</th></tr>
+              </thead>
+              <tbody>
+                {items.map((it) => {
+                  const rank = it.model.slice(0, 3).indexOf(it.truth) + 1;
+                  return (
+                    <tr key={it.id} className="border-t border-line/60 align-top">
+                      <td className="py-1 font-mono text-xs text-ink-3">{it.id}</td>
+                      <td>{actionShort(it.action)}</td>
+                      <td className="text-ink-2">{it.model.slice(0, 3).map((a, i) => <div key={i} className={a === it.truth ? "text-status-good" : ""}>{i + 1}. {actionShort(a)}</div>)}</td>
+                      <td className={rank ? "text-status-good" : "text-status-serious"}>{rank ? "✓" : "✗"} {actionShort(it.truth)}</td>
+                      <td className="text-right font-mono text-xs">{Math.round(it.confidence * 100)}%</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-2 text-xs text-ink-3">Test-split operations only; retrieval uses the training split. Same items as the accuracy card above.</p>
+        </>
+      )}
+    </div>
+  );
+}
+
+function DreamsCard({ e6 }) {
+  if (!e6) return null;
+  const pct = (r) => (r?.rate == null ? "–" : `${Math.round(r.rate * 100)}%`);
+  const ci = (r) => (r?.ci95 ? `${Math.round(r.ci95[0] * 100)}–${Math.round(r.ci95[1] * 100)}%` : "–");
+  const FIELD = { instrument_seen: "instrument seen", action_seen: "action seen", no_new_instruments: "no invented instruments",
+    phase_matches: "phase matches", view_clear: "view clear" };
+  const fc = e6.factual_control, hb = e6.hand_prompted_baseline;
+  return (
+    <div className="card min-w-0">
+      <div className="label mb-2">E6 · Dream data: world-model clips that survive both gates</div>
+      <div className="grid gap-4 md:grid-cols-3">
+        <div>
+          <div className="font-display text-3xl">{e6.accepted.k}/{e6.accepted.n}</div>
+          <div className="text-sm text-ink-2">accepted as training samples (95% CI {ci(e6.accepted)})</div>
+          <div className="mt-1 font-mono text-xs text-ink-3">fidelity pass {pct(e6.fidelity_pass)} · eyes agree {pct(e6.consistency_pass)} · {e6.renders.attempts} renders ({e6.renders.succeeded} succeeded)</div>
+        </div>
+        <div className="text-sm">
+          <div className="label mb-1">Eyes vs world model, per field</div>
+          {Object.entries(e6.agreement_by_field).map(([f, r]) => (
+            <div key={f} className="flex justify-between gap-2"><span>{FIELD[f] || f}</span><span className="font-mono">{r.k}/{r.n}</span></div>
+          ))}
+        </div>
+        <div className="text-sm text-ink-2">
+          <div className="label mb-1">Controls</div>
+          <p>Real-to-real interpolation: fidelity pass {pct(fc.fidelity_pass)}; eyes matched the real footage's phase {fc.phase_match_rate_mean == null ? "–" : `${Math.round(fc.phase_match_rate_mean * 100)}%`} and instruments {fc.instrument_match_rate_mean == null ? "–" : `${Math.round(fc.instrument_match_rate_mean * 100)}%`} of {fc.frames} seconds.</p>
+          <p className="mt-1">Igor's hand-prompted Wan clips: fidelity pass {pct(hb.fidelity_pass)} of {hb.clips}.</p>
+        </div>
+      </div>
+      <p className="mt-3 text-xs text-ink-3">{e6.notes.join(" ")}</p>
+    </div>
+  );
+}
+
 function Architecture({ stats }) {
   const n = (v) => (v == null ? "…" : v.toLocaleString());
   const Box = ({ title, children, accent }) => (
@@ -232,6 +317,7 @@ export default function Evidence() {
   const [e5, setE5] = useState(null);
   const [e5wm, setE5wm] = useState(null);
   const [e3, setE3] = useState(null);
+  const [e6, setE6] = useState(null);
   const [clips, setClips] = useState([]);
   const [usage, setUsage] = useState(null);
   const [stats, setStats] = useState(null);
@@ -243,6 +329,7 @@ export default function Evidence() {
     get("/eval/latest", { name: "E5_agent" }).then(setE5).catch(() => {});
     get("/eval/latest", { name: "E5_world_model" }).then(setE5wm).catch(() => {});
     get("/eval/latest", { name: "E3_perception" }).then(setE3).catch(() => {});
+    get("/eval/latest", { name: "E6_dreams" }).then((r) => setE6(r?.name === "E6_dreams" ? r : null)).catch(() => {});
     get("/clips").then(setClips).catch(() => {});
     get("/usage").then(setUsage).catch(() => {});
     get("/stats").then(setStats).catch(() => {});
@@ -259,8 +346,10 @@ export default function Evidence() {
         <AccuracyCard run={e1} />
         <SafetyCard runs={{ rules: e5, world_model: e5wm }} />
       </div>
+      <ForecastLedger />
       <EyesCard clips={clips} />
       <PerceptionCard e3={e3} />
+      <DreamsCard e6={e6} />
       <div className="rounded-lg border border-line px-4 py-2 text-center text-ink-2">
         Benchmark on public data, not clinical validation. Patients are synthetic. Research simulator, not a medical device.
       </div>
