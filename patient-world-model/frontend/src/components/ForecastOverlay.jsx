@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fmtT } from "./AnatomyPanel";
 import { isRevealed, overlayState, runningScore, verdict } from "../lib/forecast";
-import { actionPast, actionSentence, actionShort, changeLines, stateLines } from "../lib/describe";
+import { actionPast, actionSentence, actionShort, changeLines, cvsCount, stateLines } from "../lib/describe";
 
 // The prediction engine, shown next to the playing video. For each real moment of a held-out operation it shows,
 // in plain words: what is happening now and the patient's state (input) -> what the rules say this action does ->
@@ -117,6 +117,9 @@ export function Engine({ s, animate = true }) {
             {votes[0] && wm.top3[0]?.action === votes[0][0] ? "Its top pick follows the real cases. " : "Its top pick differs from the real cases' majority. "}
             Trained model says: {actionShort(f.trained.top3[0])} · bigram: {actionShort(f.bigram.top3[0])}.
           </p>
+          {cvsCount(f.state_before) < 3 && wm.top3.some((a) => a.action.split(",")[1] === "clip") && (
+            <p className="mt-1 text-xs font-semibold text-status-serious">⚠ It forecasts clipping while the critical view is only {cvsCount(f.state_before)} of 3.</p>
+          )}
           {s.locked && <div className="mt-1 rounded-md bg-accent/20 px-2 py-1 text-center text-sm font-semibold text-accent">Forecast locked. Watch what the surgeon does…</div>}
         </Block>
       ) : (
@@ -186,21 +189,35 @@ export default function ForecastPanel({ doc, t, ended, t0, onSeek }) {
 }
 
 // Endoscapes: Igor's eyes vs the surgeons' labels for the critical view of safety, revealed as the video plays.
-export function EyesOverlay({ clip, t, ended }) {
+// The eyes can declare the critical view, lose it when the view changes, and declare it again: all shown.
+export function EyesOverlay({ clip, t, ended, history = [], idx = -1 }) {
   if (!clip || t == null) return null;
-  const m = clip.model_cvs_t, e = clip.experts_cvs_t;
-  const eyesSaid = m != null && t >= m, expertsSaid = e != null && t >= e;
+  const e = clip.experts_cvs_t;
+  const flips = [];
+  let on = false;
+  for (let i = 0; i <= idx; i++) {
+    const now = Object.values(history[i]?.state?.cvs || {}).filter(Boolean).length === 3;
+    if (now !== on) { flips.push({ t: history[i].t, on: now }); on = now; }
+  }
+  const first = flips.find((f) => f.on)?.t;
+  const expertsSaid = e != null && t >= e;
   let note = null;
-  if (eyesSaid && expertsSaid) {
-    const d = m - e;
-    note = d === 0 ? "same second as the surgeons" : d > 0 ? `${d} s after the surgeons (the safe side)` : `${-d} s before the surgeons (too early)`;
-  } else if (ended && m == null && e == null) note = "never declared, and the surgeons agree it was never reached";
-  else if (ended && m == null) note = `never declared; the surgeons said ${fmtT(e)}`;
+  if (first != null && expertsSaid) {
+    const d = first - e;
+    note = d === 0 ? "first declared in the same second as the surgeons" : d > 0 ? `first declared ${d} s after the surgeons (the safe side)` : `first declared ${-d} s before the surgeons (too early)`;
+  } else if (ended && first == null && e == null) note = "never declared, and the surgeons agree it was never reached";
+  else if (ended && first == null) note = `never declared; the surgeons said ${fmtT(e)}`;
   return (
     <div className="flex flex-col gap-1.5 rounded-xl border-2 border-accent/50 bg-surface-0 p-3">
-      <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Is it safe to clip yet? · eyes vs surgeons</div>
-      <p className="text-xs text-ink-3">Safe to clip = the critical view of safety: 3 checks a surgeon makes before clipping.</p>
-      <div className="text-sm"><span className="text-ink-3">Eyes (Gemini Argon reading the video): </span>{eyesSaid ? <b className="text-status-good">safe at {fmtT(m)}</b> : <span className="text-ink-2">not yet</span>}</div>
+      <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Eyes vs surgeons · when was it safe to clip?</div>
+      <div className="text-sm">
+        <span className="text-ink-3">Eyes (Gemini Argon reading the video): </span>
+        {flips.length ? flips.map((f, i) => (
+          <span key={i} className={f.on ? "font-semibold text-status-good" : "text-status-warning"}>
+            {i ? " · " : ""}{f.on ? (i ? "safe again" : "safe") : "lost"} at {fmtT(Math.round(f.t))}
+          </span>
+        )) : <span className="text-ink-2">not yet</span>}
+      </div>
       <div className="text-sm"><span className="text-ink-3">Surgeons' labels: </span>{expertsSaid ? <b>safe at {fmtT(e)}</b> : <span className="text-ink-2">{ended ? "never safe in this clip" : "not yet"}</span>}</div>
       {note && <div className="rounded-md bg-status-good/15 px-2 py-1 text-sm font-semibold text-status-good">Eyes: {note}</div>}
     </div>

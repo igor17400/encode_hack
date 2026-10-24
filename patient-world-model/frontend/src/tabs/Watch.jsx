@@ -8,6 +8,7 @@ import ForecastPanel, { EyesOverlay } from "../components/ForecastOverlay";
 import { overlayState } from "../lib/forecast";
 import VideoHUD from "../components/VideoHUD";
 import PlayerBar from "../components/PlayerBar";
+import CvsCard from "../components/CvsCard";
 import World3D from "../components/World3D";
 import { fmtT } from "../components/AnatomyPanel";
 import { ErrorNote, Frame, Picker, RiskBadge, SourceTag, patientOptions } from "../components/ui";
@@ -164,7 +165,7 @@ export default function Watch({ patients, onBranch }) {
           if (d.state) {
             const c = d.changes?.length ? d.changes : diffStates(last, d.state).map((x) => x.text);
             const banner = d.held ? d.banner || "View obscured, can't confirm" : null;
-            setHistory((x) => [...x, { t: d.t, state: d.state, changes: c, banner }]);
+            setHistory((x) => [...x, { t: d.t, state: d.state, changes: c, banner, duct_confirmed: d.duct_confirmed, cvs_since: d.cvs_since }]);
             last = d.state;
           }
           if (d.source === "argon")
@@ -264,6 +265,10 @@ export default function Watch({ patients, onBranch }) {
         </div>
 
         <div className="flex min-w-0 flex-col gap-4">
+        {status !== "idle" && shown && (
+          <CvsCard state={shown.state} history={history} idx={shownIdx} obs={obs} obsList={obsList} tNow={tNow}
+            sensor={shown.state.cvs_source === "sensor"} ductConfirmed={!!shown.duct_confirmed} compact={!!forecasts} />
+        )}
         {status !== "idle" && forecasts && disagreement && (
           <div className="rounded-lg border border-status-warning/50 bg-status-warning/10 px-3 py-2 text-xs text-ink-1">{disagreement}</div>
         )}
@@ -272,7 +277,7 @@ export default function Watch({ patients, onBranch }) {
         )}
         {status !== "idle" && clip?.source === "endoscapes" && (decisionPoint && atEnd
           ? <DecisionOverlay clip={clip} patientId={patientId} onBranch={branch} />
-          : <EyesOverlay clip={clip} t={videoT} ended={atEnd} />)}
+          : <EyesOverlay clip={clip} t={videoT} ended={atEnd} history={history} idx={shownIdx} />)}
         <div className="card flex min-w-0 flex-col gap-3">
           <div className="flex items-start justify-between gap-2">
             <div>

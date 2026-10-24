@@ -122,7 +122,10 @@ def events(clip: str, patient: Patient) -> list[tuple[str, dict]]:
             "confidence": 1.0 if not held else 0.0, "held": held,
             "banner": f"view: {lab.get('view_quality')}, can't confirm" if held else None, "changes": changes,
             "anatomy_confirmable": bool(fr.get("can_confirm", True)),
-            "duct_confirmed": fr.get("duct_confirmed"), "created_at": time.time()}))
+            "duct_confirmed": fr.get("duct_confirmed"),
+            # when each held criterion started holding (Igor's `since`), in our CVS keys
+            "cvs_since": {TO_OURS[c]: fr["cvs_state"][c].get("since") for c in TO_OURS if fr["cvs_state"].get(c, {}).get("on")},
+            "created_at": time.time()}))
         if fr.get("alert"):
             a = fr["alert"]
             out.append(("alerts", {
