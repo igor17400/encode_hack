@@ -109,3 +109,12 @@ def test_failed_perception_call_is_an_error_not_an_obscured_view(monkeypatch):
     states = [d for c, d in sink.events if c == "world_state" and "held" in d]
     assert all(o["error"] and o["view_quality"] == "error" for o in obs)
     assert all(s["banner"] == "perception error, state not updated" for s in states)
+
+
+def test_perception_schema_has_display_only_boxes():
+    props = perception.perception_schema().model_json_schema()["$defs"]["Box"]["properties"]
+    assert set(props) == {"label", "box_2d", "confidence"}
+    assert "cystic_duct" in props["label"]["enum"] and "clipper" in props["label"]["enum"]
+    # boxes are never read by the rules: accepted_triplets only looks at triplets
+    obs = {"triplets": [], "boxes": [{"label": "cystic_duct", "box_2d": [1, 2, 3, 4], "confidence": 0.9}]}
+    assert perception.accepted_triplets(obs) == []

@@ -2,6 +2,11 @@
 
 Newest first. Each entry: what changed, why.
 
+## 2026-10-24 (pass 4b: boxes on our own clip)
+
+- The Flash perception schema gains optional display-only `boxes` (structures + instruments, `[ymin, xmin, ymax, xmax]` 0–1000). The rules never read them.
+- This changes the perception prompt. The recorded E3 numbers (P 27% / R 28%) were measured with the earlier prompt and stay as recorded; they are not mixed with the new prompt.
+
 ## 2026-10-24 (pass 4: frontend redesign + Igor's "eyes")
 
 - **Combined with Igor's main-branch prototype.**

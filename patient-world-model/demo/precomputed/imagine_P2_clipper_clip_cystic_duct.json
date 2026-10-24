@@ -56,7 +56,9 @@
   "active": {},
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "action": {
   "instrument": "clipper",
@@ -123,15 +125,17 @@
   },
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "rules_violations": [
   "clip_before_cvs"
  ],
  "risk_level": "high",
- "bleeding_risk": 0.1,
+ "bleeding_risk": 0.05,
  "bled": false,
- "explanation": "Clipping the cystic duct with only 1/3 Critical View of Safety criteria met (cystic artery still dissecting) violates safety protocols and places the common bile duct at high risk, consistent with all five similar recorded transitions (VID92_00689, VID96_00956, VID62_01091, VID79_01617, VID01_00698). None of the matched cases resulted in immediate bleeding from clipping the skeletonised duct, and subsequent actions split between retracting the gallbladder and proceeding to clip the nearly exposed cystic artery.",
+ "explanation": "Across all retrieved transitions (VID92_00689, VID96_00956, VID62_01091, VID79_01617, VID01_00698), clipping the cystic duct prior to achieving a full Critical View of Safety shifts the operation to the clipping-and-cutting phase without immediate bleeding, but places the common bile duct at high risk. Subsequent actions are equally split between retracting the gallbladder (VID62_01091, VID79_01617) and clipping the cystic artery (VID92_00689, VID96_00956), with grasping the gallbladder less frequent (VID01_00698).",
  "cited_transition_ids": [
   "VID92_00689",
   "VID96_00956",
@@ -207,8 +211,8 @@
  ],
  "confidence": 0.4,
  "cannot_tell": [
-  "whether the surgeon will treat the 0.9-exposed cystic artery as ready to clip (as in VID92_00689 and VID96_00956) or adjust gallbladder retraction first (as in VID62_01091 and VID79_01617)",
-  "how much the patient's acute inflammation increases bleeding risk during clip application compared to standard cases"
+  "whether the partially dissected cystic artery (0.9 exposure) will be dissected further before clipping, as retrieved cases only show the artery at 1.0 or 0.0 exposure",
+  "exact bleeding propensity from acute cholecystitis inflammation during clip application"
  ],
  "frame": {
   "_id": "VID04_00940",
