@@ -40,11 +40,59 @@ window.RUNS = [
   "detect_model": "gemini-3.8-flash"
  },
  {
+  "name": "v2_argon_boxes_162",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 124,
+  "video": "videos/endo162.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_boxes_164",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 94,
+  "video": "videos/endo164.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
   "name": "v2_argon_boxes_166",
   "model": "gemini-4-argon",
   "prompt": "v2.txt",
   "frames": 94,
   "video": "videos/endo166.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_boxes_174",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 124,
+  "video": "videos/endo174.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_boxes_176",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 154,
+  "video": "videos/endo176.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_boxes_192",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 64,
+  "video": "videos/endo192.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_boxes_199",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 94,
+  "video": "videos/endo199.mp4",
   "detect_model": "gemini-3.8-flash"
  },
  {

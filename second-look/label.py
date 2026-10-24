@@ -114,9 +114,9 @@ def label_frame(client, image, mime="image/jpeg", prompt=None, model=None, extra
             return json.loads(_ask(client, image, mime, prompt, model, extra))
         except Exception as e:
             err = str(e)
-            if (
-                "429" in err
-            ):  # free tier is 5 requests/min: wait as long as the API asks
+            if "spending cap" in err or "billing" in err.lower():  # waiting won't help: fail fast
+                break
+            if "429" in err:  # free tier is 5 requests/min: wait as long as the API asks
                 waits += 1
                 m = re.search(r"retryDelay': '(\d+)", err)
                 time.sleep(int(m.group(1)) + 1 if m else 15)

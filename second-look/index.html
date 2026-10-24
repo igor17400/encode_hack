@@ -80,6 +80,7 @@
       .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
       .state { font-size: 34px; font-weight: 700; letter-spacing: -0.01em; margin: 6px 0 14px; line-height: 1.05; }
       .state.ok { color: var(--ok); }
+      .state.dimok { opacity: 0.7; font-size: 28px; }
       .state.warn { color: var(--warn); }
       .state.bad { color: var(--bad); }
 
@@ -226,6 +227,7 @@
       <button class="play" id="play" title="Play / pause (space)"></button>
       <div class="tlwrap" id="tl">
         <div class="lane" id="bands"></div>
+        <div class="lane thin" id="cvsLane"></div>
         <div class="playhead" id="playhead"></div>
       </div>
       <div class="time" id="time"></div>
@@ -279,7 +281,7 @@
       const PHASE_COL = {
         preparation: "#3b4f63",
         calot_triangle_dissection: "#4a5866",
-        clipping_and_cutting: "#a8433d",
+        clipping_and_cutting: "#8a7bb8", // not red: red is reserved for alerts
         gallbladder_dissection: "#5a4f6e",
         retrieval: "#55553f",
         cleaning: "#3f4247",
@@ -373,20 +375,25 @@
         fl.title = `Surgeons' consensus: critical view of safety achieved at ${fmt(SAFE_AT)}`;
         $("tl").append(fl);
       }
-      F.forEach((f) => f.events?.filter((e) => e.on).forEach((e, k) => {
-        const m = document.createElement("div");
-        m.className = "pin lbl"; m.style.left = (f.t / END) * 100 + "%";
-        m.style.transform = `translateX(${-50 + k * 105}%)`; // side by side when several land on the same second
-        m.style.background = "var(--ok)"; m.textContent = e.what === "cvs" ? "CVS" : e.what.toUpperCase();
-        m.title = `${e.what === "cvs" ? "Critical view of safety" : CNAME[e.what]} achieved at ${fmt(f.t)}`;
-        $("tl").append(m);
-      }));
+      // green lane: the stretches where the model held the critical view of safety (on -> off)
+      const HELD = [];
+      F.forEach((f, i) => {
+        if (f.cvs_state?.cvs.on && !F[i - 1]?.cvs_state?.cvs.on) HELD.push({ from: f.t, to: END });
+        if (!f.cvs_state?.cvs.on && F[i - 1]?.cvs_state?.cvs.on) HELD.at(-1).to = f.t;
+      });
+      HELD.forEach((h) => {
+        const d = document.createElement("div");
+        d.style.left = (h.from / END) * 100 + "%"; d.style.width = ((h.to - h.from) / END) * 100 + "%";
+        d.style.background = "var(--ok)"; d.title = `Model: critical view of safety held ${fmt(h.from)}–${fmt(h.to)}`;
+        $("cvsLane").append(d);
+      });
+      $("cvsLane").hidden = !HELD.length;
       $("tl").onclick = (e) => {
         const r = $("tl").getBoundingClientRect();
         seek(((e.clientX - r.left) / r.width) * END);
       };
       $("legend").textContent =
-        "Top lane: model phase per labelled frame, hatched when the view is not clear. Red pin: safety alert. Green pin: cystic duct confirmed.";
+        "Top lane: model phase per labelled frame (violet = clipping), hatched when the view is not clear. Green lane below: where the model held the critical view of safety. Orange line: the experts first marked CVS achieved. Red pin: safety alert. Green dot: cystic duct confirmed.";
 
       // ---------- safety rail ----------
       const CRITS = [
@@ -412,9 +419,12 @@
           if (on) $("since_" + c).textContent = `Achieved at ${fmt(S[c].since)}`;
         });
         const n = S ? CRITS.filter(([c]) => S[c].on).length : 0, all = !!S?.cvs.on;
-        $("cvsState").textContent = !g ? "Waiting" : all ? "Achieved" : "Not yet";
-        $("cvsState").className = "state " + (!g ? "" : all ? "ok" : "warn");
-        $("cvsMet").textContent = !g ? "First assessment at " + fmt(F[0].t) : all ? `All three criteria held since ${fmt(S.cvs.since)}` : `${n} of 3 criteria met`;
+        // dissection does not undo itself: once CVS has been held, remember it even if the camera has moved on
+        const before = labelled ? HELD.filter((h) => h.from <= t).at(-1) : null;
+        const earlier = !all && before;
+        $("cvsState").textContent = !g ? "Waiting" : all ? "Achieved" : earlier ? "Achieved earlier" : "Not yet";
+        $("cvsState").className = "state " + (!g ? "" : all ? "ok" : earlier ? "ok dimok" : "warn");
+        $("cvsMet").textContent = !g ? "First assessment at " + fmt(F[0].t) : all ? `All three criteria held since ${fmt(S.cvs.since)}` : earlier ? `Seen ${fmt(before.from)}–${fmt(before.to)} · not in the current view (${n} of 3 now)` : `${n} of 3 criteria met`;
 
         $("clock").textContent = fmt(t);
       }
