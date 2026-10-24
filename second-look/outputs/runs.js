@@ -4,48 +4,63 @@ window.RUNS = [
   "model": "gemini-4-argon",
   "prompt": "v2.txt",
   "frames": 154,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": "gemini-3.8-flash"
  },
  {
   "name": "v1_argon",
   "model": "gemini-4-argon",
   "prompt": "v1.txt",
   "frames": 25,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": null
  },
  {
   "name": "v1_flash_full",
   "model": "gemini-3.8-flash",
   "prompt": "v1.txt",
   "frames": 154,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": null
  },
  {
   "name": "v2_argon",
   "model": "gemini-4-argon",
   "prompt": "v2.txt",
   "frames": 25,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": null
  },
  {
   "name": "v2_argon_boxes",
   "model": "gemini-4-argon",
   "prompt": "v2.txt",
   "frames": 154,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_boxes_166",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 94,
+  "video": "videos/endo166.mp4",
+  "detect_model": "gemini-3.8-flash"
  },
  {
   "name": "v2_flash",
   "model": "gemini-3.8-flash",
   "prompt": "v2.txt",
   "frames": 25,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": null
  },
  {
   "name": "v2_openai",
   "model": "gpt-6.1-sol",
   "prompt": "v2.txt",
   "frames": 25,
-  "video": "videos/endo198.mp4"
+  "video": "videos/endo198.mp4",
+  "detect_model": null
  }
 ];

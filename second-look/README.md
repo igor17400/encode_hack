@@ -212,6 +212,12 @@ What we learned:
 - With `gemini-4-argon` on prompt v1, the safety alert fired at 2:29 when a clipper appeared: correct detection, but a
   false alarm by the surgeons' standard (CVS had been achieved).
 
+**Operation 166** (test split, 13 keyframes, `outputs/v2_argon_boxes_166.js`, gemini-4-argon v2 + Flash boxes):
+C1 caught 4/7, C2 3/6, **C3 4/5**; agreement 77 / 77 / 85%. No false "yes" before the surgeons' first C1 at 0:59.
+The held state declares **CVS achieved at 1:09 (held since 1:07)**; surgeons mark it from 1:04. It drops at 1:13
+(camera moves, C3 raw score falls) and is re-declared at 1:24. So on this case the system says "safe" about 5 s after
+the experts, never before.
+
 Costs: about $0.005 per frame on Flash, $0.013 on Argon (introductory 2026 prices).
 
 ---
@@ -235,7 +241,8 @@ meaning (green safe, amber not yet, red stop), large type readable from 2–3 m,
 
 ## 9. Known limitations and next steps
 
-- One operation scored so far; check operation 166 before quoting numbers.
+- Two test operations scored (198, 166). The other 38 test videos are in the zip; extract and run more before
+  quoting numbers as general.
 - C3 is the weak criterion. Next: few-shot examples from training-split frames (C3 yes/no), and a world-state rule
   that remembers dissection progress (2 confident yeses within 10 s, kept unless contradicted).
 - Single still frames; surgeons judge from motion. Next: 3–5 consecutive frames per call.

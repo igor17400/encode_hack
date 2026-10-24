@@ -367,7 +367,8 @@ def write_runs_index(folder):
         s = open(p).read()
         d = json.loads(s[s.index("{"):s.rindex("}") + 1])
         runs.append({"name": name, "model": d.get("model"), "prompt": d.get("prompt", "v1.txt"),
-                     "frames": len(d["frames"]), "video": d.get("video")})
+                     "frames": len(d["frames"]), "video": d.get("video"),
+                     "detect_model": d.get("detect_model")})
     with open(os.path.join(folder, "runs.js"), "w") as f:
         f.write("window.RUNS = " + json.dumps(runs, indent=1) + ";\n")
 

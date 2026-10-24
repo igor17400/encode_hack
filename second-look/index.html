@@ -49,6 +49,7 @@
       .case { color: var(--ink-2); font-size: 13.5px; }
       .elapsed { margin-left: auto; font-size: 22px; font-weight: 600; letter-spacing: 0.02em; }
       .elapsed small { font-size: 12px; color: var(--ink-3); font-weight: 500; margin-right: 8px; letter-spacing: 0; }
+      .casepick { background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; color: var(--ink); font-size: 14px; font-weight: 500; cursor: pointer; }
       .top select { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; color: var(--ink-2); font-size: 12.5px; max-width: 300px; }
       .iconbtn { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; color: var(--ink-2); font-size: 12.5px; cursor: pointer; }
 
@@ -61,6 +62,8 @@
       /* detection overlay: positioned over the visible image area, boxes in % of the image */
       #boxes { position: absolute; pointer-events: none; }
       .box { position: absolute; border: 2px solid var(--c); border-radius: 6px; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
+      .toolbox { position: absolute; border: 1px solid rgba(255,255,255,.35); border-radius: 8px; }
+      .toolbox span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: rgba(10,12,14,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); color: #d7dce1; font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
       .organ { position: absolute; transform: translate(-50%, -50%); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.75); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
       .box span { position: absolute; left: -2px; top: -22px; background: var(--c); color: #0a0c0e; font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 6px 6px 6px 0; white-space: nowrap; }
       .box.below span { top: 4px; left: 4px; border-radius: 6px; }
@@ -97,12 +100,10 @@
       .toast.off b { background: var(--warn); }
       .toast.big { font-size: 20px; padding: 14px 22px; border-color: var(--ok); box-shadow: 0 0 40px rgba(62,207,142,.35); }
       @keyframes toast { 0% { opacity: 0; transform: translateY(-8px); } 8%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
-      .flag { position: absolute; top: -34px; transform: translateX(-1px); display: flex; align-items: flex-end; gap: 0; pointer-events: none; }
-      .flag i { width: 2px; height: 46px; background: var(--ink); border-radius: 1px; }
-      .flag span { margin-bottom: 26px; background: var(--ink); color: var(--bg); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 0 6px 6px 0; white-space: nowrap; }
+      .flag { position: absolute; top: -8px; bottom: -8px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: #ff9f43; box-shadow: 0 0 8px rgba(255,159,67,.6); }
       .toast.expert { border-color: var(--ink); }
       .toast.expert b { background: var(--ink); color: var(--bg); }
-      .pin.lbl { width: auto; height: auto; top: -20px; padding: 1px 6px; border-radius: 6px; font-size: 10.5px; font-weight: 700; color: #06140d; }
+      .pin.lbl { width: auto; height: auto; top: 16px; padding: 1px 6px; border-radius: 6px; font-size: 10.5px; font-weight: 700; color: #06140d; }
       .crit .v { text-align: right; }
       .crit .pct { font-size: 20px; font-weight: 650; }
       .crit .ref { font-size: 11.5px; color: var(--ink-3); display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
@@ -134,7 +135,7 @@
 
 
       /* bottom: playback for review and demo */
-      .bottom { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 10px 20px 16px; }
+      .bottom { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 10px 20px 26px; }
       .play { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); display: grid; place-items: center; cursor: pointer; }
       .play svg { width: 16px; height: 16px; }
       .tlwrap { position: relative; cursor: pointer; padding: 6px 0; }
@@ -170,7 +171,7 @@
   <body>
     <div class="top">
       <div class="mark">Second Look</div><span class="live"><i></i>LIVE</span>
-      <div class="case" id="caseinfo"></div>
+      <select class="casepick" id="casepick" title="Switch operation"></select>
       <div class="elapsed"><small>dissection</small><span id="clock">0:00</span></div>
       <button class="iconbtn" id="boxBtn" hidden>Structures: on</button>
       <button class="iconbtn" id="detailsBtn">Details</button>
@@ -286,8 +287,21 @@
       };
 
       // ---------- header, run picker, details ----------
-      const op = (D.video || "").match(/endo(\d+)/)?.[1];
-      $("caseinfo").textContent = op ? `Operation ${op} · Laparoscopic cholecystectomy` : "Demo case · Laparoscopic cholecystectomy";
+      // case picker: one entry per video, using that video's best run (full clip with boxes beats keyframes-only)
+      const score = (r) => (r.detect_model ? 2 : 0) + (r.frames > 50 ? 1 : 0) + (r.prompt === "v2.txt" ? 1 : 0);
+      const byVideo = {};
+      (window.RUNS || []).filter((r) => r.video && r.name !== "timeline").forEach((r) => {
+        if (!byVideo[r.video] || score(r) > score(byVideo[r.video])) byVideo[r.video] = r;
+      });
+      const cases = Object.values(byVideo);
+      if (!cases.some((r) => r.video === D.video)) cases.unshift({ name: RUN, video: D.video });
+      cases.forEach((r) => {
+        const n = (r.video || "").match(/endo(\d+)/)?.[1];
+        const o = new Option(n ? `Operation ${n} · Cholecystectomy` : "Demo case", r.name);
+        o.selected = r.video === D.video;
+        $("casepick").append(o);
+      });
+      $("casepick").onchange = (e) => (location.search = "?run=" + e.target.value);
       (window.RUNS || [{ name: RUN, model: D.model, prompt: D.prompt, frames: F.length }]).forEach((r) => {
         const o = new Option(`${r.model} · ${(r.prompt || "v1").replace(".txt", "")} · ${r.frames} frames`, r.name);
         o.selected = r.name === RUN;
@@ -356,8 +370,7 @@
       if (SAFE_AT != null) {
         const fl = document.createElement("div");
         fl.className = "flag"; fl.style.left = (SAFE_AT / END) * 100 + "%";
-        fl.innerHTML = `<i></i><span>Experts: safe to clip · ${fmt(SAFE_AT)}</span>`;
-        fl.title = "Surgeons' consensus: all three CVS criteria met";
+        fl.title = `Surgeons' consensus: critical view of safety achieved at ${fmt(SAFE_AT)}`;
         $("tl").append(fl);
       }
       F.forEach((f) => f.events?.filter((e) => e.on).forEach((e, k) => {
@@ -414,6 +427,11 @@
         cystic_plate: ["Cystic plate", "#c7a6ff"],
         gallbladder: ["Gallbladder", null],
         liver: ["Liver", null],
+        clipper: ["Clip applier", "#ff5a4f"], // the instrument the safety check exists for: always loud
+        grasper: ["Grasper", "tool"],
+        hook: ["Hook", "tool"],
+        scissors: ["Scissors", "tool"],
+        irrigator: ["Irrigator", "tool"],
       };
       const hasBoxes = F.some((f) => f.label.boxes?.length);
       let showBoxes = hasBoxes;
@@ -433,6 +451,7 @@
             if (b.label === "cystic_duct" && f.duct_confirmed) col = "#3ecf8e";
             const [y0, x0, y1, x1] = b.box_2d.map((v) => v / 10);
             if (!col) return `<div class="organ" style="left:${(x0 + x1) / 2}%;top:${(y0 + y1) / 2}%">${name}</div>`;
+            if (col === "tool") return `<div class="toolbox" style="left:${x0}%;top:${y0}%;width:${x1 - x0}%;height:${y1 - y0}%"><span>${name}</span></div>`;
             return `<div class="box${y0 < 6 ? " below" : ""}" style="--c:${col};left:${x0}%;top:${y0}%;width:${x1 - x0}%;height:${y1 - y0}%"><span>${name}</span></div>`;
           }).join("");
       }
