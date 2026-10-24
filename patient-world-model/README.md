@@ -112,6 +112,7 @@ Set `VITE_API_BASE` if the API runs elsewhere. Routes, SSE events and shapes: [d
     2. what the rules say this action does;
     3. what surgeons did next in the 5 most similar real moments (Atlas vector search, training videos only);
     4. Gemini Argon's top-3 forecast of the next move.
+  - The video is the clock. Play/pause (or space) and drag the slider, which has forecast and alert markers: the eyes, the patient model and the engine panel all follow the video time. Alerts appear when the video reaches them.
   - The video pauses briefly, then the surgeon's real next action is revealed with ✓ top pick, ✓ in top 3, or ✗ missed. A running score compares it with the trained model and the bigram.
   - Clip result: the real move was in the engine's top 3 for **6 of 11** forecasts (trained model 7, bigram 6). The predicted anatomy matched the real labels 10 of 11 times. The 200-item E1 numbers sit alongside; risk can't be checked (no complication labels).
   - The eyes (Flash) and the engine are labelled separately. When the eyes misread a clip or cut that the labels don't show, a note says so.
