@@ -52,7 +52,8 @@ def experts_cvs_time(truth: list[dict]) -> float | None:
 def clip_info(clip: str) -> dict:
     run = load_run(clip)
     ts = [f["t"] for f in run["frames"]]
-    return {"video_id": clip, "source": "endoscapes", "op": CLIPS[clip]["op"], "video": CLIPS[clip]["video"],
+    model_cvs = next((f["t"] for f in run["frames"] if f["cvs_state"].get("cvs", {}).get("on")), None)
+    return {"model_cvs_t": model_cvs,"video_id": clip, "source": "endoscapes", "op": CLIPS[clip]["op"], "video": CLIPS[clip]["video"],
             "t_start": 0, "t_end": int(max(ts)), "n_frames": len(ts), "model": run["model"],
             "detect_model": run.get("detect_model"), "prompt": run.get("prompt"),
             "experts_cvs_t": experts_cvs_time(run["truth"]), "agreement": run.get("agreement"),

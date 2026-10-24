@@ -96,6 +96,42 @@ function PerceptionCard({ e3 }) {
   );
 }
 
+function EyesCard({ clips }) {
+  const endo = (clips || []).filter((c) => c.source === "endoscapes");
+  if (!endo.length) return null;
+  const crit = [["C1", "two structures"], ["C2", "triangle cleared"], ["C3", "cystic plate"]];
+  return (
+    <div className="card min-w-0">
+      <div className="label mb-2">The eyes · CVS judged from video vs three surgeons (Endoscapes test operations)</div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {endo.map((c) => (
+          <div key={c.video_id} className="rounded-lg border border-line bg-surface-2 p-3">
+            <div className="font-display text-lg">Operation {c.op}</div>
+            <div className="text-sm text-ink-2">
+              Model declares CVS: <b>{c.model_cvs_t != null ? fmtTime(c.model_cvs_t) : "never"}</b> · surgeons: <b>{c.experts_cvs_t != null ? fmtTime(c.experts_cvs_t) : "never"}</b>
+            </div>
+            <table className="mt-2 w-full text-sm">
+              <tbody>
+                {crit.map(([k, n]) => (
+                  <tr key={k} className="border-t border-line">
+                    <td className="py-1 text-ink-2">{n}</td>
+                    <td className="text-right">caught {c.agreement?.[`${k}_caught`]?.[0]}/{c.agreement?.[`${k}_caught`]?.[1]}</td>
+                    <td className="text-right text-ink-3">agree {Math.round((c.agreement?.[k] ?? 0) * 100)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mt-1 font-mono text-[11px] text-ink-3">n = {c.agreement?.keyframes} surgeon-labelled keyframes · {c.model}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-2 text-xs text-ink-3">“Caught” = of the keyframes where surgeons said a criterion was met, how many the model also said yes. Runs by Igor Lima (Second Look prototype). Two operations only: too few to generalise.</p>
+    </div>
+  );
+}
+
+const fmtTime = (t) => `${Math.floor(t / 60)}:${String(Math.round(t) % 60).padStart(2, "0")}`;
+
 function SafetyCard({ runs }) {
   const available = Object.entries(runs).filter(([, r]) => r);
   const [which, setWhich] = useState("rules");
@@ -196,6 +232,7 @@ export default function Evidence() {
   const [e5, setE5] = useState(null);
   const [e5wm, setE5wm] = useState(null);
   const [e3, setE3] = useState(null);
+  const [clips, setClips] = useState([]);
   const [usage, setUsage] = useState(null);
   const [stats, setStats] = useState(null);
   const [q, setQ] = useState("");
@@ -206,6 +243,7 @@ export default function Evidence() {
     get("/eval/latest", { name: "E5_agent" }).then(setE5).catch(() => {});
     get("/eval/latest", { name: "E5_world_model" }).then(setE5wm).catch(() => {});
     get("/eval/latest", { name: "E3_perception" }).then(setE3).catch(() => {});
+    get("/clips").then(setClips).catch(() => {});
     get("/usage").then(setUsage).catch(() => {});
     get("/stats").then(setStats).catch(() => {});
   }, []);
@@ -221,6 +259,7 @@ export default function Evidence() {
         <AccuracyCard run={e1} />
         <SafetyCard runs={{ rules: e5, world_model: e5wm }} />
       </div>
+      <EyesCard clips={clips} />
       <PerceptionCard e3={e3} />
       <div className="rounded-lg border border-line px-4 py-2 text-center text-ink-2">
         Benchmark on public data, not clinical validation. Patients are synthetic. Research simulator, not a medical device.

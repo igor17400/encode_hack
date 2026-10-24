@@ -192,6 +192,19 @@ const STEPS = [
     title: "Pixel world models show the camera. A patient world model shows the patient.",
     text: () => <>Eyes that judge what is true now, an imagination that plays actions forward, grounded in real surgery and checked by hard rules. A research simulation on public data, not clinical advice.</>,
     note: () => "Honest numbers are on the Evidence tab, including where a simple trained model beats Gemini.",
-    visual: (d) => <World3D state={d.stateLate} playing height={420} />,
+    visual: (d) => (
+      <div className="grid gap-3 sm:grid-cols-2">
+        <figure className="card flex flex-col gap-2">
+          <div className="label">Pixel world model · shows the camera</div>
+          <video src={videoUrl("endo166_t040_wan.mp4")} autoPlay loop muted playsInline className="aspect-video w-full max-w-full rounded-lg bg-black object-cover" />
+          <figcaption className="text-xs text-ink-3">Wan 2.2 continuing a real Endoscapes frame. AI-generated, not real anatomy (Igor's preview).</figcaption>
+        </figure>
+        <figure className="card flex flex-col gap-2">
+          <div className="label">Patient world model · shows the patient</div>
+          <World3D state={d.stateLate} playing height={260} />
+          <figcaption className="text-xs text-ink-3">The state at {fmtT(T_LATE)}: criteria held, structures exposed, the bile duct protected.</figcaption>
+        </figure>
+      </div>
+    ),
   },
 ];

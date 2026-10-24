@@ -1,5 +1,6 @@
 [
  {
+  "model_cvs_t": 69.0,
   "video_id": "endo166",
   "source": "endoscapes",
   "op": 166,
@@ -32,6 +33,7 @@
   "credit": "Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0) \u00b7 run by Igor Lima (Second Look prototype)"
  },
  {
+  "model_cvs_t": null,
   "video_id": "endo198",
   "source": "endoscapes",
   "op": 198,
