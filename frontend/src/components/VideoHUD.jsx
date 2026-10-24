@@ -84,6 +84,14 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
             {obs ? `t ${fmtT(obs.t)}` : "ready"}{state?.phase ? ` · ${niceName(state.phase).replaceAll("-", " ")}` : ""}
           </span>
           {boxes.length > 0 && <span className="rounded-md bg-surface-0/70 px-2 py-0.5 font-mono text-[10px] text-ink-2">boxes: approximate (Gemini Flash)</span>}
+          {state?.cvs && (() => {
+            const n = Object.values(state.cvs).filter(Boolean).length;
+            return (
+              <span className={`self-start rounded-md px-2 py-1 text-xs font-bold ${n === 3 ? "bg-status-good text-black" : "bg-status-warning text-black"}`}>
+                {n === 3 ? "✓ Safe to clip · CVS 3/3" : `Not safe to clip yet · CVS ${n}/3`}
+              </span>
+            );
+          })()}
         </div>
 
         {/* mini world model: CVS + anatomy picture-in-picture */}

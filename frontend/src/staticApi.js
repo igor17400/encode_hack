@@ -164,7 +164,7 @@ export async function post(path, body = {}) {
     }
     const rec = (await load(`watch_${sess.video_id}_${sess.patient_id}`)) ?? (await load(`watch_${sess.video_id}_P1`));
     if (!rec) return fail(LIVE_ONLY);
-    replayWatch(sid, rec, Number(body.speed) || 1);
+    replayWatch(sid, rec, body.speed == null ? 1 : Number(body.speed)); // 0 = as fast as possible, like the backend
     return { started: true, source: rec.source === "flash" ? "perception" : rec.source, frames: rec.frames };
   }
   m = path.match(/^\/alerts\/([^/]+)\/decision$/);

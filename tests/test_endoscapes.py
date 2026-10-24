@@ -36,3 +36,16 @@ def test_op166_stream_matches_igors_run_and_ends_at_decision_point():
     assert ev[-1][1]["decision_point"] is True
     info = endoscapes.clip_info("endo166")
     assert info["experts_cvs_t"] is not None and info["agreement"]["keyframes"] == 13
+
+
+def test_cvs_since_is_igors_hold_start_in_our_keys():
+    from backend import endoscapes
+    from backend.schema import Patient
+
+    run = endoscapes.load_run("endo166")
+    by_t = {int(d["t"]): d for c, d in endoscapes.events("endo166", Patient(patient_id="P1", name="x", story="x"))
+            if c == "world_state" and not d.get("done")}
+    for fr in run["frames"]:
+        t = int(fr["t"])
+        want = {endoscapes.TO_OURS[c]: v["since"] for c, v in fr["cvs_state"].items() if c in endoscapes.TO_OURS and v["on"]}
+        assert by_t[t]["cvs_since"] == want
