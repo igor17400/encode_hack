@@ -48,6 +48,22 @@ window.RUNS = [
   "detect_model": "gemini-3.8-flash"
  },
  {
+  "name": "v2_argon_rag_166",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 94,
+  "video": "videos/endo166.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
+  "name": "v2_argon_rag_198",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 154,
+  "video": "videos/endo198.mp4",
+  "detect_model": "gemini-3.8-flash"
+ },
+ {
   "name": "v2_flash",
   "model": "gemini-3.8-flash",
   "prompt": "v2.txt",
@@ -62,5 +78,13 @@ window.RUNS = [
   "frames": 25,
   "video": "videos/endo198.mp4",
   "detect_model": null
+ },
+ {
+  "name": "video_test",
+  "model": "gemini-4-argon",
+  "prompt": "v2.txt",
+  "frames": 10,
+  "video": "videos/video_test.mp4",
+  "detect_model": "gemini-3.8-flash"
  }
 ];

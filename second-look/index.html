@@ -297,7 +297,7 @@
       if (!cases.some((r) => r.video === D.video)) cases.unshift({ name: RUN, video: D.video });
       cases.forEach((r) => {
         const n = (r.video || "").match(/endo(\d+)/)?.[1];
-        const o = new Option(n ? `Operation ${n} · Cholecystectomy` : "Demo case", r.name);
+        const o = new Option(n ? `Operation ${n} · Cholecystectomy` : r.video ? `${r.video.split("/").pop().replace(/\.mp4$/, "").replaceAll("_", " ")} · new video` : "Demo case", r.name);
         o.selected = r.video === D.video;
         $("casepick").append(o);
       });

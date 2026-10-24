@@ -29,7 +29,9 @@ All three = CVS achieved. In the dataset, surgeons reached CVS in only 6.1% of l
 ## 2. How it works
 
 ```
-video ──▶ sample 1 frame/s ──┬─▶ CVS model (gemini-4-argon, prompts/v2.txt) ──▶ C1/C2/C3 scores, phase, anatomy, view quality
+                             ┌─▶ (optional, --examples) embed frame ▶ MongoDB Atlas $vectorSearch ▶ similar expert-labelled frames ─┐
+video ──▶ sample 1 frame/s ──┼─▶ CVS model (gemini-4-argon, prompts/v2.txt) ◀──────────────────────────────────────────────────────┘
+                             │      ──▶ C1/C2/C3 scores, phase, anatomy, view quality
                              └─▶ detection model (gemini-3.8-flash, prompts/detect_v1.txt) ──▶ boxes for duct, artery, windows, plate
                                               │
                                               ▼
@@ -81,14 +83,17 @@ second-look/
 ├── index.html          operating-room screen (open directly in a browser, works from file://)
 ├── label.py            frames ▶ models ▶ world state ▶ outputs/<run>.js   (core pipeline, has --selftest)
 ├── make_clip.py        Endoscapes frames ▶ videos/endo<vid>.mp4 + videos/endo<vid>.truth.json
+├── library.py          expert-labelled frame library in MongoDB Atlas: build, upload, query (has --selftest)
 ├── eval.py             older cystic-duct detection eval on CholecSeg8k masks (has --selftest)
 ├── prompts/
 │   ├── v1.txt          first CVS prompt (too conservative: models said "no" to everything)
 │   ├── v2.txt          CVS prompt built from the CAMMA annotation protocol (default)
-│   └── detect_v1.txt   box detection prompt
+│   ├── detect_v1.txt   box detection prompt
+│   └── examples_header.txt  instructions placed before retrieved expert examples (--examples)
 ├── outputs/            one file per run, plus runs.js (index of runs, read by the run picker)
-├── videos/             endo198.mp4 (2:34), endo166.mp4 (1:33) + surgeons' CVS labels (*.truth.json)
-├── requirements.txt    google-genai, opencv-python, numpy, openai
+├── videos/             endo198.mp4 (2:34), endo166.mp4 (1:33) + surgeons' CVS labels (*.truth.json),
+│                       video_test.mp4 (10 s, unlabelled clip from outside Endoscapes)
+├── requirements.txt    google-genai, opencv-python, numpy, openai, pymongo
 └── .env                API keys (git-ignored, you create it)
 ```
 
@@ -108,6 +113,10 @@ GEMINI_API_KEY=...
 OPENAI_API_KEY=...            # optional, only for --provider openai
 GEMINI_MODEL=gemini-4-argon   # optional; the code default is gemini-3.8-flash
 OPENAI_MODEL=gpt-6.1-sol      # optional
+MONGODB_HOST=cluster-encode.xxxxx.mongodb.net   # Atlas cluster address (not secret)
+MONGODB_USER=igor             # optional, default igor
+DB_PASSWORD=...               # Atlas database user password
+# or instead of the three above: MONGODB_URI=mongodb+srv://user:pass@host/...
 ```
 
 Free-tier Gemini keys allow 5 requests/minute; `label.py` waits and retries on 429, but enable billing for full
@@ -153,7 +162,128 @@ gemini|openai`, `--detect-model`, `--detect-prompt`, `--out`, `--rebuild`, `--no
 
 ---
 
-## 6. Output format (`outputs/<run>.js`)
+## 6. MongoDB Atlas: how it works and why we need it
+
+### The problem it solves
+
+A model judging one frame in isolation has no sense of how strict expert surgeons are. Our clearest failure: on
+operation 198 Gemini 4 Argon never accepted C3 (cystic plate), even when the surgeons did. Surgeons learn the bar
+from hundreds of labelled views; the model has seen none from this dataset. The training split of Endoscapes holds
+6,960 frames that three surgeons labelled for C1/C2/C3. Atlas makes that experience **searchable by appearance**, so
+for any live frame we can pull up "how did experts label views that look like this one?"
+
+This is retrieval, not training. No model weights change; the expert frames are looked up at inference time.
+
+### What is stored
+
+Cluster `cluster-encode` (Atlas M10, AWS São Paulo), database `second_look`, collection `expert_frames`:
+
+```jsonc
+{
+  "_id": "88_31575.jpg",           // <training video>_<frame number>
+  "video": 88, "frame": 31575, "split": "train",
+  "cvs": {"C1": 0.67, "C2": 0.0, "C3": 0.67},     // average of the three surgeons
+  "met": {"C1": true, "C2": false, "C3": true},   // majority (>= 0.5)
+  "annotators": {"annotator_1": "...", "annotator_2": "...", "annotator_3": "..."},
+  "embedding": [768 floats]          // gemini-embedding-2 of the image
+}
+```
+
+3,437 documents: every training keyframe where surgeons marked at least one criterion (1,088 C1, 780 C2, 1,245 C3,
+369 full CVS) plus 1,500 random frames where they marked none. **Only training-split videos are stored**, so the test
+operations we score on (198, 166) can never retrieve themselves.
+
+Vector index `frame_vectors` (Atlas Vector Search):
+
+```json
+{"fields": [
+  {"type": "vector", "path": "embedding", "numDimensions": 768, "similarity": "cosine"},
+  {"type": "filter", "path": "video"},
+  {"type": "filter", "path": "met.C1"}, {"type": "filter", "path": "met.C2"}, {"type": "filter", "path": "met.C3"}
+]}
+```
+
+The filter fields matter: they let one query ask "the most similar frame **where experts said C3 was met**" and
+another "the most similar frame **where they said it was not**".
+
+### How it is built (`library.py build`, then `upload`)
+
+1. Read `endoscapes/all_metadata.csv` and `train_vids.txt` straight from the dataset zip.
+2. Pick keyframes from training videos (positives for any criterion + 1,500 negatives, fixed seed).
+3. Extract each JPEG to `../data/library/frames/` and embed it with `gemini-embedding-2` (768 dimensions, 16 in
+   parallel). Writes `../data/library/library.jsonl`. About 3,400 embedding calls, well under $1.
+4. `upload` inserts the documents in batches of 500 and creates the vector index (it becomes queryable in about a
+   minute).
+
+### How it is used at inference (`label.py --examples`)
+
+For each sampled frame of the video being labelled:
+
+1. Embed the frame with `gemini-embedding-2`.
+2. Run six filtered `$vectorSearch` queries: for each of C1, C2, C3, the nearest expert frame where it **was** met
+   and the nearest where it **was not** (duplicates dropped, so about five examples):
+   ```js
+   {$vectorSearch: {index: "frame_vectors", path: "embedding", queryVector: [...], numCandidates: 100, limit: 5,
+                    filter: {"met.C3": true}}},
+   {$project: {embedding: 0, score: {$meta: "vectorSearchScore"}}}
+   ```
+3. Send Gemini 4 Argon the examples first (each image followed by a caption such as *"experts said C1 yes (0.67), C2
+   no (0.00), C3 yes (0.67)"*), then `prompts/examples_header.txt` telling it to calibrate on, not copy, the
+   experts, then the frame to judge and the usual prompt.
+4. The captions of the examples used are saved in the frame's label (`label.examples`) for display and audit.
+
+`EXAMPLES_MODE=cvs` switches to a balanced variant: the two nearest full-CVS frames and the two nearest no-criterion
+frames. Retrieval runs in parallel before labelling; each query takes about 2 s from London to the São Paulo cluster,
+which is fine because labelling is precomputed.
+
+```bash
+.venv/bin/python library.py build          # extract + embed training keyframes
+.venv/bin/python library.py upload         # insert into Atlas, create the vector index
+.venv/bin/python library.py query some_frame.jpg
+GEMINI_MODEL=gemini-4-argon .venv/bin/python label.py videos/endo198.mp4 --every 1 --examples \
+  --detect-model gemini-3.8-flash --out outputs/v2_argon_rag_198.js
+```
+
+### What it changed (honest result)
+
+| Run | Caught C1 | C2 | C3 | Total | Full CVS declared |
+|---|---|---|---|---|---|
+| Op 198, no examples | 4/6 | 3/6 | 0/2 | 7/14 | never |
+| Op 198, Atlas examples | 4/6 | **4/6** | **1/2** | **9/14** | never |
+| Op 166, no examples | 4/7 | 3/6 | **4/5** | **11/18** | **1:09** (experts 1:04) |
+| Op 166, Atlas examples | **5/7** | 1/6 | 1/5 | 7/18 | never |
+
+On 198 retrieval did what we hoped: C3 caught for the first time, and a stray early C2 at 1:12 disappeared (C2 now
+turns on at 2:01, inside the surgeons' window). On 166 it made the model too cautious. Most retrieved neighbours are
+"not achieved" because CVS is rare even among similar views, which pulls answers toward "no". The balanced variant was
+not better on the 38 keyframes. Across both operations: 18/32 without examples, 16/32 with. Two operations is too
+small a sample to settle it, so the default screen uses runs **without** examples, and retrieval stays available as
+an option.
+
+Embedding similarity scores are all around 0.97–0.99: general-purpose embeddings see every laparoscopic frame as
+alike. That is why the neighbours are used as calibration examples for the judge, never as a vote.
+
+### Why MongoDB and not a local vector file
+
+- **One store for vectors and labels.** The embedding sits next to the surgeons' scores and per-annotator votes, so
+  a single query filters on labels and ranks by similarity. No separate vector database to keep in sync.
+- **Filtered vector search** is what makes the contrastive "met vs not met" retrieval a single query per side.
+- **It scales past a laptop.** All 11,090 labelled frames, or several datasets, fit without changing code; the
+  library is shared by every machine running the labeller.
+- **The same database can hold the rest of a real deployment** (planned, see below): per-second model outputs as
+  a time-series collection, the alert and Re-check/Proceed decisions as an audit log (who overrode what, when and
+  why), and change streams pushing new events to the operating-room screen live.
+
+### Planned next for Atlas
+
+1. A "similar expert-labelled views" strip on the screen: the 2–3 nearest training frames with the surgeons'
+   verdicts, as evidence the surgeon can see, independent of whether they are fed to the judge.
+2. The decision log (alerts, Re-check / Proceed, reason) written to an `events` collection instead of living in the
+   page.
+
+---
+
+## 7. Output format (`outputs/<run>.js`)
 
 A JSON object wrapped as `window.TIMELINE = {...};` so the page can load it from `file://` (browsers block `fetch`
 there). Strip the prefix to read it as JSON.
@@ -190,7 +320,7 @@ this next to agreement, because agreement alone flatters a model that always say
 
 ---
 
-## 7. Results so far (operation 198, test split, 25 surgeon-labelled keyframes)
+## 8. Results so far (operation 198, test split, 25 surgeon-labelled keyframes)
 
 | Model | Prompt | C1 caught | C2 caught | C3 caught | Agreement C1 / C2 / C3 |
 |---|---|---|---|---|---|
@@ -222,7 +352,7 @@ Costs: about $0.005 per frame on Flash, $0.013 on Argon (introductory 2026 price
 
 ---
 
-## 8. The screen (`index.html`)
+## 9. The screen (`index.html`)
 
 Designed as an intra-operative display: dark and low-glare, the endoscope image dominates, colour only carries
 meaning (green safe, amber not yet, red stop), large type readable from 2–3 m, no scrolling.
@@ -239,7 +369,7 @@ meaning (green safe, amber not yet, red stop), large type readable from 2–3 m,
 
 ---
 
-## 9. Known limitations and next steps
+## 10. Known limitations and next steps
 
 - Two test operations scored (198, 166). The other 38 test videos are in the zip; extract and run more before
   quoting numbers as general.
@@ -248,7 +378,9 @@ meaning (green safe, amber not yet, red stop), large type readable from 2–3 m,
 - Single still frames; surgeons judge from motion. Next: 3–5 consecutive frames per call.
 - The safety rule keys on the cystic duct only; it should key on the held CVS state.
 - Endoscapes ends at the first clip, so true near-misses are rare in this footage.
-- Decision log lives in the page; MongoDB Atlas storage is planned.
+- Decision log lives in the page; writing it to Atlas is planned (section 6).
+- Retrieved expert examples help on one operation and hurt on the other; needs more test operations and better
+  balancing before it becomes the default.
 - Phase 2: OR audio through the Gemini Live API (`gemini-3.8-live`): transcribe "clip", "cut", "is that the duct?" as
   world-state events, so "clip requested by voice while CVS not achieved" raises an alert.
 - Med-Gemini is research-only (no API); MedGemma is open but trained on radiology, pathology, dermatology and
@@ -256,10 +388,13 @@ meaning (green safe, amber not yet, red stop), large type readable from 2–3 m,
 
 ---
 
-## 10. Notes for agents working on this repo
+## 11. Notes for agents working on this repo
 
 - Use `.venv/bin/python` (the system Python lacks cv2 and genai).
-- Never print or commit `.env`. API keys are read from the environment after `.env` is loaded.
+- Never print or commit `.env`. MongoDB connection comes from `library.mongo_uri()` (MONGODB_URI, or
+  MONGODB_HOST + MONGODB_USER + DB_PASSWORD).
+- The Atlas library holds training-split frames only; never upload test-split frames (198, 166 and the other 38 test
+  videos) or retrieval leaks the answers. API keys are read from the environment after `.env` is loaded.
 - Prompts are plain text files; changing a prompt means a new run (`--out outputs/<name>.js`), so keep old prompts
   and outputs for comparison.
 - Rule changes in `build_timeline` do not need new model calls: run `label.py --rebuild outputs/*.js`

@@ -51,7 +51,7 @@ def is_yes(v):
         return False
 
 
-def _ask(client, image, mime, prompt=None, model=None):
+def _ask(client, image, mime, prompt=None, model=None, extra=None):
     """Send one frame + prompt to Gemini or OpenAI, return the reply text."""
     prompt, model = prompt or PROMPT, model or MODEL
     if hasattr(client, "responses"):  # openai.OpenAI
@@ -67,20 +67,51 @@ def _ask(client, image, mime, prompt=None, model=None):
     from google.genai import types
     r = client.models.generate_content(
         model=model,
-        contents=[types.Part.from_bytes(data=image, mime_type=mime), prompt],
+        contents=[*_parts(extra), "FRAME TO JUDGE:", types.Part.from_bytes(data=image, mime_type=mime), prompt]
+        if extra else [types.Part.from_bytes(data=image, mime_type=mime), prompt],
         config=types.GenerateContentConfig(response_mime_type="application/json"),
     )
     return r.text
 
 
-def label_frame(client, image, mime="image/jpeg", prompt=None, model=None):
+def _parts(extra):
+    """[(jpeg bytes, caption)] -> interleaved Gemini parts: header, then image + caption for each example."""
+    from google.genai import types
+    out = [open(os.path.join(HERE, "prompts", "examples_header.txt")).read()]
+    for img, cap in extra:
+        out += [types.Part.from_bytes(data=img, mime_type="image/jpeg"), cap]
+    return out
+
+
+def examples_for(client, image, per_side=1):
+    """Atlas Vector Search: for each criterion, the most similar expert frame where it was met and where it was not."""
+    import library
+    vec, seen, out = library.embed(client, image), set(), []
+    # EXAMPLES_MODE=cvs: 2 nearest frames where experts saw full CVS + 2 nearest where they saw none (balanced)
+    if os.environ.get("EXAMPLES_MODE") == "cvs":
+        queries = [{"met.C1": True, "met.C2": True, "met.C3": True}] * 2 + [{"met.C1": False, "met.C2": False, "met.C3": False}] * 2
+    else:  # per criterion: nearest met + nearest not met
+        queries = [{f"met.{c}": m} for c in ("C1", "C2", "C3") for m in (True, False)]
+    for filt in queries:
+        for d in library.similar(vec, k=per_side + 4, filt=filt):
+            if d["_id"] in seen:
+                continue
+            seen.add(d["_id"])
+            yn = lambda k: f"{k} {'yes' if d['met'][k] else 'no'} ({d['cvs'][k]:.2f})"
+            cap = f"Example {d['_id']}: experts said {yn('C1')}, {yn('C2')}, {yn('C3')}. Similarity {d['score']:.3f}."
+            out.append((open(os.path.join(library.LIB, "frames", d["_id"]), "rb").read(), cap, d["_id"]))
+            break
+    return out
+
+
+def label_frame(client, image, mime="image/jpeg", prompt=None, model=None, extra=None):
     """One frame in, one label dict out. Never raises: a failed call becomes a 'can't confirm' frame."""
     err, fails, waits = "", 0, 0
     while (
         fails < 2 and waits < 20
     ):  # retry once on bad JSON or an API error; rate limits wait instead
         try:
-            return json.loads(_ask(client, image, mime, prompt, model))
+            return json.loads(_ask(client, image, mime, prompt, model, extra))
         except Exception as e:
             err = str(e)
             if (
@@ -396,6 +427,7 @@ def main():
     ap.add_argument("--prompt", help="prompt file (default prompts/v2.txt)")
     ap.add_argument("--provider", choices=["gemini", "openai"], default="gemini")
     ap.add_argument("--rebuild", nargs="+", metavar="OUTPUT", help="re-apply the world-state rules to existing outputs/*.js (no model calls)")
+    ap.add_argument("--examples", action="store_true", help="add similar expert-labelled frames from Atlas Vector Search to each call")
     ap.add_argument("--detect-model", help="second Gemini model run in parallel for boxes, e.g. gemini-3.8-flash")
     ap.add_argument("--detect-prompt", default=os.path.join(HERE, "prompts", "detect_v1.txt"))
     a = ap.parse_args()
@@ -440,13 +472,22 @@ def main():
                 from google import genai
                 client = genai.Client()  # reads GEMINI_API_KEY
             print(f"labelling {len(frames)} frames with {MODEL}...")
+            ex_for = [None] * len(frames)
+            if a.examples:  # retrieval first (embedding + 6 filtered $vectorSearch queries per frame), in parallel
+                with ThreadPoolExecutor(16) as ex:
+                    ex_for = list(ex.map(lambda f: examples_for(client, f[1]), frames))
+                print(f"retrieved {sum(len(e) for e in ex_for)} expert examples from Atlas")
             with ThreadPoolExecutor(16) as ex:
-                jobs = [ex.submit(label_frame, client, f[1]) for f in frames]
+                jobs = [ex.submit(label_frame, client, f[1], "image/jpeg", None, None,
+                                  [(img, cap) for img, cap, _ in e] if e else None) for f, e in zip(frames, ex_for)]
                 if a.detect_model:  # boxes come from a second model, called in parallel with the CVS model
                     from google import genai
                     dclient, dprompt = genai.Client(), open(a.detect_prompt).read()
                     djobs = [ex.submit(label_frame, dclient, f[1], "image/jpeg", dprompt, a.detect_model) for f in frames]
                 labs = [j.result() for j in jobs]
+                for lab, e in zip(labs, ex_for):
+                    if e:
+                        lab["examples"] = [cap for _, cap, _ in e]
                 if a.detect_model:
                     for lab, dj in zip(labs, djobs):
                         lab["boxes"] = dj.result().get("boxes", [])
@@ -472,6 +513,7 @@ def main():
         "model": model,
         "prompt": os.path.basename(a.prompt or PROMPT_PATH),
         "detect_model": a.detect_model,
+        "examples": bool(a.examples),
         "every": a.every,
         "frames": frames,
         "truth": truth,

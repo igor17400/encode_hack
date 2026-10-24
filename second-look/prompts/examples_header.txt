@@ -1,0 +1,5 @@
+REFERENCE EXAMPLES. The images below come from OTHER operations. Each was labelled independently by three expert
+surgeons with the same CVS checklist; the caption under each image gives their verdict. They were retrieved because
+they look similar to the frame you must judge, and they include both achieved and not-achieved cases on purpose.
+Use them to calibrate how strict the experts are for each criterion. Do not copy their labels: they are different
+patients, and the final image must be judged on its own visible evidence.
