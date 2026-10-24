@@ -6,6 +6,17 @@ A patient world model for laparoscopic cholecystectomy. Second Look tracks the p
 
 Pixel world models (e.g. NVIDIA Cosmos-H) show what the camera would see. Second Look knows what is happening to the patient and whether the robot did the right thing.
 
+## Eyes + imagination (combined with Igor's Second Look prototype)
+
+- **Eyes** (Igor, `main` branch): Gemini Argon judges the critical view of safety directly from Endoscapes video, scored against three surgeons. His recorded runs are vendored in `demo/endoscapes/` and replayed as our perception (`backend/endoscapes.py`).
+  - Op 166: CVS declared at 1:09 vs the surgeons' 1:04.
+  - Op 198: never declared (fails safe).
+- **Imagination** (this project): the patient world model plays the decision forward from what the eyes saw.
+  - Op 166 at 1:00 (CVS not yet seen): "clip the duct now" is **high risk**, and an injury for a short-duct patient.
+  - At 1:33 (CVS held): the same action is **low risk**.
+- **Surgeons' judgement as evidence:** Igor's Atlas library of 3,437 surgeon-labelled frames is queried **read-only** (`backend/experts.py`, vector search only) to show how surgeons judged visually similar views.
+- **UI:** a 3D patient model that builds itself from the state stream as the video plays, an overlay of the model's work on the video, a timeline comparing the model with the surgeons, a map of possible futures, robot trajectories, and a Story screen. Pixel world models (Igor's Wan 2.2 preview) show the camera; this shows the patient.
+
 ## How it works
 
 - **Rule engine** (`backend/rules.py`): deterministic surgical facts.
