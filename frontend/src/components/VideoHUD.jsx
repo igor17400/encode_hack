@@ -13,7 +13,7 @@ const BOX_COLOR = {
 };
 
 export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner, alert, playing, speed, done, children,
-                                   overlay = null, onTime, hold = false }) {
+                                   overlay = null, onTime, hold = false, seek = null, onEnded }) {
   const ref = useRef(null);
   const [toasts, setToasts] = useState([]);
 
@@ -24,12 +24,13 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
     if (playing && !hold) v.play().catch(() => {});
     else v.pause();
   }, [playing, speed, hold]);
+  // The video is the clock: everything else follows its time. Seeks come from the player bar / timeline.
   useEffect(() => {
     const v = ref.current;
-    if (!v || !obs) return;
-    const target = Math.max(0, obs.t - t0);
-    if (Math.abs(v.currentTime - target) > 1.5) v.currentTime = target;
-  }, [obs?.t, t0]);
+    if (!v || !seek) return;
+    v.currentTime = Math.max(0, seek.t - t0);
+    onTime?.(t0 + v.currentTime);
+  }, [seek?.n]);
   useEffect(() => {
     if (!changes.length) return;
     const id = Math.random();
@@ -50,7 +51,7 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
       <div className="relative aspect-video w-full max-w-full">
         {src ? (
           <video ref={ref} src={src} muted playsInline preload="auto" className="absolute inset-0 h-full w-full object-cover"
-            onTimeUpdate={(e) => onTime?.(t0 + e.currentTarget.currentTime)} />
+            onTimeUpdate={(e) => onTime?.(t0 + e.currentTarget.currentTime)} onEnded={() => onEnded?.()} />
         ) : (
           <div className="absolute inset-0 grid place-items-center text-ink-3">no video for this clip</div>
         )}

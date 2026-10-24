@@ -7,6 +7,7 @@ import StateTimeline from "../components/StateTimeline";
 import ForecastPanel, { EyesOverlay } from "../components/ForecastOverlay";
 import { overlayState } from "../lib/forecast";
 import VideoHUD from "../components/VideoHUD";
+import PlayerBar from "../components/PlayerBar";
 import World3D from "../components/World3D";
 import { fmtT } from "../components/AnatomyPanel";
 import { ErrorNote, Frame, Picker, RiskBadge, SourceTag, patientOptions } from "../components/ui";
@@ -24,15 +25,16 @@ export default function Watch({ patients, onBranch }) {
   const [history, setHistory] = useState([]); // [{t, state}]
   const [obsList, setObsList] = useState([]);
   const [changes, setChanges] = useState([]);
-  const [banner, setBanner] = useState(null);
-  const [alert, setAlert] = useState(null);
   const [decisions, setDecisions] = useState([]);
   const [checks, setChecks] = useState([]);
   const [report, setReport] = useState(null);
   const [expertViews, setExpertViews] = useState(null);
   const [status, setStatus] = useState("idle");
   const [decisionPoint, setDecisionPoint] = useState(false);
-  const [scrubT, setScrubT] = useState(null);
+  const [playing, setPlaying] = useState(false); // the viewer's play / pause
+  const [seekReq, setSeekReq] = useState(null); // {t, n}: move the video (and with it everything else)
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [alerts, setAlerts] = useState([]); // every alert received, shown when the video reaches it
   const [view, setView] = useState("3d");
   const [source, setSource] = useState(null);
   const [error, setError] = useState(null);
@@ -63,7 +65,10 @@ export default function Watch({ patients, onBranch }) {
     get("/eval/latest").then(setE1).catch(() => {});
   }, [clipId]);
 
-  const fstate = overlayState(forecasts?.forecasts, videoT, { ended: status === "done" });
+  const t0 = clip?.t_start ?? 0, t1 = clip?.t_end ?? 0;
+  const tNow = videoT ?? t0; // the video is the clock
+  const atEnd = videoEnded || (videoT != null && videoT >= t1 - 0.4);
+  const fstate = overlayState(forecasts?.forecasts, videoT, { ended: atEnd });
   // Pause before reveal: freeze the video briefly once a forecast is locked, then let reality play out.
   useEffect(() => {
     if (!pauseReveal || fstate.mode !== "forecast" || !fstate.locked || lockedFor.current === fstate.f.id) return;
@@ -73,10 +78,37 @@ export default function Watch({ patients, onBranch }) {
     return () => clearTimeout(h);
   }, [pauseReveal, fstate.mode, fstate.locked, fstate.f?.id]);
   const live = history[history.length - 1];
-  const shownIdx = scrubT == null ? history.length - 1 : Math.max(0, history.findIndex((h) => h.t >= scrubT));
-  const shown = history[shownIdx];
-  const prevShown = history[shownIdx - 1];
-  const obs = scrubT == null ? obsList[obsList.length - 1] : [...obsList].reverse().find((o) => o.t <= scrubT) ?? obsList[0];
+  // Everything shown is what the stream knew at the video's current time.
+  let shownIdx = -1;
+  for (let i = 0; i < history.length && history[i].t <= tNow + 0.25; i++) shownIdx = i;
+  const shown = shownIdx >= 0 ? history[shownIdx] : null;
+  const prevShown = shownIdx > 0 ? history[shownIdx - 1] : null;
+  const obs = [...obsList].reverse().find((o) => o.t <= tNow + 0.25) ?? null;
+  const alert = alerts.find((a) => !a.decided && a.t <= tNow + 0.25) ?? null; // reached by the video, not yet decided
+  const banner = shown?.banner ?? null;
+  const loadedTo = live?.t ?? t0;
+  const videoPlaying = status !== "idle" && playing && !alert && !hold && !atEnd;
+  const seek = (t) => {
+    lockedFor.current = null; // replaying a reveal pauses before it again
+    setVideoEnded(false);
+    setSeekReq({ t: Math.min(t1, Math.max(t0, t)), n: Date.now() });
+  };
+
+  // Toasts for what the rules changed, as the video reaches each change.
+  useEffect(() => {
+    if (shown?.changes?.length) setChanges(shown.changes);
+  }, [shown?.t]);
+
+  // Space toggles play / pause (not while typing).
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.code !== "Space" || ["INPUT", "TEXTAREA", "SELECT"].includes(e.target.tagName) || status === "idle") return;
+      e.preventDefault();
+      if (atEnd) { seek(t0); setPlaying(true); } else setPlaying((p) => !p);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [status, atEnd, t0]);
   const experts = useMemo(() => obsList.filter((o) => o.expert).map((o) => o.expert), [obsList]);
   const lastExpert = [...experts].reverse().find((k) => k.t <= (obs?.t ?? 0));
 
@@ -110,14 +142,15 @@ export default function Watch({ patients, onBranch }) {
     setHistory([]);
     setObsList([]);
     setChanges([]);
-    setBanner(null);
+    setAlerts([]);
     setDecisions([]);
     setChecks([]);
     setReport(null);
     setExpertViews(null);
     setDecisionPoint(false);
-    setScrubT(null);
     setVideoT(null);
+    setVideoEnded(false);
+    setSeekReq({ t: clip?.t_start ?? 0, n: Date.now() });
     lockedFor.current = null;
     try {
       const s = await post("/sessions", { mode: "watch", patient_id: patientId, video_id: clipId });
@@ -129,12 +162,11 @@ export default function Watch({ patients, onBranch }) {
         },
         state: (d) => {
           if (d.state) {
-            setHistory((x) => [...x, { t: d.t, state: d.state }]);
             const c = d.changes?.length ? d.changes : diffStates(last, d.state).map((x) => x.text);
-            if (c.length) setChanges(c);
+            const banner = d.held ? d.banner || "View obscured, can't confirm" : null;
+            setHistory((x) => [...x, { t: d.t, state: d.state, changes: c, banner }]);
             last = d.state;
           }
-          if ("held" in d) setBanner(d.held ? d.banner || "View obscured, can't confirm" : null);
           if (d.source === "argon")
             setChecks((x) => [...x, { t: d.t, confidence: d.confidence, contradictions: d.contradictions || [], applied: d.corrections_applied || [] }]);
           if (d.done) {
@@ -142,12 +174,14 @@ export default function Watch({ patients, onBranch }) {
             setDecisionPoint(!!d.decision_point);
           }
         },
-        alert: (d) => setAlert(d),
+        alert: (d) => setAlerts((x) => [...x, d]),
         report: (d) => setReport(d),
       });
-      const r = await post(`/sessions/${s.session_id}/watch`, { speed: Number(speed), t_from: clip?.t_start, t_to: clip?.t_end });
+      // The data streams in as fast as it can; the video plays at the chosen speed and everything follows it.
+      const r = await post(`/sessions/${s.session_id}/watch`, { speed: 0, t_from: clip?.t_start, t_to: clip?.t_end });
       setSource(r.source);
       setStatus("running");
+      setPlaying(true);
     } catch (e) {
       setError(e.message);
     }
@@ -159,8 +193,7 @@ export default function Watch({ patients, onBranch }) {
 
   const events = [
     ...checks.map((c) => ({ t: c.t, kind: "check" })),
-    ...decisions.map((d) => ({ t: d.t, kind: "alert", label: `${d.type} (${d.decision})` })),
-    ...(alert ? [{ t: alert.t, kind: "alert", label: alert.type }] : []),
+    ...alerts.filter((a) => a.t <= tNow + 0.25).map((a) => ({ t: a.t, kind: "alert", label: a.decided ? `${a.type} (${a.decision})` : a.type })),
   ];
 
   return (
@@ -192,10 +225,12 @@ export default function Watch({ patients, onBranch }) {
             changes={changes}
             banner={banner}
             alert={alert}
-            playing={status === "running" && !alert && scrubT == null}
+            playing={videoPlaying}
             speed={speed}
-            done={decisionPoint}
-            onTime={setVideoT}
+            done={decisionPoint && atEnd}
+            onTime={(t) => { setVideoT(t); if (t < t1 - 0.4) setVideoEnded(false); }}
+            onEnded={() => setVideoEnded(true)}
+            seek={seekReq}
             hold={hold}
           >
             <div className="rounded-xl border border-accent/60 bg-surface-1/95 px-5 py-3 text-center">
@@ -203,6 +238,12 @@ export default function Watch({ patients, onBranch }) {
               <p className="text-sm text-ink-2">What would each move do? See the predictions beside the video.</p>
             </div>
           </VideoHUD>
+          <PlayerBar t={videoT} t0={t0} t1={t1} playing={videoPlaying} disabled={status === "idle"}
+            onToggle={() => { if (atEnd) { seek(t0); setPlaying(true); } else setPlaying(!playing); }}
+            onSeek={seek} forecasts={forecasts} alerts={alerts} clip={clip?.source === "endoscapes" ? clip : null} ended={atEnd} />
+          {status !== "idle" && loadedTo < tNow - 2 && (
+            <p className="mt-1 text-xs text-ink-3">{alerts.some((a) => !a.decided) ? "The rest of the analysis is waiting for a decision on the alert." : `Analysis loaded up to ${fmtT(loadedTo)}…`}</p>
+          )}
           {forecasts && (
             <div className="mt-2 flex flex-col gap-2">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-3">
@@ -227,11 +268,11 @@ export default function Watch({ patients, onBranch }) {
           <div className="rounded-lg border border-status-warning/50 bg-status-warning/10 px-3 py-2 text-xs text-ink-1">{disagreement}</div>
         )}
         {status !== "idle" && forecasts && (
-          <ForecastPanel doc={forecasts} t={videoT} ended={status === "done"} t0={clip?.t_start ?? 0} onSeek={(t) => setScrubT(t)} />
+          <ForecastPanel doc={forecasts} t={videoT} ended={atEnd} t0={t0} onSeek={seek} />
         )}
-        {status !== "idle" && clip?.source === "endoscapes" && (decisionPoint
+        {status !== "idle" && clip?.source === "endoscapes" && (decisionPoint && atEnd
           ? <DecisionOverlay clip={clip} patientId={patientId} onBranch={branch} />
-          : <EyesOverlay clip={clip} t={videoT} ended={status === "done"} />)}
+          : <EyesOverlay clip={clip} t={videoT} ended={atEnd} />)}
         <div className="card flex min-w-0 flex-col gap-3">
           <div className="flex items-start justify-between gap-2">
             <div>
@@ -246,7 +287,7 @@ export default function Watch({ patients, onBranch }) {
             ))}
           </div>
           {view === "3d" ? (
-            <World3D state={shown?.state} playing={status === "running" && !alert} height={forecasts || clip?.source === "endoscapes" ? 260 : 360} />
+            <World3D state={shown?.state} playing={videoPlaying} height={forecasts || clip?.source === "endoscapes" ? 260 : 360} />
           ) : (
             <AnatomyMap state={shown?.state} prev={prevShown?.state} />
           )}
@@ -268,14 +309,14 @@ export default function Watch({ patients, onBranch }) {
         <div className="card">
           <div className="mb-2 flex items-center justify-between">
             <span className="label">What the world model remembers</span>
-            {scrubT != null && <button className="text-sm text-accent underline" onClick={() => setScrubT(null)}>back to live</button>}
+            <span className="text-xs text-ink-3">click to jump the video there</span>
           </div>
           <StateTimeline
             history={history}
             t0={clip?.t_start ?? history[0].t}
             t1={clip?.t_end ?? history[history.length - 1].t}
-            playhead={shown?.t}
-            onSeek={(t) => setScrubT(t)}
+            playhead={tNow}
+            onSeek={seek}
             experts={experts}
             expertsCvsT={clip?.experts_cvs_t}
             events={events}
@@ -352,7 +393,7 @@ export default function Watch({ patients, onBranch }) {
         alert={alert}
         onClose={(d) => {
           setDecisions((x) => [...x, d]);
-          setAlert(null);
+          setAlerts((x) => x.map((a) => (a._id === d._id ? { ...a, decided: true, decision: d.decision } : a)));
         }}
       />
     </div>
