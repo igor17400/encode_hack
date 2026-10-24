@@ -27,20 +27,21 @@ NEGATIVE = (
     "cartoon, animation, instruments melting into tissue, duplicated instruments, flickering"
 )
 
-_PIPE = None
+_PIPES = {}
 
 
-def load_pipe():
-    """Load once per process. bf16 transformer, fp32 VAE (as recommended for Wan 2.2), CPU offload for headroom."""
-    global _PIPE
-    if _PIPE is None:
-        from diffusers import AutoencoderKLWan, WanImageToVideoPipeline
+def load_pipe(kind="i2v"):
+    """Load once per process. bf16 transformer, fp32 VAE (as recommended for Wan 2.2), CPU offload for headroom.
+    kind: "i2v" continues a seed frame, "t2v" generates from the prompt alone (TI2V-5B supports both)."""
+    if kind not in _PIPES:
+        from diffusers import AutoencoderKLWan, WanImageToVideoPipeline, WanPipeline
 
         vae = AutoencoderKLWan.from_pretrained(MODEL_ID, subfolder="vae", torch_dtype=torch.float32)
-        pipe = WanImageToVideoPipeline.from_pretrained(MODEL_ID, vae=vae, torch_dtype=torch.bfloat16)
+        cls = WanImageToVideoPipeline if kind == "i2v" else WanPipeline
+        pipe = cls.from_pretrained(MODEL_ID, vae=vae, torch_dtype=torch.bfloat16)
         pipe.enable_model_cpu_offload()
-        _PIPE = pipe
-    return _PIPE
+        _PIPES[kind] = pipe
+    return _PIPES[kind]
 
 
 def fit_image(path, width, height):
@@ -54,23 +55,26 @@ def fit_image(path, width, height):
 
 
 def generate(image_path, prompt, out_path, width=832, height=480, frames=81, steps=40, guidance=5.0, fps=24, seed=0,
-             chain=1):
-    """Generate one clip, or `chain` clips back to back, each starting from the last frame of the previous one."""
+             chain=1, negative_extra=""):
+    """Generate one clip, or `chain` clips back to back, each starting from the last frame of the previous one.
+    image_path=None makes the first segment text-to-video (no seed frame)."""
     from diffusers.utils import export_to_video
 
-    pipe = load_pipe()
+    pipe = load_pipe("i2v" if image_path else "t2v")
     mod = pipe.vae_scale_factor_spatial * pipe.transformer.config.patch_size[1]  # 32 for TI2V-5B
     width, height = width // mod * mod, height // mod * mod
     frames = (frames - 1) // 4 * 4 + 1  # Wan needs 4k+1 frames
-    image = fit_image(image_path, width, height)
+    image = fit_image(image_path, width, height) if image_path else None
 
     t0 = time.time()
     video = []
     for seg in range(chain):
+        if seg == 1 and image_path is None:
+            pipe = load_pipe("i2v")  # continuations always need the image-to-video pipeline
         clip = pipe(
-            image=image,
+            **({"image": image} if image is not None else {}),
             prompt=prompt,
-            negative_prompt=NEGATIVE,
+            negative_prompt=NEGATIVE + (", " + negative_extra if negative_extra else ""),
             height=height,
             width=width,
             num_frames=frames,
@@ -89,7 +93,7 @@ def generate(image_path, prompt, out_path, width=832, height=480, frames=81, ste
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--image", required=True, help="starting frame (png/jpg)")
+    ap.add_argument("--image", default=None, help="starting frame (png/jpg); omit for pure text-to-video")
     ap.add_argument("--prompt", required=True, help="what happens next")
     ap.add_argument("--out", required=True, help="output .mp4")
     ap.add_argument("--width", type=int, default=832)
@@ -100,8 +104,10 @@ def main():
     ap.add_argument("--fps", type=int, default=24)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--chain", type=int, default=1, help="number of clips to chain; 2 x 121 frames = 10 s")
+    ap.add_argument("--negative-extra", default="", help="appended to the built-in negative prompt")
     a = ap.parse_args()
-    generate(a.image, a.prompt, a.out, a.width, a.height, a.frames, a.steps, a.guidance, a.fps, a.seed, a.chain)
+    generate(a.image, a.prompt, a.out, a.width, a.height, a.frames, a.steps, a.guidance, a.fps, a.seed, a.chain,
+             a.negative_extra)
 
 
 if __name__ == "__main__":
