@@ -14,6 +14,16 @@ export function LineChart({ series, yLabel, xLabel, height = 300, format = (v) =
   const x = (i) => m.l + (n <= 1 ? 0 : (i / (n - 1)) * (W - m.l - m.r));
   const y = (v) => H - m.b - (v / yMax) * (H - m.t - m.b);
   const ticks = niceTicks(yMax);
+  // End-of-line labels: sort by y and push apart so lines ending at the same value stay readable.
+  const ends = series
+    .map((s) => {
+      const last = [...s.values.keys()].reverse().find((i) => s.values[i] != null);
+      return last == null ? null : { key: s.key, x: x(last), y: y(s.values[last]) };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.y - b.y);
+  for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 15) ends[i].y = ends[i - 1].y + 15;
+  const endY = Object.fromEntries(ends.map((e) => [e.key, e.y]));
 
   if (!n) return <div className="grid h-40 place-items-center text-ink-3">No episodes yet.</div>;
 
@@ -87,7 +97,7 @@ export function LineChart({ series, yLabel, xLabel, height = 300, format = (v) =
                     ),
                   )}
                   {last != null && (
-                    <text x={x(last) + 10} y={y(s.values[last]) + 4} fontSize="13" fill="var(--text-secondary)">
+                    <text x={x(last) + 10} y={endY[s.key] + 4} fontSize="13" fill="var(--text-secondary)">
                       {s.label}
                     </text>
                   )}
@@ -135,8 +145,8 @@ export function HBars({ rows, color = "#3987e5", highlight }) {
   return (
     <div className="flex flex-col gap-2.5">
       {rows.map((r, i) => (
-        <div key={r.label} className="grid grid-cols-[11rem_1fr_4rem] items-center gap-3" onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
-          <span className={`text-sm ${r.label === highlight ? "font-semibold text-ink-1" : "text-ink-2"}`}>{r.label}</span>
+        <div key={r.label} className="grid grid-cols-[minmax(0,7rem)_minmax(0,1fr)_3rem] items-center gap-2 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)_4rem] sm:gap-3" onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
+          <span className={`break-words text-sm ${r.label === highlight ? "font-semibold text-ink-1" : "text-ink-2"}`}>{r.label}</span>
           <div className="relative h-5 rounded bg-surface-3">
             {r.value != null && (
               <div

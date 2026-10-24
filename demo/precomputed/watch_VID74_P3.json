@@ -8,7 +8,7 @@
   [
    "observations",
    {
-    "_id": "318df74b792e46a39c37f5ecda9d1bb7",
+    "_id": "b059ccc517dc484287b331adb45bc4b3",
     "t": 381,
     "frame_path": "VID74/000381.png",
     "labels": [
@@ -31,13 +31,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.163755
+    "created_at": 1792855021.251047
    }
   ],
   [
    "world_state",
    {
-    "_id": "7f0259325b96446dac125202bf1aa901",
+    "_id": "4606eb352a3f40a38af42ac313815a93",
     "t": 381,
     "state": {
      "t": 381,
@@ -102,13 +102,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000381.png",
-    "created_at": 1792851435.164088
+    "created_at": 1792855021.2513201
    }
   ],
   [
    "observations",
    {
-    "_id": "0c40eb33dcd74bb897679d3aa34d1130",
+    "_id": "b539d17203494b4a8b4e313326551e28",
     "t": 383,
     "frame_path": "VID74/000383.png",
     "labels": [
@@ -131,13 +131,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.1640918
+    "created_at": 1792855021.251327
    }
   ],
   [
    "world_state",
    {
-    "_id": "1674ec56127446398dc50865513e4115",
+    "_id": "b89dc67620454a98aba0c5d5e18f405c",
     "t": 383,
     "state": {
      "t": 383,
@@ -202,13 +202,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000383.png",
-    "created_at": 1792851435.164299
+    "created_at": 1792855021.2514482
    }
   ],
   [
    "observations",
    {
-    "_id": "59f5d5f94be742578e07120ae7db60db",
+    "_id": "54e9eaa43d8e4d3eab571101110f82de",
     "t": 385,
     "frame_path": "VID74/000385.png",
     "labels": [
@@ -225,13 +225,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.164374
+    "created_at": 1792855021.251449
    }
   ],
   [
    "world_state",
    {
-    "_id": "ac935ad560d94590b005c7324f45d309",
+    "_id": "6db3b5190f4f4a55a6b0f7909db48e0d",
     "t": 385,
     "state": {
      "t": 385,
@@ -296,13 +296,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000385.png",
-    "created_at": 1792851435.16462
+    "created_at": 1792855021.2516348
    }
   ],
   [
    "observations",
    {
-    "_id": "ff5dbeaeb61f4f30aec355c30ccdc19d",
+    "_id": "0166d91e73c54f1fa437323a79f4fd5b",
     "t": 387,
     "frame_path": "VID74/000387.png",
     "labels": [
@@ -319,13 +319,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.164622
+    "created_at": 1792855021.2516391
    }
   ],
   [
    "world_state",
    {
-    "_id": "b6b59d55ff7843638ac94eb6cd1f4193",
+    "_id": "f14a8065b29c4e1b8e270d75c9786c98",
     "t": 387,
     "state": {
      "t": 387,
@@ -390,13 +390,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000387.png",
-    "created_at": 1792851435.164771
+    "created_at": 1792855021.251828
    }
   ],
   [
    "observations",
    {
-    "_id": "5efef0702d304630acf2bdb6c0a07a95",
+    "_id": "0f622f1d52914547b24f1136b48dbf16",
     "t": 389,
     "frame_path": "VID74/000389.png",
     "labels": [
@@ -419,13 +419,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.1647732
+    "created_at": 1792855021.251831
    }
   ],
   [
    "world_state",
    {
-    "_id": "e56ca8512de041929d70fc7eb19d9c8a",
+    "_id": "1dc7cc7ad9d342e69e9579b5e3f758aa",
     "t": 389,
     "state": {
      "t": 389,
@@ -490,13 +490,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000389.png",
-    "created_at": 1792851435.164917
+    "created_at": 1792855021.251955
    }
   ],
   [
    "observations",
    {
-    "_id": "50120bd60f0f4fb1a00c6d5c51704f20",
+    "_id": "7eacd9c35742493f9a0e6bb4ab97023e",
     "t": 391,
     "frame_path": "VID74/000391.png",
     "labels": [
@@ -513,13 +513,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.1649191
+    "created_at": 1792855021.251957
    }
   ],
   [
    "world_state",
    {
-    "_id": "549bd50173734ed39f041e8cf7dd3a91",
+    "_id": "8b30954908d3401598234576ff302990",
     "t": 391,
     "state": {
      "t": 391,
@@ -586,16 +586,16 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000391.png",
-    "created_at": 1792851435.165057
+    "created_at": 1792855021.252064
    }
   ],
   [
    "alerts",
    {
-    "_id": "b1c52d3669e04423bf6289e61faeed66",
+    "_id": "625f54e2babb4fb5bc3a50303853428d",
     "t": 391,
     "type": "clip_before_cvs",
-    "created_at": 1792851435.1650639,
+    "created_at": 1792855021.2520719,
     "frame_path": "VID74/000391.png",
     "evidence": [
      {
@@ -634,7 +634,7 @@
   [
    "observations",
    {
-    "_id": "dc58646d76b646d69afc696efdd5ead5",
+    "_id": "14bfddb1ae784a62ad229e48234928b5",
     "t": 393,
     "frame_path": "VID74/000393.png",
     "labels": [
@@ -657,13 +657,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.187136
+    "created_at": 1792855021.268955
    }
   ],
   [
    "world_state",
    {
-    "_id": "e5c18556b8b24538bb8aee34edfecf0c",
+    "_id": "b3201bed64814a75b94cd5ac784e1556",
     "t": 393,
     "state": {
      "t": 393,
@@ -730,13 +730,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000393.png",
-    "created_at": 1792851435.187329
+    "created_at": 1792855021.269113
    }
   ],
   [
    "observations",
    {
-    "_id": "3ee2ea98a0f94643a3300ddd4b7b0857",
+    "_id": "3cebab322d8747408e86da15c70f14e3",
     "t": 395,
     "frame_path": "VID74/000395.png",
     "labels": [
@@ -753,13 +753,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.187507
+    "created_at": 1792855021.269116
    }
   ],
   [
    "world_state",
    {
-    "_id": "a5767472076142b7b32def7d56af32b0",
+    "_id": "c22d1c95f8b04fd4b2eea4a6114ab1f9",
     "t": 395,
     "state": {
      "t": 395,
@@ -826,13 +826,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000395.png",
-    "created_at": 1792851435.1876512
+    "created_at": 1792855021.2692218
    }
   ],
   [
    "observations",
    {
-    "_id": "e5c3a8cdba814005b30f93aea48f01c3",
+    "_id": "35db346c49ca41cb9b12a49f2cb21236",
     "t": 397,
     "frame_path": "VID74/000397.png",
     "labels": [
@@ -849,13 +849,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.187799
+    "created_at": 1792855021.269578
    }
   ],
   [
    "world_state",
    {
-    "_id": "1487eb33c089482eae9a1e863b64224d",
+    "_id": "8cfaf2611c41421e893a7d380742bb28",
     "t": 397,
     "state": {
      "t": 397,
@@ -922,13 +922,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000397.png",
-    "created_at": 1792851435.187973
+    "created_at": 1792855021.269797
    }
   ],
   [
    "observations",
    {
-    "_id": "b34572c93f194ed49f74b0279ea41800",
+    "_id": "03ef921f6b2f4b84952273c9b3932d39",
     "t": 399,
     "frame_path": "VID74/000399.png",
     "labels": [
@@ -951,13 +951,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.187976
+    "created_at": 1792855021.269799
    }
   ],
   [
    "world_state",
    {
-    "_id": "ee0dc3c4227a47539d9e327fefe94f09",
+    "_id": "e9e57e23fae3429383a587116505cb49",
     "t": 399,
     "state": {
      "t": 399,
@@ -1024,13 +1024,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000399.png",
-    "created_at": 1792851435.188253
+    "created_at": 1792855021.269962
    }
   ],
   [
    "observations",
    {
-    "_id": "ef0dcb4ad7274bf39e703ca018686958",
+    "_id": "7d875989454446cbb2c9fefd35b52e74",
     "t": 401,
     "frame_path": "VID74/000401.png",
     "labels": [
@@ -1053,13 +1053,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.188255
+    "created_at": 1792855021.2699652
    }
   ],
   [
    "world_state",
    {
-    "_id": "f1e1dc6db3a04d42abbbef3885204dff",
+    "_id": "2e6202c2b4624e20a300dd3cf5e3b26c",
     "t": 401,
     "state": {
      "t": 401,
@@ -1126,13 +1126,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000401.png",
-    "created_at": 1792851435.188401
+    "created_at": 1792855021.2701921
    }
   ],
   [
    "observations",
    {
-    "_id": "096164300e9846e28df58c0bbc6e6586",
+    "_id": "ea43df03568c4e649f9b4915ecbc23c4",
     "t": 403,
     "frame_path": "VID74/000403.png",
     "labels": [
@@ -1161,13 +1161,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.188403
+    "created_at": 1792855021.2701938
    }
   ],
   [
    "world_state",
    {
-    "_id": "b87d09d26e8a4f70b4bc44446a1349b2",
+    "_id": "6124123629fb435cb3f72a4d917765c8",
     "t": 403,
     "state": {
      "t": 403,
@@ -1234,13 +1234,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000403.png",
-    "created_at": 1792851435.188541
+    "created_at": 1792855021.270365
    }
   ],
   [
    "observations",
    {
-    "_id": "75eb6134625247b5824eeb579782b5aa",
+    "_id": "a261318653a74eefa2e0e110e319a3a5",
     "t": 405,
     "frame_path": "VID74/000405.png",
     "labels": [
@@ -1263,13 +1263,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.188543
+    "created_at": 1792855021.270367
    }
   ],
   [
    "world_state",
    {
-    "_id": "89f76d2f8a6a4e1a85b9f1601fdb1021",
+    "_id": "a1d9d29bb565427c8faf9c780e2c7a74",
     "t": 405,
     "state": {
      "t": 405,
@@ -1336,13 +1336,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000405.png",
-    "created_at": 1792851435.188681
+    "created_at": 1792855021.270473
    }
   ],
   [
    "observations",
    {
-    "_id": "465c41ed87d64c40b6bafe9ea8cba914",
+    "_id": "d25ed254a015439ab8a85515708f0bff",
     "t": 407,
     "frame_path": "VID74/000407.png",
     "labels": [
@@ -1365,13 +1365,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.188683
+    "created_at": 1792855021.288736
    }
   ],
   [
    "world_state",
    {
-    "_id": "ea1cb246909a44819b3e39cc4a6e900f",
+    "_id": "6b16413b69c94e83911ea0c4e810c20e",
     "t": 407,
     "state": {
      "t": 407,
@@ -1438,13 +1438,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000407.png",
-    "created_at": 1792851435.188807
+    "created_at": 1792855021.288995
    }
   ],
   [
    "observations",
    {
-    "_id": "bf08bb9ec33c4bf1be2afd3c8f950882",
+    "_id": "414c25cf7b524a5f9f78c9ad5ce4d533",
     "t": 409,
     "frame_path": "VID74/000409.png",
     "labels": [
@@ -1467,13 +1467,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.2073689
+    "created_at": 1792855021.288998
    }
   ],
   [
    "world_state",
    {
-    "_id": "c625941c30eb44649314334af28ad22c",
+    "_id": "26b79e73d7c84d7691a37c22ecee7bd3",
     "t": 409,
     "state": {
      "t": 409,
@@ -1540,13 +1540,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000409.png",
-    "created_at": 1792851435.2076008
+    "created_at": 1792855021.2891672
    }
   ],
   [
    "observations",
    {
-    "_id": "d912091b9e8b484c9527a0e43075d1a2",
+    "_id": "0194ae41a54b4b7f951dbd8deec300ad",
     "t": 411,
     "frame_path": "VID74/000411.png",
     "labels": [
@@ -1569,13 +1569,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.207791
+    "created_at": 1792855021.28917
    }
   ],
   [
    "world_state",
    {
-    "_id": "cf0c183639f74e3ca0542dd03fafa9fa",
+    "_id": "6ddaf7004b2d45aca61920d60350a14e",
     "t": 411,
     "state": {
      "t": 411,
@@ -1642,13 +1642,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000411.png",
-    "created_at": 1792851435.207946
+    "created_at": 1792855021.289438
    }
   ],
   [
    "world_state",
    {
-    "_id": "c742affce5f044cf913c1f96a3425692",
+    "_id": "d08fdf58430c484fb484c86a7f87cff5",
     "t": 411,
     "state": {
      "t": 411,
@@ -1717,13 +1717,13 @@
      "gallbladder is marked as skeletonised, which is anatomically incorrect for this phase as it is only being grasped and retracted while the pedicle and plate are still being dissected."
     ],
     "corrections_applied": [],
-    "created_at": 1792851435.225079
+    "created_at": 1792855021.30531
    }
   ],
   [
    "observations",
    {
-    "_id": "b88166df9d91488ca76ef2cc1fcea187",
+    "_id": "017db5d6d0bb47d1b9b7d3c76c5d684a",
     "t": 413,
     "frame_path": "VID74/000413.png",
     "labels": [
@@ -1746,13 +1746,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.2250822
+    "created_at": 1792855021.305314
    }
   ],
   [
    "world_state",
    {
-    "_id": "7cdbb857563d47f3972fe68449d2c6cf",
+    "_id": "538215ba516a420a964d026bba47dbb6",
     "t": 413,
     "state": {
      "t": 413,
@@ -1819,13 +1819,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000413.png",
-    "created_at": 1792851435.22527
+    "created_at": 1792855021.30548
    }
   ],
   [
    "observations",
    {
-    "_id": "05e5a32403434d51b5dde6b14f397e48",
+    "_id": "46597bb414db4645b8489a9ea119a449",
     "t": 415,
     "frame_path": "VID74/000415.png",
     "labels": [
@@ -1848,13 +1848,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.2252731
+    "created_at": 1792855021.305483
    }
   ],
   [
    "world_state",
    {
-    "_id": "ba34d59b2cdc4d0ca48f0f86b5cb650c",
+    "_id": "feeeb1254b0741a0ac1ac636ee0824d7",
     "t": 415,
     "state": {
      "t": 415,
@@ -1922,16 +1922,16 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000415.png",
-    "created_at": 1792851435.225409
+    "created_at": 1792855021.305677
    }
   ],
   [
    "alerts",
    {
-    "_id": "a8f0d05d5ba749bd89899919dd474a36",
+    "_id": "8c23b3f08d5140f7a6f404033063fa29",
     "t": 415,
     "type": "clip_before_cvs",
-    "created_at": 1792851435.225415,
+    "created_at": 1792855021.305681,
     "frame_path": "VID74/000415.png",
     "evidence": [
      {
@@ -1970,7 +1970,7 @@
   [
    "observations",
    {
-    "_id": "76c63b0766bf43398e4aa8fcddd1deaf",
+    "_id": "6e2fa77bbc294f9aa8e621ede5b2fe82",
     "t": 417,
     "frame_path": "VID74/000417.png",
     "labels": [
@@ -1993,13 +1993,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.309547
+    "created_at": 1792855021.338016
    }
   ],
   [
    "world_state",
    {
-    "_id": "c9c53e7d604d42a9b8a112ae7b322483",
+    "_id": "8211844507934d869095c83b0a667c5c",
     "t": 417,
     "state": {
      "t": 417,
@@ -2067,13 +2067,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000417.png",
-    "created_at": 1792851435.309847
+    "created_at": 1792855021.3382
    }
   ],
   [
    "observations",
    {
-    "_id": "6a196e08c8c1496fb88649db829283dd",
+    "_id": "364356ee71cd4ad7b3898478ef8742bf",
     "t": 419,
     "frame_path": "VID74/000419.png",
     "labels": [
@@ -2096,13 +2096,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.309852
+    "created_at": 1792855021.338203
    }
   ],
   [
    "world_state",
    {
-    "_id": "17eea8f164274cb8bdb3fcea0a2f544a",
+    "_id": "11712aeac28b42aea803dc05f1137f07",
     "t": 419,
     "state": {
      "t": 419,
@@ -2170,13 +2170,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000419.png",
-    "created_at": 1792851435.3100731
+    "created_at": 1792855021.338309
    }
   ],
   [
    "observations",
    {
-    "_id": "aff5b4caf3a24e1c978ad269cc415e0b",
+    "_id": "5419781c716d4d82800abd763e862a1d",
     "t": 421,
     "frame_path": "VID74/000421.png",
     "labels": [
@@ -2199,13 +2199,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.310076
+    "created_at": 1792855021.338311
    }
   ],
   [
    "world_state",
    {
-    "_id": "68b94b68a3744e0bb5d56d555e0321b7",
+    "_id": "e5f1ee4996f549929f8560dcf51949a7",
     "t": 421,
     "state": {
      "t": 421,
@@ -2273,13 +2273,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000421.png",
-    "created_at": 1792851435.310276
+    "created_at": 1792855021.338413
    }
   ],
   [
    "observations",
    {
-    "_id": "c0ad4969d3f7429ab62034d6a4a70682",
+    "_id": "0e889d47f604479f94080f9fffa608c2",
     "t": 423,
     "frame_path": "VID74/000423.png",
     "labels": [
@@ -2302,13 +2302,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.310279
+    "created_at": 1792855021.3384142
    }
   ],
   [
    "world_state",
    {
-    "_id": "2a25342b6e984761bde625a1de8f0b83",
+    "_id": "29de3375a5804191920545c03b5dbe88",
     "t": 423,
     "state": {
      "t": 423,
@@ -2376,13 +2376,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000423.png",
-    "created_at": 1792851435.310474
+    "created_at": 1792855021.338512
    }
   ],
   [
    "observations",
    {
-    "_id": "29cf7c0cfc1e49a89976273bd1af2d7f",
+    "_id": "4308d540affd451286e23f15eec35d52",
     "t": 425,
     "frame_path": "VID74/000425.png",
     "labels": [
@@ -2405,13 +2405,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.310783
+    "created_at": 1792855021.338513
    }
   ],
   [
    "world_state",
    {
-    "_id": "cd5b262b4aa946819f45e372eada10df",
+    "_id": "691d8b7942f84ea99a9b76d4753edb19",
     "t": 425,
     "state": {
      "t": 425,
@@ -2479,13 +2479,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000425.png",
-    "created_at": 1792851435.31103
+    "created_at": 1792855021.3386052
    }
   ],
   [
    "observations",
    {
-    "_id": "026611afbfea4b6499dbdfb1a24f15cc",
+    "_id": "07e196100120422d9158c41600757572",
     "t": 427,
     "frame_path": "VID74/000427.png",
     "labels": [
@@ -2502,13 +2502,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.311033
+    "created_at": 1792855021.338607
    }
   ],
   [
    "world_state",
    {
-    "_id": "6df125f86b0b4923825ee3b329e64707",
+    "_id": "a7a1702676cd4719815909f312edf196",
     "t": 427,
     "state": {
      "t": 427,
@@ -2576,13 +2576,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000427.png",
-    "created_at": 1792851435.3112478
+    "created_at": 1792855021.3387
    }
   ],
   [
    "observations",
    {
-    "_id": "f175b96f3f5f4797b2753492f3f27227",
+    "_id": "e2b5ce17b9fa41f5ab32c4a7984ff02c",
     "t": 429,
     "frame_path": "VID74/000429.png",
     "labels": [
@@ -2599,13 +2599,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.3112519
+    "created_at": 1792855021.3387961
    }
   ],
   [
    "world_state",
    {
-    "_id": "e805f53d84e547ee8b6ebaa1e68bc31e",
+    "_id": "c6b4a8a2a7d74eebaf8081845adfd270",
     "t": 429,
     "state": {
      "t": 429,
@@ -2673,13 +2673,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000429.png",
-    "created_at": 1792851435.311446
+    "created_at": 1792855021.338906
    }
   ],
   [
    "observations",
    {
-    "_id": "b1e6728a21b9467ba0b2421aec856424",
+    "_id": "f07c317869ed42c09779c837d208161c",
     "t": 431,
     "frame_path": "VID74/000431.png",
     "labels": [
@@ -2696,13 +2696,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.311449
+    "created_at": 1792855021.338908
    }
   ],
   [
    "world_state",
    {
-    "_id": "e704364c10524509849f9fcf444e044f",
+    "_id": "64a8c39dc86249a1a77654fa146d3424",
     "t": 431,
     "state": {
      "t": 431,
@@ -2770,13 +2770,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000431.png",
-    "created_at": 1792851435.311645
+    "created_at": 1792855021.339009
    }
   ],
   [
    "observations",
    {
-    "_id": "5b4f91c61c084b10ac7a019f76e98bf4",
+    "_id": "7d72f7e2a1f74bb292162f6a61b4a9b0",
     "t": 433,
     "frame_path": "VID74/000433.png",
     "labels": [
@@ -2793,13 +2793,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.311647
+    "created_at": 1792855021.339218
    }
   ],
   [
    "world_state",
    {
-    "_id": "ba58be0d1a2142369b972e7f2a9bbcb3",
+    "_id": "ef5b85628c8f40d8a802c34b8bc52759",
     "t": 433,
     "state": {
      "t": 433,
@@ -2867,13 +2867,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000433.png",
-    "created_at": 1792851435.311837
+    "created_at": 1792855021.33933
    }
   ],
   [
    "observations",
    {
-    "_id": "72a61b744e81469b83095cc9cf6e877e",
+    "_id": "12485bd839184ae5926291641e136823",
     "t": 435,
     "frame_path": "VID74/000435.png",
     "labels": [
@@ -2890,13 +2890,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.3118389
+    "created_at": 1792855021.339332
    }
   ],
   [
    "world_state",
    {
-    "_id": "f9ea04b764d84007aba6eb8c93a52cc2",
+    "_id": "abdebdbbc3f54a32b8823924e3efee1e",
     "t": 435,
     "state": {
      "t": 435,
@@ -2964,13 +2964,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000435.png",
-    "created_at": 1792851435.312025
+    "created_at": 1792855021.3394282
    }
   ],
   [
    "observations",
    {
-    "_id": "a26fcc00e1b3471d847fa3c8e0469be3",
+    "_id": "9ba88f1897d643fe9504a96bddb6e41a",
     "t": 437,
     "frame_path": "VID74/000437.png",
     "labels": [
@@ -2987,13 +2987,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.312027
+    "created_at": 1792855021.3394291
    }
   ],
   [
    "world_state",
    {
-    "_id": "5b043de06850436fb199d05f74842d16",
+    "_id": "f6a5a0b7e6bd4c60b49a6a59136ca2c3",
     "t": 437,
     "state": {
      "t": 437,
@@ -3061,13 +3061,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000437.png",
-    "created_at": 1792851435.312216
+    "created_at": 1792855021.3395221
    }
   ],
   [
    "observations",
    {
-    "_id": "a143a2e3304e4c73adc4211341b7ffe4",
+    "_id": "fad74321e0024cdda1e0cb1751499996",
     "t": 439,
     "frame_path": "VID74/000439.png",
     "labels": [
@@ -3090,13 +3090,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.3895302
+    "created_at": 1792855021.339523
    }
   ],
   [
    "world_state",
    {
-    "_id": "b8b3b17b61ec4c52995a7315a2cf285f",
+    "_id": "afcbb24ae71e4fe9bc6604b7a7da0b17",
     "t": 439,
     "state": {
      "t": 439,
@@ -3164,13 +3164,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000439.png",
-    "created_at": 1792851435.389853
+    "created_at": 1792855021.339613
    }
   ],
   [
    "observations",
    {
-    "_id": "8e5531aa69f7411484cbc3b7ddc94489",
+    "_id": "2ea1a14b737448a19635e34517606277",
     "t": 441,
     "frame_path": "VID74/000441.png",
     "labels": [
@@ -3193,13 +3193,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.389858
+    "created_at": 1792855021.3396149
    }
   ],
   [
    "world_state",
    {
-    "_id": "da5a4f9d7fcc43f1865c73e4731966e7",
+    "_id": "a0309a1f3a4541c88985986d5c384d23",
     "t": 441,
     "state": {
      "t": 441,
@@ -3267,13 +3267,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000441.png",
-    "created_at": 1792851435.3900921
+    "created_at": 1792855021.339714
    }
   ],
   [
    "world_state",
    {
-    "_id": "e75c893a711742c0ad095b02e8ee5055",
+    "_id": "0f647827942a4e9e9797c0d893f2f4b8",
     "t": 441,
     "state": {
      "t": 441,
@@ -3342,13 +3342,13 @@
      "Continuous hook dissection of the cystic plate (t=413, 419, 425, 441), cystic duct (t=423), and cystic artery (t=441) contradicts their statuses already being 'skeletonised' or 'clipped'."
     ],
     "corrections_applied": [],
-    "created_at": 1792851435.404943
+    "created_at": 1792855021.3532622
    }
   ],
   [
    "observations",
    {
-    "_id": "5f2adc16b31b4b65b5aef52544b8b8bf",
+    "_id": "ef4da85a88334d9bb3a604a905d17e36",
     "t": 443,
     "frame_path": "VID74/000443.png",
     "labels": [
@@ -3365,13 +3365,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.404947
+    "created_at": 1792855021.3532648
    }
   ],
   [
    "world_state",
    {
-    "_id": "22f3823f866942f1875f31e979d21a04",
+    "_id": "faf69e231be44c0cb0b9c7782082a474",
     "t": 443,
     "state": {
      "t": 443,
@@ -3439,13 +3439,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000443.png",
-    "created_at": 1792851435.405226
+    "created_at": 1792855021.353413
    }
   ],
   [
    "observations",
    {
-    "_id": "2082dca21e7946a5ae4337e1882aa6a6",
+    "_id": "f20927b1551d4dbf989901ef4701be7e",
     "t": 445,
     "frame_path": "VID74/000445.png",
     "labels": [
@@ -3462,13 +3462,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.40523
+    "created_at": 1792855021.359297
    }
   ],
   [
    "world_state",
    {
-    "_id": "50baea1e4b594b909c539eea27d4cc9d",
+    "_id": "d994c24d75cc4cb68438b8b109f3e125",
     "t": 445,
     "state": {
      "t": 445,
@@ -3536,13 +3536,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000445.png",
-    "created_at": 1792851435.405443
+    "created_at": 1792855021.359465
    }
   ],
   [
    "observations",
    {
-    "_id": "4841452007b241c4bdb337497fbe95af",
+    "_id": "b8e164cf2c4b439aac0195b22ab2fc6b",
     "t": 447,
     "frame_path": "VID74/000447.png",
     "labels": [
@@ -3559,13 +3559,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.4054458
+    "created_at": 1792855021.359468
    }
   ],
   [
    "world_state",
    {
-    "_id": "6d089d7339b04299b2879c82d1499f77",
+    "_id": "a8a53a4392774f1a9a2a9aa11562898c",
     "t": 447,
     "state": {
      "t": 447,
@@ -3633,13 +3633,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000447.png",
-    "created_at": 1792851435.405637
+    "created_at": 1792855021.359575
    }
   ],
   [
    "observations",
    {
-    "_id": "24d33ef37f6640a580450e22afe10775",
+    "_id": "1df405067e4042d1be9fcea78cbd0537",
     "t": 449,
     "frame_path": "VID74/000449.png",
     "labels": [
@@ -3662,13 +3662,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.40564
+    "created_at": 1792855021.359684
    }
   ],
   [
    "world_state",
    {
-    "_id": "941d00d51628452780a53cca2d6652a5",
+    "_id": "5164c1ab4bf84af3821b1c2aa050ad64",
     "t": 449,
     "state": {
      "t": 449,
@@ -3736,13 +3736,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000449.png",
-    "created_at": 1792851435.405838
+    "created_at": 1792855021.359893
    }
   ],
   [
    "observations",
    {
-    "_id": "3bb0ddc2897d47ddba0dadfad63bc52c",
+    "_id": "431749c8746747da821b687adf80412a",
     "t": 451,
     "frame_path": "VID74/000451.png",
     "labels": [
@@ -3765,13 +3765,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.40584
+    "created_at": 1792855021.359895
    }
   ],
   [
    "world_state",
    {
-    "_id": "f9fbe6f14e38423f8ff331e6c2013777",
+    "_id": "5f8ce6d251924c9784d729b8eeb5ea9a",
     "t": 451,
     "state": {
      "t": 451,
@@ -3839,13 +3839,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000451.png",
-    "created_at": 1792851435.406034
+    "created_at": 1792855021.360107
    }
   ],
   [
    "observations",
    {
-    "_id": "619bd8e1d1de4ffca025d72238089381",
+    "_id": "754eeb5c9b0a47af97e26066d63c799c",
     "t": 453,
     "frame_path": "VID74/000453.png",
     "labels": [
@@ -3868,13 +3868,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.406036
+    "created_at": 1792855021.360109
    }
   ],
   [
    "world_state",
    {
-    "_id": "dea6b3c8377f475287f29d4279915a2d",
+    "_id": "1a10d31e72354e7fbd83a10a8a0aaee0",
     "t": 453,
     "state": {
      "t": 453,
@@ -3942,13 +3942,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000453.png",
-    "created_at": 1792851435.406233
+    "created_at": 1792855021.360242
    }
   ],
   [
    "observations",
    {
-    "_id": "1ae8fee62adf40309ff5ff8796e31d73",
+    "_id": "11eb9ff7df254027ae57925308de52cc",
     "t": 455,
     "frame_path": "VID74/000455.png",
     "labels": [
@@ -3965,13 +3965,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.406235
+    "created_at": 1792855021.360244
    }
   ],
   [
    "world_state",
    {
-    "_id": "51d5620670394163bdec1210fc52738f",
+    "_id": "a4beaf9f7983475b97f7a773ea3bed80",
     "t": 455,
     "state": {
      "t": 455,
@@ -4039,13 +4039,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000455.png",
-    "created_at": 1792851435.406422
+    "created_at": 1792855021.3603451
    }
   ],
   [
    "observations",
    {
-    "_id": "bd051fa1d3cd45e782f14bffb93ba511",
+    "_id": "498c620e475c456da797cd05443d3861",
     "t": 457,
     "frame_path": "VID74/000457.png",
     "labels": [
@@ -4062,13 +4062,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.406424
+    "created_at": 1792855021.360346
    }
   ],
   [
    "world_state",
    {
-    "_id": "6db1d8779fd14f67893372c7595b947b",
+    "_id": "f576f1cccd0f48aead3e6f5555928b55",
     "t": 457,
     "state": {
      "t": 457,
@@ -4136,13 +4136,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000457.png",
-    "created_at": 1792851435.406612
+    "created_at": 1792855021.3604429
    }
   ],
   [
    "observations",
    {
-    "_id": "dde315ddbb3d4a8f92d7576e4aec09cb",
+    "_id": "5ffb88ff0b6b4cf4863e47ee43d49317",
     "t": 459,
     "frame_path": "VID74/000459.png",
     "labels": [
@@ -4159,13 +4159,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.406615
+    "created_at": 1792855021.3604438
    }
   ],
   [
    "world_state",
    {
-    "_id": "dbd5d43fc75a4836a85b1d0c910f80ff",
+    "_id": "dd73a271fa4442cd97c3cf92a1eb58bd",
     "t": 459,
     "state": {
      "t": 459,
@@ -4233,13 +4233,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000459.png",
-    "created_at": 1792851435.406796
+    "created_at": 1792855021.360537
    }
   ],
   [
    "observations",
    {
-    "_id": "b3d401928c3d4fed99e561812fe8df86",
+    "_id": "fda8979580464b51a063b92b6e771168",
     "t": 461,
     "frame_path": "VID74/000461.png",
     "labels": [
@@ -4256,13 +4256,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.406805
+    "created_at": 1792855021.3698292
    }
   ],
   [
    "world_state",
    {
-    "_id": "48a0f77ad49c4720ba226f8b37a3eb10",
+    "_id": "8f08dd079ec74c9bb4b38aa0b09e1688",
     "t": 461,
     "state": {
      "t": 461,
@@ -4330,13 +4330,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000461.png",
-    "created_at": 1792851435.406995
+    "created_at": 1792855021.369998
    }
   ],
   [
    "observations",
    {
-    "_id": "8318a1beb7bc46b2b77b124f85746ebd",
+    "_id": "c459d43d4e9e4344bddb44227a0f8088",
     "t": 463,
     "frame_path": "VID74/000463.png",
     "labels": [
@@ -4353,13 +4353,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.406997
+    "created_at": 1792855021.3701582
    }
   ],
   [
    "world_state",
    {
-    "_id": "629867bc475c4a09a4f80f6db6388462",
+    "_id": "b8b426a67e134785b75498d19dd432a5",
     "t": 463,
     "state": {
      "t": 463,
@@ -4427,13 +4427,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000463.png",
-    "created_at": 1792851435.40718
+    "created_at": 1792855021.370271
    }
   ],
   [
    "observations",
    {
-    "_id": "3b17f3afd0d34ae88978a212a3724a18",
+    "_id": "bc3f8d0b2d074a6ead2fbb969b4bc244",
     "t": 465,
     "frame_path": "VID74/000465.png",
     "labels": [
@@ -4450,13 +4450,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.407182
+    "created_at": 1792855021.370273
    }
   ],
   [
    "world_state",
    {
-    "_id": "a872a4e119f04c3f862b6efdc44800c9",
+    "_id": "1a3afd9c64b342d191aa8611a633c1af",
     "t": 465,
     "state": {
      "t": 465,
@@ -4524,13 +4524,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000465.png",
-    "created_at": 1792851435.407365
+    "created_at": 1792855021.370371
    }
   ],
   [
    "observations",
    {
-    "_id": "bffb5b9dfcae4c2885e240e50e25e657",
+    "_id": "cf893d841a31484aa1445516d8d31dc9",
     "t": 467,
     "frame_path": "VID74/000467.png",
     "labels": [
@@ -4547,13 +4547,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.407367
+    "created_at": 1792855021.3705971
    }
   ],
   [
    "world_state",
    {
-    "_id": "905b2fb0f65049aabb686b08ef9a22d5",
+    "_id": "a3207280f50d4392822c8ef4f43bb913",
     "t": 467,
     "state": {
      "t": 467,
@@ -4621,13 +4621,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000467.png",
-    "created_at": 1792851435.407547
+    "created_at": 1792855021.370734
    }
   ],
   [
    "observations",
    {
-    "_id": "d217729599d44ff6b30932abaa9308fc",
+    "_id": "aea222eb46e54f5ead2d6a46dfedd9d6",
     "t": 469,
     "frame_path": "VID74/000469.png",
     "labels": [
@@ -4644,13 +4644,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.409475
+    "created_at": 1792855021.374957
    }
   ],
   [
    "world_state",
    {
-    "_id": "264429fd4d07474081eeb71ea220918d",
+    "_id": "7324f942b4234f47a1c7cfa6cba4f3c3",
     "t": 469,
     "state": {
      "t": 469,
@@ -4718,13 +4718,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000469.png",
-    "created_at": 1792851435.410667
+    "created_at": 1792855021.375106
    }
   ],
   [
    "observations",
    {
-    "_id": "8b460c0d63cf41528e48145163b6a412",
+    "_id": "9b11767c078f4090928c0e7755ef84c2",
     "t": 471,
     "frame_path": "VID74/000471.png",
     "labels": [
@@ -4741,13 +4741,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851435.412399
+    "created_at": 1792855021.375108
    }
   ],
   [
    "world_state",
    {
-    "_id": "c6fc5a7272e040f0ac447d18612139fd",
+    "_id": "664a3d04aef24fe1b6d3e51bd5234cc0",
     "t": 471,
     "state": {
      "t": 471,
@@ -4815,13 +4815,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000471.png",
-    "created_at": 1792851435.412717
+    "created_at": 1792855021.375238
    }
   ],
   [
    "world_state",
    {
-    "_id": "3274584e53b84a628cab5c0ecc44952c",
+    "_id": "070e6e3a5eb745399c9eb0ab127f05e7",
     "t": 471,
     "state": {
      "t": 471,
@@ -4892,13 +4892,13 @@
      "Gallbladder is marked as skeletonised before the cystic duct and artery are cut, while pedicle dissection is still ongoing."
     ],
     "corrections_applied": [],
-    "created_at": 1792851441.888269
+    "created_at": 1792855021.3889668
    }
   ],
   [
    "observations",
    {
-    "_id": "6a91bace38ce4c36b64907a1f24ce78b",
+    "_id": "4f9c27dbed244b74bb27795f9cea844f",
     "t": 473,
     "frame_path": "VID74/000473.png",
     "labels": [
@@ -4915,13 +4915,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.888284
+    "created_at": 1792855021.388969
    }
   ],
   [
    "world_state",
    {
-    "_id": "9477f1ba10c743eda7b43fd8cff0c170",
+    "_id": "9479f6c3b5564f269244fa779cf916ee",
     "t": 473,
     "state": {
      "t": 473,
@@ -4989,13 +4989,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000473.png",
-    "created_at": 1792851441.88884
+    "created_at": 1792855021.3891032
    }
   ],
   [
    "observations",
    {
-    "_id": "2f9d1cafe5274fbf89bea44c1699ca2f",
+    "_id": "dd1b03915ddc49afad83c57cdcb2c20d",
     "t": 475,
     "frame_path": "VID74/000475.png",
     "labels": [
@@ -5012,13 +5012,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.888853
+    "created_at": 1792855021.3891048
    }
   ],
   [
    "world_state",
    {
-    "_id": "011ea18435464839856f300f5671d961",
+    "_id": "07265aefe9a348239aca7f7c77eed7b3",
     "t": 475,
     "state": {
      "t": 475,
@@ -5086,13 +5086,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000475.png",
-    "created_at": 1792851441.889459
+    "created_at": 1792855021.3892028
    }
   ],
   [
    "observations",
    {
-    "_id": "6913598afa5a47f98086f719257e5106",
+    "_id": "4c6e7793a21b46a1be016dff5ca5dd31",
     "t": 477,
     "frame_path": "VID74/000477.png",
     "labels": [],
@@ -5102,13 +5102,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.889472
+    "created_at": 1792855021.389204
    }
   ],
   [
    "world_state",
    {
-    "_id": "77819fbc1c334d9ea4e7a63a4ac3c758",
+    "_id": "e0252ae68cc9467fafdf0edc496be491",
     "t": 477,
     "state": {
      "t": 477,
@@ -5176,13 +5176,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000477.png",
-    "created_at": 1792851441.889907
+    "created_at": 1792855021.38929
    }
   ],
   [
    "observations",
    {
-    "_id": "cf754ce55e8c465d8a783873d26c334c",
+    "_id": "2544b73192c643beb67a5f4052347f33",
     "t": 479,
     "frame_path": "VID74/000479.png",
     "labels": [
@@ -5199,13 +5199,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.889917
+    "created_at": 1792855021.389291
    }
   ],
   [
    "world_state",
    {
-    "_id": "264152ac64e145e6811f46da7d481272",
+    "_id": "a4ca8c330e4348a1990ff7cc6b589bd1",
     "t": 479,
     "state": {
      "t": 479,
@@ -5273,13 +5273,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000479.png",
-    "created_at": 1792851441.890312
+    "created_at": 1792855021.389385
    }
   ],
   [
    "observations",
    {
-    "_id": "35b2b0d41e964f4fa728131faabc2cad",
+    "_id": "f5e9cf664a954cadbd2cc293ffdbc36c",
     "t": 481,
     "frame_path": "VID74/000481.png",
     "labels": [
@@ -5296,13 +5296,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.8903182
+    "created_at": 1792855021.389386
    }
   ],
   [
    "world_state",
    {
-    "_id": "e22ec541acea4fb6a4d62bc835926be1",
+    "_id": "b13c308d7702471eb099683bdf86c5e3",
     "t": 481,
     "state": {
      "t": 481,
@@ -5370,13 +5370,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000481.png",
-    "created_at": 1792851441.890667
+    "created_at": 1792855021.389473
    }
   ],
   [
    "observations",
    {
-    "_id": "936475647cfd4918b9ba4865d9b83234",
+    "_id": "d7042f1322dd4a0c91afe8a5026c6019",
     "t": 483,
     "frame_path": "VID74/000483.png",
     "labels": [
@@ -5393,13 +5393,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.8906748
+    "created_at": 1792855021.389475
    }
   ],
   [
    "world_state",
    {
-    "_id": "bcf5c0583bd74c82a17c4f2f76b417a8",
+    "_id": "6b60236dda4048af9828bfb9eea3d88a",
     "t": 483,
     "state": {
      "t": 483,
@@ -5467,13 +5467,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000483.png",
-    "created_at": 1792851441.891027
+    "created_at": 1792855021.3895638
    }
   ],
   [
    "observations",
    {
-    "_id": "2055af520cc146b4ac7c62d57eb4536e",
+    "_id": "c622cb44535443a4ac1c406a5ee01896",
     "t": 485,
     "frame_path": "VID74/000485.png",
     "labels": [
@@ -5490,13 +5490,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.8910332
+    "created_at": 1792855021.389566
    }
   ],
   [
    "world_state",
    {
-    "_id": "03b5944e508f42eca48820eb562cfce0",
+    "_id": "137080f49dc04ab48d959bf71e0a0fd7",
     "t": 485,
     "state": {
      "t": 485,
@@ -5564,13 +5564,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000485.png",
-    "created_at": 1792851441.89137
+    "created_at": 1792855021.389649
    }
   ],
   [
    "observations",
    {
-    "_id": "01e4209fb787478bb421fccd774396dc",
+    "_id": "caee0bf2b7c7466bae78b8d15c700053",
     "t": 487,
     "frame_path": "VID74/000487.png",
     "labels": [
@@ -5593,13 +5593,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.891375
+    "created_at": 1792855021.3896918
    }
   ],
   [
    "world_state",
    {
-    "_id": "f59da56a704741d3b9db8b93927670dd",
+    "_id": "7011ff509a564b5b858fea3a0471bc0b",
     "t": 487,
     "state": {
      "t": 487,
@@ -5667,13 +5667,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000487.png",
-    "created_at": 1792851441.8917491
+    "created_at": 1792855021.389798
    }
   ],
   [
    "observations",
    {
-    "_id": "a79f08d537ef49588619176807a6066a",
+    "_id": "416da94761fd4c0ba38e0256987f0967",
     "t": 489,
     "frame_path": "VID74/000489.png",
     "labels": [
@@ -5690,13 +5690,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.891754
+    "created_at": 1792855021.3899
    }
   ],
   [
    "world_state",
    {
-    "_id": "08b41a4de6f04b87a5a19a259e296c4f",
+    "_id": "4c8f86d3417947f9b05559993f2cab50",
     "t": 489,
     "state": {
      "t": 489,
@@ -5764,13 +5764,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000489.png",
-    "created_at": 1792851441.8921092
+    "created_at": 1792855021.39001
    }
   ],
   [
    "observations",
    {
-    "_id": "e40e07284cff4ae7ac9b2be602a3d834",
+    "_id": "1fea303785604c10aa42c80c3a23e2f5",
     "t": 491,
     "frame_path": "VID74/000491.png",
     "labels": [
@@ -5787,13 +5787,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.892113
+    "created_at": 1792855021.3900108
    }
   ],
   [
    "world_state",
    {
-    "_id": "b6ada1080e8c437eb504f7ac231ca934",
+    "_id": "9e9b5b7a79934876a7e4e9a4d491c4e7",
     "t": 491,
     "state": {
      "t": 491,
@@ -5861,13 +5861,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000491.png",
-    "created_at": 1792851441.892469
+    "created_at": 1792855021.390107
    }
   ],
   [
    "observations",
    {
-    "_id": "3979d33d177b47afab93c83ed64f395e",
+    "_id": "978f2d540745438b8ebd51e70ba4d54c",
     "t": 493,
     "frame_path": "VID74/000493.png",
     "labels": [
@@ -5884,13 +5884,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.892473
+    "created_at": 1792855021.398997
    }
   ],
   [
    "world_state",
    {
-    "_id": "1d5d915e718a4c0995bac3c78c814812",
+    "_id": "d66fd98b81d34f4fbcd8bbc49daa3538",
     "t": 493,
     "state": {
      "t": 493,
@@ -5958,13 +5958,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000493.png",
-    "created_at": 1792851441.8927948
+    "created_at": 1792855021.399198
    }
   ],
   [
    "observations",
    {
-    "_id": "b9bb0450a8464c0098c128907635c30f",
+    "_id": "afa402a401a54fea8601cc3a5d4598dd",
     "t": 495,
     "frame_path": "VID74/000495.png",
     "labels": [
@@ -5981,13 +5981,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.892798
+    "created_at": 1792855021.399213
    }
   ],
   [
    "world_state",
    {
-    "_id": "db5ba5fe56cb486b9ee923753d7a7d78",
+    "_id": "11424b49fe6f4543b0062fa94ad6c34a",
     "t": 495,
     "state": {
      "t": 495,
@@ -6055,13 +6055,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000495.png",
-    "created_at": 1792851441.893066
+    "created_at": 1792855021.3994062
    }
   ],
   [
    "observations",
    {
-    "_id": "0792d72fc80d4f67a7cd4e79404c67f5",
+    "_id": "53619a08f75e4d25aa0936d2c3f4a4c0",
     "t": 497,
     "frame_path": "VID74/000497.png",
     "labels": [
@@ -6078,13 +6078,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.8930728
+    "created_at": 1792855021.399408
    }
   ],
   [
    "world_state",
    {
-    "_id": "4358274d6eb54e2ab390ae5f79f53ddd",
+    "_id": "7ebacdba66db428cb057f2bf046c8094",
     "t": 497,
     "state": {
      "t": 497,
@@ -6152,13 +6152,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000497.png",
-    "created_at": 1792851441.893323
+    "created_at": 1792855021.3995168
    }
   ],
   [
    "observations",
    {
-    "_id": "2795cb9577f34e739d8ed70d274bad79",
+    "_id": "2eb402b524bd4e47a7086abba32fbe5b",
     "t": 499,
     "frame_path": "VID74/000499.png",
     "labels": [
@@ -6175,13 +6175,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.893326
+    "created_at": 1792855021.399519
    }
   ],
   [
    "world_state",
    {
-    "_id": "bbf2f10b37cd4cdfa15d54f21444e021",
+    "_id": "e29deeb5620f449a8092122dc70e4f05",
     "t": 499,
     "state": {
      "t": 499,
@@ -6249,13 +6249,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000499.png",
-    "created_at": 1792851441.893574
+    "created_at": 1792855021.3996139
    }
   ],
   [
    "observations",
    {
-    "_id": "19caa68281a748159ac8febd21b5f8da",
+    "_id": "2bab58cf4c054735a82e93cd7588daa2",
     "t": 501,
     "frame_path": "VID74/000501.png",
     "labels": [
@@ -6278,13 +6278,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851441.893578
+    "created_at": 1792855021.399615
    }
   ],
   [
    "world_state",
    {
-    "_id": "6e4d18a942ab4cda9b0629d5e55a9b42",
+    "_id": "2e238fa7dd5b40e4b79608574a4be838",
     "t": 501,
     "state": {
      "t": 501,
@@ -6352,13 +6352,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000501.png",
-    "created_at": 1792851441.893872
+    "created_at": 1792855021.399712
    }
   ],
   [
    "world_state",
    {
-    "_id": "321faae7f66149e78a7e84bbf8d74095",
+    "_id": "58030375ac704030982143b8d710bae0",
     "t": 501,
     "state": {
      "t": 501,
@@ -6427,13 +6427,13 @@
      "Cystic artery is marked as 'clipped', but observation 487 explicitly shows 'hook,dissect,cystic_artery'."
     ],
     "corrections_applied": [],
-    "created_at": 1792851448.321265
+    "created_at": 1792855021.41029
    }
   ],
   [
    "observations",
    {
-    "_id": "20194bab128243cd9b54d559d925b36f",
+    "_id": "bfc2cea8fee949aeb2c2dc815d7a2fd0",
     "t": 503,
     "frame_path": "VID74/000503.png",
     "labels": [
@@ -6450,13 +6450,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.32129
+    "created_at": 1792855021.410293
    }
   ],
   [
    "world_state",
    {
-    "_id": "02c2a9c0176441b0b693e2450b31a761",
+    "_id": "1939f6eb79944a58bd043be57153cd39",
     "t": 503,
     "state": {
      "t": 503,
@@ -6524,13 +6524,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000503.png",
-    "created_at": 1792851448.3219311
+    "created_at": 1792855021.410472
    }
   ],
   [
    "observations",
    {
-    "_id": "f6b46c501ff7470b9f1a8a1801eabf1a",
+    "_id": "e2eb8a86c4754ab6a70d32349d4d66ad",
     "t": 505,
     "frame_path": "VID74/000505.png",
     "labels": [
@@ -6547,13 +6547,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3219469
+    "created_at": 1792855021.410475
    }
   ],
   [
    "world_state",
    {
-    "_id": "a956169c680043c281d851ea8a33bf29",
+    "_id": "71718a27e2544885acae05f8154bb898",
     "t": 505,
     "state": {
      "t": 505,
@@ -6621,13 +6621,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000505.png",
-    "created_at": 1792851448.322588
+    "created_at": 1792855021.410639
    }
   ],
   [
    "observations",
    {
-    "_id": "a16ecf18717441d1a49f266b92662b6a",
+    "_id": "66a8e87f54de4b5998d355526ed8ae65",
     "t": 507,
     "frame_path": "VID74/000507.png",
     "labels": [
@@ -6650,13 +6650,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.322604
+    "created_at": 1792855021.410642
    }
   ],
   [
    "world_state",
    {
-    "_id": "8f61408f9f604fb5b1729f013d916d98",
+    "_id": "c340e5dbb51d4e91aff4832601dd1aa4",
     "t": 507,
     "state": {
      "t": 507,
@@ -6724,13 +6724,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000507.png",
-    "created_at": 1792851448.323083
+    "created_at": 1792855021.4107788
    }
   ],
   [
    "observations",
    {
-    "_id": "82374f6e6cdf438a9ed60a145d3774b2",
+    "_id": "c67ad68522fe4755b164cd7e345c8222",
     "t": 509,
     "frame_path": "VID74/000509.png",
     "labels": [
@@ -6753,13 +6753,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3230898
+    "created_at": 1792855021.411655
    }
   ],
   [
    "world_state",
    {
-    "_id": "6f9a56bdac504347bc0cfc7cd7ab51d8",
+    "_id": "3e83a4824167486a9bccded2a8f7024d",
     "t": 509,
     "state": {
      "t": 509,
@@ -6827,13 +6827,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000509.png",
-    "created_at": 1792851448.323482
+    "created_at": 1792855021.423904
    }
   ],
   [
    "observations",
    {
-    "_id": "6eb35cf4563c42018de5390adcf420c8",
+    "_id": "389fe42fdc914263801d39ffe77d7795",
     "t": 511,
     "frame_path": "VID74/000511.png",
     "labels": [
@@ -6856,13 +6856,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.323489
+    "created_at": 1792855021.42501
    }
   ],
   [
    "world_state",
    {
-    "_id": "aeb000ca1f514e828ffdec429340d37f",
+    "_id": "2245b4e731954ab6a41453089294045a",
     "t": 511,
     "state": {
      "t": 511,
@@ -6930,13 +6930,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000511.png",
-    "created_at": 1792851448.3238568
+    "created_at": 1792855021.425306
    }
   ],
   [
    "observations",
    {
-    "_id": "052f148969ff4124a8b76def745eebf5",
+    "_id": "150be9fb0be54bfaaaa9cde862744f83",
     "t": 513,
     "frame_path": "VID74/000513.png",
     "labels": [
@@ -6959,13 +6959,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3238661
+    "created_at": 1792855021.425309
    }
   ],
   [
    "world_state",
    {
-    "_id": "f029691b6bbc4c41b8208b9d1d8abfda",
+    "_id": "f654c8f1ab924ce99a6c18cdb73a36ba",
     "t": 513,
     "state": {
      "t": 513,
@@ -7033,13 +7033,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000513.png",
-    "created_at": 1792851448.324163
+    "created_at": 1792855021.425438
    }
   ],
   [
    "observations",
    {
-    "_id": "ac5ca534356a47b68ffcfb0cc7ccc2c0",
+    "_id": "a1c48cf204684e78bf5f9bf713a45659",
     "t": 515,
     "frame_path": "VID74/000515.png",
     "labels": [
@@ -7056,13 +7056,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3241758
+    "created_at": 1792855021.42544
    }
   ],
   [
    "world_state",
    {
-    "_id": "aee72b61fc55429998006e59ae78c0f0",
+    "_id": "797fae602616405d95bc7507a47e16ea",
     "t": 515,
     "state": {
      "t": 515,
@@ -7130,13 +7130,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000515.png",
-    "created_at": 1792851448.324432
+    "created_at": 1792855021.425538
    }
   ],
   [
    "observations",
    {
-    "_id": "91e5f170e7054f2e8f46e53f4c6d8a3a",
+    "_id": "334e0a66cf424e65bf51bd1993463fd8",
     "t": 517,
     "frame_path": "VID74/000517.png",
     "labels": [
@@ -7159,13 +7159,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.324436
+    "created_at": 1792855021.425539
    }
   ],
   [
    "world_state",
    {
-    "_id": "a506d37e44ee4c5583d602710c012f59",
+    "_id": "064617e2064c4fb7a67bbc61630cc3f7",
     "t": 517,
     "state": {
      "t": 517,
@@ -7233,13 +7233,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000517.png",
-    "created_at": 1792851448.3246999
+    "created_at": 1792855021.425637
    }
   ],
   [
    "observations",
    {
-    "_id": "7ecdf798b2fa446d8d35c8427c8a688e",
+    "_id": "6e055ee2f6a840788573effccdcefa00",
     "t": 519,
     "frame_path": "VID74/000519.png",
     "labels": [
@@ -7262,13 +7262,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.324713
+    "created_at": 1792855021.425638
    }
   ],
   [
    "world_state",
    {
-    "_id": "246e90975cdb467d96ec559bedbe6549",
+    "_id": "7b58c23b79ec4050ac33be70bdcb6f43",
     "t": 519,
     "state": {
      "t": 519,
@@ -7336,13 +7336,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000519.png",
-    "created_at": 1792851448.325008
+    "created_at": 1792855021.425737
    }
   ],
   [
    "observations",
    {
-    "_id": "a94ee0383e3f40de9ccb164c4282d6c9",
+    "_id": "80bf02fef842426b9b1e99ba0fb18aba",
     "t": 521,
     "frame_path": "VID74/000521.png",
     "labels": [
@@ -7365,13 +7365,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.325013
+    "created_at": 1792855021.425738
    }
   ],
   [
    "world_state",
    {
-    "_id": "27c2c53fe68944daa9ab4e31069f323b",
+    "_id": "17a139e557e047abb8f8a81ee43d2ac3",
     "t": 521,
     "state": {
      "t": 521,
@@ -7439,13 +7439,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000521.png",
-    "created_at": 1792851448.325284
+    "created_at": 1792855021.425836
    }
   ],
   [
    "observations",
    {
-    "_id": "3bbca9f570f14ed9a109d2fec5b55496",
+    "_id": "273326df82a94d3b8a395658b32aa1a3",
     "t": 523,
     "frame_path": "VID74/000523.png",
     "labels": [
@@ -7468,13 +7468,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3252869
+    "created_at": 1792855021.425838
    }
   ],
   [
    "world_state",
    {
-    "_id": "64fe331bde2a484493289ff7319910f8",
+    "_id": "47f4865a6b7744f4a5e079abf164c84e",
     "t": 523,
     "state": {
      "t": 523,
@@ -7542,13 +7542,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000523.png",
-    "created_at": 1792851448.32556
+    "created_at": 1792855021.425934
    }
   ],
   [
    "observations",
    {
-    "_id": "38c24a481db8486d8207912a1d0a761d",
+    "_id": "b0d38e91ef40435cb5446c049140baaf",
     "t": 525,
     "frame_path": "VID74/000525.png",
     "labels": [
@@ -7565,13 +7565,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3255649
+    "created_at": 1792855021.439274
    }
   ],
   [
    "world_state",
    {
-    "_id": "8b30a924f3be42fab34a34d9ebd2785f",
+    "_id": "cd667138b0334f1392f2b1436a122506",
     "t": 525,
     "state": {
      "t": 525,
@@ -7639,13 +7639,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000525.png",
-    "created_at": 1792851448.325821
+    "created_at": 1792855021.439444
    }
   ],
   [
    "observations",
    {
-    "_id": "c876a3e33c874f7ca7c990dded891e86",
+    "_id": "a6fcf7d14ae34e09bab679b0e4e31a9d",
     "t": 527,
     "frame_path": "VID74/000527.png",
     "labels": [],
@@ -7655,13 +7655,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.325825
+    "created_at": 1792855021.441042
    }
   ],
   [
    "world_state",
    {
-    "_id": "174f10aaffd24fb7b3cd10c3fc77206f",
+    "_id": "c86152f0eed1480da6a39d5fc7c58e3c",
     "t": 527,
     "state": {
      "t": 527,
@@ -7729,13 +7729,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000527.png",
-    "created_at": 1792851448.3260832
+    "created_at": 1792855021.441172
    }
   ],
   [
    "observations",
    {
-    "_id": "20fa9de442ad4bd5991581b70bc1fafa",
+    "_id": "957603decfab447aac6ee72b621a030e",
     "t": 529,
     "frame_path": "VID74/000529.png",
     "labels": [],
@@ -7745,13 +7745,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3260858
+    "created_at": 1792855021.441174
    }
   ],
   [
    "world_state",
    {
-    "_id": "c24c8ae72b164c729a6893d75524416f",
+    "_id": "69af5700888d4fb995b029274b93ef3e",
     "t": 529,
     "state": {
      "t": 529,
@@ -7819,13 +7819,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000529.png",
-    "created_at": 1792851448.3263192
+    "created_at": 1792855021.441277
    }
   ],
   [
    "observations",
    {
-    "_id": "991b137764b045b8a92fe87ca48cd64b",
+    "_id": "ba2883b1046c4a7c850e9a716ddc98f0",
     "t": 531,
     "frame_path": "VID74/000531.png",
     "labels": [
@@ -7842,13 +7842,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851448.3263412
+    "created_at": 1792855021.442816
    }
   ],
   [
    "world_state",
    {
-    "_id": "bad73f9ba6c4404a9a2da43ae14fcfbf",
+    "_id": "f1dae29fcc324b40a4d2bd4e57a04ee6",
     "t": 531,
     "state": {
      "t": 531,
@@ -7916,13 +7916,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000531.png",
-    "created_at": 1792851448.326586
+    "created_at": 1792855021.443038
    }
   ],
   [
    "world_state",
    {
-    "_id": "095a2180cbe842e09ba883b70893f56f",
+    "_id": "cf13478557284c25a96edd3cdb4d430b",
     "t": 531,
     "state": {
      "t": 531,
@@ -7991,13 +7991,13 @@
      "At t=517, 'scissors,dissect,cystic_duct' occurs after initial clipping (t=503, 505), followed by further clipping (t=521, 523), which is an unusual sequence or a misclassified cut/dissection."
     ],
     "corrections_applied": [],
-    "created_at": 1792851452.1651042
+    "created_at": 1792855021.47295
    }
   ],
   [
    "observations",
    {
-    "_id": "aa69a045aba5418fb147f28cfd7e9201",
+    "_id": "87cf74c0159741669e5041ffe6edf3b1",
     "t": 533,
     "frame_path": "VID74/000533.png",
     "labels": [
@@ -8014,13 +8014,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.165122
+    "created_at": 1792855021.472953
    }
   ],
   [
    "world_state",
    {
-    "_id": "18661929cf4e466483444a6d4657421c",
+    "_id": "9da8f52c1e8c41eda53f8698b509933f",
     "t": 533,
     "state": {
      "t": 533,
@@ -8088,13 +8088,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000533.png",
-    "created_at": 1792851452.16566
+    "created_at": 1792855021.473118
    }
   ],
   [
    "observations",
    {
-    "_id": "857cf0eff4ce4197a3c520caa3577c5d",
+    "_id": "2943f64559c74322b63676b344f0a268",
     "t": 535,
     "frame_path": "VID74/000535.png",
     "labels": [
@@ -8117,13 +8117,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.1656709
+    "created_at": 1792855021.473121
    }
   ],
   [
    "world_state",
    {
-    "_id": "e7fe291733b04f9186cf7dded6cb8137",
+    "_id": "087f68e2fdfc43e5b01ad59da473fe4d",
     "t": 535,
     "state": {
      "t": 535,
@@ -8191,13 +8191,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000535.png",
-    "created_at": 1792851452.166066
+    "created_at": 1792855021.473243
    }
   ],
   [
    "observations",
    {
-    "_id": "76d4b8a39c724187b8448cd02a5ae16f",
+    "_id": "bc476adb5110482484a26ba4624b2189",
     "t": 537,
     "frame_path": "VID74/000537.png",
     "labels": [
@@ -8214,13 +8214,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.166081
+    "created_at": 1792855021.473244
    }
   ],
   [
    "world_state",
    {
-    "_id": "46b43b49d9ed4b28913af62c2c8675b6",
+    "_id": "23774001adb54fb09794fbb6ce847385",
     "t": 537,
     "state": {
      "t": 537,
@@ -8288,13 +8288,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000537.png",
-    "created_at": 1792851452.1665568
+    "created_at": 1792855021.473363
    }
   ],
   [
    "observations",
    {
-    "_id": "b8ecb7115516469faa4f389f71eedbd5",
+    "_id": "ba0a6a82a9a54c6c9c02283096dd023a",
     "t": 539,
     "frame_path": "VID74/000539.png",
     "labels": [
@@ -8311,13 +8311,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.1665752
+    "created_at": 1792855021.473365
    }
   ],
   [
    "world_state",
    {
-    "_id": "ecb70044d16a44719718f7b86351c35a",
+    "_id": "34fce1fa2d894327901beabc22fe4468",
     "t": 539,
     "state": {
      "t": 539,
@@ -8385,13 +8385,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000539.png",
-    "created_at": 1792851452.167093
+    "created_at": 1792855021.473473
    }
   ],
   [
    "observations",
    {
-    "_id": "8299d79af33d42a2bf5d47f1c45e77ac",
+    "_id": "3a5e72f88d444f5b9895870c32b0de41",
     "t": 541,
     "frame_path": "VID74/000541.png",
     "labels": [
@@ -8408,13 +8408,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.167101
+    "created_at": 1792855021.473474
    }
   ],
   [
    "world_state",
    {
-    "_id": "18fdbf2b4127444cbff09445359b9312",
+    "_id": "f439892dd9214daa9cc34c2c4cc88da4",
     "t": 541,
     "state": {
      "t": 541,
@@ -8482,13 +8482,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000541.png",
-    "created_at": 1792851452.167477
+    "created_at": 1792855021.47359
    }
   ],
   [
    "observations",
    {
-    "_id": "76574886a8e546899e21e93216b89b17",
+    "_id": "56e02a0e6efa4668b11d04c8a7416a1d",
     "t": 543,
     "frame_path": "VID74/000543.png",
     "labels": [
@@ -8505,13 +8505,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.167485
+    "created_at": 1792855021.473591
    }
   ],
   [
    "world_state",
    {
-    "_id": "949d377566f0471c8b589107fb2d9751",
+    "_id": "f78d91b9a0f74496b86c09091b1dbff1",
     "t": 543,
     "state": {
      "t": 543,
@@ -8579,13 +8579,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000543.png",
-    "created_at": 1792851452.167849
+    "created_at": 1792855021.473702
    }
   ],
   [
    "observations",
    {
-    "_id": "38007652314e43dea9d83fb978fba31d",
+    "_id": "f06fcfc14de3426cb490ced2c7e2d6fd",
     "t": 545,
     "frame_path": "VID74/000545.png",
     "labels": [
@@ -8602,13 +8602,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.1678798
+    "created_at": 1792855021.473738
    }
   ],
   [
    "world_state",
    {
-    "_id": "8cc0acc3bbf6494cbde4966a01e0a67e",
+    "_id": "fc8a67214a9f42cc9a281f5d2d03b7af",
     "t": 545,
     "state": {
      "t": 545,
@@ -8676,13 +8676,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000545.png",
-    "created_at": 1792851452.1682281
+    "created_at": 1792855021.473857
    }
   ],
   [
    "observations",
    {
-    "_id": "3fb1c548a40f4234b85c1f3ff6c5d387",
+    "_id": "e0d6cebf8e2e4f65a86049f883e0857b",
     "t": 547,
     "frame_path": "VID74/000547.png",
     "labels": [
@@ -8699,13 +8699,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.1682382
+    "created_at": 1792855021.473859
    }
   ],
   [
    "world_state",
    {
-    "_id": "ea6b05a63e3440a6983323d0e1927b78",
+    "_id": "de354c511c39480d8fca158beca1a03b",
     "t": 547,
     "state": {
      "t": 547,
@@ -8773,13 +8773,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000547.png",
-    "created_at": 1792851452.1685572
+    "created_at": 1792855021.47397
    }
   ],
   [
    "observations",
    {
-    "_id": "1f6239b47eb54db4b4f947283cc00815",
+    "_id": "1c957e39084d4ce2b0545fad6882fc5c",
     "t": 549,
     "frame_path": "VID74/000549.png",
     "labels": [
@@ -8802,13 +8802,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.168573
+    "created_at": 1792855021.473972
    }
   ],
   [
    "world_state",
    {
-    "_id": "2473c49dcf5648b09a4bbec9740b7f02",
+    "_id": "63d9331e3db5490a8033bc564c45a03e",
     "t": 549,
     "state": {
      "t": 549,
@@ -8876,13 +8876,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000549.png",
-    "created_at": 1792851452.168959
+    "created_at": 1792855021.474098
    }
   ],
   [
    "observations",
    {
-    "_id": "cc5d9add19634e0ebe03ca61954349cc",
+    "_id": "19d0ee6147374eb08161a4f46040e659",
     "t": 551,
     "frame_path": "VID74/000551.png",
     "labels": [
@@ -8899,13 +8899,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.168963
+    "created_at": 1792855021.4740999
    }
   ],
   [
    "world_state",
    {
-    "_id": "35998c6277404ecbbe532e175a8c473f",
+    "_id": "2df506abddca478f8acfabdbbbb97c10",
     "t": 551,
     "state": {
      "t": 551,
@@ -8973,13 +8973,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000551.png",
-    "created_at": 1792851452.169302
+    "created_at": 1792855021.4742138
    }
   ],
   [
    "observations",
    {
-    "_id": "383080f5086049ff98b433e6cc2e208d",
+    "_id": "359f611258fe4635a0d1218bc9307403",
     "t": 553,
     "frame_path": "VID74/000553.png",
     "labels": [
@@ -8996,13 +8996,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.169318
+    "created_at": 1792855021.474216
    }
   ],
   [
    "world_state",
    {
-    "_id": "6daf3939a84049e1816f7c5909ca4a7a",
+    "_id": "fea4c6cfd3ed4803b22f14ef657f38cf",
     "t": 553,
     "state": {
      "t": 553,
@@ -9070,13 +9070,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000553.png",
-    "created_at": 1792851452.169653
+    "created_at": 1792855021.474327
    }
   ],
   [
    "observations",
    {
-    "_id": "cf77b3f3e7e14a0aa7c6561c509f876f",
+    "_id": "dec15efdaa244d2a93a548db5538b21a",
     "t": 555,
     "frame_path": "VID74/000555.png",
     "labels": [
@@ -9093,13 +9093,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.1696692
+    "created_at": 1792855021.474491
    }
   ],
   [
    "world_state",
    {
-    "_id": "2a5f645a3cae48d78a1cd114da65a3da",
+    "_id": "3975e596c2be4126bf2cf4355e82aa6b",
     "t": 555,
     "state": {
      "t": 555,
@@ -9167,13 +9167,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000555.png",
-    "created_at": 1792851452.169974
+    "created_at": 1792855021.47464
    }
   ],
   [
    "observations",
    {
-    "_id": "1fde80baf5b245e195c70da4b720f34c",
+    "_id": "cd70bd13003e46068aff0cf026be2c5f",
     "t": 557,
     "frame_path": "VID74/000557.png",
     "labels": [
@@ -9190,13 +9190,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.169981
+    "created_at": 1792855021.474643
    }
   ],
   [
    "world_state",
    {
-    "_id": "6bdf22b1c9634471a371e5237a7ff8db",
+    "_id": "f6ae0cf20ea347eb91b5a5591938745a",
     "t": 557,
     "state": {
      "t": 557,
@@ -9264,13 +9264,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000557.png",
-    "created_at": 1792851452.1703
+    "created_at": 1792855021.474763
    }
   ],
   [
    "observations",
    {
-    "_id": "03d946c4c20e4d5db314fa13de27bbc7",
+    "_id": "94b7125ec3ea4ddfa3597449819c450f",
     "t": 559,
     "frame_path": "VID74/000559.png",
     "labels": [
@@ -9287,13 +9287,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.170304
+    "created_at": 1792855021.474765
    }
   ],
   [
    "world_state",
    {
-    "_id": "6047bd88b69f45e9b8dd025ff6583185",
+    "_id": "46361095f1f64ea98c66c8b6042918f6",
     "t": 559,
     "state": {
      "t": 559,
@@ -9361,13 +9361,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000559.png",
-    "created_at": 1792851452.170582
+    "created_at": 1792855021.47489
    }
   ],
   [
    "observations",
    {
-    "_id": "b91760d06c2b40e48cdc7d0c87e068c1",
+    "_id": "4e52a3961be14ffbbeb8c1905bd766d9",
     "t": 561,
     "frame_path": "VID74/000561.png",
     "labels": [],
@@ -9377,13 +9377,13 @@
     "reason_if_not": "",
     "error": null,
     "source": "flash",
-    "created_at": 1792851452.1705852
+    "created_at": 1792855021.47492
    }
   ],
   [
    "world_state",
    {
-    "_id": "11e256e5210c4df69282a3c7af5ead1b",
+    "_id": "7785234f72e54f569427efd5f1936a19",
     "t": 561,
     "state": {
      "t": 561,
@@ -9451,13 +9451,13 @@
     "banner": null,
     "error": null,
     "frame_path": "VID74/000561.png",
-    "created_at": 1792851452.170819
+    "created_at": 1792855021.475032
    }
   ],
   [
    "world_state",
    {
-    "_id": "609ef500ad6a4a00aaefc36dc40739b4",
+    "_id": "abd83cf36e244b75afc51dd94052ad81",
     "t": 561,
     "state": {
      "t": 561,
@@ -9526,13 +9526,13 @@
      "phase is gallbladder-dissection while cystic_artery is not yet cut and cystic_duct is still being clipped at t=551-557"
     ],
     "corrections_applied": [],
-    "created_at": 1792851452.18503
+    "created_at": 1792855021.4847832
    }
   ],
   [
    "world_state",
    {
-    "_id": "094afc5c06e44af4a5ad7da6df515890",
+    "_id": "2e1f1d1368074df8838dc95ad49dd2cf",
     "t": 561,
     "state": {
      "t": 561,
@@ -9597,7 +9597,30 @@
     "source": "end",
     "confidence": 1.0,
     "done": true,
-    "created_at": 1792851452.1850638
+    "created_at": 1792855021.4847932
+   }
+  ],
+  [
+   "report_events",
+   {
+    "kind": "watch",
+    "patient_id": "P3",
+    "text": "During this watch session for synthetic patient P3 (characterised by adhesions from prior surgery), two safety alerts for clipping before achieving the Critical View of Safety (CVS) were triggered at t=391 and t=415. Both alerts were automatically acknowledged by the system due to the recording mode. Throughout the procedure (from t=411 to t=561), numerous verification contradictions occurred, indicating ongoing hook and scissors dissection of the cystic duct, artery, and plate despite these structures already being marked as skeletonised, clipped, or cut. The session concluded in the gallbladder-dissection phase with an incomplete CVS (2/3), no bleeding, and the common bile duct marked as at risk.",
+    "key_events": [
+     "t=391: Alert for clipping before CVS triggered and auto-acknowledged.",
+     "t=411: Verification contradictions noted for ongoing dissection of structures already marked as skeletonised or clipped.",
+     "t=415: Second alert for clipping before CVS triggered and auto-acknowledged.",
+     "t=441-531: Multiple verification contradictions recorded as hook and scissors dissection continued on the cystic duct, artery, and plate despite their clipped/skeletonised status.",
+     "t=561: Impossible sequence contradiction logged where the cystic duct was cut (t=537-539) prior to further dissection (t=543) and clipping (t=551-557)."
+    ],
+    "violations": [
+     "clip_before_cvs"
+    ],
+    "n_events": 20,
+    "created_at": 1792855028.0882828,
+    "model": "gemini-4-argon",
+    "_id": "bed1c9a69548456384e4d94b98c68a7d",
+    "report_id": "e40eeedc0e054fbc98b1237dafaab5f8"
    }
   ]
  ],

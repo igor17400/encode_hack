@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { post, niceName } from "../api";
 import { Frame } from "./ui";
 import { fmtT } from "./AnatomyPanel";
+
+const QUICK_REASONS = [
+  "Confirmed anatomy on a second view",
+  "False alarm: perception misread the frame",
+  "Stop and reassess before continuing",
+];
 
 const TEXT = {
   clip_before_cvs: "Clip or cut before the critical view of safety is met.",
@@ -15,6 +21,10 @@ export default function AlertModal({ alert, onClose }) {
   const [reason, setReason] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(null);
+  useEffect(() => {
+    setReason(""); // each alert gets its own decision and reason
+    setErr(null);
+  }, [alert?._id]);
   if (!alert) return null;
   const evidence = alert.evidence || [];
 
@@ -71,14 +81,33 @@ export default function AlertModal({ alert, onClose }) {
         ) : null}
 
         <label className="label" htmlFor="reason">
-          Reason (required, logged)
+          Reason (required, logged): type one or pick
         </label>
+        <div className="mb-2 mt-1 flex flex-wrap gap-2">
+          {QUICK_REASONS.map((q) => (
+            <button
+              key={q}
+              type="button"
+              className={`rounded-full border px-3 py-1 text-sm ${reason === q ? "border-accent bg-accent/20 text-ink-1" : "border-line text-ink-2 hover:bg-surface-2"}`}
+              onClick={() => {
+                setReason(q);
+                setErr(null);
+              }}
+            >
+              {q}
+            </button>
+          ))}
+        </div>
         <textarea
           id="reason"
           className="mt-1 w-full rounded-lg border border-line bg-surface-2 p-3 text-ink-1"
           rows={2}
           value={reason}
-          onChange={(e) => setReason(e.target.value)}
+          autoFocus
+          onChange={(e) => {
+            setReason(e.target.value);
+            setErr(null);
+          }}
           placeholder="e.g. Surgeon confirmed anatomy on a second view"
         />
         {err && <div className="mt-2 text-sm text-status-serious">{err}</div>}

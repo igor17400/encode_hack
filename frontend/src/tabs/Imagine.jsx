@@ -68,8 +68,8 @@ function ResultCard({ node, onContinue, onSelectCitation, path }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <div>
+      <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-2">
+        <div className="min-w-0">
           <div className="label mb-1">Cited real transitions</div>
           {r.cited_transition_ids.length ? (
             <div className="flex flex-wrap gap-1.5">
@@ -171,6 +171,10 @@ export default function Imagine({ patients, start, setStart }) {
     }
   }
 
+  async function compare(act) {
+    for (const pid of ["P1", "P2", "P4"]) await run(act, pid);
+  }
+
   const pathOf = (node) => {
     const parts = [];
     let n = node;
@@ -181,7 +185,7 @@ export default function Imagine({ patients, start, setStart }) {
     return ["start", ...parts].join("  →  ");
   };
   const fromNode = nodes.find((n) => n.id === from);
-  const shown = nodes.slice(-4);
+  const shown = nodes.slice(-6);
 
   return (
     <div className="flex flex-col gap-5">
@@ -204,6 +208,9 @@ export default function Imagine({ patients, start, setStart }) {
         <Picker label="Any action" value={action} onChange={setAction} options={actions.map((a) => ({ value: a, label: actionLabel(a) }))} />
         <button className="btn" disabled={busy || !start} onClick={() => run(action)}>
           Imagine
+        </button>
+        <button className="btn" disabled={busy || !start} onClick={() => compare(QUICK[0].action)} title="Same action, three patients">
+          Compare “clip duct” on P1 · P2 · P4
         </button>
         <SimNote className="ml-auto" />
       </div>

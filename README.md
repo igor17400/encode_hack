@@ -115,23 +115,27 @@ Set `VITE_API_BASE` if the API runs elsewhere. Routes, SSE events and shapes: [d
 | Check | Result | Sample |
 | --- | --- | --- |
 | E1 next action, top-1 / top-3: Second Look (Argon + retrieval) | 30.0% / 56.0% | 200 test transitions from 10 unseen operations |
-| E1 baselines, top-1 / top-3: bigram · retrieval only · most common | 29.5% / 55.5% · 28.0% / 53.0% · 21.0% / 45.5% | same 200 |
-| E1 vs best baseline (bigram), top-3, paired bootstrap | +0.5 pts, 95% CI −7 to +8: **not significant** | same 200 |
+| E1 trained baseline (gradient boosting on state + action; fit on train, tuned on val) | **39.5% / 67.5%** | same 200 |
+| E1 simple baselines, top-1 / top-3: bigram · retrieval only · most common | 29.5% / 55.5% · 28.0% / 53.0% · 21.0% / 45.5% | same 200 |
+| E1 Argon vs trained baseline, top-3, paired bootstrap | −11.5 pts, 95% CI −18 to −5: **Argon is significantly worse** | same 200 |
+| E1 Argon vs bigram, top-3 | +0.5 pts, 95% CI −7 to +8: a tie | same 200 |
 | E2 calibration (ECE, 5 bins) | 0.24. Accuracy rises with confidence (21% → 38% → 58%) but it is overconfident | same 200 |
 | E3 perception (`gemini-3.8-flash`): triplet precision / recall | 27% / 28% | 200 test frames (VID73, VID74), 264 labelled triplets |
 | E3: cystic duct / cystic artery / cystic plate recall | 53% / 26% / 88% | 17 / 23 / 16 labelled |
 | E5 Gemini agent (P2, P4): violations and injury rate per episode | 0.0 and 0% for both patients, with or without lessons | 10 episodes per cell, rules dynamics, max 25 steps |
 | E5 completion rate: agent / agent + lessons / expert replay | P2 30% / 50% / 100%; P4 90% / 100% / 100% | 10 episodes per cell |
+| E5 with the **Argon world model as the simulator**: agent violations / injury rate | 0.0 and 0% (P2 and P4, with or without lessons); random: P2 3.8 / 40%, P4 2.2 / 100% | 5 episodes per cell; 529 steps, all from Argon |
 
 Reading these honestly:
-- **Next-action prediction ties the best simple baseline.**
-  - Argon predicts the surgeon's next move as well as a bigram table trained on the same videos (56.0% vs 55.5% top-3), not better.
+- **Next-action prediction: a small trained model beats Gemini.**
+  - Gradient boosting on 3,000 train transitions gets 67.5% top-3 against Argon's 56.0%. Argon ties the bigram table.
+  - Second Look's value is the grounded, explainable, rule-checked world model and the safety simulator, not next-action accuracy. A trained predictor could be plugged in for next-action suggestions.
   - Per the build plan, we lead with safety (E5) and perception (E3) instead of claiming a win.
   - One prompt change was tuned on validation only (defining `confidence` as the probability that the top prediction is right). It cut validation ECE from about 0.45 to 0.16 without changing accuracy. The test set was then run once.
 - **The Gemini agent stayed safe in every episode,** against 40–90% injuries for random actions. It completes P2 less often because the inflamed patient needs more dissection than 25 steps of 10 s allow.
 - **No lessons were written,** because there was no unsafe agent episode. "With lessons" therefore ran under the same condition as "without", and the completion difference is sampling noise. This run does not show whether lessons help.
 - **Perception is the weak link.** In a live Watch run on the demo clip, Flash misreads caused an early `clip_before_cvs` alert. Argon verification flagged the inconsistencies (see `DECISIONS.md`).
-- Robot runs with the full Argon world model as dynamics (instead of rules) are not done yet: about 500 Argon calls.
+- With the Argon world model as the simulator, the agent was again never unsafe, so no lessons were written and the lessons mechanism remains untested (completion gaps between "agent" and "agent + lessons" are noise at n=5).
 
 ## Atlas features used
 

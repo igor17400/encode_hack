@@ -1,0 +1,2641 @@
+{
+ "VID74/000381.png": [
+  {
+   "id": "VID25_00400",
+   "path": "VID25/000400.png",
+   "video_id": "VID25",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.98858243227005,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.988033652305603,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00480",
+   "path": "VID04/000480.png",
+   "video_id": "VID04",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9877482652664185,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000383.png": [
+  {
+   "id": "VID27_00380",
+   "path": "VID27/000380.png",
+   "video_id": "VID27",
+   "t": 380,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9915817379951477,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_00380",
+   "path": "VID05/000380.png",
+   "video_id": "VID05",
+   "t": 380,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9914374351501465,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID40_00800",
+   "path": "VID40/000800.png",
+   "video_id": "VID40",
+   "t": 800,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9910539388656616,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000385.png": [
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9932082891464233,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00640",
+   "path": "VID04/000640.png",
+   "video_id": "VID04",
+   "t": 640,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9920985102653503,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00540",
+   "path": "VID35/000540.png",
+   "video_id": "VID35",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9920188784599304,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000387.png": [
+  {
+   "id": "VID04_00650",
+   "path": "VID04/000650.png",
+   "video_id": "VID04",
+   "t": 650,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9894195795059204,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00480",
+   "path": "VID103/000480.png",
+   "video_id": "VID103",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9877719879150391,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00580",
+   "path": "VID103/000580.png",
+   "video_id": "VID103",
+   "t": 580,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.987518310546875,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000389.png": [
+  {
+   "id": "VID43_01360",
+   "path": "VID43/001360.png",
+   "video_id": "VID43",
+   "t": 1360,
+   "phase": "gallbladder-dissection",
+   "score": 0.9907587170600891,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9901605844497681,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00520",
+   "path": "VID25/000520.png",
+   "video_id": "VID25",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9900598526000977,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000391.png": [
+  {
+   "id": "VID27_00160",
+   "path": "VID27/000160.png",
+   "video_id": "VID27",
+   "t": 160,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9791115522384644,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_01020",
+   "path": "VID48/001020.png",
+   "video_id": "VID48",
+   "t": 1020,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9788826704025269,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00680",
+   "path": "VID43/000680.png",
+   "video_id": "VID43",
+   "t": 680,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9774556159973145,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000393.png": [
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9916317462921143,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_01520",
+   "path": "VID27/001520.png",
+   "video_id": "VID27",
+   "t": 1520,
+   "phase": "gallbladder-dissection",
+   "score": 0.991362988948822,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00640",
+   "path": "VID04/000640.png",
+   "video_id": "VID04",
+   "t": 640,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9912571310997009,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000395.png": [
+  {
+   "id": "VID35_00540",
+   "path": "VID35/000540.png",
+   "video_id": "VID35",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9913899302482605,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9911741614341736,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01360",
+   "path": "VID43/001360.png",
+   "video_id": "VID43",
+   "t": 1360,
+   "phase": "gallbladder-dissection",
+   "score": 0.9911041855812073,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000397.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9901959896087646,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_01500",
+   "path": "VID103/001500.png",
+   "video_id": "VID103",
+   "t": 1500,
+   "phase": "gallbladder-dissection",
+   "score": 0.9901863932609558,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00400",
+   "path": "VID103/000400.png",
+   "video_id": "VID103",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9900079965591431,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000399.png": [
+  {
+   "id": "VID05_00720",
+   "path": "VID05/000720.png",
+   "video_id": "VID05",
+   "t": 720,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9926453828811646,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00140",
+   "path": "VID49/000140.png",
+   "video_id": "VID49",
+   "t": 140,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9925016760826111,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID13_00260",
+   "path": "VID13/000260.png",
+   "video_id": "VID13",
+   "t": 260,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9915814399719238,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000401.png": [
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9902539253234863,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9894166588783264,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_00560",
+   "path": "VID36/000560.png",
+   "video_id": "VID36",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9893404841423035,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000403.png": [
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9893227815628052,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9887323379516602,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00480",
+   "path": "VID04/000480.png",
+   "video_id": "VID04",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9880294799804688,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000405.png": [
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9866204261779785,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_01540",
+   "path": "VID15/001540.png",
+   "video_id": "VID15",
+   "t": 1540,
+   "phase": "gallbladder-dissection",
+   "score": 0.9859999418258667,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9856208562850952,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000407.png": [
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.987373948097229,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00550",
+   "path": "VID04/000550.png",
+   "video_id": "VID04",
+   "t": 550,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9871958494186401,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00690",
+   "path": "VID04/000690.png",
+   "video_id": "VID04",
+   "t": 690,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9870724678039551,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000409.png": [
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9912303686141968,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_00900",
+   "path": "VID02/000900.png",
+   "video_id": "VID02",
+   "t": 900,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911834001541138,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_00960",
+   "path": "VID02/000960.png",
+   "video_id": "VID02",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9908658266067505,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000411.png": [
+  {
+   "id": "VID103_00440",
+   "path": "VID103/000440.png",
+   "video_id": "VID103",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.991965651512146,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00740",
+   "path": "VID48/000740.png",
+   "video_id": "VID48",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.991001307964325,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_00300",
+   "path": "VID27/000300.png",
+   "video_id": "VID27",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.990562915802002,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000413.png": [
+  {
+   "id": "VID35_00260",
+   "path": "VID35/000260.png",
+   "video_id": "VID35",
+   "t": 260,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9882192015647888,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID13_00060",
+   "path": "VID13/000060.png",
+   "video_id": "VID13",
+   "t": 60,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.988038182258606,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_00560",
+   "path": "VID36/000560.png",
+   "video_id": "VID36",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9878625273704529,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000415.png": [
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.983982503414154,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00400",
+   "path": "VID25/000400.png",
+   "video_id": "VID25",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9833078980445862,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00550",
+   "path": "VID04/000550.png",
+   "video_id": "VID04",
+   "t": 550,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9829312562942505,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000417.png": [
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9889017343521118,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9867495894432068,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_00900",
+   "path": "VID02/000900.png",
+   "video_id": "VID02",
+   "t": 900,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9866383671760559,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000419.png": [
+  {
+   "id": "VID02_00930",
+   "path": "VID02/000930.png",
+   "video_id": "VID02",
+   "t": 930,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9900168180465698,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00400",
+   "path": "VID25/000400.png",
+   "video_id": "VID25",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9890434741973877,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00940",
+   "path": "VID48/000940.png",
+   "video_id": "VID48",
+   "t": 940,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9889815449714661,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000421.png": [
+  {
+   "id": "VID02_00960",
+   "path": "VID02/000960.png",
+   "video_id": "VID02",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9905469417572021,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_00900",
+   "path": "VID02/000900.png",
+   "video_id": "VID02",
+   "t": 900,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9902322292327881,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID22_00320",
+   "path": "VID22/000320.png",
+   "video_id": "VID22",
+   "t": 320,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9900569319725037,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000423.png": [
+  {
+   "id": "VID27_00380",
+   "path": "VID27/000380.png",
+   "video_id": "VID27",
+   "t": 380,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9906755685806274,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00400",
+   "path": "VID25/000400.png",
+   "video_id": "VID25",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9906032085418701,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_00560",
+   "path": "VID36/000560.png",
+   "video_id": "VID36",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9905517101287842,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000425.png": [
+  {
+   "id": "VID36_00560",
+   "path": "VID36/000560.png",
+   "video_id": "VID36",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9882405400276184,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00540",
+   "path": "VID103/000540.png",
+   "video_id": "VID103",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9881491661071777,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00740",
+   "path": "VID48/000740.png",
+   "video_id": "VID48",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.988103985786438,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000427.png": [
+  {
+   "id": "VID35_00300",
+   "path": "VID35/000300.png",
+   "video_id": "VID35",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9908393621444702,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_00460",
+   "path": "VID05/000460.png",
+   "video_id": "VID05",
+   "t": 460,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9903136491775513,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00240",
+   "path": "VID35/000240.png",
+   "video_id": "VID35",
+   "t": 240,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9898648858070374,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000429.png": [
+  {
+   "id": "VID26_00400",
+   "path": "VID26/000400.png",
+   "video_id": "VID26",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9926319718360901,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00420",
+   "path": "VID26/000420.png",
+   "video_id": "VID26",
+   "t": 420,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9923776388168335,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.99225914478302,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000431.png": [
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9908150434494019,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00490",
+   "path": "VID04/000490.png",
+   "video_id": "VID04",
+   "t": 490,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9904325008392334,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01360",
+   "path": "VID43/001360.png",
+   "video_id": "VID43",
+   "t": 1360,
+   "phase": "gallbladder-dissection",
+   "score": 0.989919900894165,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000433.png": [
+  {
+   "id": "VID103_00480",
+   "path": "VID103/000480.png",
+   "video_id": "VID103",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9894686341285706,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00400",
+   "path": "VID15/000400.png",
+   "video_id": "VID15",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9892269968986511,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00620",
+   "path": "VID25/000620.png",
+   "video_id": "VID25",
+   "t": 620,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9890581369400024,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000435.png": [
+  {
+   "id": "VID43_01360",
+   "path": "VID43/001360.png",
+   "video_id": "VID43",
+   "t": 1360,
+   "phase": "gallbladder-dissection",
+   "score": 0.991309642791748,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9911910891532898,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00520",
+   "path": "VID103/000520.png",
+   "video_id": "VID103",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911823272705078,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000437.png": [
+  {
+   "id": "VID26_00400",
+   "path": "VID26/000400.png",
+   "video_id": "VID26",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9907515645027161,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00420",
+   "path": "VID26/000420.png",
+   "video_id": "VID26",
+   "t": 420,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9907510280609131,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00620",
+   "path": "VID04/000620.png",
+   "video_id": "VID04",
+   "t": 620,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9906951189041138,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000439.png": [
+  {
+   "id": "VID49_00210",
+   "path": "VID49/000210.png",
+   "video_id": "VID49",
+   "t": 210,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9925520420074463,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00230",
+   "path": "VID49/000230.png",
+   "video_id": "VID49",
+   "t": 230,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9915960431098938,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9907912611961365,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000441.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9916319847106934,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9907968640327454,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_01440",
+   "path": "VID48/001440.png",
+   "video_id": "VID48",
+   "t": 1440,
+   "phase": "gallbladder-dissection",
+   "score": 0.9907578229904175,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000443.png": [
+  {
+   "id": "VID04_00690",
+   "path": "VID04/000690.png",
+   "video_id": "VID04",
+   "t": 690,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9897827506065369,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.989745557308197,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID47_01580",
+   "path": "VID47/001580.png",
+   "video_id": "VID47",
+   "t": 1580,
+   "phase": "gallbladder-dissection",
+   "score": 0.989591658115387,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000445.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9906061291694641,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_01060",
+   "path": "VID36/001060.png",
+   "video_id": "VID36",
+   "t": 1060,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9890674352645874,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID47_00440",
+   "path": "VID47/000440.png",
+   "video_id": "VID47",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9889664649963379,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000447.png": [
+  {
+   "id": "VID23_00420",
+   "path": "VID23/000420.png",
+   "video_id": "VID23",
+   "t": 420,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9827165007591248,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00480",
+   "path": "VID26/000480.png",
+   "video_id": "VID26",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9823064208030701,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01080",
+   "path": "VID43/001080.png",
+   "video_id": "VID43",
+   "t": 1080,
+   "phase": "clipping-and-cutting",
+   "score": 0.9815562963485718,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000449.png": [
+  {
+   "id": "VID13_00060",
+   "path": "VID13/000060.png",
+   "video_id": "VID13",
+   "t": 60,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9896551370620728,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00360",
+   "path": "VID103/000360.png",
+   "video_id": "VID103",
+   "t": 360,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9894591569900513,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_01500",
+   "path": "VID103/001500.png",
+   "video_id": "VID103",
+   "t": 1500,
+   "phase": "gallbladder-dissection",
+   "score": 0.9892356395721436,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000451.png": [
+  {
+   "id": "VID23_00400",
+   "path": "VID23/000400.png",
+   "video_id": "VID23",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9864515662193298,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_01400",
+   "path": "VID103/001400.png",
+   "video_id": "VID103",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9857901930809021,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00440",
+   "path": "VID103/000440.png",
+   "video_id": "VID103",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9857816696166992,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000453.png": [
+  {
+   "id": "VID23_00760",
+   "path": "VID23/000760.png",
+   "video_id": "VID23",
+   "t": 760,
+   "phase": "gallbladder-dissection",
+   "score": 0.9854130744934082,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.984874963760376,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01480",
+   "path": "VID43/001480.png",
+   "video_id": "VID43",
+   "t": 1480,
+   "phase": "gallbladder-dissection",
+   "score": 0.9839609861373901,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000455.png": [
+  {
+   "id": "VID36_01060",
+   "path": "VID36/001060.png",
+   "video_id": "VID36",
+   "t": 1060,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9906848669052124,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00480",
+   "path": "VID35/000480.png",
+   "video_id": "VID35",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9903175234794617,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9899324178695679,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000457.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9892392754554749,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00680",
+   "path": "VID26/000680.png",
+   "video_id": "VID26",
+   "t": 680,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9891214370727539,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID47_00440",
+   "path": "VID47/000440.png",
+   "video_id": "VID47",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9890497326850891,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000459.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9903732538223267,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00340",
+   "path": "VID35/000340.png",
+   "video_id": "VID35",
+   "t": 340,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9896358251571655,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00440",
+   "path": "VID15/000440.png",
+   "video_id": "VID15",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9896292686462402,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000461.png": [
+  {
+   "id": "VID02_01080",
+   "path": "VID02/001080.png",
+   "video_id": "VID02",
+   "t": 1080,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9876722693443298,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_01050",
+   "path": "VID02/001050.png",
+   "video_id": "VID02",
+   "t": 1050,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9867006540298462,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00540",
+   "path": "VID26/000540.png",
+   "video_id": "VID26",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.986391007900238,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000463.png": [
+  {
+   "id": "VID02_01050",
+   "path": "VID02/001050.png",
+   "video_id": "VID02",
+   "t": 1050,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9876479506492615,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00540",
+   "path": "VID26/000540.png",
+   "video_id": "VID26",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9872254133224487,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00300",
+   "path": "VID25/000300.png",
+   "video_id": "VID25",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9862937927246094,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000465.png": [
+  {
+   "id": "VID02_01080",
+   "path": "VID02/001080.png",
+   "video_id": "VID02",
+   "t": 1080,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9873998165130615,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00540",
+   "path": "VID26/000540.png",
+   "video_id": "VID26",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.986327052116394,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID110_01520",
+   "path": "VID110/001520.png",
+   "video_id": "VID110",
+   "t": 1520,
+   "phase": "gallbladder-dissection",
+   "score": 0.9856420755386353,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000467.png": [
+  {
+   "id": "VID26_00540",
+   "path": "VID26/000540.png",
+   "video_id": "VID26",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9889587163925171,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00300",
+   "path": "VID25/000300.png",
+   "video_id": "VID25",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9876022338867188,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID110_00720",
+   "path": "VID110/000720.png",
+   "video_id": "VID110",
+   "t": 720,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9875098466873169,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000469.png": [
+  {
+   "id": "VID26_00540",
+   "path": "VID26/000540.png",
+   "video_id": "VID26",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9890991449356079,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_01050",
+   "path": "VID02/001050.png",
+   "video_id": "VID02",
+   "t": 1050,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9889587163925171,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_00900",
+   "path": "VID36/000900.png",
+   "video_id": "VID36",
+   "t": 900,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9876586198806763,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000471.png": [
+  {
+   "id": "VID02_01080",
+   "path": "VID02/001080.png",
+   "video_id": "VID02",
+   "t": 1080,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9886839985847473,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID110_01520",
+   "path": "VID110/001520.png",
+   "video_id": "VID110",
+   "t": 1520,
+   "phase": "gallbladder-dissection",
+   "score": 0.9885499477386475,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00300",
+   "path": "VID25/000300.png",
+   "video_id": "VID25",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9884428977966309,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000473.png": [
+  {
+   "id": "VID25_00300",
+   "path": "VID25/000300.png",
+   "video_id": "VID25",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9860328435897827,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_01020",
+   "path": "VID02/001020.png",
+   "video_id": "VID02",
+   "t": 1020,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9858662486076355,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID23_00380",
+   "path": "VID23/000380.png",
+   "video_id": "VID23",
+   "t": 380,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9857707619667053,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000475.png": [
+  {
+   "id": "VID26_00540",
+   "path": "VID26/000540.png",
+   "video_id": "VID26",
+   "t": 540,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9876775741577148,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID110_00720",
+   "path": "VID110/000720.png",
+   "video_id": "VID110",
+   "t": 720,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9869985580444336,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID110_01520",
+   "path": "VID110/001520.png",
+   "video_id": "VID110",
+   "t": 1520,
+   "phase": "gallbladder-dissection",
+   "score": 0.9865260124206543,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000477.png": [
+  {
+   "id": "VID48_01460",
+   "path": "VID48/001460.png",
+   "video_id": "VID48",
+   "t": 1460,
+   "phase": "gallbladder-dissection",
+   "score": 0.9874613881111145,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_00300",
+   "path": "VID25/000300.png",
+   "video_id": "VID25",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9868446588516235,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_01260",
+   "path": "VID48/001260.png",
+   "video_id": "VID48",
+   "t": 1260,
+   "phase": "gallbladder-dissection",
+   "score": 0.9859180450439453,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000479.png": [
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9929046034812927,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID01_01120",
+   "path": "VID01/001120.png",
+   "video_id": "VID01",
+   "t": 1120,
+   "phase": "gallbladder-dissection",
+   "score": 0.9919162392616272,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID26_00400",
+   "path": "VID26/000400.png",
+   "video_id": "VID26",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9916398525238037,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000481.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9915957450866699,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9912464022636414,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00480",
+   "path": "VID35/000480.png",
+   "video_id": "VID35",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9909312725067139,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000483.png": [
+  {
+   "id": "VID26_00520",
+   "path": "VID26/000520.png",
+   "video_id": "VID26",
+   "t": 520,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9904409646987915,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9903322458267212,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9903042912483215,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000485.png": [
+  {
+   "id": "VID48_01020",
+   "path": "VID48/001020.png",
+   "video_id": "VID48",
+   "t": 1020,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9830546379089355,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00680",
+   "path": "VID43/000680.png",
+   "video_id": "VID43",
+   "t": 680,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9794272780418396,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_00160",
+   "path": "VID27/000160.png",
+   "video_id": "VID27",
+   "t": 160,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9792321920394897,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000487.png": [
+  {
+   "id": "VID35_00480",
+   "path": "VID35/000480.png",
+   "video_id": "VID35",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9932211637496948,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9928199052810669,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_00820",
+   "path": "VID05/000820.png",
+   "video_id": "VID05",
+   "t": 820,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9925861358642578,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000489.png": [
+  {
+   "id": "VID43_01400",
+   "path": "VID43/001400.png",
+   "video_id": "VID43",
+   "t": 1400,
+   "phase": "gallbladder-dissection",
+   "score": 0.9889789819717407,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00440",
+   "path": "VID103/000440.png",
+   "video_id": "VID103",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9888451099395752,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID23_00760",
+   "path": "VID23/000760.png",
+   "video_id": "VID23",
+   "t": 760,
+   "phase": "gallbladder-dissection",
+   "score": 0.9887272119522095,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000491.png": [
+  {
+   "id": "VID49_00220",
+   "path": "VID49/000220.png",
+   "video_id": "VID49",
+   "t": 220,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9913980960845947,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00480",
+   "path": "VID35/000480.png",
+   "video_id": "VID35",
+   "t": 480,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9909859299659729,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_01060",
+   "path": "VID36/001060.png",
+   "video_id": "VID36",
+   "t": 1060,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9907857179641724,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000493.png": [
+  {
+   "id": "VID05_00960",
+   "path": "VID05/000960.png",
+   "video_id": "VID05",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9877880811691284,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00650",
+   "path": "VID04/000650.png",
+   "video_id": "VID04",
+   "t": 650,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9874099493026733,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00240",
+   "path": "VID43/000240.png",
+   "video_id": "VID43",
+   "t": 240,
+   "phase": "preparation",
+   "score": 0.9868159294128418,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000495.png": [
+  {
+   "id": "VID43_00600",
+   "path": "VID43/000600.png",
+   "video_id": "VID43",
+   "t": 600,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9848171472549438,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_02160",
+   "path": "VID02/002160.png",
+   "video_id": "VID02",
+   "t": 2160,
+   "phase": "gallbladder-dissection",
+   "score": 0.9845089912414551,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00560",
+   "path": "VID15/000560.png",
+   "video_id": "VID15",
+   "t": 560,
+   "phase": "clipping-and-cutting",
+   "score": 0.9838827252388,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000497.png": [
+  {
+   "id": "VID02_01320",
+   "path": "VID02/001320.png",
+   "video_id": "VID02",
+   "t": 1320,
+   "phase": "clipping-and-cutting",
+   "score": 0.9852809906005859,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_01000",
+   "path": "VID27/001000.png",
+   "video_id": "VID27",
+   "t": 1000,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9852281212806702,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_00960",
+   "path": "VID05/000960.png",
+   "video_id": "VID05",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9851385354995728,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000499.png": [
+  {
+   "id": "VID05_00960",
+   "path": "VID05/000960.png",
+   "video_id": "VID05",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9875542521476746,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_01000",
+   "path": "VID27/001000.png",
+   "video_id": "VID27",
+   "t": 1000,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9871227741241455,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_01320",
+   "path": "VID02/001320.png",
+   "video_id": "VID02",
+   "t": 1320,
+   "phase": "clipping-and-cutting",
+   "score": 0.9870836734771729,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000501.png": [
+  {
+   "id": "VID27_01000",
+   "path": "VID27/001000.png",
+   "video_id": "VID27",
+   "t": 1000,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9856158494949341,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00600",
+   "path": "VID43/000600.png",
+   "video_id": "VID43",
+   "t": 600,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9854943752288818,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_00580",
+   "path": "VID27/000580.png",
+   "video_id": "VID27",
+   "t": 580,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.985132098197937,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000503.png": [
+  {
+   "id": "VID05_01220",
+   "path": "VID05/001220.png",
+   "video_id": "VID05",
+   "t": 1220,
+   "phase": "clipping-and-cutting",
+   "score": 0.9895134568214417,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01080",
+   "path": "VID05/001080.png",
+   "video_id": "VID05",
+   "t": 1080,
+   "phase": "clipping-and-cutting",
+   "score": 0.9882433414459229,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00240",
+   "path": "VID15/000240.png",
+   "video_id": "VID15",
+   "t": 240,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9881077408790588,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000505.png": [
+  {
+   "id": "VID15_00460",
+   "path": "VID15/000460.png",
+   "video_id": "VID15",
+   "t": 460,
+   "phase": "clipping-and-cutting",
+   "score": 0.9911282062530518,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID49_00210",
+   "path": "VID49/000210.png",
+   "video_id": "VID49",
+   "t": 210,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911030530929565,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00380",
+   "path": "VID43/000380.png",
+   "video_id": "VID43",
+   "t": 380,
+   "phase": "preparation",
+   "score": 0.9910308122634888,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000507.png": [
+  {
+   "id": "VID36_00960",
+   "path": "VID36/000960.png",
+   "video_id": "VID36",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9916428327560425,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00460",
+   "path": "VID15/000460.png",
+   "video_id": "VID15",
+   "t": 460,
+   "phase": "clipping-and-cutting",
+   "score": 0.991415798664093,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00440",
+   "path": "VID15/000440.png",
+   "video_id": "VID15",
+   "t": 440,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911392331123352,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000509.png": [
+  {
+   "id": "VID27_01040",
+   "path": "VID27/001040.png",
+   "video_id": "VID27",
+   "t": 1040,
+   "phase": "clipping-and-cutting",
+   "score": 0.9919866323471069,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID25_01420",
+   "path": "VID25/001420.png",
+   "video_id": "VID25",
+   "t": 1420,
+   "phase": "gallbladder-dissection",
+   "score": 0.991346001625061,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_01220",
+   "path": "VID35/001220.png",
+   "video_id": "VID35",
+   "t": 1220,
+   "phase": "clipping-and-cutting",
+   "score": 0.9912043809890747,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000511.png": [
+  {
+   "id": "VID103_00820",
+   "path": "VID103/000820.png",
+   "video_id": "VID103",
+   "t": 820,
+   "phase": "clipping-and-cutting",
+   "score": 0.9878257513046265,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID40_00820",
+   "path": "VID40/000820.png",
+   "video_id": "VID40",
+   "t": 820,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9873372316360474,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00700",
+   "path": "VID48/000700.png",
+   "video_id": "VID48",
+   "t": 700,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9870216250419617,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000513.png": [
+  {
+   "id": "VID27_00560",
+   "path": "VID27/000560.png",
+   "video_id": "VID27",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9875133633613586,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00800",
+   "path": "VID35/000800.png",
+   "video_id": "VID35",
+   "t": 800,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9872281551361084,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID48_00200",
+   "path": "VID48/000200.png",
+   "video_id": "VID48",
+   "t": 200,
+   "phase": "preparation",
+   "score": 0.986793041229248,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000515.png": [
+  {
+   "id": "VID05_01300",
+   "path": "VID05/001300.png",
+   "video_id": "VID05",
+   "t": 1300,
+   "phase": "gallbladder-dissection",
+   "score": 0.9905203580856323,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00300",
+   "path": "VID15/000300.png",
+   "video_id": "VID15",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9905177354812622,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_01580",
+   "path": "VID27/001580.png",
+   "video_id": "VID27",
+   "t": 1580,
+   "phase": "gallbladder-dissection",
+   "score": 0.9903249740600586,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000517.png": [
+  {
+   "id": "VID49_00140",
+   "path": "VID49/000140.png",
+   "video_id": "VID49",
+   "t": 140,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9914727210998535,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01440",
+   "path": "VID43/001440.png",
+   "video_id": "VID43",
+   "t": 1440,
+   "phase": "gallbladder-dissection",
+   "score": 0.9914502501487732,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01300",
+   "path": "VID05/001300.png",
+   "video_id": "VID05",
+   "t": 1300,
+   "phase": "gallbladder-dissection",
+   "score": 0.9908827543258667,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000519.png": [
+  {
+   "id": "VID04_00700",
+   "path": "VID04/000700.png",
+   "video_id": "VID04",
+   "t": 700,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9922404289245605,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00740",
+   "path": "VID04/000740.png",
+   "video_id": "VID04",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911832809448242,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_00960",
+   "path": "VID36/000960.png",
+   "video_id": "VID36",
+   "t": 960,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911035299301147,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000521.png": [
+  {
+   "id": "VID04_00740",
+   "path": "VID04/000740.png",
+   "video_id": "VID04",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9911633729934692,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01440",
+   "path": "VID43/001440.png",
+   "video_id": "VID43",
+   "t": 1440,
+   "phase": "gallbladder-dissection",
+   "score": 0.991113007068634,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID36_01160",
+   "path": "VID36/001160.png",
+   "video_id": "VID36",
+   "t": 1160,
+   "phase": "clipping-and-cutting",
+   "score": 0.9908393621444702,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000523.png": [
+  {
+   "id": "VID15_00460",
+   "path": "VID15/000460.png",
+   "video_id": "VID15",
+   "t": 460,
+   "phase": "clipping-and-cutting",
+   "score": 0.9910678863525391,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID02_01350",
+   "path": "VID02/001350.png",
+   "video_id": "VID02",
+   "t": 1350,
+   "phase": "clipping-and-cutting",
+   "score": 0.9906619191169739,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID27_00580",
+   "path": "VID27/000580.png",
+   "video_id": "VID27",
+   "t": 580,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9898598194122314,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000525.png": [
+  {
+   "id": "VID15_00400",
+   "path": "VID15/000400.png",
+   "video_id": "VID15",
+   "t": 400,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9885366559028625,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00660",
+   "path": "VID15/000660.png",
+   "video_id": "VID15",
+   "t": 660,
+   "phase": "clipping-and-cutting",
+   "score": 0.9883270263671875,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01160",
+   "path": "VID05/001160.png",
+   "video_id": "VID05",
+   "t": 1160,
+   "phase": "clipping-and-cutting",
+   "score": 0.9879065752029419,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000527.png": [
+  {
+   "id": "VID15_00760",
+   "path": "VID15/000760.png",
+   "video_id": "VID15",
+   "t": 760,
+   "phase": "clipping-and-cutting",
+   "score": 0.9905907511711121,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01140",
+   "path": "VID05/001140.png",
+   "video_id": "VID05",
+   "t": 1140,
+   "phase": "clipping-and-cutting",
+   "score": 0.9902822971343994,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01100",
+   "path": "VID05/001100.png",
+   "video_id": "VID05",
+   "t": 1100,
+   "phase": "clipping-and-cutting",
+   "score": 0.9895777702331543,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000529.png": [
+  {
+   "id": "VID05_01140",
+   "path": "VID05/001140.png",
+   "video_id": "VID05",
+   "t": 1140,
+   "phase": "clipping-and-cutting",
+   "score": 0.9904553294181824,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID47_00860",
+   "path": "VID47/000860.png",
+   "video_id": "VID47",
+   "t": 860,
+   "phase": "clipping-and-cutting",
+   "score": 0.9881061315536499,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01100",
+   "path": "VID05/001100.png",
+   "video_id": "VID05",
+   "t": 1100,
+   "phase": "clipping-and-cutting",
+   "score": 0.9880126714706421,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000531.png": [
+  {
+   "id": "VID02_01320",
+   "path": "VID02/001320.png",
+   "video_id": "VID02",
+   "t": 1320,
+   "phase": "clipping-and-cutting",
+   "score": 0.9841920137405396,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_01060",
+   "path": "VID15/001060.png",
+   "video_id": "VID15",
+   "t": 1060,
+   "phase": "gallbladder-dissection",
+   "score": 0.9836099743843079,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00760",
+   "path": "VID04/000760.png",
+   "video_id": "VID04",
+   "t": 760,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9835000038146973,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000533.png": [
+  {
+   "id": "VID02_01320",
+   "path": "VID02/001320.png",
+   "video_id": "VID02",
+   "t": 1320,
+   "phase": "clipping-and-cutting",
+   "score": 0.9809110164642334,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00760",
+   "path": "VID04/000760.png",
+   "video_id": "VID04",
+   "t": 760,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9809045791625977,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00200",
+   "path": "VID04/000200.png",
+   "video_id": "VID04",
+   "t": 200,
+   "phase": "preparation",
+   "score": 0.9808250665664673,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000535.png": [
+  {
+   "id": "VID04_00650",
+   "path": "VID04/000650.png",
+   "video_id": "VID04",
+   "t": 650,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.988304615020752,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01220",
+   "path": "VID05/001220.png",
+   "video_id": "VID05",
+   "t": 1220,
+   "phase": "clipping-and-cutting",
+   "score": 0.98664790391922,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_00560",
+   "path": "VID05/000560.png",
+   "video_id": "VID05",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9862990975379944,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000537.png": [
+  {
+   "id": "VID05_01160",
+   "path": "VID05/001160.png",
+   "video_id": "VID05",
+   "t": 1160,
+   "phase": "clipping-and-cutting",
+   "score": 0.990134060382843,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01280",
+   "path": "VID05/001280.png",
+   "video_id": "VID05",
+   "t": 1280,
+   "phase": "gallbladder-dissection",
+   "score": 0.9886562824249268,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01100",
+   "path": "VID05/001100.png",
+   "video_id": "VID05",
+   "t": 1100,
+   "phase": "clipping-and-cutting",
+   "score": 0.9884255528450012,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000539.png": [
+  {
+   "id": "VID47_00860",
+   "path": "VID47/000860.png",
+   "video_id": "VID47",
+   "t": 860,
+   "phase": "clipping-and-cutting",
+   "score": 0.9916207790374756,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00380",
+   "path": "VID43/000380.png",
+   "video_id": "VID43",
+   "t": 380,
+   "phase": "preparation",
+   "score": 0.9902653694152832,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01020",
+   "path": "VID05/001020.png",
+   "video_id": "VID05",
+   "t": 1020,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9898446798324585,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000541.png": [
+  {
+   "id": "VID47_00860",
+   "path": "VID47/000860.png",
+   "video_id": "VID47",
+   "t": 860,
+   "phase": "clipping-and-cutting",
+   "score": 0.9906694293022156,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00380",
+   "path": "VID43/000380.png",
+   "video_id": "VID43",
+   "t": 380,
+   "phase": "preparation",
+   "score": 0.9905296564102173,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID01_00240",
+   "path": "VID01/000240.png",
+   "video_id": "VID01",
+   "t": 240,
+   "phase": "preparation",
+   "score": 0.9899791479110718,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000543.png": [
+  {
+   "id": "VID47_00860",
+   "path": "VID47/000860.png",
+   "video_id": "VID47",
+   "t": 860,
+   "phase": "clipping-and-cutting",
+   "score": 0.9899024963378906,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01280",
+   "path": "VID05/001280.png",
+   "video_id": "VID05",
+   "t": 1280,
+   "phase": "gallbladder-dissection",
+   "score": 0.9881067276000977,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00840",
+   "path": "VID103/000840.png",
+   "video_id": "VID103",
+   "t": 840,
+   "phase": "clipping-and-cutting",
+   "score": 0.988082766532898,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000545.png": [
+  {
+   "id": "VID47_00860",
+   "path": "VID47/000860.png",
+   "video_id": "VID47",
+   "t": 860,
+   "phase": "clipping-and-cutting",
+   "score": 0.9899182319641113,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID103_00840",
+   "path": "VID103/000840.png",
+   "video_id": "VID103",
+   "t": 840,
+   "phase": "clipping-and-cutting",
+   "score": 0.9888883829116821,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01160",
+   "path": "VID05/001160.png",
+   "video_id": "VID05",
+   "t": 1160,
+   "phase": "clipping-and-cutting",
+   "score": 0.9887282848358154,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000547.png": [
+  {
+   "id": "VID15_00380",
+   "path": "VID15/000380.png",
+   "video_id": "VID15",
+   "t": 380,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9923750162124634,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00300",
+   "path": "VID15/000300.png",
+   "video_id": "VID15",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.992250919342041,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID01_00240",
+   "path": "VID01/000240.png",
+   "video_id": "VID01",
+   "t": 240,
+   "phase": "preparation",
+   "score": 0.9919307231903076,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000549.png": [
+  {
+   "id": "VID43_00380",
+   "path": "VID43/000380.png",
+   "video_id": "VID43",
+   "t": 380,
+   "phase": "preparation",
+   "score": 0.9924498796463013,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01020",
+   "path": "VID05/001020.png",
+   "video_id": "VID05",
+   "t": 1020,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9920098781585693,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00300",
+   "path": "VID15/000300.png",
+   "video_id": "VID15",
+   "t": 300,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9912363290786743,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000551.png": [
+  {
+   "id": "VID48_01060",
+   "path": "VID48/001060.png",
+   "video_id": "VID48",
+   "t": 1060,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9896879196166992,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00740",
+   "path": "VID04/000740.png",
+   "video_id": "VID04",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.989398717880249,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID05_01040",
+   "path": "VID05/001040.png",
+   "video_id": "VID05",
+   "t": 1040,
+   "phase": "clipping-and-cutting",
+   "score": 0.9893044233322144,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000553.png": [
+  {
+   "id": "VID47_00860",
+   "path": "VID47/000860.png",
+   "video_id": "VID47",
+   "t": 860,
+   "phase": "clipping-and-cutting",
+   "score": 0.9891043901443481,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID47_00560",
+   "path": "VID47/000560.png",
+   "video_id": "VID47",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9890416860580444,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID04_00740",
+   "path": "VID04/000740.png",
+   "video_id": "VID04",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9888252019882202,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000555.png": [
+  {
+   "id": "VID49_00140",
+   "path": "VID49/000140.png",
+   "video_id": "VID49",
+   "t": 140,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9892070889472961,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00380",
+   "path": "VID43/000380.png",
+   "video_id": "VID43",
+   "t": 380,
+   "phase": "preparation",
+   "score": 0.9888275265693665,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_01440",
+   "path": "VID43/001440.png",
+   "video_id": "VID43",
+   "t": 1440,
+   "phase": "gallbladder-dissection",
+   "score": 0.9888229370117188,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000557.png": [
+  {
+   "id": "VID04_00740",
+   "path": "VID04/000740.png",
+   "video_id": "VID04",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9897736310958862,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID47_00560",
+   "path": "VID47/000560.png",
+   "video_id": "VID47",
+   "t": 560,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9894963502883911,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID43_00380",
+   "path": "VID43/000380.png",
+   "video_id": "VID43",
+   "t": 380,
+   "phase": "preparation",
+   "score": 0.9893438816070557,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000559.png": [
+  {
+   "id": "VID04_00740",
+   "path": "VID04/000740.png",
+   "video_id": "VID04",
+   "t": 740,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.990283727645874,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_00160",
+   "path": "VID35/000160.png",
+   "video_id": "VID35",
+   "t": 160,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9895864725112915,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID35_01100",
+   "path": "VID35/001100.png",
+   "video_id": "VID35",
+   "t": 1100,
+   "phase": "carlot-triangle-dissection",
+   "score": 0.9893695116043091,
+   "label": "closest real frame (image similarity)"
+  }
+ ],
+ "VID74/000561.png": [
+  {
+   "id": "VID02_01320",
+   "path": "VID02/001320.png",
+   "video_id": "VID02",
+   "t": 1320,
+   "phase": "clipping-and-cutting",
+   "score": 0.9870665073394775,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00880",
+   "path": "VID15/000880.png",
+   "video_id": "VID15",
+   "t": 880,
+   "phase": "gallbladder-dissection",
+   "score": 0.9868104457855225,
+   "label": "closest real frame (image similarity)"
+  },
+  {
+   "id": "VID15_00760",
+   "path": "VID15/000760.png",
+   "video_id": "VID15",
+   "t": 760,
+   "phase": "clipping-and-cutting",
+   "score": 0.9861823320388794,
+   "label": "closest real frame (image similarity)"
+  }
+ ]
+}

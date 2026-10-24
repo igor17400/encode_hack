@@ -4,6 +4,11 @@
  "metrics": {
   "n": 200,
   "split": "test",
+  "trained_params": {
+   "learning_rate": 0.05,
+   "max_iter": 200,
+   "max_leaf_nodes": 15
+  },
   "model_source_counts": {
    "argon": 200
   },
@@ -46,28 +51,30 @@
   "majority_top3": 0.455,
   "bigram_top1": 0.295,
   "bigram_top3": 0.555,
+  "trained_top1": 0.395,
+  "trained_top3": 0.675,
   "model_top1": 0.3,
   "model_top3": 0.56,
   "retrieval_top1": 0.28,
   "retrieval_top3": 0.53,
   "retrieval_n": 200,
-  "best_baseline_top3": 0.555,
+  "best_baseline_top3": 0.675,
   "vs_best_baseline_top3": {
-   "baseline": "bigram",
-   "diff": 0.005,
+   "baseline": "trained",
+   "diff": -0.115,
    "ci95": [
-    -0.07,
-    0.08
+    -0.18,
+    -0.05
    ],
-   "significant": false
+   "significant": true
   },
   "e4": {
    "videos": 50,
    "clip_before_cvs": 0.2
   }
  },
- "created_at": 1792851197.117961,
- "git_commit": null,
+ "created_at": 1792852949.736856,
+ "git_commit": "b5324bc",
  "config": {
   "argon": "gemini-4-argon",
   "embed": "gemini-embedding-2",

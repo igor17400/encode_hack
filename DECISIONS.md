@@ -2,6 +2,25 @@
 
 Newest first. Each entry: what changed, why.
 
+## 2026-10-24 (pass 3: finishing the plan and deploying)
+
+- **Trained next-action baseline.**
+  - `HistGradientBoostingClassifier` on state_before + action features, fit on train only (asserted).
+  - Grid over learning rate, iterations and leaves, scored on val. lr=0.1 diverged (val top-3 0.08–0.20); chosen: lr 0.05, 200 iterations, 15 leaves (val 0.68).
+  - Test (n=200): 39.5% / 67.5% top-1 / top-3. Argon is 11.5 pts worse at top-3 (paired bootstrap 95% CI −18 to −5).
+  - Reported as is. The eval now reports a CI against the best baseline instead of a bare `>`.
+- **E5 with Argon world-model dynamics.** 5 parallel processes, 5 episodes per cell, seed 2, `strict=True`. Every step records its source.
+  - The random baseline was split into one process per patient to finish in time. The killed run's 2 partial episodes were deleted from Atlas so the exports contain only complete runs.
+  - Expert replay in that table comes from the rules run (it replays real actions).
+- **Hybrid search.** Atlas `$rankFusion` over `$search` and `$vectorSearch` for lessons and reports, with `scoreDetails` showing which pipeline matched. Reports are embedded on write (`reports_vec` index). Cluster errors return 502; there is no fallback.
+- **Multimodal frame search.**
+  - gemini-embedding-2 image embeddings for 1,776 train frames (1 every 10 s, from the 25 train videos with frames on disk), in the `frames_img_vec` index. `/similar_frames` serves them.
+  - Similarity scores are tightly bunched (~0.985) and neighbours lean to the most common scene, so this general-purpose embedding discriminates laparoscopic frames weakly. The UI shows the score and labels results "closest real frames by image similarity".
+- **Static Artifact deploy.**
+  - `frontend/src/staticApi.js` mirrors the backend's precomputed mode in the browser (same routes and events). Anything not recorded returns "runs in the live demo".
+  - `frontend/scripts/build_static.sh` bundles `demo/precomputed` and JPEG frames.
+- **Route naming.** The new image-similarity route is `/similar_frames`, not `/frames/similar`, because the `/frames/{path}` catch-all would shadow it.
+
 ## 2026-10-24 (live runs and integrity fixes)
 
 - **No silent fallbacks in evaluation.**

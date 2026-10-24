@@ -1,3 +1,6 @@
+import * as staticApi from "./staticApi";
+
+export const STATIC = import.meta.env.VITE_STATIC === "1";
 export const API = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 
 async function handle(res) {
@@ -13,12 +16,12 @@ async function handle(res) {
   return res.json();
 }
 
-export function get(path, params) {
+function httpGet(path, params) {
   const qs = params ? "?" + new URLSearchParams(Object.entries(params).filter(([, v]) => v != null)) : "";
   return fetch(`${API}${path}${qs}`).then(handle);
 }
 
-export function post(path, body) {
+function httpPost(path, body) {
   return fetch(`${API}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -26,16 +29,20 @@ export function post(path, body) {
   }).then(handle);
 }
 
-export const frameUrl = (path) => (path ? `${API}/frames/${path}` : null);
-
 /** Open the SSE stream for a session / batch. handlers: {eventName: (data) => void}. Returns close(). */
-export function openStream(id, handlers) {
+function httpStream(id, handlers) {
   const es = new EventSource(`${API}/stream/${id}`);
   for (const [ev, fn] of Object.entries(handlers)) {
     es.addEventListener(ev, (e) => fn(JSON.parse(e.data)));
   }
   return () => es.close();
 }
+
+export const get = STATIC ? staticApi.get : httpGet;
+export const post = STATIC ? staticApi.post : httpPost;
+export const openStream = STATIC ? staticApi.openStream : httpStream;
+export const frameUrl = STATIC ? staticApi.frameUrl : (path) => (path ? `${API}/frames/${path}` : null);
+export const videoUrl = (name) => (!name ? null : STATIC ? `./clips/${name}` : `${API}/clip_video/${name}`);
 
 const nice = (s) => s.replaceAll("_", " ");
 export const actionLabel = (a) => {

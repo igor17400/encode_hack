@@ -257,5 +257,32 @@ def embed_one(text: str, kind: str = "query") -> list[float]:
     return embed([text], kind)[0]
 
 
+def embed_images(paths: list) -> list[list[float]]:
+    """Multimodal embeddings of image files (one Content per image), cached by image bytes."""
+    from google.genai import types
+
+    out = []
+    for p in paths:
+        data = Path(p).read_bytes()
+        key = _hash("embimg", config.EMBED_MODEL, config.EMBED_DIM, _hash(data))
+        hit = cache.get(key)
+        if hit is not None:
+            out.append(np.frombuffer(hit, dtype=np.float32).tolist())
+            continue
+        _count_call()
+        mime = "image/jpeg" if str(p).lower().endswith((".jpg", ".jpeg")) else "image/png"
+        resp = _with_retries(lambda: client().models.embed_content(
+            model=_embed_model or config.EMBED_MODEL,
+            contents=[types.Content(parts=[types.Part.from_bytes(data=data, mime_type=mime)])],
+            config=types.EmbedContentConfig(output_dimensionality=config.EMBED_DIM)))
+        if len(resp.embeddings) != 1:
+            raise GeminiError(f"expected 1 image embedding, got {len(resp.embeddings)}")
+        a = np.asarray(resp.embeddings[0].values, dtype=np.float32)
+        a /= np.linalg.norm(a) or 1.0
+        cache.put(key, a.tobytes())
+        out.append(a.tolist())
+    return out
+
+
 def embed_model_in_use() -> str | None:
     return _embed_model

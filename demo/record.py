@@ -90,8 +90,8 @@ def main() -> None:
     events = []
     for pid in ("P1", "P3"):  # P3's adhesions make the same real actions unsafe -> a real alert
         sink = perception.MemorySink()
-        asyncio.run(perception.run_watch("recording", a.video, pats[pid], sink, t_from=t_from, t_to=t_to,
-                                         source="flash" if LIVE else "labels", verify=LIVE))
+        asyncio.run(perception.run_watch(f"recording_{a.video}_{pid}", a.video, pats[pid], sink, t_from=t_from,
+                                         t_to=t_to, source="flash" if LIVE else "labels", verify=LIVE, report=LIVE))
         ev = [[c, {k: v for k, v in d.items() if k != "session_id"}] for c, d in sink.events]
         events += ev
         write(f"watch_{a.video}_{pid}", {"video_id": a.video, "patient_id": pid, "t_from": t_from, "t_to": t_to,
@@ -100,8 +100,10 @@ def main() -> None:
                                          "source": "flash" if LIVE else "labels"})
 
     n_win = len(perception.clip_frames(a.video, t_from, t_to))
+    video = Path(__file__).resolve().parent / "clips" / f"{a.video}_{t_from}-{t_to}.mp4"
     write("clips", [{"video_id": a.video, "n_frames": n_win, "t_start": t_from, "t_end": t_to,
-                     "watch_patients": ["P1", "P3"], "branch_t": bp["t"]}])
+                     "watch_patients": ["P1", "P3"], "branch_t": bp["t"],
+                     "video": video.name if video.exists() else None}])
 
     # Episodes per patient: random, expert replay, and (live only) agent without / with lessons.
     policies = ["random", "expert_replay"] + (["agent", "agent_lessons"] if LIVE else [])
@@ -117,21 +119,56 @@ def main() -> None:
                 # are the E5 episodes (served from cache) and the robot tab matches the Evidence table.
                 ep = simulator.run_episode(pats[pid], pol, rng=random.Random(1000 + i), dynamics="rules",
                                            lessons=store if pol == "agent_lessons" else None,
-                                           sample_key=f"e5-seed1-{pid}-ep{i}", **kw)
+                                           sample_key=f"e5-seed1-{pid}-ep{i}",
+                                           episode_id=f"e5rules-{pid}-{pol}-{i}", **kw)
+                if LIVE:
+                    simulator.save_episode(ep)  # stable id: re-recording replaces, never duplicates
                 ep.pop("final_state", None)
                 eps.append(ep)
             print(f"  {pid} {pol}: mean violations "
                   f"{sum(e['n_violations'] for e in eps if e['policy'] == pol) / a.episodes:.1f}")
         write(f"episodes_{pid}", eps)
+        if LIVE:  # real Argon reports of each agent batch (searchable via Atlas hybrid search)
+            from backend import reports
+
+            for pol in ("agent", "agent_lessons"):
+                batch = [e for e in eps if e["policy"] == pol]
+                reports.write(f"recording_{pid}_{pol}", "episodes", pats[pid], reports.episode_events(batch), None,
+                              [v for e in batch for v in e["violations"]])
         if "agent_lessons" in policies:
             for l in store.all():
                 d = l.model_dump()
                 d["times_cited"] = sum(l.lesson_id in e["lessons_used"] for e in eps)
                 all_lessons.append(d)
     write("lessons", all_lessons)
+    if LIVE:  # world-model E5 episodes (run by eval/agent_eval.py, stored in Atlas) for the static demo
+        from backend import db
+
+        for pid in a.patients:
+            wm = list(db.col("episodes").find({"patient_id": pid, "dynamics": "world_model",
+                                                "batch_id": {"$regex": "^E5wm_"}}, {"final_state": 0}))
+            if wm:
+                write(f"episodes_wm_{pid}", [dict(e, _id=str(e["_id"])) for e in wm])
+    if LIVE:
+        from backend import db
+
+        write("reports", [dict(r, _id=str(r["_id"])) for r in db.col("reports").find({}, {"embedding": 0})])
+
+    # Visually similar real frames (image embeddings in Atlas) for every recorded Watch frame.
+    if LIVE:
+        from backend import db, gemini
+
+        sim = {}
+        for rel in sorted({d["frame_path"] for c, d in events if c == "observations"}):
+            vec = gemini.embed_images([config.FRAMES_DIR / rel])[0]
+            sim[rel] = [{"id": str(r["_id"]), "path": r["path"], "video_id": r.get("video_id"), "t": r.get("t"),
+                         "phase": r.get("phase"), "score": r.get("score"),
+                         "label": "closest real frame (image similarity)"}
+                        for r in db.similar_frames(vec, exclude_video=rel.split("/")[0], k=3)]
+        write("similar_frames", sim)
 
     # Eval cards.
-    for name in ("eval_latest", "eval_E5_agent", "eval_E3_perception"):
+    for name in ("eval_latest", "eval_E5_agent", "eval_E3_perception", "eval_E5_world_model"):
         p = config.DATA / f"{name}.json"
         if p.exists():
             d = json.loads(p.read_text())
@@ -149,6 +186,10 @@ def main() -> None:
 
     # Copy the frames the recordings reference into the repo so the offline demo needs no download.
     refs = {d.get("frame_path") or d.get("path") for _, d in events}
+    refs |= {ev["path"] for _, d in events for ev in (d.get("evidence") or []) if ev.get("path")}  # alert evidence
+    sim_file = OUT / "similar_frames.json"
+    if sim_file.exists():
+        refs |= {f["path"] for fs in json.loads(sim_file.read_text()).values() for f in fs}
     for name in OUT.glob("imagine_*.json"):
         f = json.loads(name.read_text()).get("frame")
         if f:
@@ -156,13 +197,17 @@ def main() -> None:
     dst_root = Path(__file__).resolve().parent / "clips" / "frames"
     refs = set(filter(None, refs))
     n = 0
+    from PIL import Image
+
+    jpg = lambda rel: str(Path(rel).with_suffix(".jpg"))  # noqa: E731  (stored as JPEG to keep the repo small)
     for rel in refs:
-        src, dst = config.FRAMES_DIR / rel, dst_root / rel
-        if src.exists() and (not dst.exists() or dst.read_bytes() != src.read_bytes()):
+        src, dst = config.FRAMES_DIR / rel, dst_root / jpg(rel)
+        if src.exists() and (not dst.exists() or dst.stat().st_mtime < src.stat().st_mtime):
             dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy(src, dst)
+            Image.open(src).convert("RGB").save(dst, "JPEG", quality=82)
             n += 1
-    stale = [f for f in dst_root.rglob("*.png") if str(f.relative_to(dst_root)) not in refs]
+    keep = {jpg(r) for r in refs}
+    stale = [f for f in dst_root.rglob("*") if f.is_file() and str(f.relative_to(dst_root)) not in keep]
     for f in stale:
         f.unlink()
     print(f"  copied {n} referenced frames to demo/clips/frames/, removed {len(stale)} unreferenced")

@@ -9,3 +9,5 @@ huggingface_hub
 numpy
 httpx
 pytest
+scikit-learn
+pillow

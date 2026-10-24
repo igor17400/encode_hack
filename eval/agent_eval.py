@@ -7,6 +7,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 import json
 import random
 import time
@@ -28,7 +29,9 @@ def summarise(eps: list[dict]) -> dict:
             "injury_rate": round(sum(e["injury"] for e in eps) / n, 2),
             "completion_rate": round(sum(e["completed"] for e in eps) / n, 2),
             "mean_reward": round(sum(e["reward"] for e in eps) / n, 1),
-            "violations_per_episode": [e["n_violations"] + (1 if e["injury"] else 0) for e in eps]}
+            "violations_per_episode": [e["n_violations"] + (1 if e["injury"] else 0) for e in eps],
+            "completed_per_episode": [bool(e["completed"]) for e in eps],
+            "step_sources": dict(Counter(s["source"] for e in eps for s in e["trace"]))}
 
 
 def main() -> None:
@@ -38,12 +41,14 @@ def main() -> None:
     ap.add_argument("--episodes", type=int, default=10)
     ap.add_argument("--dynamics", default="world_model", choices=["world_model", "rules"])
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--name", default="E5_agent", help="eval_runs name and output file data/eval_<name>.json")
+    ap.add_argument("--max-calls", type=int, default=4000)
     a = ap.parse_args()
 
-    run_id = f"e5_{int(time.time())}"
+    run_id = f"{a.name}_{int(time.time())}"
     pats = patients()
     test_videos = splits.load()["test"]
-    config.GEMINI_MAX_CALLS = max(config.GEMINI_MAX_CALLS, 4000)
+    config.GEMINI_MAX_CALLS = a.max_calls
     results: dict = {}
     for pid in a.patients:
         p = pats[pid]
@@ -66,12 +71,12 @@ def main() -> None:
             results.setdefault(pid, {})[pol] = summarise(eps)
         results[pid]["lessons"] = [l.model_dump() for l in store.all()] if "agent_lessons" in a.policies else []
 
-    doc = {"name": "E5_agent", "run_id": run_id, "metrics": results, "created_at": time.time(),
+    doc = {"name": a.name, "run_id": run_id, "metrics": results, "created_at": time.time(),
            "config": {"episodes": a.episodes, "dynamics": a.dynamics, "max_steps": simulator.MAX_STEPS,
                       "policies": a.policies, "patients": a.patients},
            "note": "In-context learning through lessons stored in Atlas; no weights are trained."}
     print(json.dumps({pid: {k: v for k, v in r.items() if k != "lessons"} for pid, r in results.items()}, indent=1))
-    (config.DATA / "eval_E5_agent.json").write_text(json.dumps(doc, indent=1, default=str))
+    (config.DATA / f"eval_{a.name}.json").write_text(json.dumps(doc, indent=1, default=str))
     if config.MONGODB_URI:
         from backend import db
 

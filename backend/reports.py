@@ -74,7 +74,8 @@ def write(session_id: str, kind: str, patient: Patient, events: list[str], final
     if config.MONGODB_URI:
         from backend import db
 
-        db.col("reports").insert_one(dict(doc))
+        vec = gemini.embed_one(out.text, kind="document")  # for hybrid (text + vector) search
+        db.col("reports").insert_one(dict(doc, embedding=db.to_bin(vec)))
     else:
         with LOCAL_REPORTS.open("a") as f:
             f.write(json.dumps(doc) + "\n")

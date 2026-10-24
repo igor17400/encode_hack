@@ -27,7 +27,7 @@ They will be re-recorded live with the same shapes. Show `source` in small print
 | Watch | `GET /clips` → `GET /patients` → `POST /sessions {mode:"watch", patient_id, video_id}` → open `GET /stream/{session_id}` → `POST /sessions/{id}/watch {speed}` |
 | Imagine | `GET /branch_point` → `POST /sessions {mode:"imagine", patient_id, video_id}` → `POST /sessions/{id}/imagine {action, state}` (or `/rollout {actions, state}`) |
 | Train the robot | `POST /episodes {patient_id, n_episodes, policy}` → open `GET /stream/{batch_id}` → `GET /episodes?patient_id=` → `GET /lessons` |
-| Evidence | `GET /eval/latest` (E1), `GET /eval/latest?name=E5_agent`, `GET /stats` (dataset facts computed from the pipeline), `GET /usage`, `GET /search?q=` |
+| Evidence | `GET /eval/latest` (E1), `GET /eval/latest?name=E5_agent` / `E5_world_model` / `E3_perception`, `GET /stats` (dataset facts computed from the pipeline), `GET /usage`, `GET /search?q=` |
 
 Demo specifics:
 
@@ -35,6 +35,14 @@ Demo specifics:
 - **Alerts:** an alert **pauses** playback until you call `POST /alerts/{id}/decision {decision: "ack" | "override", reason}`. A reason is required.
 - **Imagine:** the demo buttons are "Clip duct now" (`clipper,clip,cystic_duct`) and "Keep dissecting plate" (`hook,dissect,cystic_plate`), from the branch point state. Recorded for P1, P2 and P4.
 - **Train the robot:** policies are `random`, `expert_replay`, `agent`, `agent_lessons`. The offline recordings only have `random` and `expert_replay` until the live run.
+
+More routes:
+- `GET /similar_frames?path=VID74/000501.png&k=3`: closest real train frames by image similarity (`score`, `path`, `video_id`, `t`).
+- `GET /reports?session_id=`: Argon session and batch reports.
+- `GET /episodes?patient_id=&dynamics=rules|world_model` and `GET /episodes/{episode_id}` (full `trace`).
+- `GET /search?q=`: hybrid results with `_collection`, `matched` (`text` / `vector`) and `score`.
+- SSE `report` event: the end-of-Watch session report.
+- Static build: `VITE_STATIC=1` uses `src/staticApi.js` (same routes, recorded data); `scripts/build_static.sh` builds `dist-static/`.
 
 Images: `GET /frames/{path}`, where `path` is e.g. `VID74/000435.png` from any `frame_path` or `frame.path` field.
 

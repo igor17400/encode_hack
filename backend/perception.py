@@ -310,7 +310,9 @@ async def run_watch(
 
         try:
             events, final = reports.watch_events(log)
-            reports.write(session_id, "watch", patient, events, final, st.violations)
+            doc = reports.write(session_id, "watch", patient, events, final, st.violations)
+            emit("report_events", {k: v for k, v in doc.items() if k != "_id"} | {"_id": uuid.uuid4().hex,
+                                                                                  "report_id": doc["_id"]})
         except Exception as e:  # no report is better than an invented one
             print(f"[watch] session report not written: {e}")
     return st

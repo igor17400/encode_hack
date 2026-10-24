@@ -42,6 +42,8 @@ export function SourceTag({ source }) {
       rules_only: "rules only (offline recording)",
       labels: "replaying real dataset labels (offline recording)",
       perception: "Gemini Flash perception",
+      flash: "Gemini Flash perception (recorded live run)",
+      recorded: "recorded live run",
       precomputed: "recorded run",
     }[source] || source;
   return <span className="text-xs text-ink-3">source: {text}</span>;

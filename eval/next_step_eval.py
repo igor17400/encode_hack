@@ -105,9 +105,16 @@ def main() -> None:
     base = Baselines(train)
 
     metrics: dict = {"n": len(sampled), "split": a.split}
+    from eval.trained_baseline import load_selected
+
+    trained = load_selected(rows)  # fitted on train only, hyperparameters chosen on val
+    assert not ({r["_id"] for r in sampled} & trained.fitted_ids), "trained baseline saw evaluation rows"
+    trained_pred = dict(zip((r["_id"] for r in sampled), trained.predict_top3(sampled)))
+    metrics["trained_params"] = trained.params
     hits = Counter()
     for r in sampled:
-        for name, pred in (("majority", base.majority), ("bigram", base.predict_bigram(r["action"]))):
+        for name, pred in (("majority", base.majority), ("bigram", base.predict_bigram(r["action"])),
+                           ("trained", trained_pred[r["_id"]])):
             t1, t3 = topk(pred, r["next_action"])
             hits[f"{name}_top1"] += t1
             hits[f"{name}_top3"] += t3
@@ -142,13 +149,13 @@ def main() -> None:
         metrics[k] = round(v / max(denom, 1), 3)
     if hits["retrieval_n"]:
         metrics["retrieval_n"] = hits["retrieval_n"]
-    baseline_best = max(metrics.get("bigram_top3", 0), metrics.get("majority_top3", 0), metrics.get("retrieval_top3", 0))
+    baseline_best = max(metrics.get(f"{k}_top3", 0) for k in ("bigram", "majority", "retrieval", "trained"))
     metrics["best_baseline_top3"] = baseline_best
     if per_item:
         # Paired bootstrap of (model - best baseline) top-3 accuracy on the same items. A difference counts as
         # real only if the 95% CI excludes 0; a raw ">" on 200 items would overclaim a tie.
         names = {"bigram": lambda it: base.predict_bigram(it["action"]), "majority": lambda it: base.majority,
-                 "retrieval": lambda it: it["retrieval"]}
+                 "retrieval": lambda it: it["retrieval"], "trained": lambda it: trained_pred[it["id"]]}
         best = max(names, key=lambda k: metrics.get(f"{k}_top3", -1))
         diffs = [int(it["truth"] in it["model"][:3]) - int(it["truth"] in names[best](it)[:3]) for it in per_item]
         rng = random.Random(0)

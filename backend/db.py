@@ -15,7 +15,10 @@ VECTOR_INDEXES = {
     "transitions": ("transitions_vec", ["split", "phase"]),
     "frames": ("frames_vec", ["split", "phase"]),
     "lessons": ("lessons_vec", ["violation_type", "patient_id", "risk_factors", "scope"]),
+    "reports": ("reports_vec", ["patient_id", "kind"]),
 }
+# Second vector field on frames: image embeddings (multimodal search), separate index.
+IMAGE_INDEX = ("frames", "frames_img_vec", "image_embedding", ["split", "video_id"])
 TEXT_INDEXES = {"reports": "reports_text", "lessons": "lessons_text"}
 REGULAR_INDEXES = {
     "world_state": [("session_id", 1), ("t", 1)],
@@ -76,9 +79,9 @@ def to_bin(vec):
     return Binary.from_vector([float(x) for x in vec], BinaryVectorDtype.FLOAT32)
 
 
-def _vector_def(filters: list[str]) -> dict:
+def _vector_def(filters: list[str], path: str = "embedding") -> dict:
     return {"fields": [
-        {"type": "vector", "path": "embedding", "numDimensions": config.EMBED_DIM, "similarity": "cosine"},
+        {"type": "vector", "path": path, "numDimensions": config.EMBED_DIM, "similarity": "cosine"},
         *[{"type": "filter", "path": f} for f in filters],
     ]}
 
@@ -101,6 +104,8 @@ def ensure_indexes(wait: bool = False) -> list[str]:
         wanted.setdefault(name, []).append(SearchIndexModel(definition=_vector_def(filters), name=idx, type="vectorSearch"))
     for name, idx in TEXT_INDEXES.items():
         wanted.setdefault(name, []).append(SearchIndexModel(definition={"mappings": {"dynamic": True}}, name=idx, type="search"))
+    c, idx, path, filters = IMAGE_INDEX
+    wanted.setdefault(c, []).append(SearchIndexModel(definition=_vector_def(filters, path), name=idx, type="vectorSearch"))
 
     for name, models in wanted.items():
         have = {i["name"] for i in col(name).list_search_indexes()}
@@ -119,7 +124,7 @@ def ensure_indexes(wait: bool = False) -> list[str]:
 
 def wait_for_search_indexes(timeout_s: int = 300) -> None:
     deadline = time.time() + timeout_s
-    targets = [(c, i) for c, (i, _) in VECTOR_INDEXES.items()] + list(TEXT_INDEXES.items())
+    targets = [(c, i) for c, (i, _) in VECTOR_INDEXES.items()] + list(TEXT_INDEXES.items()) + [IMAGE_INDEX[:2]]
     while time.time() < deadline:
         pending = []
         for c, i in targets:
@@ -164,6 +169,39 @@ def _retry(fn, tries: int = 5):
             if e.code not in TRANSIENT_CODES or i == tries - 1:
                 raise
         time.sleep(1.5 * (2 ** i))
+
+
+def hybrid_search(query: str, query_vector: list[float], limit: int = 10) -> list[dict]:
+    """Atlas $rankFusion of full-text ($search) and semantic ($vectorSearch) results, per collection, merged by
+    fused score. Each hit carries which pipelines matched it (scoreDetails). Errors propagate to the caller."""
+    out = []
+    for name in ("lessons", "reports"):
+        pipe = [
+            {"$rankFusion": {"input": {"pipelines": {
+                "text": [{"$search": {"index": TEXT_INDEXES[name], "text": {"query": query, "path": "text"}}},
+                         {"$limit": limit}],
+                "vector": [{"$vectorSearch": {"index": VECTOR_INDEXES[name][0], "path": "embedding",
+                                              "queryVector": [float(x) for x in query_vector],
+                                              "numCandidates": 100, "limit": limit}}]}},
+                "scoreDetails": True}},
+            {"$limit": limit},
+            {"$project": {"embedding": 0, "score": {"$meta": "score"}, "details": {"$meta": "scoreDetails"}}},
+        ]
+        for d in _retry(lambda: list(col(name).aggregate(pipe))):
+            matched = [x.get("inputPipelineName") for x in (d.pop("details", {}) or {}).get("details", [])
+                       if x.get("rank") is not None]
+            d.update(_collection=name, _id=str(d["_id"]), matched=matched)
+            out.append(d)
+    return sorted(out, key=lambda d: -d.get("score", 0))[:limit]
+
+
+def similar_frames(image_vector: list[float], exclude_video: str | None = None, k: int = 5) -> list[dict]:
+    c, idx, path, _ = IMAGE_INDEX
+    flt = {"split": "train"} | ({"video_id": {"$ne": exclude_video}} if exclude_video else {})
+    stage = {"index": idx, "path": path, "queryVector": [float(x) for x in image_vector],
+             "numCandidates": 200, "limit": k, "filter": flt}
+    proj = {"embedding": 0, "image_embedding": 0, "state": 0, "score": {"$meta": "vectorSearchScore"}}
+    return _retry(lambda: list(col(c).aggregate([{"$vectorSearch": stage}, {"$project": proj}])))
 
 
 def text_search(query: str, limit: int = 10) -> list[dict]:

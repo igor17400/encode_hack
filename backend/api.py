@@ -13,6 +13,7 @@ import random
 import threading
 import time
 import uuid
+from pathlib import Path
 from collections import defaultdict
 from contextlib import asynccontextmanager
 from typing import Literal
@@ -28,7 +29,8 @@ from backend.schema import Action, Patient, State, TransitionResult
 
 ALERT_VIOLATIONS = {rules.V_CLIP_BEFORE_CVS, rules.V_CUT_WITHOUT_CLIPS, rules.V_CBD_INJURY}
 STREAM_COLLECTIONS = {"world_state": "state", "predictions": "prediction", "alerts": "alert",
-                      "observations": "observation", "episode_steps": "episode_step", "episodes": "episode"}
+                      "observations": "observation", "episode_steps": "episode_step", "episodes": "episode",
+                      "report_events": "report"}
 PRECOMPUTED = config.DEMO_MODE == "precomputed"
 NOTE = "Research simulation, not clinical advice."
 
@@ -98,13 +100,23 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 DEMO_FRAMES = config.ROOT / "demo" / "clips" / "frames"  # frames the recordings use, committed to the repo
 
 
+@app.get("/clip_video/{name}")
+def clip_video(name: str):
+    """Real-time mp4 of a demo clip (made from the same frames the analysis uses)."""
+    f = (config.ROOT / "demo" / "clips" / name).resolve()
+    if f.suffix != ".mp4" or not f.is_file() or (config.ROOT / "demo" / "clips").resolve() not in f.parents:
+        raise HTTPException(404, "clip video not found")
+    return FileResponse(f, media_type="video/mp4")
+
+
 @app.get("/frames/{path:path}")
 def frame(path: str):
     """Reference / demo frames: data/frames first, then the committed demo copies."""
     for root in (config.FRAMES_DIR, DEMO_FRAMES):
-        f = (root / path).resolve()
-        if f.is_file() and root.resolve() in f.parents:
-            return FileResponse(f, media_type="image/png")
+        for cand in (path, str(Path(path).with_suffix(".jpg"))):  # demo copies are stored as JPEG
+            f = (root / cand).resolve()
+            if f.is_file() and root.resolve() in f.parents:
+                return FileResponse(f, media_type="image/jpeg" if f.suffix == ".jpg" else "image/png")
     raise HTTPException(404, "frame not found")
 
 
@@ -460,11 +472,13 @@ async def start_episodes(body: EpisodesIn):
 
 
 @app.get("/episodes")
-def list_episodes(patient_id: str | None = None, batch_id: str | None = None, limit: int = 200):
+def list_episodes(patient_id: str | None = None, batch_id: str | None = None, dynamics: str | None = None,
+                  limit: int = 200):
     if PRECOMPUTED:
-        rec = pc(f"episodes_{patient_id}") if patient_id else None
+        suffix = "_wm" if dynamics == "world_model" else ""
+        rec = pc(f"episodes{suffix}_{patient_id}") if patient_id else None
         return [{k: v for k, v in e.items() if k != "trace"} for e in (rec or [])]
-    q = {k: v for k, v in (("patient_id", patient_id), ("batch_id", batch_id)) if v}
+    q = {k: v for k, v in (("patient_id", patient_id), ("batch_id", batch_id), ("dynamics", dynamics)) if v}
     return list(_db().col("episodes").find(q, {"trace": 0, "final_state": 0}).sort("created_at", 1).limit(limit))
 
 
@@ -480,6 +494,16 @@ def get_episode(eid: str):
     if not e:
         raise HTTPException(404)
     return e
+
+
+@app.get("/reports")
+def list_reports(session_id: str | None = None, limit: int = 20):
+    """Argon session / batch reports (never invented: written only when the Argon call succeeded)."""
+    if PRECOMPUTED:
+        return [r for r in (pc("reports") or []) if not session_id or r["session_id"] == session_id]
+    q = {"session_id": session_id} if session_id else {}
+    return [dict(r, _id=str(r["_id"])) for r in
+            _db().col("reports").find(q, {"embedding": 0}).sort("created_at", -1).limit(limit)]
 
 
 @app.get("/lessons")
@@ -550,9 +574,32 @@ def search(q: str):
         ql = q.lower()
         lessons = pc("lessons") if PRECOMPUTED else [l.model_dump() for l in agent.LessonStore().all()]
         recs = pc("reports") if PRECOMPUTED else reports.local_search(q)
-        return ([dict(l, _collection="lessons") for l in (lessons or []) if ql in l["text"].lower()]
-                + [dict(r, _collection="reports") for r in (recs or []) if ql in r["text"].lower()])
-    return _db().text_search(q)
+        return ([dict(l, _collection="lessons", matched=["substring"]) for l in (lessons or []) if ql in l["text"].lower()]
+                + [dict(r, _collection="reports", matched=["substring"]) for r in (recs or []) if ql in r["text"].lower()])
+    from backend import gemini
+
+    # Hybrid: Atlas $rankFusion of full-text + vector search. Cluster errors surface as a 502, never hidden.
+    try:
+        return _db().hybrid_search(q, gemini.embed_one(q, kind="query"))
+    except Exception as e:
+        raise HTTPException(502, f"hybrid search failed: {e}")
+
+
+@app.get("/similar_frames")
+def frames_similar(path: str, k: int = 5):
+    """Closest real train frames by IMAGE similarity (multimodal embeddings), excluding the query's own video."""
+    if PRECOMPUTED:
+        return (pc("similar_frames") or {}).get(path, [])
+    from backend import gemini
+
+    src = (config.FRAMES_DIR / path).resolve()
+    if not src.is_file() or config.FRAMES_DIR.resolve() not in src.parents:
+        raise HTTPException(404, "frame not found")
+    vec = gemini.embed_images([src])[0]
+    rows = _db().similar_frames(vec, exclude_video=path.split("/")[0], k=k)
+    return [{"id": str(r["_id"]), "path": r["path"], "video_id": r.get("video_id"), "t": r.get("t"),
+             "phase": r.get("phase"), "score": r.get("score"), "label": "closest real frame (image similarity)"}
+            for r in rows]
 
 
 # --- SSE ----------------------------------------------------------------------

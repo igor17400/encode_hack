@@ -11,26 +11,37 @@ function AccuracyCard({ run }) {
   const hasModel = m.model_top3 != null;
   const rows = [
     { label: "Second Look (Argon)", value: m.model_top3 ?? null, note: hasModel ? `top-1 ${pct(m.model_top1)}` : "pending live run" },
+    ...(m.trained_top3 != null
+      ? [{ label: "Trained model (gradient boosting)", value: m.trained_top3, note: `top-1 ${pct(m.trained_top1)} · fitted on train, tuned on val` }]
+      : []),
     { label: "Retrieval only", value: m.retrieval_top3 ?? null, note: m.retrieval_top3 != null ? `top-1 ${pct(m.retrieval_top1)}` : "needs Atlas" },
     { label: "Bigram (train)", value: m.bigram_top3, note: `top-1 ${pct(m.bigram_top1)}` },
     { label: "Most common action", value: m.majority_top3, note: `top-1 ${pct(m.majority_top1)}` },
   ];
   return (
-    <div className="card">
+    <div className="card min-w-0">
       <div className="label">E1 · next-action accuracy on unseen operations</div>
       <div className="my-2 flex items-baseline gap-4">
         <span className={hasModel ? "text-5xl font-bold" : "text-3xl font-semibold text-ink-3"}>{hasModel ? pct(m.model_top3) : "pending"}</span>
         <span className="text-ink-2">
-          top-3 {hasModel ? "for Second Look" : "(model run pending)"} vs <b>{pct(m.best_baseline_top3)}</b> best simple baseline
+          top-3 {hasModel ? "for Second Look" : "(model run pending)"} vs <b>{pct(m.best_baseline_top3)}</b> best baseline
         </span>
       </div>
       <HBars rows={rows} highlight="Second Look (Argon)" />
       {m.vs_best_baseline_top3 && (
-        <div className={`mt-3 rounded-lg border px-3 py-2 text-sm ${m.vs_best_baseline_top3.significant ? "border-status-good/60" : "border-line"}`}>
-          Difference vs {m.vs_best_baseline_top3.baseline}: {m.vs_best_baseline_top3.diff >= 0 ? "+" : ""}
+        <div className={`mt-3 rounded-lg border px-3 py-2 text-sm ${!m.vs_best_baseline_top3.significant ? "border-line" : m.vs_best_baseline_top3.diff < 0 ? "border-status-serious/70" : "border-status-good/60"}`}>
+          Predicting the surgeon's next action, Second Look vs the{" "}
+          {{ trained: "trained model (gradient boosting on 3,000 real transitions)", bigram: "bigram table", retrieval: "retrieval-only baseline", majority: "most-common-action baseline" }[m.vs_best_baseline_top3.baseline] ?? m.vs_best_baseline_top3.baseline}
+          : {m.vs_best_baseline_top3.diff >= 0 ? "+" : ""}
           {Math.round(m.vs_best_baseline_top3.diff * 1000) / 10} pts (95% CI {Math.round(m.vs_best_baseline_top3.ci95[0] * 1000) / 10} to{" "}
           {Math.round(m.vs_best_baseline_top3.ci95[1] * 1000) / 10}, paired bootstrap) ·{" "}
-          <b>{m.vs_best_baseline_top3.significant ? "a real difference" : "not a significant difference: a tie with the baseline"}</b>
+          <b>
+            {!m.vs_best_baseline_top3.significant
+              ? "not a significant difference: a tie with the baseline"
+              : m.vs_best_baseline_top3.diff < 0
+                ? "the trained model predicts next moves significantly better than Second Look"
+                : "Second Look predicts next moves significantly better"}
+          </b>
         </div>
       )}
       <div className="mt-3 text-sm text-ink-3">
@@ -67,7 +78,7 @@ function PerceptionCard({ e3 }) {
     })),
   ];
   return (
-    <div className="card">
+    <div className="card min-w-0">
       <div className="label">E3 · perception ({e3.config?.model}) on unseen test frames</div>
       <div className="my-2 flex items-baseline gap-4">
         <span className="text-4xl font-bold">{pct(m.triplets_micro.recall)}</span>
@@ -85,13 +96,31 @@ function PerceptionCard({ e3 }) {
   );
 }
 
-function SafetyCard({ e5 }) {
+function SafetyCard({ runs }) {
+  const available = Object.entries(runs).filter(([, r]) => r);
+  const [which, setWhich] = useState("rules");
+  const e5 = runs[which] || available[0]?.[1];
   if (!e5) return <div className="card text-ink-3">No agent evaluation yet.</div>;
   const pats = Object.keys(e5.metrics);
   return (
-    <div className="card">
-      <div className="label mb-2">E5 · robot safety per episode</div>
-      <table className="w-full text-left">
+    <div className="card min-w-0">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <div className="label">E5 · robot safety per episode</div>
+        <div className="flex gap-1 rounded-lg border border-line p-0.5 text-sm">
+          {[["rules", "Rule-engine dynamics"], ["world_model", "Argon world model"]].map(([k, label]) => (
+            <button
+              key={k}
+              disabled={!runs[k]}
+              onClick={() => setWhich(k)}
+              className={`rounded-md px-2.5 py-1 disabled:opacity-40 ${which === k ? "bg-accent text-white" : "text-ink-2"}`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+      <table className="w-full min-w-[30rem] text-left">
         <thead>
           <tr className="text-sm text-ink-3">
             <th className="py-1">Patient</th>
@@ -121,6 +150,7 @@ function SafetyCard({ e5 }) {
           )}
         </tbody>
       </table>
+      </div>
       <div className="mt-2 text-sm text-ink-3">
         {e5.config.episodes} episodes per cell · dynamics: {e5.config.dynamics} · max {e5.config.max_steps} steps ·
         lessons written: {pats.map((p) => `${p} ${(e5.metrics[p].lessons || []).length}`).join(", ")}
@@ -139,11 +169,11 @@ function Architecture({ stats }) {
       <div className="text-sm text-ink-3">{children}</div>
     </div>
   );
-  const Arrow = () => <div className="grid place-items-center text-2xl text-ink-3">→</div>;
+  const Arrow = () => <div className="hidden place-items-center text-2xl text-ink-3 sm:grid">→</div>;
   return (
     <div className="card">
       <div className="label mb-3">How it works</div>
-      <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch gap-2">
+      <div className="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-[1fr_auto_1fr_auto_1fr]">
         <Box title="Real data">CholecT50: {n(stats?.n_videos)} operations, {n(stats?.n_labelled_seconds)} labelled seconds (instrument, verb, target)</Box>
         <Arrow />
         <Box title="Rule engine">Anatomy state, CVS proxy, hard safety facts. Always has the final say.</Box>
@@ -152,7 +182,7 @@ function Architecture({ stats }) {
           {n(stats?.n_transitions)} real transitions + {n(stats?.n_reference_frames)} reference frames · Vector Search · Atlas Search · change streams
         </Box>
       </div>
-      <div className="mt-2 grid grid-cols-3 gap-2">
+      <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
         <Box title="Watch">Gemini Flash labels live frames → state; holds back when the view is obscured</Box>
         <Box title="Imagine">Gemini Argon predicts risk from cited real transitions; closest real frame</Box>
         <Box title="Train the robot">Gemini agent acts; lessons from failures stored in Atlas and retrieved</Box>
@@ -164,6 +194,7 @@ function Architecture({ stats }) {
 export default function Evidence() {
   const [e1, setE1] = useState(null);
   const [e5, setE5] = useState(null);
+  const [e5wm, setE5wm] = useState(null);
   const [e3, setE3] = useState(null);
   const [usage, setUsage] = useState(null);
   const [stats, setStats] = useState(null);
@@ -173,6 +204,7 @@ export default function Evidence() {
   useEffect(() => {
     get("/eval/latest").then(setE1).catch(() => {});
     get("/eval/latest", { name: "E5_agent" }).then(setE5).catch(() => {});
+    get("/eval/latest", { name: "E5_world_model" }).then(setE5wm).catch(() => {});
     get("/eval/latest", { name: "E3_perception" }).then(setE3).catch(() => {});
     get("/usage").then(setUsage).catch(() => {});
     get("/stats").then(setStats).catch(() => {});
@@ -187,7 +219,7 @@ export default function Evidence() {
     <div className="flex flex-col gap-5">
       <div className="grid gap-5 lg:grid-cols-2">
         <AccuracyCard run={e1} />
-        <SafetyCard e5={e5} />
+        <SafetyCard runs={{ rules: e5, world_model: e5wm }} />
       </div>
       <PerceptionCard e3={e3} />
       <div className="rounded-lg border border-line px-4 py-2 text-center text-ink-2">
@@ -195,10 +227,10 @@ export default function Evidence() {
       </div>
       <Architecture stats={stats} />
       <div className="grid gap-5 lg:grid-cols-2">
-        <div className="card">
-          <div className="label mb-2">Search past runs (Atlas Search)</div>
+        <div className="card min-w-0">
+          <div className="label mb-2">Search past runs (Atlas hybrid search: text + vector, $rankFusion)</div>
           <form onSubmit={search} className="flex gap-2">
-            <input className="select flex-1" value={q} onChange={(e) => setQ(e.target.value)} placeholder="e.g. inflamed, clip, adhesions" />
+            <input id="search-q" className="select min-w-0 flex-1" value={q} onChange={(e) => setQ(e.target.value)} placeholder="e.g. inflamed, clip, adhesions" />
             <button className="btn">Search</button>
           </form>
           {hits && (
@@ -206,14 +238,22 @@ export default function Evidence() {
               {hits.length === 0 && <span className="text-ink-3">No matches.</span>}
               {hits.map((h, i) => (
                 <div key={i} className="rounded bg-surface-2 p-2">
-                  <span className="text-ink-3">{niceName(h._collection || h.violation_type || "lesson")}: </span>
+                  <div className="mb-1 flex flex-wrap gap-2 text-xs text-ink-3">
+                    <span className="rounded-full border border-line px-2">{niceName(h._collection || "lesson")}</span>
+                    {(h.matched || []).map((m) => (
+                      <span key={m} className="rounded-full border border-line px-2">
+                        {m === "text" ? "full-text match" : m === "vector" ? "semantic match" : m}
+                      </span>
+                    ))}
+                    {h.score != null && <span>fused score {Number(h.score).toFixed(3)}</span>}
+                  </div>
                   {h.text}
                 </div>
               ))}
             </div>
           )}
         </div>
-        <div className="card text-sm text-ink-2">
+        <div className="card min-w-0 text-sm text-ink-2">
           <div className="label mb-2">Models, data and credits</div>
           {stats?.models && (
             <p>
@@ -227,7 +267,9 @@ export default function Evidence() {
           </p>
           {usage && usage.calls != null && (
             <p className="mt-2 text-ink-3">
-              Gemini usage: {usage.calls} calls ({usage.cached} cached) · {usage.input_tokens + usage.output_tokens} tokens · est. ${usage.est_cost_usd?.toFixed(2)}
+              Gemini usage: {usage.calls.toLocaleString()} calls ({usage.cached.toLocaleString()} served from cache) ·{" "}
+              {(usage.input_tokens + usage.output_tokens).toLocaleString()} tokens
+              {usage.est_cost_usd > 0 ? ` · est. $${usage.est_cost_usd.toFixed(2)}` : ""}
             </p>
           )}
         </div>
