@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Endoscopy Walkthrough</title>
+<style>
+:root{--bg:#0d0f12;--panel:#15191f;--line:#262c35;--text:#e6e8eb;--muted:#9aa3ad;--accent:#4fd1c5;--warn:#f6ad55;--eso:#d9a8a2;--sto:#c9584a;--duo:#d6997a}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;grid-template-columns:1fr 390px;grid-template-rows:1fr auto}
+#stage{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:0}
+#scope{position:relative;border-radius:50%;overflow:hidden;box-shadow:0 0 0 8px #000,0 0 80px #000;cursor:grab;touch-action:none}
+#scope:active{cursor:grabbing}
+#scope canvas{display:block}
+#scope::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 90px 30px #000;pointer-events:none}
+#labels{position:absolute;inset:0;pointer-events:none}
+.tag{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-17px,-50%)}
+.ring{width:34px;height:34px;flex:none;border:2px solid var(--warn);border-radius:50%;box-shadow:0 0 14px var(--warn);animation:pulse 1.6s ease-in-out infinite}
+.txt{background:rgba(0,0,0,.7);padding:2px 8px;border-radius:4px;font-size:12px;white-space:nowrap}
+@keyframes pulse{50%{transform:scale(1.18);opacity:.6}}
+#hud{position:absolute;top:14px;left:16px;font:12px/1.4 ui-monospace,Menlo,monospace;color:var(--muted)}
+#hud b{color:var(--text);font-size:20px}
+#hint{position:absolute;bottom:12px;left:16px;font-size:12px;color:var(--muted)}
+#banner{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(20,24,30,.92);border:1px solid var(--accent);color:var(--text);padding:8px 14px;border-radius:8px;font-size:13px;display:none;max-width:calc(100% - 32px);text-align:center}
+aside{grid-row:1/3;grid-column:2;background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:22px 22px 30px}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:21px;line-height:1.25;margin:6px 0 4px}
+.meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:20px 0 6px}
+ul,ol{margin:0;padding-left:18px}
+li{margin:4px 0}
+.tip{border-left:3px solid var(--accent);padding-left:12px}
+.tip p{margin:0}
+.find{background:#1d2229;border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:6px;padding:8px 10px;margin:6px 0}
+.find b{display:block;font-size:13px}
+.muted{color:var(--muted)}
+#check{list-style:none;padding:0}
+#check li{display:flex;gap:8px;align-items:center;cursor:pointer;padding:3px 6px;border-radius:4px;margin:1px 0}
+#check li:hover{background:#1d2229}
+#check li::before{content:"○";color:var(--muted);width:14px}
+#check li.done::before{content:"●";color:var(--accent)}
+#check li.now{background:#1f2a2b}
+#check .cm{margin-left:auto;color:var(--muted);font:12px ui-monospace,Menlo,monospace}
+footer{grid-column:1;display:flex;gap:14px;align-items:center;padding:12px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
+button{background:var(--accent);color:#04201d;border:0;border-radius:6px;padding:7px 14px;font-weight:600;cursor:pointer;font-size:13px}
+button.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+label{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;white-space:nowrap}
+#timeline{flex:1 1 260px;position:relative;height:30px;cursor:pointer;min-width:200px}
+#track{position:absolute;left:0;right:0;top:11px;height:8px;border-radius:4px;overflow:hidden;display:flex}
+#track div{height:100%}
+.tick{position:absolute;top:6px;width:2px;height:18px;background:#fff;opacity:.55;transform:translateX(-1px)}
+#head{position:absolute;top:3px;width:4px;height:24px;background:var(--warn);border-radius:2px;transform:translateX(-2px);box-shadow:0 0 8px var(--warn)}
+@media (max-width:900px){
+  body{grid-template-columns:1fr;grid-template-rows:62vh auto auto}
+  aside{grid-row:3;grid-column:1;border-left:0;border-top:1px solid var(--line)}
+  footer{grid-row:2}
+}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="scope"><div id="labels"></div></div>
+  <div id="hud"><b id="depth">15 cm</b><br><span id="region">Esophagus</span></div>
+  <div id="banner"></div>
+  <div id="hint">Drag to look around · Space play/pause · ← → look · ↑ ↓ step</div>
+</div>
+
+<aside>
+  <div class="eyebrow">Upper GI endoscopy · guided run</div>
+  <h1 id="lmName"></h1>
+  <div class="meta" id="lmMeta"></div>
+  <h3>What to look for</h3><ul id="look"></ul>
+  <h3>Don't miss</h3><ul id="path"></ul>
+  <h3>Technique</h3><div class="tip"><p id="tip"></p></div>
+  <h3>Findings in view</h3><div id="inview"></div>
+  <h3>Stations</h3><ol id="check"></ol>
+</aside>
+
+<footer>
+  <button id="play">Pause</button>
+  <button id="restart" class="ghost">Restart</button>
+  <div id="timeline"><div id="track"></div><div id="head"></div></div>
+  <label>Speed <input id="speed" type="range" min="0.5" max="6" step="0.5" value="2"></label>
+  <label><input id="stopAt" type="checkbox" checked> Stop at stations</label>
+  <label><input id="showFind" type="checkbox" checked> Label findings</label>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ---------- Anatomy: centerline from upper esophageal sphincter to D2 ----------
+const P = [
+  [0,0,0],[0.3,-12,0.3],[-0.3,-24,-0.3],[0.2,-34,0.4],   // 0-3 esophagus
+  [-0.6,-40,1],                                          // 4 GE junction
+  [-2.5,-44,2],[-6,-48,3],[-8.5,-55,2],[-7.5,-62,0],     // 5-8 cardia, body
+  [-3,-67,-1],[3,-68,-1],[7.5,-65.5,0],                  // 9-11 angulus, antrum
+  [9.5,-63.5,0.3],                                       // 12 pylorus
+  [11.5,-61.5,1],[13.5,-61,2.8],                         // 13-14 bulb
+  [14.8,-64,3.8],[15,-70,4],[14.5,-77,4],                // 15-17 D2
+].map(a => new THREE.Vector3(...a));
+// lumen radius at each control point
+const RK = [0.9,1.3,1.3,1.25,1.0,2.2,3.4,3.7,3.4,3.0,2.3,1.4,0.55,1.7,1.7,1.4,1.5,1.5];
+
+const curve = new THREE.CatmullRomCurve3(P, false, 'centripetal');
+const L = curve.getLength();
+const N = 2000, R = 128;                      // rings along, vertices around
+const CENTER = curve.getSpacedPoints(N);      // same arc-length points TubeGeometry uses
+const TAU = Math.PI * 2;
+const u = d => d / L;                         // world units -> curve parameter
+const T = P.map(p => {   // curve parameter of each control point
+  let best = 0, bd = Infinity;
+  CENTER.forEach((c, i) => { const d = c.distanceToSquared(p); if (d < bd) { bd = d; best = i; } });
+  return best / N;
+});
+
+const clamp01 = x => Math.min(1, Math.max(0, x));
+const smoothstep = (a, b, x) => { const k = clamp01((x - a) / (b - a)); return k * k * (3 - 2 * k); };
+const band = (x, a, b, c, d) => smoothstep(a, b, x) * (1 - smoothstep(c, d, x));
+const mix = (a, b, k) => a.map((v, i) => v + (b[i] - v) * k);
+const angDiff = (a, b) => ((a - b + Math.PI) % TAU + TAU) % TAU - Math.PI;
+
+function baseRadius(t) {
+  for (let k = 0; k < T.length - 1; k++)
+    if (t <= T[k + 1]) return RK[k] + (RK[k + 1] - RK[k]) * smoothstep(T[k], T[k + 1], t);
+  return RK[RK.length - 1];
+}
+
+// ---------- Findings placed on the wall (t along path, th = angle around) ----------
+const FINDINGS = [
+  { name: 'Erosive esophagitis (LA B)', t: T[3] + u(2.5), th: 3.4, kind: 'streak',
+    desc: 'Linear red mucosal break with whitish fibrin, longer than 5 mm, not bridging fold tops: LA grade B reflux esophagitis.' },
+  { name: "Barrett's tongue", t: T[4], th: 1.2, kind: 'tongue',
+    desc: 'Salmon-coloured columnar tongue extending above the GEJ. Measure with Prague C & M; biopsy per Seattle protocol.' },
+  { name: 'Fundic gland polyp', t: T[7] + u(1.5), th: 4.9, kind: 'polyp', size: 0.5,
+    desc: 'Small, glassy, sessile polyp in the body. Common with long-term PPI use; usually benign.' },
+  { name: 'Gastric ulcer (Forrest III)', t: T[9] + u(1.5), th: 3.1, kind: 'ulcer', size: 0.9,
+    desc: 'Round ulcer with clean white fibrin base and red halo. Biopsy the edges to exclude malignancy; test for H. pylori.' },
+  { name: 'Duodenal bulb ulcer', t: T[13] + u(1.2), th: 1.0, kind: 'ulcer', size: 0.45,
+    desc: 'Small clean-based ulcer on the anterior bulb wall, the most common site for duodenal ulcers.' },
+  { name: 'Major papilla', t: T[16] + u(1), th: 4.7, kind: 'papilla', size: 0.45,
+    desc: 'Mound on the medial wall of D2 where the bile and pancreatic ducts drain. Better seen with a side-viewing scope.' },
+];
+
+// ---------- Teaching stations ----------
+const STATIONS = [
+  { at: T[0] + u(2), cm: 17, name: 'Upper esophageal sphincter',
+    look: ['Pass the UES under direct vision; never push blindly.', 'Pale pink, smooth squamous mucosa with fine palisade vessels.', 'Inlet patch: salmon island of gastric mucosa just below the UES, easy to miss on fast insertion.'],
+    path: ["Zenker's diverticulum (posterior, above UES)", 'Cervical inlet patch', 'Esophageal web'],
+    tip: 'Most perforations happen here. Keep the scope midline and advance as the patient swallows.' },
+  { at: T[2], cm: 25, name: 'Mid esophagus',
+    look: ['Extrinsic impressions: aortic arch (~23 cm) and left main bronchus (~27 cm).', 'Left atrial pulsation further down (~30–35 cm).', 'Rotate to inspect all four walls; lesions hide in a collapsed lumen.'],
+    path: ['Eosinophilic esophagitis: rings, linear furrows, white exudates', 'Candida: white adherent plaques', 'Squamous cell carcinoma (use NBI / Lugol for subtle lesions)'],
+    tip: 'Insufflate enough to flatten the wall; inspect on insertion and again on withdrawal.' },
+  { at: T[3], cm: 34, name: 'Distal esophagus',
+    look: ['Mucosal breaks running up from the Z-line: grade with the Los Angeles (LA) system.', 'Varices: bluish tortuous columns; red wale signs mean higher bleeding risk.'],
+    path: ['Reflux esophagitis (LA A–D)', 'Esophageal varices', "Adenocarcinoma arising in Barrett's"],
+    tip: 'LA B = at least one break longer than 5 mm that does not extend between the tops of two folds.' },
+  { at: T[4] - u(4.5), cm: 38, name: 'GE junction / Z-line',
+    look: ['Z-line: where pale squamous mucosa meets red-orange gastric mucosa.', 'GEJ = proximal end of the gastric folds. Note the diaphragmatic pinch.', "Salmon tongues ABOVE the GEJ suggest Barrett's esophagus."],
+    path: ["Barrett's esophagus", 'Hiatal hernia (GEJ ≥ 2 cm above the pinch)', 'Mallory–Weiss tear'],
+    tip: 'Record three depths from the incisors: Z-line, GEJ and diaphragmatic pinch.' },
+  { at: T[5], cm: 42, name: 'Cardia & proximal stomach',
+    look: ['Suction the gastric lake in the fundus to see the mucosa underneath.', 'Fundus and cardia are blind spots in forward view; they need retroflexion.', 'Insufflate to unfold the stomach before judging the folds.'],
+    path: ['Fundal varices', 'Cameron lesions in a hiatal hernia', 'Cardia cancer'],
+    tip: 'Retroflex (J-manoeuvre) in every EGD; the cardia is a classic place to miss a cancer.' },
+  { at: T[7] - u(3), cm: 50, name: 'Gastric body',
+    look: ['Rugae: thick longitudinal folds along the greater curvature that flatten with air.', "Folds that don't flatten, or converge on a point, need biopsy.", 'Visible submucosal vessels suggest atrophic gastritis.'],
+    path: ['Fundic gland & hyperplastic polyps', 'Atrophic gastritis', 'Early gastric cancer, lymphoma'],
+    tip: 'Sydney protocol biopsies (2 antrum, 1 angulus, 2 body) for H. pylori and atrophy.' },
+  { at: T[9] - u(2.5), cm: 58, name: 'Angulus & antrum',
+    look: ['Angular incisure: best seen in retroflexion; classic ulcer and cancer site.', 'Antrum: no rugae, peristaltic waves moving toward the pylorus.', 'For ulcers, describe size and base (clean, pigmented, visible vessel): Forrest classification.'],
+    path: ['Peptic ulcer (lesser curvature)', 'H. pylori gastritis, intestinal metaplasia', 'NSAID erosions'],
+    tip: 'Biopsy the edge of every gastric ulcer to exclude malignancy.' },
+  { at: T[12] - u(3), cm: 63, name: 'Pylorus',
+    look: ['Round opening that opens and closes with peristalsis.', 'Centre it in view, wait for it to open, then advance gently.'],
+    path: ['Pyloric channel ulcer', 'Gastric outlet obstruction / stenosis'],
+    tip: "Don't force it. A red-out means you are on the wall: pull back and re-centre." },
+  { at: T[13] - u(0.5), cm: 66, name: 'Duodenal bulb (D1)',
+    look: ['Smooth, slightly granular mucosa with no circular folds.', 'Check the anterior wall carefully: most duodenal ulcers are here.', 'Go slowly; the bulb is easy to skip straight into D2.'],
+    path: ['Duodenal ulcer', 'Erosive duodenitis', 'Brunner gland hyperplasia'],
+    tip: 'Kissing ulcers (anterior + posterior) are common; check both walls.' },
+  { at: T[16] - u(2), cm: 75, name: 'Second part of duodenum (D2)',
+    look: ['Circular folds (valvulae conniventes) give a ringed look.', 'Major papilla on the medial wall.', 'Scalloped or absent folds and mosaic mucosa suggest coeliac disease.'],
+    path: ['Coeliac disease (villous atrophy)', 'Ampullary adenoma', 'Giardiasis'],
+    tip: 'Coeliac work-up: 4 biopsies from D2 + 1–2 from the bulb.' },
+];
+
+// ---------- Wall shape + colour as a function of (t, angle) ----------
+const ESO = [0.93, 0.75, 0.71], STO = [0.87, 0.40, 0.33], DUO = [0.91, 0.64, 0.51];
+const RED = [0.72, 0.12, 0.10], FIBRIN = [0.96, 0.93, 0.80], HALO = [0.80, 0.20, 0.17];
+
+function wall(t, th) {
+  const s = t * L;
+  const zline = T[4] + u(0.25 * Math.sin(th * 5) + 0.15 * Math.sin(th * 11));   // irregular Z-line
+  let c = mix(ESO, STO, smoothstep(zline - u(0.3), zline + u(0.3), t));
+  c = mix(c, DUO, smoothstep(T[12] - u(0.4), T[12] + u(0.4), t));
+  c = c.map(v => v * (1 + 0.06 * Math.sin(s * 1.7 + th * 3) * Math.sin(s * 0.9 - th * 2)));
+  let m = 1;
+  // gastric rugae: longitudinal folds, fade out in the antrum
+  m -= band(t, T[5], T[6], T[9], T[10]) * 0.08 * Math.max(0, Math.sin(th * 10 + Math.sin(s * 0.4) * 1.2)) ** 3;
+  // duodenal circular folds in D2
+  m -= band(t, T[14], T[15], 2, 3) * 0.1 * Math.max(0, Math.sin(s * 3.2 + Math.sin(th * 3) * 0.6)) ** 4;
+
+  const r0 = baseRadius(t);
+  for (const f of FINDINGS) {
+    const dt = (t - f.t) * L, da = angDiff(th, f.th) * r0;
+    if (f.kind === 'ulcer') {
+      const d = Math.hypot(dt, da) / f.size;
+      if (d < 0.7) { c = mix(c, FIBRIN, smoothstep(0.7, 0.5, d)); m += 0.03; }
+      else if (d < 1.4) c = mix(c, HALO, 1 - smoothstep(0.7, 1.4, d));
+    } else if (f.kind === 'polyp' || f.kind === 'papilla') {
+      const d = Math.hypot(dt, da) / f.size;
+      if (d < 1) {
+        const h = Math.cos(d * Math.PI / 2);
+        m -= h * f.size * 0.9 / r0;
+        c = mix(c, f.kind === 'polyp' ? [0.95, 0.55, 0.45] : [0.95, 0.72, 0.62], h * 0.7);
+      }
+    } else if (f.kind === 'streak') {
+      const d = Math.hypot(dt / 3, da);
+      if (d < 0.35) c = mix(c, d < 0.22 ? RED : FIBRIN, 0.85);
+    } else if (f.kind === 'tongue') {
+      const up = (zline - t) * L;                     // distance above the Z-line
+      if (up > 0 && up < 3 && Math.abs(da) < 0.55 * (1 - up / 3)) c = mix(c, STO, 0.9);
+    }
+  }
+  return [m, c];
+}
+
+// ---------- Build mesh ----------
+const geo = new THREE.TubeGeometry(curve, N, 1, R, false);
+const frames = curve.computeFrenetFrames(N, false);   // same frames the tube was built with; used for camera "up"
+const pos = geo.attributes.position, colors = new Float32Array(pos.count * 3), v = new THREE.Vector3();
+for (let i = 0; i <= N; i++) {
+  const t = i / N, c0 = CENTER[i], r0 = baseRadius(t);
+  for (let j = 0; j <= R; j++) {
+    const k = i * (R + 1) + j, [m, c] = wall(t, (j / R) * TAU);
+    v.fromBufferAttribute(pos, k).sub(c0).multiplyScalar(r0 * m).add(c0);   // unit-radius tube -> real radius
+    pos.setXYZ(k, v.x, v.y, v.z);
+    colors.set(c, k * 3);
+  }
+}
+geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+geo.computeVertexNormals();
+
+function mucosaTexture() {
+  const S = 512, cv = document.createElement('canvas'); cv.width = cv.height = S;
+  const g = cv.getContext('2d'), rnd = Math.random;
+  g.fillStyle = '#fff'; g.fillRect(0, 0, S, S);
+  for (let k = 0; k < 1800; k++) {
+    g.fillStyle = `rgba(${190 + rnd() * 65 | 0},${130 + rnd() * 70 | 0},${130 + rnd() * 60 | 0},0.07)`;
+    g.beginPath(); g.arc(rnd() * S, rnd() * S, 2 + rnd() * 14, 0, TAU); g.fill();
+  }
+  // branching vessels, drawn 9x offset so the tile wraps seamlessly
+  const paths = [];
+  for (let n = 0; n < 28; n++) {
+    let x = rnd() * S, y = rnd() * S, a = rnd() * TAU; const pts = [[x, y]];
+    for (let s = 0; s < 45; s++) { a += (rnd() - 0.5) * 0.7; x += Math.cos(a) * 6; y += Math.sin(a) * 6; pts.push([x, y]); }
+    paths.push({ pts, w: 0.5 + rnd() * 1.8 });
+  }
+  g.strokeStyle = 'rgba(140,20,30,0.2)';
+  for (const ox of [-S, 0, S]) for (const oy of [-S, 0, S]) for (const p of paths) {
+    g.lineWidth = p.w; g.beginPath();
+    p.pts.forEach(([x, y], i) => i ? g.lineTo(x + ox, y + oy) : g.moveTo(x + ox, y + oy));
+    g.stroke();
+  }
+  const tex = new THREE.CanvasTexture(cv);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(L / 2.5, 6);
+  return tex;
+}
+const tex = mucosaTexture();
+const mesh = new THREE.Mesh(geo, new THREE.MeshPhongMaterial({
+  vertexColors: true, map: tex, bumpMap: tex, bumpScale: 0.015,
+  shininess: 80, specular: 0x664444, side: THREE.BackSide,
+}));
+
+// ---------- Scene: camera with the light on its tip, like a real scope ----------
+const stage = document.getElementById('stage'), scope = document.getElementById('scope'), labelsEl = document.getElementById('labels');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+scope.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0);
+scene.fog = new THREE.Fog(0x000000, 1.5, 18);
+scene.add(mesh);
+const camera = new THREE.PerspectiveCamera(100, 1, 0.02, 60);
+camera.add(new THREE.PointLight(0xfff0e0, 1.4, 24, 1.5));
+scene.add(camera, new THREE.AmbientLight(0x502828, 0.6));
+
+function resize() {
+  const s = Math.max(200, Math.min(stage.clientWidth, stage.clientHeight) - 40);
+  scope.style.width = scope.style.height = s + 'px';
+  renderer.setSize(s, s);
+}
+addEventListener('resize', resize); resize();
+
+// finding label anchors = the displaced wall vertex, nudged toward the lumen
+FINDINGS.forEach(f => {
+  const i = Math.round(f.t * N), j = Math.round((((f.th / TAU) % 1) + 1) % 1 * R);
+  f.pos = new THREE.Vector3().fromBufferAttribute(pos, i * (R + 1) + j).lerp(CENTER[i], 0.05);
+  f.el = document.createElement('div'); f.el.className = 'tag';
+  f.el.innerHTML = `<span class="ring"></span><span class="txt">${f.name}</span>`;
+  labelsEl.append(f.el);
+});
+
+// ---------- UI ----------
+const $ = id => document.getElementById(id);
+const tStart = u(0.5), tEnd = 1 - u(3.5);
+let t = tStart, playing = true, yaw = 0, pitch = 0, dragging = false, lastStation = -2, lastInView = '';
+
+const regionOf = t => t < T[4] ? 'Esophagus' : t < T[12] ? 'Stomach' : 'Duodenum';
+function depthCm(t) {
+  const S = STATIONS;
+  if (t <= S[0].at) return 15 + (S[0].cm - 15) * (t - tStart) / (S[0].at - tStart);
+  for (let k = 0; k < S.length - 1; k++)
+    if (t <= S[k + 1].at) return S[k].cm + (S[k + 1].cm - S[k].cm) * (t - S[k].at) / (S[k + 1].at - S[k].at);
+  return S.at(-1).cm + (t - S.at(-1).at) * L * 0.8;
+}
+
+const track = $('track'), timeline = $('timeline');
+[[0, T[4], 'var(--eso)'], [T[4], T[12], 'var(--sto)'], [T[12], 1, 'var(--duo)']].forEach(([a, b, col]) => {
+  const d = document.createElement('div'); d.style.width = (b - a) * 100 + '%'; d.style.background = col; track.append(d);
+});
+STATIONS.forEach((s, k) => {
+  const tk = document.createElement('div'); tk.className = 'tick'; tk.style.left = s.at * 100 + '%'; tk.title = s.name; timeline.append(tk);
+  const li = document.createElement('li');
+  li.innerHTML = `${s.name}<span class="cm">${s.cm} cm</span>`;
+  li.onclick = () => { t = s.at; playing = false; showBanner(`At station: ${s.name}`); syncPlay(); };
+  $('check').append(li); s.li = li;
+});
+timeline.onclick = e => {
+  const r = timeline.getBoundingClientRect();
+  t = Math.min(tEnd, Math.max(tStart, (e.clientX - r.left) / r.width));
+};
+
+function showBanner(msg) { const b = $('banner'); b.textContent = msg; b.style.display = msg ? 'block' : 'none'; }
+function syncPlay() { $('play').textContent = playing ? 'Pause' : 'Play'; if (playing) showBanner(''); }
+function togglePlay() { if (t >= tEnd) t = tStart; playing = !playing; syncPlay(); }
+$('play').onclick = togglePlay;
+$('restart').onclick = () => { t = tStart; playing = true; syncPlay(); };
+
+addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+  if (e.code === 'ArrowUp') t = Math.min(tEnd, t + u(1));
+  if (e.code === 'ArrowDown') t = Math.max(tStart, t - u(1));
+  if (e.code === 'ArrowLeft') yaw = Math.min(1, yaw + 0.1);
+  if (e.code === 'ArrowRight') yaw = Math.max(-1, yaw - 0.1);
+});
+let px = 0, py = 0;
+scope.addEventListener('pointerdown', e => { dragging = true; px = e.clientX; py = e.clientY; scope.setPointerCapture(e.pointerId); });
+scope.addEventListener('pointerup', () => dragging = false);
+scope.addEventListener('pointermove', e => {
+  if (!dragging) return;
+  yaw = Math.max(-1, Math.min(1, yaw + (e.clientX - px) * 0.004));
+  pitch = Math.max(-0.9, Math.min(0.9, pitch + (e.clientY - py) * 0.004));
+  px = e.clientX; py = e.clientY;
+});
+
+function renderStation(k) {
+  const s = STATIONS[Math.max(0, k)];
+  $('lmName').textContent = s.name;
+  $('lmMeta').textContent = `≈ ${s.cm} cm from incisors · ${regionOf(s.at)}`;
+  $('look').innerHTML = s.look.map(x => `<li>${x}</li>`).join('');
+  $('path').innerHTML = s.path.map(x => `<li>${x}</li>`).join('');
+  $('tip').textContent = s.tip;
+  STATIONS.forEach((st, i) => { st.li.classList.toggle('done', i <= k); st.li.classList.toggle('now', i === k); });
+}
+
+// ---------- Loop ----------
+const ahead = new THREE.Vector3(), tmp = new THREE.Vector3();
+let last = performance.now();
+function frame(now) {
+  const dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now;   // first rAF stamp can predate performance.now()
+  if (playing) {
+    let nt = Math.min(tEnd, t + (+$('speed').value) * dt / L);
+    if ($('stopAt').checked) for (const s of STATIONS) if (t < s.at && nt >= s.at) {
+      nt = s.at; playing = false; syncPlay();
+      showBanner(`Station: ${s.name}. Review the panel, then press Space to continue.`);
+      break;
+    }
+    t = nt;
+    if (t >= tEnd) { playing = false; syncPlay(); showBanner('Run complete: all stations reached. Press Play to restart.'); }
+    if (!dragging) { yaw *= 0.97; pitch *= 0.97; }   // scope tip drifts back to neutral while advancing
+  }
+
+  // camera on the centerline, looking down the lumen, with a little breathing motion
+  const i = Math.round(t * N);
+  camera.position.copy(curve.getPointAt(t)).addScaledVector(frames.normals[i], 0.04 * Math.sin(now * 0.0016));
+  camera.up.copy(frames.normals[i]);
+  camera.lookAt(curve.getPointAt(Math.min(1, t + u(3)), ahead));
+  camera.rotateY(yaw); camera.rotateX(pitch);
+  camera.updateMatrixWorld();
+  renderer.render(scene, camera);
+
+  // HUD
+  $('depth').textContent = Math.round(depthCm(t)) + ' cm';
+  $('region').textContent = regionOf(t);
+  $('head').style.left = t * 100 + '%';
+  let k = -1; STATIONS.forEach((s, n) => { if (s.at <= t + u(0.3)) k = n; });
+  if (k !== lastStation) { lastStation = k; renderStation(k); }
+
+  // finding labels
+  // ponytail: distance check, no occlusion raycast; labels can show through a fold in tight bends
+  const W = renderer.domElement.clientWidth, inView = [];
+  for (const f of FINDINGS) {
+    tmp.copy(f.pos).applyMatrix4(camera.matrixWorldInverse);
+    let show = $('showFind').checked && tmp.z < 0 && tmp.length() < 11;
+    if (show) { tmp.copy(f.pos).project(camera); show = Math.abs(tmp.x) < 0.92 && Math.abs(tmp.y) < 0.92; }
+    f.el.style.display = show ? 'flex' : 'none';
+    if (show) { f.el.style.left = (tmp.x + 1) / 2 * W + 'px'; f.el.style.top = (1 - tmp.y) / 2 * W + 'px'; inView.push(f); }
+  }
+  const key = inView.map(f => f.name).join('|');
+  if (key !== lastInView) {
+    lastInView = key;
+    $('inview').innerHTML = inView.length
+      ? inView.map(f => `<div class="find"><b>${f.name}</b>${f.desc}</div>`).join('')
+      : '<span class="muted">Nothing flagged in view.</span>';
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
