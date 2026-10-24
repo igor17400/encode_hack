@@ -1,0 +1,3549 @@
+{
+ "video": "VID74",
+ "split": "test",
+ "window": [
+  381,
+  561
+ ],
+ "patient": "P1",
+ "forecasts": [
+  {
+   "id": "VID74_00311",
+   "t": 311,
+   "t_end": 425,
+   "phase": "carlot-triangle-dissection",
+   "action": "hook,dissect,cystic_duct",
+   "state_before": {
+    "t": 310,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": false,
+     "c2_plate_exposed": true,
+     "c3_two_structures": false
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "grasper,retract,gallbladder",
+      "probability": 0.6
+     },
+     {
+      "action": "hook,dissect,cystic_artery",
+      "probability": 0.35
+     },
+     {
+      "action": "hook,dissect,gallbladder",
+      "probability": 0.05
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.02,
+    "confidence": 0.6,
+    "state_out": {
+     "t": 320,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": false,
+      "c2_plate_exposed": true,
+      "c3_two_structures": false
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "hook,dissect,cystic_duct": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Dissecting the cystic duct with the hook successfully skeletonises it without bleeding or injury across all vijf similar recorded transitions (VID02_00873, VID22_00268, VID26_00456, VID27_00298, VID31_01271). Following this step, surgeons either retract the gallbladder with a grasper (3/5 cases) or proceed to dissect the cystic artery with the hook (2/5 cases).",
+    "cited_transition_ids": [
+     "VID02_00873",
+     "VID22_00268",
+     "VID26_00456",
+     "VID27_00298",
+     "VID31_01271"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID02_00873",
+      "video_id": "VID02",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_duct",
+      "action": "hook,dissect,cystic_duct",
+      "next_action": "hook,dissect,cystic_artery",
+      "score": 0.9818
+     },
+     {
+      "id": "VID22_00268",
+      "video_id": "VID22",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_duct",
+      "action": "hook,dissect,cystic_duct",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9818
+     },
+     {
+      "id": "VID26_00456",
+      "video_id": "VID26",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_duct",
+      "action": "hook,dissect,cystic_duct",
+      "next_action": "hook,dissect,cystic_artery",
+      "score": 0.9818
+     },
+     {
+      "id": "VID27_00298",
+      "video_id": "VID27",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_duct",
+      "action": "hook,dissect,cystic_duct",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9818
+     },
+     {
+      "id": "VID31_01271",
+      "video_id": "VID31",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_duct",
+      "action": "hook,dissect,cystic_duct",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9818
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_artery",
+     "hook,dissect,gallbladder"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "grasper,grasp,gallbladder",
+     "hook,dissect,cystic_artery"
+    ]
+   },
+   "truth": {
+    "next_action": "grasper,retract,gallbladder",
+    "t": 426,
+    "state_after": {
+     "t": 425,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": false,
+      "c2_plate_exposed": true,
+      "c3_two_structures": false
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": 1
+    },
+    "trained": {
+     "rank": 1
+    },
+    "bigram": {
+     "rank": 1
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "unseen",
+      "real": "unseen",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 1,
+      "real": 1,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00426",
+   "t": 426,
+   "t_end": 426,
+   "phase": "carlot-triangle-dissection",
+   "action": "grasper,retract,gallbladder",
+   "state_before": {
+    "t": 425,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": false,
+     "c2_plate_exposed": true,
+     "c3_two_structures": false
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "hook,dissect,cystic_duct",
+      "probability": 0.4
+     },
+     {
+      "action": "hook,dissect,gallbladder",
+      "probability": 0.4
+     },
+     {
+      "action": "grasper,retract,liver",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.02,
+    "confidence": 0.4,
+    "state_out": {
+     "t": 435,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": false,
+      "c2_plate_exposed": true,
+      "c3_two_structures": false
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "grasper,retract,gallbladder": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Retracting the gallbladder with a grasper during Calot's triangle dissection is a routine, low-risk maneuver that resulted in no bleeding or adverse events across all five matching recorded transitions (VID22_00308, VID27_00335, VID31_01384, VID31_01427, VID31_01432). Following this retraction, surgeons most commonly proceed with hook dissection of either the cystic duct (2/5 cases) or the gallbladder (2/5 cases).",
+    "cited_transition_ids": [
+     "VID22_00308",
+     "VID27_00335",
+     "VID31_01384",
+     "VID31_01427",
+     "VID31_01432"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID22_00308",
+      "video_id": "VID22",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,cystic_duct",
+      "score": 0.9821
+     },
+     {
+      "id": "VID27_00335",
+      "video_id": "VID27",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,cystic_duct",
+      "score": 0.9821
+     },
+     {
+      "id": "VID31_01384",
+      "video_id": "VID31",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9821
+     },
+     {
+      "id": "VID31_01427",
+      "video_id": "VID31",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,retract,liver",
+      "score": 0.9821
+     },
+     {
+      "id": "VID31_01432",
+      "video_id": "VID31",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9821
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "hook,dissect,cystic_duct",
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct"
+    ]
+   },
+   "truth": {
+    "next_action": "hook,dissect,cystic_artery",
+    "t": 427,
+    "state_after": {
+     "t": 426,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": false,
+      "c2_plate_exposed": true,
+      "c3_two_structures": false
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": null
+    },
+    "trained": {
+     "rank": null
+    },
+    "bigram": {
+     "rank": null
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "unseen",
+      "real": "unseen",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 1,
+      "real": 1,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00427",
+   "t": 427,
+   "t_end": 449,
+   "phase": "carlot-triangle-dissection",
+   "action": "hook,dissect,cystic_artery",
+   "state_before": {
+    "t": 426,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": false,
+     "c2_plate_exposed": true,
+     "c3_two_structures": false
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "hook,dissect,gallbladder",
+      "probability": 0.4
+     },
+     {
+      "action": "grasper,retract,gallbladder",
+      "probability": 0.2
+     },
+     {
+      "action": "hook,dissect,cystic_duct",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.05,
+    "confidence": 0.4,
+    "state_out": {
+     "t": 436,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "hook,dissect,cystic_artery": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Dissecting the cystic artery with the hook skeletonises the vessel and completes all three Critical View of Safety criteria without bleeding, directly matching VID02_01167, VID05_00747, and VID70_00401. Following this step, recorded cases most commonly proceed with hook dissection of the gallbladder (VID70_00401, VID49_00250), grasper retraction of the gallbladder (VID02_01167), or further hook dissection of the cystic duct (VID05_00747).",
+    "cited_transition_ids": [
+     "VID02_01167",
+     "VID05_00747",
+     "VID70_00401",
+     "VID49_00250",
+     "VID60_01883"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID05_00747",
+      "video_id": "VID05",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=visible 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "hook,dissect,cystic_duct",
+      "score": 0.9829
+     },
+     {
+      "id": "VID70_00401",
+      "video_id": "VID70",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=visible 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9829
+     },
+     {
+      "id": "VID49_00250",
+      "video_id": "VID49",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9818
+     },
+     {
+      "id": "VID60_01883",
+      "video_id": "VID60",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=unseen 0.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "grasper,dissect,cystic_plate",
+      "score": 0.9818
+     },
+     {
+      "id": "VID02_01167",
+      "video_id": "VID02",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=unseen 0.0; plate=visible 1.0; cvs=1/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9813
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "hook,coagulate,cystic_artery",
+     "hook,dissect,cystic_plate"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct",
+     "grasper,grasp,gallbladder"
+    ]
+   },
+   "truth": {
+    "next_action": "grasper,retract,gallbladder",
+    "t": 450,
+    "state_after": {
+     "t": 449,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": 2
+    },
+    "trained": {
+     "rank": 1
+    },
+    "bigram": {
+     "rank": 1
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00450",
+   "t": 450,
+   "t_end": 454,
+   "phase": "carlot-triangle-dissection",
+   "action": "grasper,retract,gallbladder",
+   "state_before": {
+    "t": 449,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "grasper,grasp,gallbladder",
+      "probability": 0.4
+     },
+     {
+      "action": "clipper,clip,cystic_duct",
+      "probability": 0.2
+     },
+     {
+      "action": "grasper,retract,gallbladder",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.05,
+    "confidence": 0.4,
+    "state_out": {
+     "t": 459,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "grasper,retract,gallbladder": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Retracting the gallbladder with the grasper once the critical view of safety is achieved maintains exposure without causing bleeding or structural injury across all five matched transitions (VID02_01246, VID103_00634, VID103_00643, VID103_00670, VID22_00388). The most frequent subsequent action in these recordings is grasping the gallbladder (2/5 cases), though clipping the cystic duct, continued retraction, or hook dissection also occur (1/5 each).",
+    "cited_transition_ids": [
+     "VID02_01246",
+     "VID103_00634",
+     "VID103_00643",
+     "VID103_00670",
+     "VID22_00388"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID02_01246",
+      "video_id": "VID02",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_duct",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00634",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00643",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00670",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID22_00388",
+      "video_id": "VID22",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9817
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "hook,dissect,cystic_artery",
+     "hook,dissect,gallbladder",
+     "irrigator,aspirate,fluid"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct"
+    ]
+   },
+   "truth": {
+    "next_action": "hook,dissect,cystic_artery",
+    "t": 466,
+    "state_after": {
+     "t": 454,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": null
+    },
+    "trained": {
+     "rank": 1
+    },
+    "bigram": {
+     "rank": null
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00466",
+   "t": 466,
+   "t_end": 485,
+   "phase": "carlot-triangle-dissection",
+   "action": "hook,dissect,cystic_artery",
+   "state_before": {
+    "t": 465,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "grasper,retract,gallbladder",
+      "probability": 0.75
+     },
+     {
+      "action": "hook,retract,gallbladder",
+      "probability": 0.18
+     },
+     {
+      "action": "clipper,clip,cystic_artery",
+      "probability": 0.07
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.05,
+    "confidence": 0.75,
+    "state_out": {
+     "t": 475,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "hook,dissect,cystic_artery": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Dissecting the already skeletonised cystic artery with the hook completes safely without bleeding or injury across all five matched historical transitions (VID27_00434, VID27_00449, VID27_00493, VID27_00602, VID31_01587). Following this step, the surgeon most frequently adjusts exposure by retracting the gallbladder with the grasper (4 of 5 cases) or the hook (1 of 5 cases).",
+    "cited_transition_ids": [
+     "VID27_00434",
+     "VID27_00449",
+     "VID27_00493",
+     "VID27_00602",
+     "VID31_01587"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID27_00434",
+      "video_id": "VID27",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9831
+     },
+     {
+      "id": "VID27_00449",
+      "video_id": "VID27",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9831
+     },
+     {
+      "id": "VID27_00493",
+      "video_id": "VID27",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9831
+     },
+     {
+      "id": "VID27_00602",
+      "video_id": "VID27",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "hook,retract,gallbladder",
+      "score": 0.9831
+     },
+     {
+      "id": "VID31_01587",
+      "video_id": "VID31",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=hook dissect cystic_artery",
+      "action": "hook,dissect,cystic_artery",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9831
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_plate",
+     "hook,retract,gallbladder"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct",
+     "grasper,grasp,gallbladder"
+    ]
+   },
+   "truth": {
+    "next_action": "grasper,retract,gallbladder",
+    "t": 488,
+    "state_after": {
+     "t": 485,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": 1
+    },
+    "trained": {
+     "rank": 1
+    },
+    "bigram": {
+     "rank": 1
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00488",
+   "t": 488,
+   "t_end": 488,
+   "phase": "carlot-triangle-dissection",
+   "action": "grasper,retract,gallbladder",
+   "state_before": {
+    "t": 487,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "grasper,grasp,gallbladder",
+      "probability": 0.4
+     },
+     {
+      "action": "clipper,clip,cystic_duct",
+      "probability": 0.2
+     },
+     {
+      "action": "grasper,retract,gallbladder",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.0,
+    "confidence": 0.4,
+    "state_out": {
+     "t": 497,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "grasper,retract,gallbladder": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Retracting the gallbladder with a grasper once the critical view of safety is achieved results in no bleeding or injury across all five matched transitions (VID02_01246, VID103_00634, VID103_00643, VID103_00670, VID22_00388). Subsequent actions vary between re-grasping or retracting the gallbladder (VID103_00634, VID103_00643, VID103_00670), clipping the cystic duct (VID02_01246), and dissecting the gallbladder with a hook (VID22_00388).",
+    "cited_transition_ids": [
+     "VID02_01246",
+     "VID103_00634",
+     "VID103_00643",
+     "VID103_00670",
+     "VID22_00388"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID02_01246",
+      "video_id": "VID02",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_duct",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00634",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00643",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00670",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID22_00388",
+      "video_id": "VID22",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9817
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "hook,dissect,cystic_artery",
+     "hook,dissect,gallbladder",
+     "irrigator,aspirate,fluid"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct"
+    ]
+   },
+   "truth": {
+    "next_action": "grasper,retract,gallbladder",
+    "t": 493,
+    "state_after": {
+     "t": 488,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": 3
+    },
+    "trained": {
+     "rank": null
+    },
+    "bigram": {
+     "rank": 2
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00493",
+   "t": 493,
+   "t_end": 500,
+   "phase": "carlot-triangle-dissection",
+   "action": "grasper,retract,gallbladder",
+   "state_before": {
+    "t": 492,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "grasper,grasp,gallbladder",
+      "probability": 0.4
+     },
+     {
+      "action": "clipper,clip,cystic_duct",
+      "probability": 0.2
+     },
+     {
+      "action": "grasper,retract,gallbladder",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.0,
+    "confidence": 0.4,
+    "state_out": {
+     "t": 502,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "grasper,retract,gallbladder": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Retracting the gallbladder with the grasper once the critical view of safety is achieved caused no bleeding or adverse events in all five similar recorded transitions (VID02_01246, VID103_00634, VID103_00643, VID103_00670, VID22_00388). Subsequent actions varied between re-grasping or retracting the gallbladder (VID103_00634, VID103_00643, VID103_00670), further dissection (VID22_00388), and clipping the cystic duct (VID02_01246).",
+    "cited_transition_ids": [
+     "VID02_01246",
+     "VID103_00634",
+     "VID103_00643",
+     "VID103_00670",
+     "VID22_00388"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID02_01246",
+      "video_id": "VID02",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_duct",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00634",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00643",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID103_00670",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9817
+     },
+     {
+      "id": "VID22_00388",
+      "video_id": "VID22",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9817
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "hook,dissect,cystic_artery",
+     "hook,dissect,gallbladder",
+     "irrigator,aspirate,fluid"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct"
+    ]
+   },
+   "truth": {
+    "next_action": "clipper,clip,cystic_duct",
+    "t": 501,
+    "state_after": {
+     "t": 500,
+     "phase": "carlot-triangle-dissection",
+     "phase_idx": 1,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": 2
+    },
+    "trained": {
+     "rank": null
+    },
+    "bigram": {
+     "rank": null
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00501",
+   "t": 501,
+   "t_end": 526,
+   "phase": "carlot-triangle-dissection",
+   "action": "clipper,clip,cystic_duct",
+   "state_before": {
+    "t": 500,
+    "phase": "carlot-triangle-dissection",
+    "phase_idx": 1,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "clipper,clip,cystic_artery",
+      "probability": 0.75
+     },
+     {
+      "action": "grasper,grasp,cystic_duct",
+      "probability": 0.15
+     },
+     {
+      "action": "clipper,clip,cystic_duct",
+      "probability": 0.1
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.02,
+    "confidence": 0.75,
+    "state_out": {
+     "t": 510,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "clipped",
+       "exposure": 1.0,
+       "clips": 1,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "clipper,clip,cystic_duct": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Clipping the skeletonised cystic duct with a complete Critical View of Safety safely transitions the operation to the clipping-and-cutting phase with no bleeding in all five matched cases (VID02_01255, VID103_00777, VID110_00886, VID13_00372, VID26_00743). In four of the five recorded transitions the surgeon proceeds to clip the cystic artery next, whereas in one case (VID110_00886) the surgeon grasps the cystic duct.",
+    "cited_transition_ids": [
+     "VID02_01255",
+     "VID103_00777",
+     "VID110_00886",
+     "VID13_00372",
+     "VID26_00743"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID02_01255",
+      "video_id": "VID02",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=clipper clip cystic_duct",
+      "action": "clipper,clip,cystic_duct",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9814
+     },
+     {
+      "id": "VID103_00777",
+      "video_id": "VID103",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=clipper clip cystic_duct",
+      "action": "clipper,clip,cystic_duct",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9814
+     },
+     {
+      "id": "VID110_00886",
+      "video_id": "VID110",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=clipper clip cystic_duct",
+      "action": "clipper,clip,cystic_duct",
+      "next_action": "grasper,grasp,cystic_duct",
+      "score": 0.9814
+     },
+     {
+      "id": "VID13_00372",
+      "video_id": "VID13",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=clipper clip cystic_duct",
+      "action": "clipper,clip,cystic_duct",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9814
+     },
+     {
+      "id": "VID26_00743",
+      "video_id": "VID26",
+      "summary": "phase=carlot-triangle-dissection; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=clipper clip cystic_duct",
+      "action": "clipper,clip,cystic_duct",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9814
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "clipper,clip,cystic_artery",
+     "grasper,retract,gallbladder",
+     "grasper,grasp,cystic_duct"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "clipper,clip,cystic_artery",
+     "grasper,grasp,gallbladder"
+    ]
+   },
+   "truth": {
+    "next_action": "grasper,retract,gallbladder",
+    "t": 527,
+    "state_after": {
+     "t": 526,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "clipped",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": null
+    },
+    "trained": {
+     "rank": 2
+    },
+    "bigram": {
+     "rank": 1
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "clipped",
+      "real": "clipped",
+      "clips_predicted": 1,
+      "clips_real": 7,
+      "match": false
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00527",
+   "t": 527,
+   "t_end": 533,
+   "phase": "clipping-and-cutting",
+   "action": "grasper,retract,gallbladder",
+   "state_before": {
+    "t": 526,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 7,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "clipper,clip,cystic_artery",
+      "probability": 0.4
+     },
+     {
+      "action": "clipper,clip,cystic_duct",
+      "probability": 0.4
+     },
+     {
+      "action": "irrigator,aspirate,fluid",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.02,
+    "confidence": 0.4,
+    "state_out": {
+     "t": 536,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "clipped",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "grasper,retract,gallbladder": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Retracting the gallbladder with the grasper during the clipping-and-cutting phase maintains clear exposure without causing bleeding or injury across all five similar recorded transitions (VID22_00494, VID22_00581, VID22_00481, VID35_01260, VID27_01060). Following this retraction, the surgeon typically proceeds to apply clips to either the cystic artery (VID22_00481, VID27_01060) or the cystic duct (VID22_00581, VID35_01260), or aspirates fluid (VID22_00494).",
+    "cited_transition_ids": [
+     "VID22_00494",
+     "VID22_00581",
+     "VID22_00481",
+     "VID35_01260",
+     "VID27_01060"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID22_00494",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=clipped 1.0 clips=8; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "irrigator,aspirate,fluid",
+      "score": 0.9793
+     },
+     {
+      "id": "VID22_00581",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=clipped 1.0 clips=8; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_duct",
+      "score": 0.9793
+     },
+     {
+      "id": "VID22_00481",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=clipped 1.0 clips=6; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9791
+     },
+     {
+      "id": "VID35_01260",
+      "video_id": "VID35",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=9; artery=skeletonised 1.0; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_duct",
+      "score": 0.9789
+     },
+     {
+      "id": "VID27_01060",
+      "video_id": "VID27",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=8; artery=skeletonised 1.0; plate=skeletonised 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9788
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "clipper,clip,cystic_artery",
+     "clipper,clip,cystic_duct",
+     "grasper,retract,gallbladder"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct"
+    ]
+   },
+   "truth": {
+    "next_action": "scissors,cut,cystic_duct",
+    "t": 534,
+    "state_after": {
+     "t": 533,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "clipped",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": null
+    },
+    "trained": {
+     "rank": null
+    },
+    "bigram": {
+     "rank": null
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "clipped",
+      "real": "clipped",
+      "clips_predicted": 7,
+      "clips_real": 7,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00534",
+   "t": 534,
+   "t_end": 559,
+   "phase": "clipping-and-cutting",
+   "action": "scissors,cut,cystic_duct",
+   "state_before": {
+    "t": 533,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 7,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "scissors,cut,cystic_artery",
+      "probability": 0.35
+     },
+     {
+      "action": "hook,dissect,gallbladder",
+      "probability": 0.35
+     },
+     {
+      "action": "clipper,clip,cystic_artery",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.02,
+    "confidence": 0.35,
+    "state_out": {
+     "t": 543,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "cut",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "scissors,cut,cystic_duct": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Dividing the clipped cystic duct under a clear critical view of safety is low-risk and resulted in no bleeding across all five similar recorded transitions (VID13_00416, VID22_00619, VID75_00553, VID43_01171, VID49_00523). However, the next step is less certain because the cystic artery is still unclipped in this patient, whereas in the retrieved transitions it was already clipped before cutting the artery (VID13_00416, VID22_00619) or already divided before starting gallbladder dissection (VID75_00553, VID43_01171, VID49_00523).",
+    "cited_transition_ids": [
+     "VID13_00416",
+     "VID22_00619",
+     "VID75_00553",
+     "VID43_01171",
+     "VID49_00523"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID13_00416",
+      "video_id": "VID13",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=7; artery=clipped 1.0 clips=4; plate=visible 1.0; cvs=3/3; bleeding=no; action=scissors cut cystic_duct",
+      "action": "scissors,cut,cystic_duct",
+      "next_action": "scissors,cut,cystic_artery",
+      "score": 0.9791
+     },
+     {
+      "id": "VID22_00619",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=6; artery=clipped 1.0 clips=8; plate=visible 1.0; cvs=3/3; bleeding=no; action=scissors cut cystic_duct",
+      "action": "scissors,cut,cystic_duct",
+      "next_action": "scissors,cut,cystic_artery",
+      "score": 0.9787
+     },
+     {
+      "id": "VID75_00553",
+      "video_id": "VID75",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=7; artery=cut 1.0 clips=4; plate=skeletonised 1.0; cvs=3/3; bleeding=no; action=scissors cut cystic_duct",
+      "action": "scissors,cut,cystic_duct",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9786
+     },
+     {
+      "id": "VID43_01171",
+      "video_id": "VID43",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=7; artery=cut 1.0 clips=7; plate=skeletonised 1.0; cvs=3/3; bleeding=no; action=scissors cut cystic_duct",
+      "action": "scissors,cut,cystic_duct",
+      "next_action": "grasper,retract,gallbladder",
+      "score": 0.9785
+     },
+     {
+      "id": "VID49_00523",
+      "video_id": "VID49",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=clipped 1.0 clips=5; artery=cut 1.0 clips=5; plate=visible 1.0; cvs=3/3; bleeding=no; action=scissors cut cystic_duct",
+      "action": "scissors,cut,cystic_duct",
+      "next_action": "hook,dissect,gallbladder",
+      "score": 0.9782
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "grasper,grasp,gallbladder",
+     "grasper,retract,gallbladder",
+     "clipper,clip,cystic_duct"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "grasper,retract,gallbladder",
+     "scissors,cut,cystic_artery",
+     "grasper,grasp,gallbladder"
+    ]
+   },
+   "truth": {
+    "next_action": "grasper,retract,gallbladder",
+    "t": 560,
+    "state_after": {
+     "t": 559,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "cut",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": true
+   },
+   "scores": {
+    "world_model": {
+     "rank": null
+    },
+    "trained": {
+     "rank": 2
+    },
+    "bigram": {
+     "rank": 1
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "cut",
+      "real": "cut",
+      "clips_predicted": 7,
+      "clips_real": 7,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  },
+  {
+   "id": "VID74_00560",
+   "t": 560,
+   "t_end": 570,
+   "phase": "clipping-and-cutting",
+   "action": "grasper,retract,gallbladder",
+   "state_before": {
+    "t": 559,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": true,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "cut",
+      "exposure": 1.0,
+      "clips": 7,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "visible",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0
+   },
+   "world_model": {
+    "top3": [
+     {
+      "action": "clipper,clip,cystic_artery",
+      "probability": 0.25
+     },
+     {
+      "action": "grasper,grasp,gallbladder",
+      "probability": 0.2
+     },
+     {
+      "action": "irrigator,aspirate,fluid",
+      "probability": 0.2
+     }
+    ],
+    "risk_level": "low",
+    "bleeding_risk": 0.02,
+    "confidence": 0.25,
+    "state_out": {
+     "t": 569,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "cut",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "active": {
+      "grasper,retract,gallbladder": 10
+     },
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0,
+     "cvs_sensor": null,
+     "cvs_source": "proxy"
+    },
+    "rules_violations": [],
+    "explanation": "Retracting the gallbladder during the clipping-and-cutting phase with CVS achieved maintains exposure without causing bleeding or structural injury across all similar cases (VID22_00494, VID22_00581, VID22_00481, VID110_00978, VID110_00984). With the cystic duct already cut and the cystic artery skeletonised, the surgeon will likely proceed to clip the cystic artery (VID22_00481) or reposition the grasper on the gallbladder (VID110_00978).",
+    "cited_transition_ids": [
+     "VID22_00494",
+     "VID22_00581",
+     "VID22_00481",
+     "VID110_00978",
+     "VID110_00984"
+    ],
+    "source": "argon",
+    "neighbours": [
+     {
+      "id": "VID22_00494",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=clipped 1.0 clips=8; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "irrigator,aspirate,fluid",
+      "score": 0.9787
+     },
+     {
+      "id": "VID22_00581",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=clipped 1.0 clips=8; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_duct",
+      "score": 0.9787
+     },
+     {
+      "id": "VID22_00481",
+      "video_id": "VID22",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=skeletonised 1.0; artery=clipped 1.0 clips=6; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "clipper,clip,cystic_artery",
+      "score": 0.9786
+     },
+     {
+      "id": "VID110_00978",
+      "video_id": "VID110",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=cut 1.0 clips=10; artery=clipped 1.0 clips=3; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,gallbladder",
+      "score": 0.9782
+     },
+     {
+      "id": "VID110_00984",
+      "video_id": "VID110",
+      "summary": "phase=clipping-and-cutting; gb=skeletonised 1.0; duct=cut 1.0 clips=10; artery=clipped 1.0 clips=3; plate=visible 1.0; cvs=3/3; bleeding=no; action=grasper retract gallbladder",
+      "action": "grasper,retract,gallbladder",
+      "next_action": "grasper,grasp,cystic_duct",
+      "score": 0.9782
+     }
+    ],
+    "risk_floor": "low"
+   },
+   "trained": {
+    "top3": [
+     "clipper,clip,cystic_artery",
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder"
+    ]
+   },
+   "bigram": {
+    "top3": [
+     "hook,dissect,gallbladder",
+     "grasper,retract,gallbladder",
+     "hook,dissect,cystic_duct"
+    ]
+   },
+   "truth": {
+    "next_action": "clipper,clip,cystic_artery",
+    "t": 571,
+    "state_after": {
+     "t": 570,
+     "phase": "clipping-and-cutting",
+     "phase_idx": 2,
+     "phase_inferred": true,
+     "structures": {
+      "gallbladder": {
+       "name": "gallbladder",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_duct": {
+       "name": "cystic_duct",
+       "status": "cut",
+       "exposure": 1.0,
+       "clips": 7,
+       "at_risk": false
+      },
+      "cystic_artery": {
+       "name": "cystic_artery",
+       "status": "skeletonised",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "cystic_plate": {
+       "name": "cystic_plate",
+       "status": "visible",
+       "exposure": 1.0,
+       "clips": 0,
+       "at_risk": false
+      },
+      "common_bile_duct": {
+       "name": "common_bile_duct",
+       "status": "unseen",
+       "exposure": 0.0,
+       "clips": 0,
+       "at_risk": false
+      }
+     },
+     "cvs": {
+      "c1_triangle_cleared": true,
+      "c2_plate_exposed": true,
+      "c3_two_structures": true
+     },
+     "bleeding": false,
+     "view_quality": "clear",
+     "violations": [],
+     "injury": false,
+     "packed": false,
+     "gb_detach": 0.0,
+     "last_bleed_t": null,
+     "adhesion_last_seen": null,
+     "adhesion_load": 0.0
+    },
+    "in_clip": false
+   },
+   "scores": {
+    "world_model": {
+     "rank": 1
+    },
+    "trained": {
+     "rank": 1
+    },
+    "bigram": {
+     "rank": null
+    },
+    "anatomy": {
+     "gallbladder": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_duct": {
+      "predicted": "cut",
+      "real": "cut",
+      "clips_predicted": 7,
+      "clips_real": 7,
+      "match": true
+     },
+     "cystic_artery": {
+      "predicted": "skeletonised",
+      "real": "skeletonised",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cystic_plate": {
+      "predicted": "visible",
+      "real": "visible",
+      "clips_predicted": 0,
+      "clips_real": 0,
+      "match": true
+     },
+     "cvs": {
+      "predicted": 3,
+      "real": 3,
+      "match": true
+     }
+    }
+   }
+  }
+ ],
+ "clip_score": {
+  "n": 11,
+  "world_model": {
+   "top1": 3,
+   "top3": 6
+  },
+  "trained": {
+   "top1": 5,
+   "top3": 7
+  },
+  "bigram": {
+   "top1": 5,
+   "top3": 6
+  },
+  "anatomy_all_match": 10
+ },
+ "created_at": 1792872301.0410721,
+ "note": "Forecasts use only the state before, the current action and train-split retrieval. Truth is CholecT50's labels. Risk and bleeding cannot be checked (no complication labels)."
+}

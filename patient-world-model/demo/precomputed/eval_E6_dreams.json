@@ -1,0 +1,222 @@
+{
+ "name": "E6_dreams",
+ "created_at": 1792871657.837996,
+ "video_model": [
+  "gemini-omni-1.1-flash"
+ ],
+ "world_model_clips": 12,
+ "renders": {
+  "attempts": 36,
+  "succeeded": 35
+ },
+ "fidelity_pass": {
+  "k": 0,
+  "n": 12,
+  "rate": 0.0,
+  "ci95": [
+   0.0,
+   0.243
+  ]
+ },
+ "consistency_pass": {
+  "k": 3,
+  "n": 12,
+  "rate": 0.25,
+  "ci95": [
+   0.089,
+   0.532
+  ]
+ },
+ "accepted": {
+  "k": 0,
+  "n": 12,
+  "rate": 0.0,
+  "ci95": [
+   0.0,
+   0.243
+  ]
+ },
+ "agreement_by_field": {
+  "action_seen": {
+   "k": 10,
+   "n": 12,
+   "rate": 0.833,
+   "ci95": [
+    0.552,
+    0.953
+   ]
+  },
+  "instrument_seen": {
+   "k": 12,
+   "n": 12,
+   "rate": 1.0,
+   "ci95": [
+    0.757,
+    1.0
+   ]
+  },
+  "no_new_instruments": {
+   "k": 6,
+   "n": 12,
+   "rate": 0.5,
+   "ci95": [
+    0.254,
+    0.746
+   ]
+  },
+  "phase_matches": {
+   "k": 9,
+   "n": 12,
+   "rate": 0.75,
+   "ci95": [
+    0.468,
+    0.911
+   ]
+  },
+  "view_clear": {
+   "k": 12,
+   "n": 12,
+   "rate": 1.0,
+   "ci95": [
+    0.757,
+    1.0
+   ]
+  }
+ },
+ "by_kind": {
+  "safe": {
+   "clips": 3,
+   "accepted": {
+    "k": 0,
+    "n": 3,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.562
+    ]
+   }
+  },
+  "counterfactual": {
+   "clips": 3,
+   "accepted": {
+    "k": 0,
+    "n": 3,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.562
+    ]
+   }
+  },
+  "robot": {
+   "clips": 6,
+   "accepted": {
+    "k": 0,
+    "n": 6,
+    "rate": 0.0,
+    "ci95": [
+     0.0,
+     0.39
+    ]
+   }
+  }
+ },
+ "fidelity_scores": [
+  3.0,
+  3.0,
+  3.0,
+  3.0,
+  3.0,
+  3.0,
+  4.0,
+  3.0,
+  4.0,
+  6.0,
+  3.0,
+  3.0
+ ],
+ "robot_episodes": [
+  {
+   "name": "robot_endo166_93_P2_6x10s",
+   "steps": 6,
+   "duration_s": 60.0,
+   "accepted_steps": 0
+  }
+ ],
+ "factual_control": {
+  "clips": 3,
+  "fidelity_pass": {
+   "k": 2,
+   "n": 3,
+   "rate": 0.667,
+   "ci95": [
+    0.208,
+    0.939
+   ]
+  },
+  "phase_match_rate_mean": 0.722,
+  "instrument_match_rate_mean": 0.667,
+  "frames": 18
+ },
+ "hand_prompted_baseline": {
+  "clips": 3,
+  "model": [
+   "Wan 2.2 TI2V-5B (Igor, local)"
+  ],
+  "fidelity_pass": {
+   "k": 0,
+   "n": 3,
+   "rate": 0.0,
+   "ci95": [
+    0.0,
+    0.562
+   ]
+  },
+  "intent_free_checks": {
+   "no_new_instruments": {
+    "k": 1,
+    "n": 3,
+    "rate": 0.333,
+    "ci95": [
+     0.061,
+     0.792
+    ]
+   },
+   "view_clear": {
+    "k": 3,
+    "n": 3,
+    "rate": 1.0,
+    "ci95": [
+     0.438,
+     1.0
+    ]
+   }
+  },
+  "world_model_same_checks": {
+   "no_new_instruments": {
+    "k": 6,
+    "n": 12,
+    "rate": 0.5,
+    "ci95": [
+     0.254,
+     0.746
+    ]
+   },
+   "view_clear": {
+    "k": 12,
+    "n": 12,
+    "rate": 1.0,
+    "ci95": [
+     0.757,
+     1.0
+    ]
+   }
+  }
+ },
+ "notes": [
+  "Every attempted clip is counted, rejected ones included; a failed render, QC or perception call counts as a failure.",
+  "Fidelity = an Argon inspector against the real anchor frame(s). Consistency = our Flash eyes on the generated frames must see the action and phase the world model predicted, and no invented instruments.",
+  "Descriptive only: small n, one video model, one patient (P2). Not evidence that the clips improve a policy.",
+  "Samples are video + action triplet + predicted state, not robot kinematics."
+ ]
+}

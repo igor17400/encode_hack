@@ -42,6 +42,7 @@ export const get = STATIC ? staticApi.get : httpGet;
 export const post = STATIC ? staticApi.post : httpPost;
 export const openStream = STATIC ? staticApi.openStream : httpStream;
 export const frameUrl = STATIC ? staticApi.frameUrl : (path) => (path ? `${API}/frames/${path}` : null);
+export const dreamUrl = (name) => (!name ? null : STATIC ? `./dreams/${name}` : `${API}/dream_media/${name}`);
 export const videoUrl = (name) => (!name ? null : STATIC ? `./clips/${name}` : `${API}/clip_video/${name}`);
 
 const nice = (s) => s.replaceAll("_", " ");

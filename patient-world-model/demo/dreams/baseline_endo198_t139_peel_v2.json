@@ -1,0 +1,191 @@
+{
+ "_id": "baseline_endo198_t139_peel_v2",
+ "name": "baseline_endo198_t139_peel_v2",
+ "kind": "baseline",
+ "run_id": "dreams_1792868147",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "Wan 2.2 TI2V-5B (Igor, local)",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo198",
+  "t": 139
+ },
+ "anchor_images": [
+  "baseline_endo198_t139_peel_v2.anchor0.jpg"
+ ],
+ "prompt": "(hand-written: worldmodel/prompts/peel_sd_512.txt)",
+ "patient_id": null,
+ "action": null,
+ "changes": [],
+ "risk_level": null,
+ "violations": [],
+ "hand_prompted": true,
+ "prompt_ref": "worldmodel/prompts/peel_sd_512.txt",
+ "source_model": "Wan 2.2 TI2V-5B (Igor, local)",
+ "note": "Hand-written prompt, no world model: only the intent-free checks apply.",
+ "attempts": [
+  {
+   "attempt": 1,
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frames 2-6: A malformed, unidentifiable instrument appears from the right and morphs into a distorted, serrated blob.",
+     "Frames 2-6: Significant loss of sharpness and texture detail compared to the real anchor frame.",
+     "Frame 6: Tissue in the lower-right dissector region warps and tears implausibly, creating unnatural white flaps.",
+     "Frames 4-6: The lower-left grasper tip warps and loses structural definition."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "no_new_instruments": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": null,
+    "observed": {
+     "instruments": [
+      "grasper",
+      "hook",
+      "scissors"
+     ],
+     "anchor_instruments": [
+      "grasper"
+     ]
+    }
+   },
+   "accepted": false,
+   "file": "clip.mp4"
+  }
+ ],
+ "video": "baseline_endo198_t139_peel_v2.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 3.0,
+  "issues": [
+   "Frames 2-6: A malformed, unidentifiable instrument appears from the right and morphs into a distorted, serrated blob.",
+   "Frames 2-6: Significant loss of sharpness and texture detail compared to the real anchor frame.",
+   "Frame 6: Tissue in the lower-right dissector region warps and tears implausibly, creating unnatural white flaps.",
+   "Frames 4-6: The lower-left grasper tip warps and loses structural definition."
+  ]
+ },
+ "consistency": {
+  "agreement": {
+   "no_new_instruments": false,
+   "view_clear": true
+  },
+  "errors": [],
+  "passed": null,
+  "observed": {
+   "instruments": [
+    "grasper",
+    "hook",
+    "scissors"
+   ],
+   "anchor_instruments": [
+    "grasper"
+   ]
+  }
+ },
+ "accepted": false,
+ "created_at": 1792869210.982286,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID25/000280.png",
+    "video_id": "VID25",
+    "t": 280,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9808456897735596
+   },
+   {
+    "path": "VID23/001520.png",
+    "video_id": "VID23",
+    "t": 1520,
+    "phase": "cleaning-and-coagulation",
+    "score": 0.9808353185653687
+   },
+   {
+    "path": "VID13/000500.png",
+    "video_id": "VID13",
+    "t": 500,
+    "phase": "gallbladder-dissection",
+    "score": 0.9801149368286133
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 70, frame 19225 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.982459306716919,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 88, frame 26825 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "score": 0.9818193912506104,
+    "retrieved_for": [
+     "C1 met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 21, frame 84800 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "score": 0.9816198348999023,
+    "retrieved_for": [
+     "C2 met"
+    ]
+   }
+  ]
+ },
+ "reason": "hand-prompted comparison (never a training sample)",
+ "text": "baseline dream clip; patient None; action None; risk None; no rule violations; changes: none; rejected; anchor endoscapes"
+}

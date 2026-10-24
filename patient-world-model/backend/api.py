@@ -30,7 +30,7 @@ from backend.schema import Action, Patient, State, TransitionResult
 ALERT_VIOLATIONS = {rules.V_CLIP_BEFORE_CVS, rules.V_CUT_WITHOUT_CLIPS, rules.V_CBD_INJURY}
 STREAM_COLLECTIONS = {"world_state": "state", "predictions": "prediction", "alerts": "alert",
                       "observations": "observation", "episode_steps": "episode_step", "episodes": "episode",
-                      "report_events": "report"}
+                      "report_events": "report", "dream_events": "dream"}
 PRECOMPUTED = config.DEMO_MODE == "precomputed"
 NOTE = "Research simulation, not clinical advice."
 
@@ -108,6 +108,18 @@ def clip_video(name: str):
         if f.suffix == ".mp4" and f.is_file() and d.resolve() in f.parents:
             return FileResponse(f, media_type="video/mp4")
     raise HTTPException(404, "clip video not found")
+
+
+DREAMS_DIR = config.ROOT / "demo" / "dreams"
+
+
+@app.get("/dream_media/{name}")
+def dream_media(name: str):
+    """An AI-generated dream clip (.mp4) or its real anchor frame (.jpg), from demo/dreams."""
+    f = (DREAMS_DIR / name).resolve()
+    if f.suffix in (".mp4", ".jpg") and f.is_file() and DREAMS_DIR.resolve() in f.parents:
+        return FileResponse(f, media_type="video/mp4" if f.suffix == ".mp4" else "image/jpeg")
+    raise HTTPException(404, "dream media not found")
 
 
 @app.get("/frames/{path:path}")
@@ -220,9 +232,19 @@ def clips():
         return r
     from backend import endoscapes
 
+    import re
+
     split = json.loads(config.SPLIT.read_text())
     out = [endoscapes.clip_info(c) for c in endoscapes.CLIPS]
+    # Demo windows with a real-time mp4 (demo/clips/<VID>_<from>-<to>.mp4) come first: they have video to watch.
+    demo = {}
+    for f in sorted((config.ROOT / "demo" / "clips").glob("*.mp4")):
+        if m := re.fullmatch(r"(VID\d+)_(\d+)-(\d+)", f.stem):
+            demo[m[1]] = {"video_id": m[1], "source": "cholect50", "t_start": int(m[2]), "t_end": int(m[3]), "video": f.name}
+    out += list(demo.values())
     for v in split["test"]:
+        if v in demo:
+            continue
         d = config.FRAMES_DIR / v
         frames = sorted(int(p.stem) for p in d.glob("*.png")) if d.exists() else []
         if frames:
@@ -522,6 +544,47 @@ def recorded(name: str):
     return json.loads(p.read_text())
 
 
+@app.get("/forecasts/{video_id}")
+def forecasts(video_id: str):
+    """World-model forecasts on a held-out operation, with what actually happened (demo/record_forecasts.py).
+    The UI reveals each truth only when the video reaches it."""
+    import re
+
+    if not re.fullmatch(r"[A-Za-z0-9_]+", video_id):
+        raise HTTPException(400, "bad video id")
+    p = config.PRECOMPUTED / f"forecast_{video_id}.json"
+    if not p.exists():
+        raise HTTPException(404, f"no recorded forecasts for {video_id}")
+    return json.loads(p.read_text())
+
+
+@app.get("/forecast_ledger")
+def forecast_ledger():
+    """The 200 held-out E1 forecasts (truth + model top-3 per item) for the Evidence ledger."""
+    p = config.PRECOMPUTED / "forecast_ledger.json"
+    return json.loads(p.read_text()) if p.exists() else {"items": []}
+
+
+@app.get("/dreams")
+def dreams():
+    """Every attempted dream clip (accepted and rejected), as recorded by pipeline/08_dream_clips.py and summarised
+    by eval/dream_eval.py. The same file backs the live and offline demo; Atlas `dream_clips` holds the copies."""
+    p = config.PRECOMPUTED / "dreams.json"
+    return json.loads(p.read_text()) if p.exists() else []
+
+
+@app.get("/dreams/search")
+def dreams_search(q: str, limit: int = 6):
+    """Hybrid ($rankFusion: full text + vector) search over the dream clips in Atlas."""
+    if PRECOMPUTED or not config.MONGODB_URI:
+        raise HTTPException(503, "dream search needs the live backend (Atlas)")
+    from backend import gemini
+
+    rows = _db().hybrid_search(q, gemini.embed_one(q), limit=limit, collections=("dream_clips",))
+    return [{k: r.get(k) for k in ("_id", "kind", "action", "accepted", "risk_level", "violations", "video", "score",
+                                   "matched", "reason")} for r in rows]
+
+
 @app.get("/expert_views")
 def expert_views(clip: str, t: int):
     """How surgeons judged visually similar views (Igor's Endoscapes library, queried read-only and cached by
@@ -618,7 +681,8 @@ def search(q: str):
 
     # Hybrid: Atlas $rankFusion of full-text + vector search. Cluster errors surface as a 502, never hidden.
     try:
-        return _db().hybrid_search(q, gemini.embed_one(q, kind="query"))
+        return _db().hybrid_search(q, gemini.embed_one(q, kind="query"),
+                                   collections=("lessons", "reports", "dream_clips"))
     except Exception as e:
         raise HTTPException(502, f"hybrid search failed: {e}")
 

@@ -1,0 +1,470 @@
+{
+ "_id": "counterfactual_endo198_153_P2",
+ "name": "counterfactual_endo198_153_P2",
+ "kind": "counterfactual",
+ "run_id": "dreams_1792868147",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo198",
+  "t": 153,
+  "credit": "Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0)"
+ },
+ "anchor_images": [
+  "counterfactual_endo198_153_P2.anchor0.jpg"
+ ],
+ "prompt": "Continue this exact laparoscopic cholecystectomy footage for 6 seconds. Same camera, viewpoint, lighting, colours, image quality and anatomy as the input image.\n\nWhat is in the scene (taken from the real frame):\nA circular laparoscopic view shows the dissection of the hepatocystic triangle. A metallic fenestrated grasper enters from the lower-left edge, holding the pale pink and yellowish gallbladder neck to provide lateral traction. A second instrument with a grey insulated shaft and open metallic jaws enters from the lower-right edge, positioned against the darkly cauterized tissue bed. The dissected area reveals a small window with a bluish tubular structure and dark red charred tissue. Reddish-brown liver parenchyma is visible on the upper right and upper left, while yellowish-orange adipose tissue rests at the bottom of the frame. There are no surgical clips, no active bleeding, and no smoke present in the scene.\n\nOne surgical step happens (chosen by a patient world model): A laparoscopic clip applier: a long shaft with two jaws holding one small metal clip comes into view along its shaft (or, if it is already in view, moves to the cystic duct). It closes its jaws across the cystic duct, leaving one small metal clip on it, then opens and withdraws.\n\nInstruments already in view: the grasper and the scissors. An instrument never changes into another instrument. Before the clipper arrives, any instrument in its way slides straight back out of view along its own shaft; the others stay where they are.\n\nBy the end of the clip: the cystic duct has 1 small metal clip across it.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands; bleeding; cutting.",
+ "patient_id": "P2",
+ "action": "clipper,clip,cystic_duct",
+ "state_before": {
+  "t": 153,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c3_two_structures": false,
+   "c1_triangle_cleared": false,
+   "c2_plate_exposed": false
+  },
+  "bleeding": false,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {},
+  "last_bleed_t": null,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": {
+   "c3_two_structures": false,
+   "c1_triangle_cleared": false,
+   "c2_plate_exposed": false
+  },
+  "cvs_source": "sensor"
+ },
+ "state_after_predicted": {
+  "t": 163,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "clipped",
+    "exposure": 1.0,
+    "clips": 1,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": true
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": true,
+   "c2_plate_exposed": false,
+   "c3_two_structures": true
+  },
+  "bleeding": false,
+  "view_quality": "clear",
+  "violations": [
+   "clip_before_cvs"
+  ],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {
+   "clipper,clip,cystic_duct": 10
+  },
+  "last_bleed_t": null,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
+ },
+ "changes": [
+  "cystic duct: skeletonised \u2192 clipped",
+  "cystic duct: 1 clip",
+  "critical view of safety 0/3 \u2192 2/3",
+  "common bile duct now at risk"
+ ],
+ "risk_level": "high",
+ "violations": [
+  "clip_before_cvs"
+ ],
+ "cited_transition_ids": [
+  "VID52_00731",
+  "VID75_00517",
+  "VID35_01263",
+  "VID110_00901",
+  "VID110_00921"
+ ],
+ "world_model_source": "argon",
+ "explanation": "Clipping the cystic duct before exposing the cystic plate violates the Critical View of Safety and places the unseen common bile duct at high risk, although none of the retrieved transitions caused bleeding (VID52_00731, VID75_00517, VID35_01263, VID110_00901, VID110_00921). Following cystic duct clipping, the surgeon most frequently retracts the gallbladder (VID52_00731, VID75_00517, VID35_01263) or grasps the cystic duct (VID110_00901, VID110_00921).",
+ "world_model_record": "imagine_P2_clipper_clip_cystic_duct_endo198_153.json",
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 79,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frame 2-3: The original white clip applier abruptly morphs into a black-shafted grasper holding a metallic loop.",
+     "Frame 4-6: The clip application is physically implausible, with the loop warping into an unrealistic double-looped clip in frame 6.",
+     "Frame 2-6: The background anatomy and left grasper are completely frozen and static while the right tool moves."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": true,
+     "phase_matches": true,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": true,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_duct",
+      "grasper,dissect,cystic_pedicle",
+      "grasper,grasp,gallbladder",
+      "grasper,retract,gallbladder"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 6
+     },
+     "anchor_instruments": [
+      "grasper",
+      "scissors"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "clipper,clip,cystic_duct"
+    }
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  },
+  {
+   "attempt": 2,
+   "seconds_taken": 77,
+   "prompt_feedback": [
+    "Frame 2-3: The original white clip applier abruptly morphs into a black-shafted grasper holding a metallic loop.",
+    "Frame 4-6: The clip application is physically implausible, with the loop warping into an unrealistic double-looped clip in frame 6.",
+    "Frame 2-6: The background anatomy and left grasper are completely frozen and static while the right tool moves."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frame 3: The right-hand surgical instrument abruptly transforms from a white-shafted clip applier into a black-shafted grasper with a floating metal loop between its jaws.",
+     "Frames 4-7: A malformed metal clip/loop floats unnaturally inside the grasper jaws and then detaches into the tissue without a proper clipping mechanism."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": true,
+     "phase_matches": true,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": true,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_artery",
+      "clipper,clip,cystic_duct",
+      "grasper,retract,gallbladder"
+     ],
+     "phase_late": "clipping-and-cutting",
+     "view_quality": {
+      "clear": 6
+     },
+     "anchor_instruments": [
+      "grasper",
+      "scissors"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "clipper,clip,cystic_duct"
+    }
+   },
+   "accepted": false,
+   "file": "try2.mp4"
+  },
+  {
+   "attempt": 3,
+   "seconds_taken": 74,
+   "prompt_feedback": [
+    "Frame 2-3: The original white clip applier abruptly morphs into a black-shafted grasper holding a metallic loop.",
+    "Frame 4-6: The clip application is physically implausible, with the loop warping into an unrealistic double-looped clip in frame 6.",
+    "Frame 2-6: The background anatomy and left grasper are completely frozen and static while the right tool moves.",
+    "Frame 3: The right-hand surgical instrument abruptly transforms from a white-shafted clip applier into a black-shafted grasper with a floating metal loop between its jaws.",
+    "Frames 4-7: A malformed metal clip/loop floats unnaturally inside the grasper jaws and then detaches into the tissue without a proper clipping mechanism."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frame 3: The right surgical instrument abruptly morphs from a white-shafted clip applier into a black-shafted grasper holding a paperclip-like wire.",
+     "Frame 3: Background anatomy on the right side changes, with liver tissue morphing into yellow adipose tissue.",
+     "Frame 7: The deployed clip resembles an ordinary office paperclip rather than a surgical clip."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": true,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "scissors"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_duct",
+      "grasper,dissect,cystic_duct",
+      "grasper,retract,gallbladder",
+      "scissors,dissect,cystic_pedicle"
+     ],
+     "phase_late": "carlot-triangle-dissection",
+     "view_quality": {
+      "clear": 6
+     },
+     "anchor_instruments": [
+      "grasper",
+      "scissors"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "clipper,clip,cystic_duct"
+    }
+   },
+   "accepted": false,
+   "file": "try3.mp4"
+  }
+ ],
+ "video": "counterfactual_endo198_153_P2.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 3.0,
+  "issues": [
+   "Frame 2-3: The original white clip applier abruptly morphs into a black-shafted grasper holding a metallic loop.",
+   "Frame 4-6: The clip application is physically implausible, with the loop warping into an unrealistic double-looped clip in frame 6.",
+   "Frame 2-6: The background anatomy and left grasper are completely frozen and static while the right tool moves."
+  ]
+ },
+ "consistency": {
+  "agreement": {
+   "instrument_seen": true,
+   "action_seen": true,
+   "no_new_instruments": true,
+   "phase_matches": true,
+   "view_clear": true
+  },
+  "errors": [],
+  "passed": true,
+  "observed": {
+   "instruments": [
+    "clipper",
+    "grasper"
+   ],
+   "triplets": [
+    "clipper,clip,cystic_duct",
+    "grasper,dissect,cystic_pedicle",
+    "grasper,grasp,gallbladder",
+    "grasper,retract,gallbladder"
+   ],
+   "phase_late": "clipping-and-cutting",
+   "view_quality": {
+    "clear": 6
+   },
+   "anchor_instruments": [
+    "grasper",
+    "scissors"
+   ],
+   "expected_phase": "clipping-and-cutting",
+   "expected_action": "clipper,clip,cystic_duct"
+  }
+ },
+ "accepted": false,
+ "created_at": 1792868837.804965,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID01/001220.png",
+    "video_id": "VID01",
+    "t": 1220,
+    "phase": "gallbladder-dissection",
+    "score": 0.9851460456848145
+   },
+   {
+    "path": "VID110/000900.png",
+    "video_id": "VID110",
+    "t": 900,
+    "phase": "clipping-and-cutting",
+    "score": 0.9845584034919739
+   },
+   {
+    "path": "VID13/000200.png",
+    "video_id": "VID13",
+    "t": 200,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9845316410064697
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 9, frame 21825 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9864383935928345,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 70, frame 19225 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.9859000444412231,
+    "retrieved_for": [
+     "C2 not met",
+     "C3 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 15, frame 31525 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "score": 0.9848772287368774,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   }
+  ]
+ },
+ "reason": "fidelity failed: Frame 2-3: The original white clip applier abruptly morphs into a black-shafted grasper holding a metallic loop.; Frame 4-6: The clip application is physically implausible, with the loop warping into an unrealistic double-looped clip in frame 6.",
+ "text": "counterfactual dream clip; patient P2; action clipper,clip,cystic_duct; risk high; clip_before_cvs; changes: cystic duct: skeletonised \u2192 clipped; cystic duct: 1 clip; critical view of safety 0/3 \u2192 2/3; common bile duct now at risk; rejected; anchor endoscapes"
+}

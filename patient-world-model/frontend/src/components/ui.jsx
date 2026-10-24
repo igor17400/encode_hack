@@ -11,7 +11,7 @@ export function RiskBadge({ level, large }) {
   const r = RISK[level] || RISK.low;
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border font-semibold ${large ? "px-4 py-1.5 text-lg" : "px-3 py-0.5 text-sm"}`}
+      className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full border font-semibold ${large ? "px-4 py-1.5 text-lg" : "px-3 py-0.5 text-sm"}`}
       style={{ borderColor: r.color, color: "#f0efec", background: `${r.color}22` }}
     >
       <span

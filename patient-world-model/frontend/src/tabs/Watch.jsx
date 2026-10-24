@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { get, post, openStream, videoUrl } from "../api";
+import { get, post, openStream, videoUrl} from "../api";
+import { actionShort } from "../lib/describe";
 import AnatomyMap, { CvsRing, diffStates } from "../components/AnatomyMap";
 import AlertModal from "../components/AlertModal";
 import StateTimeline from "../components/StateTimeline";
+import ForecastPanel, { EyesOverlay } from "../components/ForecastOverlay";
+import { overlayState } from "../lib/forecast";
 import VideoHUD from "../components/VideoHUD";
 import World3D from "../components/World3D";
 import { fmtT } from "../components/AnatomyPanel";
-import { ErrorNote, Frame, Picker, SourceTag, patientOptions } from "../components/ui";
+import { ErrorNote, Frame, Picker, RiskBadge, SourceTag, patientOptions } from "../components/ui";
 
 const CLIP_LABEL = (c) =>
   c.source === "endoscapes"
@@ -33,6 +36,12 @@ export default function Watch({ patients, onBranch }) {
   const [view, setView] = useState("3d");
   const [source, setSource] = useState(null);
   const [error, setError] = useState(null);
+  const [forecasts, setForecasts] = useState(null); // recorded forecast -> reality for held-out CholecT50 clips
+  const [videoT, setVideoT] = useState(null);
+  const [pauseReveal, setPauseReveal] = useState(true);
+  const [hold, setHold] = useState(false);
+  const [e1, setE1] = useState(null);
+  const lockedFor = useRef(null);
   const closeRef = useRef(null);
 
   useEffect(() => {
@@ -46,6 +55,23 @@ export default function Watch({ patients, onBranch }) {
   }, []);
 
   const clip = clips.find((c) => c.video_id === clipId);
+
+  useEffect(() => {
+    setForecasts(null);
+    if (!clipId || clipId.startsWith("endo")) return;
+    get(`/forecasts/${clipId}`).then(setForecasts).catch(() => setForecasts(null));
+    get("/eval/latest").then(setE1).catch(() => {});
+  }, [clipId]);
+
+  const fstate = overlayState(forecasts?.forecasts, videoT, { ended: status === "done" });
+  // Pause before reveal: freeze the video briefly once a forecast is locked, then let reality play out.
+  useEffect(() => {
+    if (!pauseReveal || fstate.mode !== "forecast" || !fstate.locked || lockedFor.current === fstate.f.id) return;
+    lockedFor.current = fstate.f.id;
+    setHold(true);
+    const h = setTimeout(() => setHold(false), 1800);
+    return () => clearTimeout(h);
+  }, [pauseReveal, fstate.mode, fstate.locked, fstate.f?.id]);
   const live = history[history.length - 1];
   const shownIdx = scrubT == null ? history.length - 1 : Math.max(0, history.findIndex((h) => h.t >= scrubT));
   const shown = history[shownIdx];
@@ -53,6 +79,20 @@ export default function Watch({ patients, onBranch }) {
   const obs = scrubT == null ? obsList[obsList.length - 1] : [...obsList].reverse().find((o) => o.t <= scrubT) ?? obsList[0];
   const experts = useMemo(() => obsList.filter((o) => o.expert).map((o) => o.expert), [obsList]);
   const lastExpert = [...experts].reverse().find((k) => k.t <= (obs?.t ?? 0));
+
+  // Eyes vs engine on hard facts: the eyes read the video; the engine starts from the surgeons' labels.
+  const disagreement = (() => {
+    if (fstate.mode !== "forecast" || !shown?.state) return null;
+    const lab = fstate.f.state_before.structures, out = fstate.f.world_model.state_out.structures;
+    const hard = new Set(["clipped", "cut"]);
+    for (const n of ["cystic_duct", "cystic_artery"]) {
+      const eyes = shown.state.structures[n].status;
+      if (hard.has(eyes) && !hard.has(lab[n].status) && !hard.has(out[n].status))
+        return `The eyes currently read the ${n.replace("_", " ")} as ${eyes}; the surgeons' labels say it is not yet. The prediction engine starts from the labels, so its forecast is not affected by this misreading.`;
+    }
+    return null;
+  })();
+
 
   // How surgeons judged views that look like the current frame (Igor's library, read-only, cached).
   useEffect(() => {
@@ -77,6 +117,8 @@ export default function Watch({ patients, onBranch }) {
     setExpertViews(null);
     setDecisionPoint(false);
     setScrubT(null);
+    setVideoT(null);
+    lockedFor.current = null;
     try {
       const s = await post("/sessions", { mode: "watch", patient_id: patientId, video_id: clipId });
       let last = null;
@@ -138,6 +180,10 @@ export default function Watch({ patients, onBranch }) {
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="min-w-0">
+          <div className="mb-1 flex flex-wrap items-baseline gap-2">
+            <span className="font-mono text-[11px] uppercase tracking-wider text-accent">Eyes</span>
+            <span className="text-xs text-ink-3">{clip?.source === "endoscapes" ? "Gemini Argon judges the critical view from each frame; Flash draws approximate boxes" : "Gemini Flash reads each frame: instruments, actions, approximate boxes"}</span>
+          </div>
           <VideoHUD
             src={videoUrl(clip?.video)}
             t0={clip?.t_start ?? 0}
@@ -149,19 +195,47 @@ export default function Watch({ patients, onBranch }) {
             playing={status === "running" && !alert && scrubT == null}
             speed={speed}
             done={decisionPoint}
+            onTime={setVideoT}
+            hold={hold}
           >
-            <div className="max-w-md rounded-xl border border-accent/60 bg-surface-1 p-5 text-center">
-              <div className="label mb-1">The camera stops at the first clip</div>
-              <p className="mb-3 text-ink-1">This is the decision a surgeon (or a robot) is about to make. The world model can play it forward.</p>
-              <button className="btn-primary" onClick={branch}>⑂ Imagine the next action</button>
+            <div className="rounded-xl border border-accent/60 bg-surface-1/95 px-5 py-3 text-center">
+              <div className="label">The camera stops before the first clip</div>
+              <p className="text-sm text-ink-2">What would each move do? See the predictions beside the video.</p>
             </div>
           </VideoHUD>
+          {forecasts && (
+            <div className="mt-2 flex flex-col gap-2">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-3">
+                <span>
+                  <b className="text-ink-2">Forecast → reality:</b> {clipId} is a held-out operation (never used for retrieval or training). Each forecast was made before the moment it predicts; the truth is the surgeons' recorded actions.
+                </span>
+                {e1?.metrics && (
+                  <span>
+                    Across {e1.metrics.n} held-out moments, next action in top 3: world model {Math.round(e1.metrics.model_top3 * 100)}% · trained model {Math.round(e1.metrics.trained_top3 * 100)}% · bigram {Math.round(e1.metrics.bigram_top3 * 100)}%.
+                  </span>
+                )}
+                <label className="flex items-center gap-1.5 text-ink-2">
+                  <input type="checkbox" checked={pauseReveal} onChange={(e) => setPauseReveal(e.target.checked)} /> pause before each reveal
+                </label>
+              </div>
+            </div>
+          )}
         </div>
 
+        <div className="flex min-w-0 flex-col gap-4">
+        {status !== "idle" && forecasts && disagreement && (
+          <div className="rounded-lg border border-status-warning/50 bg-status-warning/10 px-3 py-2 text-xs text-ink-1">{disagreement}</div>
+        )}
+        {status !== "idle" && forecasts && (
+          <ForecastPanel doc={forecasts} t={videoT} ended={status === "done"} t0={clip?.t_start ?? 0} onSeek={(t) => setScrubT(t)} />
+        )}
+        {status !== "idle" && clip?.source === "endoscapes" && (decisionPoint
+          ? <DecisionOverlay clip={clip} patientId={patientId} onBranch={branch} />
+          : <EyesOverlay clip={clip} t={videoT} ended={status === "done"} />)}
         <div className="card flex min-w-0 flex-col gap-3">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <div className="label">World model · patient state</div>
+              <div className="label">Patient model · built by the eyes from the video</div>
               <div className="font-display text-xl">{shown ? `t ${fmtT(shown.t)}` : "waiting"}</div>
             </div>
             <CvsRing state={shown?.state} size={74} />
@@ -172,7 +246,7 @@ export default function Watch({ patients, onBranch }) {
             ))}
           </div>
           {view === "3d" ? (
-            <World3D state={shown?.state} playing={status === "running" && !alert} height={360} />
+            <World3D state={shown?.state} playing={status === "running" && !alert} height={forecasts || clip?.source === "endoscapes" ? 260 : 360} />
           ) : (
             <AnatomyMap state={shown?.state} prev={prevShown?.state} />
           )}
@@ -186,6 +260,7 @@ export default function Watch({ patients, onBranch }) {
               ))}
             </div>
           )}
+        </div>
         </div>
       </div>
 
@@ -280,6 +355,46 @@ export default function Watch({ patients, onBranch }) {
           setAlert(null);
         }}
       />
+    </div>
+  );
+}
+
+
+// The last frame of an Endoscapes clip is the moment before the first clip. The recorded world-model steps for
+// "clip now" and "keep dissecting" from this sensed state are shown right on the frozen frame.
+function DecisionOverlay({ clip, patientId, onBranch }) {
+  const [recs, setRecs] = useState(null);
+  useEffect(() => {
+    if (!clip) return;
+    const k = (a) => `imagine_${patientId}_${a.replaceAll(",", "_")}_${clip.video_id}_${clip.t_end}`;
+    Promise.all(["clipper,clip,cystic_duct", "hook,dissect,cystic_plate"].map((a) => get(`/recorded/${k(a)}`).catch(() => null)))
+      .then(setRecs);
+  }, [clip?.video_id, patientId]);
+  const have = recs?.filter(Boolean) || [];
+  return (
+    <div className="rounded-xl border-2 border-accent/60 bg-surface-1 p-4">
+      <div className="label">The camera stops before the first clip · patient {patientId}</div>
+      <p className="mb-3 text-sm text-ink-2">What would each move do from what the eyes saw? Predicted by the world model (rules → real cases from Atlas → Argon).</p>
+      {have.length ? (
+        <div className="grid gap-2">
+          {have.map((r) => (
+            <div key={actionShort(r.action)} className="rounded-lg border border-line bg-surface-2 p-3">
+              <div className="mb-1 flex items-center justify-between gap-2">
+                <b className="text-sm">{actionShort(r.action)}</b>
+                <RiskBadge level={r.risk_level} />
+              </div>
+              {r.rules_violations.length > 0 && <div className="text-sm text-status-serious">▲ {r.rules_violations.join(", ").replaceAll("_", " ")}</div>}
+              <ul className="text-xs text-ink-2">{diffStates(r.state_in, r.state_out).map((c) => <li key={c.text}>→ {c.text}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-ink-3">No recorded prediction for patient {patientId} at this moment; open it in Imagine to run one.</p>
+      )}
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+        <span className="text-xs text-ink-3">Counterfactual: the real operation did not take these paths, so they can't be checked against reality.</span>
+        <button className="btn-primary text-sm" onClick={onBranch}>⑂ Explore in Imagine</button>
+      </div>
     </div>
   );
 }

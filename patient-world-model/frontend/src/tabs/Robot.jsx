@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { get, post, openStream, actionLabel, niceName, STATIC } from "../api";
+import { get, post, openStream, niceName, STATIC } from "../api";
+import { actionShort } from "../lib/describe";
 import AnatomyMap, { CvsRing } from "../components/AnatomyMap";
 import { HBars } from "../components/charts";
 import { Trajectories } from "../components/StateSpaceMap";
 import { parseSummary } from "../lib/statespace";
 import { ErrorNote, Picker, SimNote, patientOptions } from "../components/ui";
+import DreamData from "../components/DreamData";
 
 // Fixed entity -> color (never by rank). Validated dark categorical slots 1-4.
 export const POLICIES = [
@@ -165,7 +167,7 @@ export default function Robot({ patients }) {
               <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <div className="label">Replay · {POLICIES.find((p) => p.key === sel.policy)?.label}</div>
-                  <div className="font-display text-lg">step {frame} of {selStates.length - 1}{frame > 0 ? ` · ${actionLabel(sel.trace[frame - 1].action)}` : ""}</div>
+                  <div className="font-display text-lg">step {frame} of {selStates.length - 1}{frame > 0 ? ` · ${actionShort(sel.trace[frame - 1].action)}` : ""}</div>
                 </div>
                 <CvsRing state={selStates[frame]} size={52} showLabels={false} />
               </div>
@@ -186,7 +188,7 @@ export default function Robot({ patients }) {
               <div className="h-80 overflow-y-auto font-mono text-sm">
                 {steps.map((s, i) => (
                   <div key={i} className={`border-b border-line/60 py-1 ${s.violations.length || s.injury ? "text-status-serious" : "text-ink-2"}`}>
-                    #{s.step + 1} {actionLabel(s.action)} ({s.reward >= 0 ? "+" : ""}{s.reward}){s.violations.length ? ` ▲ ${s.violations.map(niceName).join(", ")}` : ""}
+                    #{s.step + 1} {actionShort(s.action)} ({s.reward >= 0 ? "+" : ""}{s.reward}){s.violations.length ? ` ▲ ${s.violations.map(niceName).join(", ")}` : ""}
                   </div>
                 ))}
               </div>
@@ -196,6 +198,7 @@ export default function Robot({ patients }) {
           )}
         </div>
       </div>
+      <DreamData />
     </div>
   );
 }

@@ -1,0 +1,473 @@
+{
+ "_id": "safe_endo198_153_P2",
+ "name": "safe_endo198_153_P2",
+ "kind": "safe",
+ "run_id": "dreams_1792868147",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "seconds": 6,
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo198",
+  "t": 153,
+  "credit": "Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0)"
+ },
+ "anchor_images": [
+  "safe_endo198_153_P2.anchor0.jpg"
+ ],
+ "prompt": "Continue this exact laparoscopic cholecystectomy footage for 6 seconds. Same camera, viewpoint, lighting, colours, image quality and anatomy as the input image.\n\nWhat is in the scene (taken from the real frame):\nA circular laparoscopic view shows the dissection of the hepatocystic triangle. A metallic fenestrated grasper enters from the lower-left edge, holding the pale pink and yellowish gallbladder neck to provide lateral traction. A second instrument with a grey insulated shaft and open metallic jaws enters from the lower-right edge, positioned against the darkly cauterized tissue bed. The dissected area reveals a small window with a bluish tubular structure and dark red charred tissue. Reddish-brown liver parenchyma is visible on the upper right and upper left, while yellowish-orange adipose tissue rests at the bottom of the frame. There are no surgical clips, no active bleeding, and no smoke present in the scene.\n\nOne surgical step happens (chosen by a patient world model): A laparoscopic electrocautery hook: a slim grey insulated shaft ending in a small bent metal tip comes into view along its shaft (or, if it is already in view, moves to the cystic plate). It makes short, deliberate strokes, stripping fat and connective tissue away from the cystic plate.\n\nInstruments already in view: the grasper and the scissors. An instrument never changes into another instrument. Before the hook arrives, any instrument in its way slides straight back out of view along its own shaft; the others stay where they are.\n\nBy the end of the clip: the cystic plate is partly freed: some fat and connective tissue has been stripped from it.\n\nMotion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments keep their exact shape, colour, size and entry side. Tissue moves only where an instrument touches it, deforms slightly and springs back.\n\nKeep identical to the input image for the whole clip: the colours, the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure not named above.\n\nStrictly forbidden: new, extra, swapped or reshaped instruments; a new sac or organ appearing; smoke; zooms, camera cuts or jumps; text or overlays; changes of colour, exposure or image quality; human hands; bleeding; clips; cutting.",
+ "patient_id": "P2",
+ "action": "hook,dissect,cystic_plate",
+ "state_before": {
+  "t": 153,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c3_two_structures": false,
+   "c1_triangle_cleared": false,
+   "c2_plate_exposed": false
+  },
+  "bleeding": false,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {},
+  "last_bleed_t": null,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": {
+   "c3_two_structures": false,
+   "c1_triangle_cleared": false,
+   "c2_plate_exposed": false
+  },
+  "cvs_source": "sensor"
+ },
+ "state_after_predicted": {
+  "t": 163,
+  "phase": "clipping-and-cutting",
+  "phase_idx": 2,
+  "phase_inferred": false,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "visible",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "dissecting",
+    "exposure": 0.5555555555555557,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": true,
+   "c2_plate_exposed": false,
+   "c3_two_structures": true
+  },
+  "bleeding": false,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "active": {
+   "hook,dissect,cystic_plate": 10
+  },
+  "last_bleed_t": null,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
+ },
+ "changes": [
+  "cystic plate: visible \u2192 dissecting",
+  "critical view of safety 0/3 \u2192 2/3"
+ ],
+ "risk_level": "low",
+ "violations": [],
+ "cited_transition_ids": [
+  "VID15_00497",
+  "VID15_00521",
+  "VID43_01073",
+  "VID110_01025",
+  "VID15_00631"
+ ],
+ "world_model_source": "argon",
+ "explanation": "Dissecting the cystic plate with the hook advances exposure to 0.56 and satisfies two of three CVS criteria without causing bleeding or rule violations, consistent with VID15_00497 and VID15_00521. Following hook dissection in this phase, the surgeon most frequently adjusts traction on the gallbladder with the grasper (VID15_00497, VID15_00521, VID15_00631) or proceeds to clipping (VID43_01073).",
+ "world_model_record": "imagine_P2_hook_dissect_cystic_plate_endo198_153.json",
+ "attempts": [
+  {
+   "attempt": 1,
+   "seconds_taken": 71,
+   "prompt_feedback": [],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frame 3: The right grasper instrument abruptly disappears and is swapped for a hook cautery tool.",
+     "Frames 3-7: The surrounding adipose tissue on the bottom right morphs and expands unnaturally when the instrument changes.",
+     "Frames 5-7: The hook instrument passes through the tissue with implausible warping rather than realistic dissection."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": true,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "grasper",
+      "hook",
+      "scissors"
+     ],
+     "triplets": [
+      "grasper,retract,gallbladder",
+      "hook,dissect,cystic_pedicle",
+      "hook,dissect,cystic_plate",
+      "hook,dissect,peritoneum",
+      "scissors,dissect,cystic_pedicle"
+     ],
+     "phase_late": "carlot-triangle-dissection",
+     "view_quality": {
+      "clear": 6
+     },
+     "anchor_instruments": [
+      "grasper",
+      "scissors"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "hook,dissect,cystic_plate"
+    }
+   },
+   "accepted": false,
+   "file": "try1.mp4"
+  },
+  {
+   "attempt": 2,
+   "seconds_taken": 75,
+   "prompt_feedback": [
+    "Frame 3: The right grasper instrument abruptly disappears and is swapped for a hook cautery tool.",
+    "Frames 3-7: The surrounding adipose tissue on the bottom right morphs and expands unnaturally when the instrument changes.",
+    "Frames 5-7: The hook instrument passes through the tissue with implausible warping rather than realistic dissection."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frame 3: The right-hand clip applier/grasper abruptly disappears.",
+     "Frame 4: A hook cautery instrument abruptly appears in place of the previous instrument.",
+     "Frames 2-7: The background anatomy and left grasper are completely static and frozen except for localized warping near the right tool."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": true,
+     "no_new_instruments": false,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "hook"
+     ],
+     "triplets": [
+      "grasper,retract,gallbladder",
+      "hook,dissect,cystic_duct",
+      "hook,dissect,cystic_pedicle",
+      "hook,dissect,cystic_plate",
+      "hook,dissect,peritoneum"
+     ],
+     "phase_late": "carlot-triangle-dissection",
+     "view_quality": {
+      "clear": 6
+     },
+     "anchor_instruments": [
+      "grasper",
+      "scissors"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "hook,dissect,cystic_plate"
+    }
+   },
+   "accepted": false,
+   "file": "try2.mp4"
+  },
+  {
+   "attempt": 3,
+   "seconds_taken": 73,
+   "prompt_feedback": [
+    "Frame 3: The right grasper instrument abruptly disappears and is swapped for a hook cautery tool.",
+    "Frames 3-7: The surrounding adipose tissue on the bottom right morphs and expands unnaturally when the instrument changes.",
+    "Frames 5-7: The hook instrument passes through the tissue with implausible warping rather than realistic dissection.",
+    "Frame 3: The right-hand clip applier/grasper abruptly disappears.",
+    "Frame 4: A hook cautery instrument abruptly appears in place of the previous instrument.",
+    "Frames 2-7: The background anatomy and left grasper are completely static and frozen except for localized warping near the right tool."
+   ],
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frame 3: The right surgical instrument abruptly swaps from a bipolar grasper to an electrosurgical hook without withdrawing.",
+     "Frame 3: Unnatural morphological jump in the fatty tissue at the bottom right.",
+     "Frame 5: Tissue warps implausibly around the hook tip, forming a temporary band that disappears in Frame 6."
+    ]
+   },
+   "consistency": {
+    "agreement": {
+     "instrument_seen": true,
+     "action_seen": false,
+     "no_new_instruments": false,
+     "phase_matches": false,
+     "view_clear": true
+    },
+    "errors": [],
+    "passed": false,
+    "observed": {
+     "instruments": [
+      "clipper",
+      "grasper",
+      "hook"
+     ],
+     "triplets": [
+      "clipper,clip,cystic_duct",
+      "grasper,retract,gallbladder",
+      "hook,dissect,cystic_duct",
+      "hook,dissect,cystic_pedicle",
+      "hook,dissect,peritoneum"
+     ],
+     "phase_late": "carlot-triangle-dissection",
+     "view_quality": {
+      "clear": 6
+     },
+     "anchor_instruments": [
+      "grasper",
+      "scissors"
+     ],
+     "expected_phase": "clipping-and-cutting",
+     "expected_action": "hook,dissect,cystic_plate"
+    }
+   },
+   "accepted": false,
+   "file": "try3.mp4"
+  }
+ ],
+ "video": "safe_endo198_153_P2.mp4",
+ "fidelity": {
+  "pass": false,
+  "score": 3.0,
+  "issues": [
+   "Frame 3: The right grasper instrument abruptly disappears and is swapped for a hook cautery tool.",
+   "Frames 3-7: The surrounding adipose tissue on the bottom right morphs and expands unnaturally when the instrument changes.",
+   "Frames 5-7: The hook instrument passes through the tissue with implausible warping rather than realistic dissection."
+  ]
+ },
+ "consistency": {
+  "agreement": {
+   "instrument_seen": true,
+   "action_seen": true,
+   "no_new_instruments": true,
+   "phase_matches": false,
+   "view_clear": true
+  },
+  "errors": [],
+  "passed": false,
+  "observed": {
+   "instruments": [
+    "grasper",
+    "hook",
+    "scissors"
+   ],
+   "triplets": [
+    "grasper,retract,gallbladder",
+    "hook,dissect,cystic_pedicle",
+    "hook,dissect,cystic_plate",
+    "hook,dissect,peritoneum",
+    "scissors,dissect,cystic_pedicle"
+   ],
+   "phase_late": "carlot-triangle-dissection",
+   "view_quality": {
+    "clear": 6
+   },
+   "anchor_instruments": [
+    "grasper",
+    "scissors"
+   ],
+   "expected_phase": "clipping-and-cutting",
+   "expected_action": "hook,dissect,cystic_plate"
+  }
+ },
+ "accepted": false,
+ "created_at": 1792868605.103647,
+ "kept_attempt": 1,
+ "nearest": {
+  "real_frames": [
+   {
+    "path": "VID13/000250.png",
+    "video_id": "VID13",
+    "t": 250,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9860573410987854
+   },
+   {
+    "path": "VID13/000190.png",
+    "video_id": "VID13",
+    "t": 190,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.9857586622238159
+   },
+   {
+    "path": "VID103/000380.png",
+    "video_id": "VID103",
+    "t": 380,
+    "phase": "carlot-triangle-dissection",
+    "score": 0.985703706741333
+   }
+  ],
+  "expert_views": [
+   {
+    "source": "Endoscapes training video 60, frame 31825 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "score": 0.9864392280578613,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 99, frame 27425 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "score": 0.9859323501586914,
+    "retrieved_for": [
+     "C3 met"
+    ]
+   },
+   {
+    "source": "Endoscapes training video 80, frame 9975 (3 surgeons)",
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "score": 0.9853627681732178,
+    "retrieved_for": [
+     "C1 met"
+    ]
+   }
+  ]
+ },
+ "reason": "fidelity failed: Frame 3: The right grasper instrument abruptly disappears and is swapped for a hook cautery tool.; Frames 3-7: The surrounding adipose tissue on the bottom right morphs and expands unnaturally when the instrument changes.; eyes disagree with the world model: phase_matches",
+ "text": "safe dream clip; patient P2; action hook,dissect,cystic_plate; risk low; no rule violations; changes: cystic plate: visible \u2192 dissecting; critical view of safety 0/3 \u2192 2/3; rejected; anchor endoscapes"
+}

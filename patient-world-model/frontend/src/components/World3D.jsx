@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import AnatomyMap from "./AnatomyMap";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { CSS2DObject, CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
@@ -37,7 +38,7 @@ function label(text) {
   return new CSS2DObject(el);
 }
 
-export default function World3D({ state, playing = false, height = 380 }) {
+function World3DScene({ state, playing = false, height = 380 }) {
   const host = useRef(null);
   const world = useRef(null);
 
@@ -261,6 +262,30 @@ export default function World3D({ state, playing = false, height = 380 }) {
           The patient model builds here as the video plays.
         </div>
       )}
+    </div>
+  );
+}
+
+let webgl = null;
+function hasWebGL() {
+  if (webgl === null) {
+    try {
+      const c = document.createElement("canvas");
+      webgl = !!(c.getContext("webgl2") || c.getContext("webgl"));
+    } catch {
+      webgl = false;
+    }
+  }
+  return webgl;
+}
+
+// No WebGL (old or locked-down browsers): show the 2D anatomy map instead of crashing the page.
+export default function World3D(props) {
+  if (hasWebGL()) return <World3DScene {...props} />;
+  return (
+    <div className="flex flex-col gap-1">
+      <AnatomyMap state={props.state} />
+      <span className="text-xs text-ink-3">3D view needs WebGL, which this browser does not provide; showing the anatomy map.</span>
     </div>
   );
 }

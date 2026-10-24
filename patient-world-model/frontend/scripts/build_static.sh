@@ -5,7 +5,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT=..
-rm -rf public/data public/frames public/clips dist-static
+rm -rf public/data public/frames public/clips public/dreams dist-static
 mkdir -p public/data public/frames
 for f in "$ROOT"/demo/precomputed/*.json; do
   case "$(basename "$f")" in _*) continue ;; esac   # skip private scratch files
@@ -17,6 +17,8 @@ done
 done
 # Real-time clip videos for the Watch player.
 mkdir -p public/clips && cp "$ROOT"/demo/clips/*.mp4 "$ROOT"/demo/endoscapes/*.mp4 public/clips/ 2>/dev/null || true
+# AI-generated dream clips + their real anchor frames (Train the robot -> Dream data).
+mkdir -p public/dreams && cp "$ROOT"/demo/dreams/*.mp4 "$ROOT"/demo/dreams/*.jpg public/dreams/ 2>/dev/null || true
 VITE_STATIC=1 npx vite build --base ./ --outDir dist-static >/dev/null
 # Artifact page: the publisher adds the document skeleton, so keep only head/body contents.
 python3 - <<'PY'

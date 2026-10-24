@@ -106,6 +106,16 @@ Set `VITE_API_BASE` if the API runs elsewhere. Routes, SSE events and shapes: [d
   - If smoke, blood or glare hide the anatomy, the state is held and the UI shows "view obscured, can't confirm".
   - Every ~30 s, `gemini-4-argon` checks for contradictions. It can only move statuses forward; it can never un-cut a structure or mark CVS met.
   - Safety violations raise an alert that pauses playback until a human Acknowledges or Overrides, with a reason.
+- **Forecast → reality** (Watch on VID74, a held-out test operation; `demo/record_forecasts.py`, `backend/forecast.py`):
+  - Next to the playing video, the **prediction engine** shows each forecast in four plain-language steps:
+    1. what the surgeon is doing now and the patient's state (from the surgeons' labels);
+    2. what the rules say this action does;
+    3. what surgeons did next in the 5 most similar real moments (Atlas vector search, training videos only);
+    4. Gemini Argon's top-3 forecast of the next move.
+  - The video pauses briefly, then the surgeon's real next action is revealed with ✓ top pick, ✓ in top 3, or ✗ missed. A running score compares it with the trained model and the bigram.
+  - Clip result: the real move was in the engine's top 3 for **6 of 11** forecasts (trained model 7, bigram 6). The predicted anatomy matched the real labels 10 of 11 times. The 200-item E1 numbers sit alongside; risk can't be checked (no complication labels).
+  - The eyes (Flash) and the engine are labelled separately. When the eyes misread a clip or cut that the labels don't show, a note says so.
+  - On Endoscapes clips the same panel shows "eyes vs surgeons" for the critical view of safety. On the last frame it shows the recorded "clip now" vs "keep dissecting" predictions, marked as counterfactual.
 - **Imagine** (`backend/world_model.py`): branch "what if action X now?" from any state. Returns the predicted state, risk, explanation, cited real transitions and the closest real frame.
 - **Train the robot** (`backend/agent.py`, `backend/simulator.py`):
   - A Flash agent picks actions from 17 real triplets, playing a synthetic patient.
@@ -151,6 +161,28 @@ Reading these honestly:
 - **Perception is the weak link.** In a live Watch run on the demo clip, Flash misreads caused an early `clip_before_cvs` alert. Argon verification flagged the inconsistencies (see `DECISIONS.md`).
 - With the Argon world model as the simulator, the agent was again never unsafe, so no lessons were written and the lessons mechanism remains untested (completion gaps between "agent" and "agent + lessons" are noise at n=5).
 
+## Dream data: synthetic training video from the world model
+
+`pipeline/08_dream_clips.py` → `eval/dream_eval.py` (E6) → `eval/export_dreams.py`.
+- **How a clip is made:**
+  - A world-model step chooses the action and predicted outcome.
+  - A deterministic compiler writes the video prompt from that prediction.
+  - Gemini Omni Flash renders it from a **real** Endoscapes frame. The recipe is adapted from Igor's `generate.py`.
+  - Two gates check it:
+    - **fidelity:** an Argon inspector compares the clip with the real frame;
+    - **consistency:** our Flash eyes must see the predicted action and phase, and no invented instruments.
+- **What was made:**
+  - Safe and unsafe branches at 3 decision moments.
+  - 3 control clips (interpolating between two real frames).
+  - Igor's hand-prompted Wan 2.2 clips as a comparison.
+  - A **60-second robot episode**: 6 steps of 10 s. The agent picks each action, and each step starts from the previous clip's last frame. It comes with a per-step label track.
+- **Result (descriptive, small n): 0 of 12 world-model clips accepted.**
+  - The eyes saw the intended action in 10 of 12 and the instrument in 12 of 12.
+  - The failure is visual: Omni morphs an instrument already in view into the requested one (a grasper grows a wire loop instead of a clip applier arriving).
+  - Controls pass fidelity 2 of 3; Igor's hand-prompted clips pass 0 of 3.
+- **The idea works end to end:** world-model-written prompts, gates that catch real defects, a training export. Today's video model is the bottleneck.
+- Samples are video + action + predicted state, not robot kinematics: a low-level policy would also need an inverse-dynamics model.
+
 ## Atlas features used
 
 | Feature | What it does here |
@@ -163,6 +195,8 @@ Reading these honestly:
 | Atlas Search: `reports`, `lessons` | The full-text half of hybrid search |
 | Change streams | Push `world_state`, `predictions`, `alerts`, `observations`, episode steps and reports to the browser over SSE |
 | Binary vectors | Embeddings stored as float32 `BinData` to keep storage small |
+| Vector + hybrid search: `dream_clips` | Every generated clip (accepted or not) with its prompt, states and gate verdicts; `/dreams/search` |
+| `forecasts` | The recorded VID74 forecasts with their truth |
 | Igor's `expert_frames` (separate cluster, read-only) | "How surgeons judged similar views": filtered vector search over 3,437 surgeon-labelled Endoscapes frames |
 
 ## Honest notes

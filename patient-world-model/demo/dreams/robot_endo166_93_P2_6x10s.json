@@ -1,0 +1,960 @@
+{
+ "_id": "robot_endo166_93_P2_6x10s",
+ "name": "robot_endo166_93_P2_6x10s",
+ "kind": "robot_episode",
+ "run_id": "dreams_1792868193",
+ "synthetic": true,
+ "label": "AI-generated",
+ "model": "gemini-omni-1.1-flash",
+ "patient_id": "P2",
+ "policy": "agent (Flash)",
+ "anchor": {
+  "source": "endoscapes",
+  "clip": "endo166",
+  "t": 93
+ },
+ "anchor_images": [
+  "robot_endo166_93_P2_6x10s_step0.anchor0.jpg"
+ ],
+ "video": "robot_endo166_93_P2_6x10s.mp4",
+ "duration": 60.0,
+ "steps": [
+  {
+   "step": 0,
+   "t_start": 0.0,
+   "t_end": 10.0,
+   "clip": "robot_endo166_93_P2_6x10s_step0",
+   "action": "clipper,clip,cystic_duct",
+   "agent_reason": "The critical view of safety has been fully achieved and the cystic duct is skeletonised, so clipping the cystic duct is the appropriate next step.",
+   "changes": [
+    "cystic duct: skeletonised \u2192 clipped",
+    "cystic duct: 1 clip"
+   ],
+   "risk_level": "low",
+   "violations": [],
+   "accepted": false,
+   "reason": "fidelity failed: Frames 3-9: The right-hand dissector/grasper from the anchor frame morphs into a completely different instrument (a deformed grasper with a floating metal wire loop at its tip).; Frames 5-9: The clip is not properly applied by a clip applier; instead, an implausible wire ring floats at the end of a standard grasper, which morphs again in frame 9.; eyes disagree with the world model: no_new_instruments",
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frames 3-9: The right-hand dissector/grasper from the anchor frame morphs into a completely different instrument (a deformed grasper with a floating metal wire loop at its tip).",
+     "Frames 5-9: The clip is not properly applied by a clip applier; instead, an implausible wire ring floats at the end of a standard grasper, which morphs again in frame 9."
+    ]
+   },
+   "agreement": {
+    "instrument_seen": true,
+    "action_seen": true,
+    "no_new_instruments": false,
+    "phase_matches": true,
+    "view_clear": true
+   },
+   "state_before": {
+    "t": 93,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c3_two_structures": true,
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {},
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": {
+     "c3_two_structures": true,
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true
+    },
+    "cvs_source": "sensor"
+   },
+   "state_after": {
+    "t": 103,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 1,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_duct": 10
+    },
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   }
+  },
+  {
+   "step": 1,
+   "t_start": 10.0,
+   "t_end": 20.0,
+   "clip": "robot_endo166_93_P2_6x10s_step1",
+   "action": "clipper,clip,cystic_duct",
+   "agent_reason": "Apply the second clip to the cystic duct to ensure secure occlusion before transection.",
+   "changes": [
+    "cystic duct: 2 clips",
+    "bleeding starts"
+   ],
+   "risk_level": "low",
+   "violations": [],
+   "accepted": false,
+   "reason": "fidelity failed: Instrument swap: the left instrument changes into a grasper instead of a clip applier (frames 3-8).; Hallucinated and vanishing metal clips appear inside the grasper jaws in frames 4-5 and disappear by frame 8.; eyes disagree with the world model: no_new_instruments",
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Instrument swap: the left instrument changes into a grasper instead of a clip applier (frames 3-8).",
+     "Hallucinated and vanishing metal clips appear inside the grasper jaws in frames 4-5 and disappear by frame 8.",
+     "Failed intended action: no new clip stays on the cystic duct."
+    ]
+   },
+   "agreement": {
+    "instrument_seen": true,
+    "action_seen": true,
+    "no_new_instruments": false,
+    "phase_matches": true,
+    "view_clear": true
+   },
+   "state_before": {
+    "t": 103,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 1,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": false,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_duct": 10
+    },
+    "last_bleed_t": null,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   },
+   "state_after": {
+    "t": 113,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_duct": 10
+    },
+    "last_bleed_t": 113,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   }
+  },
+  {
+   "step": 2,
+   "t_start": 20.0,
+   "t_end": 30.0,
+   "clip": "robot_endo166_93_P2_6x10s_step2",
+   "action": "clipper,clip,cystic_artery",
+   "agent_reason": "The cystic duct has already received two clips, so the next priority according to the goal is clipping the skeletonised cystic artery twice.",
+   "changes": [
+    "cystic artery: skeletonised \u2192 clipped",
+    "cystic artery: 1 clip"
+   ],
+   "risk_level": "low",
+   "violations": [],
+   "accepted": false,
+   "reason": "fidelity failed: Frames 4-9: The entering instrument is a serrated grasper holding a malformed wire rather than a surgical clip applier.; Frames 6-9: The clip warps implausibly and merges into the existing clip without proper clipping mechanics.; eyes disagree with the world model: no_new_instruments",
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frames 4-9: The entering instrument is a serrated grasper holding a malformed wire rather than a surgical clip applier.",
+     "Frames 6-9: The clip warps implausibly and merges into the existing clip without proper clipping mechanics."
+    ]
+   },
+   "agreement": {
+    "instrument_seen": true,
+    "action_seen": true,
+    "no_new_instruments": false,
+    "phase_matches": true,
+    "view_clear": true
+   },
+   "state_before": {
+    "t": 113,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_duct": 10
+    },
+    "last_bleed_t": 113,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   },
+   "state_after": {
+    "t": 123,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 1,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_artery": 10
+    },
+    "last_bleed_t": 123,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   }
+  },
+  {
+   "step": 3,
+   "t_start": 30.0,
+   "t_end": 40.0,
+   "clip": "robot_endo166_93_P2_6x10s_step3",
+   "action": "clipper,clip,cystic_artery",
+   "agent_reason": "The cystic artery currently has only one clip and requires a second clip before division.",
+   "changes": [
+    "cystic artery: 2 clips"
+   ],
+   "risk_level": "moderate",
+   "violations": [],
+   "accepted": false,
+   "reason": "fidelity failed: Wrong instrument used: a serrated grasper enters instead of a clipper (frames 3-9).; Intended action not completed: the instrument squeezes an existing clip rather than applying a new clip to the cystic artery (frames 5-8).; eyes disagree with the world model: no_new_instruments",
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Wrong instrument used: a serrated grasper enters instead of a clipper (frames 3-9).",
+     "Intended action not completed: the instrument squeezes an existing clip rather than applying a new clip to the cystic artery (frames 5-8)."
+    ]
+   },
+   "agreement": {
+    "instrument_seen": true,
+    "action_seen": true,
+    "no_new_instruments": false,
+    "phase_matches": true,
+    "view_clear": true
+   },
+   "state_before": {
+    "t": 123,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 1,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_artery": 10
+    },
+    "last_bleed_t": 123,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   },
+   "state_after": {
+    "t": 133,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_artery": 10
+    },
+    "last_bleed_t": 133,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   }
+  },
+  {
+   "step": 4,
+   "t_start": 40.0,
+   "t_end": 50.0,
+   "clip": "robot_endo166_93_P2_6x10s_step4",
+   "action": "scissors,cut,cystic_duct",
+   "agent_reason": "Both the cystic duct and artery have been clipped twice, so cutting the cystic duct is the next required step in the clipping-and-cutting phase.",
+   "changes": [
+    "cystic duct: clipped \u2192 cut"
+   ],
+   "risk_level": "low",
+   "violations": [],
+   "accepted": false,
+   "reason": "fidelity failed: Frames 3-5: A grasper enters from the right, approaches the clip, and abruptly disappears in Frame 6.; Frames 7-9: The instrument is swapped to laparoscopic scissors which enter from the right.; eyes disagree with the world model: no_new_instruments",
+   "fidelity": {
+    "pass": false,
+    "score": 3.0,
+    "issues": [
+     "Frames 3-5: A grasper enters from the right, approaches the clip, and abruptly disappears in Frame 6.",
+     "Frames 7-9: The instrument is swapped to laparoscopic scissors which enter from the right.",
+     "Frames 8-9: The scissors close on the cystic duct, but the tissue fails to sever or react physically."
+    ]
+   },
+   "agreement": {
+    "instrument_seen": true,
+    "action_seen": true,
+    "no_new_instruments": false,
+    "phase_matches": true,
+    "view_clear": true
+   },
+   "state_before": {
+    "t": 133,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "clipper,clip,cystic_artery": 10
+    },
+    "last_bleed_t": 133,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   },
+   "state_after": {
+    "t": 143,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "cut",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "scissors,cut,cystic_duct": 10
+    },
+    "last_bleed_t": 133,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   }
+  },
+  {
+   "step": 5,
+   "t_start": 50.0,
+   "t_end": 60.0,
+   "clip": "robot_endo166_93_P2_6x10s_step5",
+   "action": "scissors,cut,cystic_artery",
+   "agent_reason": "The cystic artery is already doubly clipped and skeletonised, so cutting it completes the clipping-and-cutting phase for the vessels.",
+   "changes": [
+    "cystic artery: clipped \u2192 cut"
+   ],
+   "risk_level": "low",
+   "violations": [],
+   "accepted": false,
+   "reason": "fidelity failed: Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.; Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip.; eyes disagree with the world model: no_new_instruments, phase_matches",
+   "fidelity": {
+    "pass": false,
+    "score": 4.0,
+    "issues": [
+     "Frames 5-9: The scissors close directly on the metal clip, causing the clip to deform and warp implausibly instead of cutting the vessel adjacent to it.",
+     "Frames 4-9: The blades of the scissors morph in shape and thickness as they interact with the clip."
+    ]
+   },
+   "agreement": {
+    "instrument_seen": true,
+    "action_seen": true,
+    "no_new_instruments": false,
+    "phase_matches": false,
+    "view_clear": true
+   },
+   "state_before": {
+    "t": 143,
+    "phase": "clipping-and-cutting",
+    "phase_idx": 2,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "cut",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "clipped",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "scissors,cut,cystic_duct": 10
+    },
+    "last_bleed_t": 133,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   },
+   "state_after": {
+    "t": 153,
+    "phase": "gallbladder-dissection",
+    "phase_idx": 3,
+    "phase_inferred": false,
+    "structures": {
+     "gallbladder": {
+      "name": "gallbladder",
+      "status": "visible",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "cystic_duct": {
+      "name": "cystic_duct",
+      "status": "cut",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_artery": {
+      "name": "cystic_artery",
+      "status": "cut",
+      "exposure": 1.0,
+      "clips": 2,
+      "at_risk": false
+     },
+     "cystic_plate": {
+      "name": "cystic_plate",
+      "status": "skeletonised",
+      "exposure": 1.0,
+      "clips": 0,
+      "at_risk": false
+     },
+     "common_bile_duct": {
+      "name": "common_bile_duct",
+      "status": "unseen",
+      "exposure": 0.0,
+      "clips": 0,
+      "at_risk": false
+     }
+    },
+    "cvs": {
+     "c1_triangle_cleared": true,
+     "c2_plate_exposed": true,
+     "c3_two_structures": true
+    },
+    "bleeding": true,
+    "view_quality": "clear",
+    "violations": [],
+    "injury": false,
+    "packed": false,
+    "gb_detach": 0.0,
+    "active": {
+     "scissors,cut,cystic_artery": 10
+    },
+    "last_bleed_t": 133,
+    "adhesion_last_seen": null,
+    "adhesion_load": 0.0,
+    "cvs_sensor": null,
+    "cvs_source": "proxy"
+   }
+  }
+ ],
+ "accepted_steps": 0,
+ "accepted": false,
+ "reason": "0/6 steps accepted; only those go to the training export",
+ "credit": "Rendering recipe adapted from Igor Lima's generate.py (Second Look prototype, igor17400/encode_hack)",
+ "created_at": 1792870258.932609,
+ "text": "robot episode, patient P2, 6 steps, 60 s: clipper,clip,cystic_duct (rejected); clipper,clip,cystic_duct (rejected); clipper,clip,cystic_artery (rejected); clipper,clip,cystic_artery (rejected); scissors,cut,cystic_duct (rejected); scissors,cut,cystic_artery (rejected)"
+}

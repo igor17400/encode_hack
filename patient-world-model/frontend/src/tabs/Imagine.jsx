@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { get, post, actionLabel, niceName } from "../api";
-import AnatomyMap, { CvsRing, diffStates } from "../components/AnatomyMap";
-import AlertModal from "../components/AlertModal";
+import { get, post, niceName, STATIC } from "../api";
+import { actionShort } from "../lib/describe";
 import { FutureTree } from "../components/StateSpaceMap";
+import PredictionFlow from "../components/PredictionFlow";
 import { fmtT } from "../components/AnatomyPanel";
-import { ErrorNote, Frame, Picker, RiskBadge, SimNote, SourceTag, patientOptions } from "../components/ui";
+import { ErrorNote, Picker, SimNote, patientOptions } from "../components/ui";
 
 const QUICK = [
   { action: "clipper,clip,cystic_duct", label: "Clip the duct now" },
@@ -20,7 +20,6 @@ export default function Imagine({ patients, start, setStart }) {
   const [selected, setSelected] = useState(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
-  const [alert, setAlert] = useState(null);
   const [citation, setCitation] = useState(null);
   const sessions = useRef({}).current;
 
@@ -53,10 +52,6 @@ export default function Imagine({ patients, start, setStart }) {
                      state: r.state_out, risk: r.risk_level };
       setNodes((x) => [...x, node]);
       setSelected(node.id);
-      if (r.alert_ids?.length) {
-        setAlert({ _id: r.alert_ids[0], type: r.rules_violations[0] || `risk_${r.risk_level}`, t: r.state_out.t, action: act,
-          evidence: (r.neighbours || []).slice(0, 3).map((n) => ({ id: n.id, summary: `${n.summary} → next: ${n.next_action}`, video_id: n.video_id })) });
-      }
     } catch (e) {
       setError(e.message);
     } finally {
@@ -69,7 +64,6 @@ export default function Imagine({ patients, start, setStart }) {
 
   const sel = nodes.find((n) => n.id === selected);
   const r = sel?.result;
-  const changes = r ? diffStates(r.state_in, r.state_out) : [];
   const fromNode = nodes.find((n) => n.id === from);
 
   return (
@@ -78,7 +72,7 @@ export default function Imagine({ patients, start, setStart }) {
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <div>
             <div className="label">Imagine from</div>
-            <div className="font-display text-xl">{fromNode ? `${actionLabel(fromNode.action)} (${fromNode.patient_id})` : start?.label || "loading…"}</div>
+            <div className="font-display text-xl">{fromNode ? `${actionShort(fromNode.action)} (${fromNode.patient_id})` : start?.label || "loading…"}</div>
           </div>
           <SimNote />
         </div>
@@ -88,8 +82,14 @@ export default function Imagine({ patients, start, setStart }) {
             <button key={q.action} className="btn-primary" disabled={busy || !start} onClick={() => run(q.action)}>{q.label}</button>
           ))}
           <button className="btn" disabled={busy || !start} onClick={() => compare(QUICK[0].action)}>Same action on P1 · P2 · P4</button>
-          <Picker label="Any real action" value={action} onChange={setAction} options={actions.map((a) => ({ value: a, label: actionLabel(a) }))} />
-          <button className="btn" disabled={busy || !start} onClick={() => run(action)}>Imagine</button>
+          {STATIC ? (
+            <p className="max-w-xs self-end text-sm text-ink-3">Any other action needs a new Gemini prediction, so it runs in the live demo only. This page replays recorded steps.</p>
+          ) : (
+            <>
+              <Picker label="Any real action" value={action} onChange={setAction} options={actions.map((a) => ({ value: a, label: actionShort(a) }))} />
+              <button className="btn" disabled={busy || !start} onClick={() => run(action)}>Imagine</button>
+            </>
+          )}
           {fromNode && <button className="text-sm text-accent underline" onClick={() => setFrom(null)}>back to the starting moment</button>}
         </div>
       </div>
@@ -104,53 +104,9 @@ export default function Imagine({ patients, start, setStart }) {
         {!nodes.length && <p className="mt-2 text-ink-3">Pick an action. The world model predicts the next patient state and places it on the map.</p>}
       </div>
 
-      {r && (
-        <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1.1fr)]">
-          <div className="card min-w-0">
-            <div className="mb-2 flex items-center justify-between"><span className="label">Before</span><CvsRing state={r.state_in} size={52} showLabels={false} /></div>
-            <AnatomyMap state={r.state_in} />
-          </div>
-          <div className="card min-w-0">
-            <div className="mb-2 flex items-center justify-between"><span className="label">After · {actionLabel(r.action)}</span><CvsRing state={r.state_out} size={52} showLabels={false} /></div>
-            <AnatomyMap state={r.state_out} prev={r.state_in} />
-            <ul className="mt-2 flex flex-col gap-1 text-sm">
-              {changes.map((c, i) => <li key={i} className="text-ink-1"><span className="text-accent">→</span> {c.text}</li>)}
-              {!changes.length && <li className="text-ink-3">No anatomy change.</li>}
-            </ul>
-          </div>
-          <div className="card flex min-w-0 flex-col gap-3">
-            <div className="flex items-center justify-between gap-2">
-              <span className="font-mono text-sm text-ink-3">patient {sel.patient_id}</span>
-              <RiskBadge level={r.risk_level} large />
-            </div>
-            {r.rules_violations.length > 0 && (
-              <div className="rounded-lg border border-status-serious/60 bg-status-serious/10 px-3 py-2 text-sm">
-                <b>Rule engine:</b> {r.rules_violations.map(niceName).join(", ")}. A hard constraint; the model cannot override it.
-              </div>
-            )}
-            <div>
-              <div className="label mb-1">Why (Gemini Argon, grounded in real cases)</div>
-              <p className="text-ink-1">{r.explanation}</p>
-              <p className="mt-1 text-xs text-ink-3">bleeding risk {Math.round(r.bleeding_risk * 100)}% · confidence {Math.round(r.confidence * 100)}%</p>
-            </div>
-            <div>
-              <div className="label mb-1">Real recorded transitions it cites</div>
-              <div className="flex flex-wrap gap-1.5">
-                {r.cited_transition_ids.map((id) => (
-                  <button key={id} className="rounded-full border border-line bg-surface-2 px-2.5 py-0.5 font-mono text-xs hover:border-accent" onClick={() => setCitation({ r, id })}>{id}</button>
-                ))}
-                {!r.cited_transition_ids.length && <span className="text-sm text-ink-3">none</span>}
-              </div>
-            </div>
-            <Frame path={r.frame?.path} label="closest real frame" caption={r.frame?.video_id ?? "offline"} />
-            <SourceTag source={r.source} />
-            <button className="btn text-sm" onClick={() => setFrom(sel.id)}>⑂ Continue from this future</button>
-          </div>
-        </div>
-      )}
+      {r && <PredictionFlow r={r} patientId={sel.patient_id} onCite={(id) => setCitation({ r, id })} onContinue={() => setFrom(sel.id)} />}
 
       {citation && <CitationModal {...citation} onClose={() => setCitation(null)} />}
-      <AlertModal alert={alert} onClose={() => setAlert(null)} />
     </div>
   );
 }
@@ -167,7 +123,7 @@ function CitationModal({ r, id, onClose }) {
             <dt className="text-ink-3">operation</dt><dd>{nb.video_id} · {niceName(nb.phase).replaceAll("-", " ")}</dd>
             <dt className="text-ink-3">before</dt><dd className="font-mono text-xs">{nb.summary}</dd>
             <dt className="text-ink-3">after</dt><dd className="font-mono text-xs">{nb.state_after_summary}</dd>
-            <dt className="text-ink-3">surgeon next did</dt><dd>{actionLabel(nb.next_action)}</dd>
+            <dt className="text-ink-3">surgeon next did</dt><dd>{actionShort(nb.next_action)}</dd>
             <dt className="text-ink-3">similarity</dt><dd>{nb.score?.toFixed(3)}</dd>
           </dl>
         )}

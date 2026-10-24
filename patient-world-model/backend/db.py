@@ -16,10 +16,11 @@ VECTOR_INDEXES = {
     "frames": ("frames_vec", ["split", "phase"]),
     "lessons": ("lessons_vec", ["violation_type", "patient_id", "risk_factors", "scope"]),
     "reports": ("reports_vec", ["patient_id", "kind"]),
+    "dream_clips": ("dream_clips_vec", ["kind", "accepted", "patient_id"]),
 }
 # Second vector field on frames: image embeddings (multimodal search), separate index.
 IMAGE_INDEX = ("frames", "frames_img_vec", "image_embedding", ["split", "video_id"])
-TEXT_INDEXES = {"reports": "reports_text", "lessons": "lessons_text"}
+TEXT_INDEXES = {"reports": "reports_text", "lessons": "lessons_text", "dream_clips": "dream_clips_text"}
 REGULAR_INDEXES = {
     "world_state": [("session_id", 1), ("t", 1)],
     "transitions": [("video_id", 1), ("t_start", 1)],
@@ -30,6 +31,7 @@ REGULAR_INDEXES = {
     "observations": [("session_id", 1), ("t", 1)],
     "episode_steps": [("session_id", 1)],
     "eval_runs": [("name", 1), ("created_at", -1)],
+    "dream_events": [("session_id", 1), ("created_at", 1)],
 }
 
 
@@ -171,11 +173,12 @@ def _retry(fn, tries: int = 5):
         time.sleep(1.5 * (2 ** i))
 
 
-def hybrid_search(query: str, query_vector: list[float], limit: int = 10) -> list[dict]:
+def hybrid_search(query: str, query_vector: list[float], limit: int = 10,
+                  collections: tuple[str, ...] = ("lessons", "reports")) -> list[dict]:
     """Atlas $rankFusion of full-text ($search) and semantic ($vectorSearch) results, per collection, merged by
     fused score. Each hit carries which pipelines matched it (scoreDetails). Errors propagate to the caller."""
     out = []
-    for name in ("lessons", "reports"):
+    for name in collections:
         pipe = [
             {"$rankFusion": {"input": {"pipelines": {
                 "text": [{"$search": {"index": TEXT_INDEXES[name], "text": {"query": query, "path": "text"}}},
@@ -185,7 +188,8 @@ def hybrid_search(query: str, query_vector: list[float], limit: int = 10) -> lis
                                               "numCandidates": 100, "limit": limit}}]}},
                 "scoreDetails": True}},
             {"$limit": limit},
-            {"$project": {"embedding": 0, "score": {"$meta": "score"}, "details": {"$meta": "scoreDetails"}}},
+            {"$project": {"embedding": 0, "state_before": 0, "state_after_predicted": 0, "attempts": 0,
+                          "score": {"$meta": "score"}, "details": {"$meta": "scoreDetails"}}},
         ]
         for d in _retry(lambda: list(col(name).aggregate(pipe))):
             matched = [x.get("inputPipelineName") for x in (d.pop("details", {}) or {}).get("details", [])
