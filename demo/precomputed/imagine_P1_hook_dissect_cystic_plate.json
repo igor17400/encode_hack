@@ -56,7 +56,9 @@
   "active": {},
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "action": {
   "instrument": "hook",
@@ -121,13 +123,15 @@
   },
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "rules_violations": [],
  "risk_level": "low",
  "bleeding_risk": 0.05,
  "bled": false,
- "explanation": "Dissecting the cystic plate with the hook completes its skeletonisation safely without bleeding, matching all five recorded transitions (VID25_00267, VID25_00409, VID43_00790, VID52_00341, VID62_00506). The most common subsequent actions in the reference cases are retracting the gallbladder with a grasper or dissecting the cystic duct with the hook.",
+ "explanation": "Dissecting the cystic plate with the hook completes its skeletonisation without complication or bleeding, consistent with all five retrieved cases (VID25_00267, VID25_00409, VID43_00790, VID52_00341, VID62_00506). Following this step, surgeons in the reference transitions equally often dissected the cystic duct (VID25_00409, VID52_00341) or retracted the gallbladder (VID25_00267, VID62_00506), or occasionally coagulated the gallbladder (VID43_00790).",
  "cited_transition_ids": [
   "VID25_00267",
   "VID25_00409",
@@ -189,11 +193,11 @@
  ],
  "likely_next_actions": [
   {
-   "action": "grasper,retract,gallbladder",
+   "action": "hook,dissect,cystic_duct",
    "probability": 0.4
   },
   {
-   "action": "hook,dissect,cystic_duct",
+   "action": "grasper,retract,gallbladder",
    "probability": 0.4
   },
   {
@@ -203,7 +207,7 @@
  ],
  "confidence": 0.4,
  "cannot_tell": [
-  "Whether the surgeon will instead finish dissecting the cystic artery next, because the cystic duct and artery were completely unseen in all retrieved reference transitions unlike the current state."
+  "Exact next target preference given that the cystic duct is already skeletonised and the cystic artery is 90% exposed in the current state, whereas both structures were unseen in all retrieved reference transitions"
  ],
  "frame": {
   "_id": "VID18_00665",

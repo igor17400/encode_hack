@@ -1,7 +1,7 @@
 {
- "calls": 1406,
- "cached": 2778,
- "input_tokens": 1806719,
- "output_tokens": 915794,
+ "calls": 1557,
+ "cached": 3727,
+ "input_tokens": 2004848,
+ "output_tokens": 983066,
  "est_cost_usd": 0.0
 }

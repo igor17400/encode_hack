@@ -56,7 +56,9 @@
   "active": {},
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "action": {
   "instrument": "clipper",
@@ -123,7 +125,9 @@
   },
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "rules_violations": [
   "clip_before_cvs"
@@ -131,7 +135,7 @@
  "risk_level": "high",
  "bleeding_risk": 0.05,
  "bled": false,
- "explanation": "Clipping the cystic duct before completing the Critical View of Safety transitions the procedure to the clipping-and-cutting phase and places the common bile duct at risk, though without immediate bleeding in any cited case (VID92_00689, VID96_00956, VID62_01091, VID79_01617, VID01_00698). Following this step, surgeons in similar states either retract or grasp the gallbladder (VID62_01091, VID79_01617, VID01_00698) or proceed to clip the exposed cystic artery (VID92_00689, VID96_00956).",
+ "explanation": "Clipping the cystic duct before achieving the Critical View of Safety transitions the operation to clipping-and-cutting while placing the common bile duct at high risk, consistent with all retrieved cases (VID92_00689, VID96_00956, VID62_01091, VID79_01617, VID01_00698). None of the matched transitions resulted in bleeding, and the surgeon most commonly followed by retracting the gallbladder (VID62_01091, VID79_01617) or clipping the exposed cystic artery (VID92_00689, VID96_00956).",
  "cited_transition_ids": [
   "VID92_00689",
   "VID96_00956",
@@ -207,8 +211,8 @@
  ],
  "confidence": 0.4,
  "cannot_tell": [
-  "whether additional clips will be applied to the cystic duct before changing instruments",
-  "whether the cystic artery at 0.9 exposure requires further dissection before clipping"
+  "whether the surgeon will apply additional clips to the cystic duct before switching targets",
+  "whether the clipped structure is truly the cystic duct or a misidentified common bile duct given the incomplete critical view"
  ],
  "frame": {
   "_id": "VID04_00940",

@@ -25,6 +25,7 @@ from backend import config, gemini, rules, world_model
 from backend.schema import STATUS_ORDER, STRUCTURES, Patient, State
 
 VIEW_QUALITY = ("clear", "smoke", "blood", "glare", "occluded", "out_of_focus")
+BOX_STRUCTURES = ("gallbladder", "cystic_duct", "cystic_artery", "cystic_plate", "liver", "hepatocystic_window")
 FRAME_EVERY_S = 2
 VERIFY_EVERY_S = 30
 MAX_CONCURRENCY = 8
@@ -42,6 +43,11 @@ def perception_schema() -> type[BaseModel]:
     lit = lambda xs: Literal[tuple(x for x in xs if not x.startswith("null"))]  # noqa: E731
     Trip = create_model("ObservedTriplet", instrument=(lit(v["instruments"]), ...), verb=(lit(v["verbs"]), ...),
                         target=(lit(v["targets"]), ...), confidence=(float, Field(ge=0, le=1)))
+    # Display-only boxes (Gemini's native [ymin, xmin, ymax, xmax] on a 0-1000 grid). Never fed to the rules.
+    box_labels = tuple(BOX_STRUCTURES) + tuple(x for x in v["instruments"] if not x.startswith("null"))
+    Box = create_model("Box", label=(Literal[box_labels], ...),
+                       box_2d=(list[int], Field(description="[ymin, xmin, ymax, xmax], each 0-1000")),
+                       confidence=(float, Field(ge=0, le=1)))
     return create_model(
         "Observation",
         triplets=(list[Trip], Field(description="Every instrument action visible; empty if none")),
@@ -49,6 +55,7 @@ def perception_schema() -> type[BaseModel]:
         view_quality=(Literal[VIEW_QUALITY], ...),
         can_confirm_anatomy=(bool, ...),
         reason_if_not=(str, Field(default="")),
+        boxes=(list[Box], Field(default_factory=list, description="Approximate boxes for visible structures and instruments")),
     )
 
 
@@ -60,7 +67,9 @@ targets: {targets}
 Give each triplet a confidence 0-1. Report the surgical phase ({phases}).
 view_quality: clear unless smoke, blood, glare, occlusion or blur prevents seeing anatomy.
 can_confirm_anatomy: true only if you can actually see the structures you label. Prefer "cannot confirm"
-to guessing; if false, say why in reason_if_not."""
+to guessing; if false, say why in reason_if_not.
+boxes: approximate bounding boxes for the visible structures ({structures}) and instruments, as
+box_2d = [ymin, xmin, ymax, xmax] on a 0-1000 grid, each with a confidence. Only boxes you can actually see."""
 
 
 class Correction(BaseModel):
@@ -166,7 +175,8 @@ def observe_flash(path: Path) -> dict:
     v = vocab()
     prompt = PERCEPTION_PROMPT.format(
         instruments=", ".join(v["instruments"]), verbs=", ".join(x for x in v["verbs"] if not x.startswith("null")),
-        targets=", ".join(x for x in v["targets"] if not x.startswith("null")), phases=", ".join(v["phases"]))
+        targets=", ".join(x for x in v["targets"] if not x.startswith("null")), phases=", ".join(v["phases"]),
+        structures=", ".join(BOX_STRUCTURES))
     out = gemini.generate_json(config.MODEL_FLASH, prompt, perception_schema(), images=[path], thinking_level="low")
     return out.model_dump()
 
@@ -241,7 +251,7 @@ async def run_watch(
         now = time.time()
         rel = str(p.relative_to(config.FRAMES_DIR))
         emit("observations", {"_id": uuid.uuid4().hex, "session_id": session_id, "t": t, "frame_path": rel,
-                                   "labels": obs["triplets"], "phase": obs.get("phase"),
+                                   "labels": obs["triplets"], "phase": obs.get("phase"), "boxes": obs.get("boxes", []),
                                    "view_quality": obs["view_quality"], "can_confirm": obs["can_confirm_anatomy"],
                                    "reason_if_not": obs.get("reason_if_not", ""), "error": obs.get("error"),
                                    "source": source,

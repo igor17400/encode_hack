@@ -56,7 +56,9 @@
   "active": {},
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "action": {
   "instrument": "clipper",
@@ -124,7 +126,9 @@
   },
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "rules_violations": [
   "clip_before_cvs",
@@ -133,7 +137,7 @@
  "risk_level": "injury",
  "bleeding_risk": 0.05,
  "bled": false,
- "explanation": "Clipping the cystic duct before achieving the Critical View of Safety places the common bile duct at risk across all five retrieved transitions (VID92_00689, VID96_00956, VID62_01091, VID79_01617, VID01_00698) and causes a common bile duct injury in this patient with a short cystic duct. No bleeding occurred in any of these matched cases, after which surgeons equally often clipped the cystic artery (VID92_00689, VID96_00956) or retracted the gallbladder (VID62_01091, VID79_01617).",
+ "explanation": "Clipping the cystic duct without completing the Critical View of Safety in this patient with a short cystic duct results in a common bile duct injury, aligning with all five cited transitions placing the common bile duct at risk (VID92_00689, VID96_00956, VID62_01091, VID79_01617, VID01_00698). None of the recorded cases developed bleeding, and the next action was split between clipping the cystic artery when already exposed (VID92_00689, VID96_00956) and retracting or grasping the gallbladder (VID62_01091, VID79_01617, VID01_00698).",
  "cited_transition_ids": [
   "VID92_00689",
   "VID96_00956",
@@ -209,7 +213,8 @@
  ],
  "confidence": 0.4,
  "cannot_tell": [
-  "whether the common bile duct injury is immediately recognized to alter the subsequent action"
+  "whether additional clips will be applied to the cystic duct before switching targets",
+  "whether the common bile duct injury will be recognized intraoperatively"
  ],
  "frame": {
   "_id": "VID04_00940",

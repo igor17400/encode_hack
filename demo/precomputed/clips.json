@@ -67,6 +67,7 @@
  },
  {
   "video_id": "VID74",
+  "source": "cholect50",
   "n_frames": 91,
   "t_start": 381,
   "t_end": 561,
@@ -75,7 +76,6 @@
    "P3"
   ],
   "branch_t": 435,
-  "video": "VID74_381-561.mp4",
-  "source": "cholect50"
+  "video": "VID74_381-561.mp4"
  }
 ]

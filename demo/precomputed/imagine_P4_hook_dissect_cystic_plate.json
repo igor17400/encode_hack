@@ -56,7 +56,9 @@
   "active": {},
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "action": {
   "instrument": "hook",
@@ -121,13 +123,15 @@
   },
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "rules_violations": [],
  "risk_level": "low",
  "bleeding_risk": 0.05,
  "bled": false,
- "explanation": "Dissecting the cystic plate with the hook completes its skeletonisation without bleeding or injury, matching all five retrieved transitions (VID25_00267, VID25_00409, VID43_00790, VID52_00341, VID62_00506). The surgeon is equally likely to follow this by dissecting the cystic duct or retracting the gallbladder (2/5 cases each), although confidence is limited because the cystic duct and artery were unseen in all cited cases.",
+ "explanation": "Dissecting the cystic plate with the hook skeletonises it without bleeding or injury across all five cited cases (VID25_00267, VID25_00409, VID43_00790, VID52_00341, VID62_00506). The recorded transitions split evenly between retracting the gallbladder (VID25_00267, VID62_00506) and dissecting the cystic duct (VID25_00409, VID52_00341) next, though those cases had unexposed ducts and arteries.",
  "cited_transition_ids": [
   "VID25_00267",
   "VID25_00409",
@@ -189,11 +193,11 @@
  ],
  "likely_next_actions": [
   {
-   "action": "hook,dissect,cystic_duct",
+   "action": "grasper,retract,gallbladder",
    "probability": 0.4
   },
   {
-   "action": "grasper,retract,gallbladder",
+   "action": "hook,dissect,cystic_duct",
    "probability": 0.4
   },
   {
@@ -203,8 +207,8 @@
  ],
  "confidence": 0.4,
  "cannot_tell": [
-  "How the already-skeletonised cystic duct and partially dissected cystic artery influence the next action, since both were unseen in all retrieved transitions",
-  "Specific risk contribution from the patient's short cystic duct anatomy during plate dissection"
+  "whether the surgeon will focus on the cystic artery next, because the cystic duct is already skeletonised and the artery is at 0.9 exposure here whereas both were unseen in all cited transitions",
+  "effect of the patient's short cystic duct anatomy on subsequent dissection steps"
  ],
  "frame": {
   "_id": "VID18_00665",

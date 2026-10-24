@@ -56,7 +56,9 @@
   "active": {},
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "action": {
   "instrument": "hook",
@@ -121,13 +123,15 @@
   },
   "last_bleed_t": null,
   "adhesion_last_seen": null,
-  "adhesion_load": 0.0
+  "adhesion_load": 0.0,
+  "cvs_sensor": null,
+  "cvs_source": "proxy"
  },
  "rules_violations": [],
  "risk_level": "low",
  "bleeding_risk": 0.15,
  "bled": false,
- "explanation": "Dissecting the exposed cystic plate with the hook completes its skeletonisation without complication in all five similar recorded transitions (VID25_00267, VID25_00409, VID43_00790, VID52_00341, VID62_00506), though the patient's acute cholecystitis and 2.0x bleed factor carry a modest baseline oozing risk. Following this step, recorded cases split evenly between retracting the gallbladder (2/5) and dissecting the cystic duct (2/5), with occasional bipolar coagulation of the gallbladder (1/5).",
+ "explanation": "Dissecting the cystic plate with the hook completes its skeletonisation without bleeding in all five reference transitions (VID25_00267, VID25_00409, VID43_00790, VID52_00341, VID62_00506), though this patient's acute cholecystitis carries a slightly elevated baseline ooze risk. In the recorded cases, surgeons next either retracted the gallbladder (VID25_00267, VID62_00506), dissected the cystic duct (VID25_00409, VID52_00341), or coagulated the gallbladder bed (VID43_00790).",
  "cited_transition_ids": [
   "VID25_00267",
   "VID25_00409",
@@ -201,9 +205,10 @@
    "probability": 0.2
   }
  ],
- "confidence": 0.4,
+ "confidence": 0.35,
  "cannot_tell": [
-  "In all five retrieved transitions the cystic duct and artery were still unseen, so they do not directly indicate whether the surgeon will instead finish skeletonising the 90%-exposed cystic artery to achieve the Critical View of Safety."
+  "Whether the surgeon will instead dissect the cystic artery to complete the critical view of safety, since both the cystic duct and artery were unseen (0.0 exposure) in all retrieved transitions unlike the current state",
+  "The exact effect of acute cholecystitis tissue oedema on minor oozing not explicitly logged in the reference transitions"
  ],
  "frame": {
   "_id": "VID18_00665",
