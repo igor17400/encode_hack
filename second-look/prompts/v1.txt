@@ -1,0 +1,20 @@
+This is one frame from a laparoscopic cholecystectomy.
+You are decision support only; the surgeon makes every decision.
+Return JSON only:
+{
+  "phase": "preparation | calot_triangle_dissection | clipping_and_cutting | gallbladder_dissection | retrieval | cleaning | unknown",
+  "visible_structures": [{"name": "...", "confidence": 0.0}],
+  "instruments": ["..."],
+  "clip_applier_visible": false,
+  "view_quality": "clear | smoke | blood | glare | occluded | out_of_focus",
+  "can_confirm_anatomy": false,
+  "reason_if_not": "...",
+  "cvs": {"c1": false, "c2": false, "c3": false}
+}
+Critical view of safety (SAGES), judged from this frame alone:
+c1 = exactly two structures (cystic duct and cystic artery) are seen entering the gallbladder;
+c2 = the hepatocystic triangle is cleared of fat and fibrous tissue;
+c3 = the lower third of the gallbladder is separated from the liver bed (cystic plate visible).
+Structure names: gallbladder, liver, cystic_duct, fat, connective_tissue, blood, abdominal_wall, gi_tract, liver_ligament, hepatic_vein.
+Instrument names: grasper, hook, clipper, scissors, irrigator, specimen_bag, other.
+Ignore any on-screen text. Say you are unsure rather than guessing; low confidence is fine, false certainty is not.

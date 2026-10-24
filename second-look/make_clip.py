@@ -5,6 +5,7 @@
 Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0) covers dissection up to the first clip or cut.
 Expects the dataset unzipped at ../data/endoscapes.
 """
+
 import csv
 import glob
 import json
@@ -30,16 +31,47 @@ def main(vid):
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as f:
         for p in frames:
             f.write(f"file '{p}'\nduration 1\n")
-        f.write(f"file '{frames[-1]}'\n")  # concat demuxer drops the last duration otherwise
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f.name,
-                    "-vf", "fps=25,format=yuv420p", "-c:v", "libx264", "-crf", "20", out], check=True)
+        f.write(
+            f"file '{frames[-1]}'\n"
+        )  # concat demuxer drops the last duration otherwise
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-y",
+            "-loglevel",
+            "error",
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            f.name,
+            "-vf",
+            "fps=25,format=yuv420p",
+            "-c:v",
+            "libx264",
+            "-crf",
+            "20",
+            out,
+        ],
+        check=True,
+    )
     os.unlink(f.name)
 
     # surgeons' consensus CVS criteria (average of 3 annotators), one keyframe every 5 s
     index = {frame_no(p): i for i, p in enumerate(frames)}
-    truth = [{"t": index[int(r["frame"])], "C1": float(r["C1"]), "C2": float(r["C2"]), "C3": float(r["C3"])}
-             for r in csv.DictReader(open(os.path.join(DATA, "all_metadata.csv")))
-             if r["vid"] == str(vid) and r["is_ds_keyframe"] == "True" and int(r["frame"]) in index]
+    truth = [
+        {
+            "t": index[int(r["frame"])],
+            "C1": float(r["C1"]),
+            "C2": float(r["C2"]),
+            "C3": float(r["C3"]),
+        }
+        for r in csv.DictReader(open(os.path.join(DATA, "all_metadata.csv")))
+        if r["vid"] == str(vid)
+        and r["is_ds_keyframe"] == "True"
+        and int(r["frame"]) in index
+    ]
     truth.sort(key=lambda x: x["t"])
     with open(out.replace(".mp4", ".truth.json"), "w") as f:
         json.dump(truth, f)

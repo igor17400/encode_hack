@@ -1,0 +1,18 @@
+This is one frame from a laparoscopic cholecystectomy (keyhole gallbladder removal), taken during dissection of the
+hepatocystic triangle. Detect the anatomy and instruments below and return a bounding box for each one you can see.
+
+Classes:
+- gallbladder: the pear-shaped organ being removed, usually held up by a grasper.
+- liver: the large dark red-brown organ behind the gallbladder.
+- cystic_duct: tubular biliary structure leaving the gallbladder neck (will be clipped).
+- cystic_artery: thinner tubular vessel to the gallbladder, usually above or behind the duct (will be clipped).
+- cystic_plate: connective tissue exposed on the liver bed where the gallbladder has been lifted off.
+- hepatocystic_window: a dissected gap in the hepatocystic triangle you can see through.
+- grasper, hook, clipper, scissors, irrigator: instruments; box the instrument tip area in view.
+
+Only box what is actually visible. Leave a class out rather than guess. A tubular structure still covered in fat is not
+yet a cystic_duct or cystic_artery unless its shape is clearly visible.
+
+Return JSON only:
+{"boxes": [{"label": "<class>", "box_2d": [ymin, xmin, ymax, xmax], "confidence": <0.0-1.0>}]}
+Coordinates are integers from 0 to 1000, relative to the image height (y) and width (x).

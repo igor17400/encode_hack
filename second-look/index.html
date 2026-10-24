@@ -1,334 +1,572 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Second Look</title>
-<style>
-:root{--bg:#0c0e11;--panel:#14181d;--card:#1a1f26;--line:#272e37;--text:#e7e9ec;--muted:#949ea9;--ok:#48c78e;--warn:#f0b04a;--bad:#ef5b5b;--accent:#5fb8e8}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 400px;min-height:100vh}
-main{padding:18px 22px;display:flex;flex-direction:column;gap:14px;min-width:0}
-aside{background:var(--panel);border-left:1px solid var(--line);padding:18px 20px;overflow:auto;max-height:100vh}
-header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
-h1{font-size:20px;margin:0}
-.sub{color:var(--muted);font-size:13px}
-h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
-h3:first-child{margin-top:0}
-#truthBox h3{margin-top:18px}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Second Look</title>
+    <style>
+      /* Intra-operative display: read at a glance from 2-3 m in a dim theatre.
+         Dark, low-glare surfaces; the endoscope image dominates; colour only carries meaning
+         (green = safe, amber = not yet, red = stop); one screen, no scrolling. */
+      :root {
+        --bg: #0a0c0e;
+        --panel: #13161a;
+        --panel-2: #191d22;
+        --line: rgba(255, 255, 255, 0.07);
+        --ink: #eef1f4;
+        --ink-2: #a3acb6;
+        --ink-3: #66707b;
+        --ok: #3ecf8e;
+        --ok-bg: rgba(62, 207, 142, 0.12);
+        --warn: #f5b544;
+        --warn-bg: rgba(245, 181, 68, 0.12);
+        --bad: #ff5a4f;
+        --bad-bg: rgba(255, 90, 79, 0.14);
+      }
+      * { box-sizing: border-box; }
+      [hidden] { display: none !important; }
+      html, body { margin: 0; height: 100%; }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font: 15px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+        font-variant-numeric: tabular-nums;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        height: 100vh;
+        overflow: hidden;
+      }
+      button, select, input { font: inherit; color: inherit; }
 
-/* pipeline: how it works */
-#pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.step{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;transition:border-color .25s,background .25s}
-.step b{display:block;font-size:12px}
-.step span{color:var(--muted);font-size:12px}
-.step.on{border-color:var(--accent);background:#17242e}
-.step.alarm{border-color:var(--bad);background:#2a1719}
+      /* top bar: identity and case context, kept quiet */
+      .top { display: flex; align-items: center; gap: 18px; padding: 12px 20px; border-bottom: 1px solid var(--line); }
+      .mark { display: flex; align-items: center; gap: 9px; font-weight: 650; letter-spacing: 0.01em; }
+      .live { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--bad); background: var(--bad-bg); padding: 4px 10px; border-radius: 999px; }
+      .live i { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); animation: pulse 1.6s ease-in-out infinite; }
+      .live.paused { color: var(--ink-3); background: var(--panel-2); }
+      .live.paused i { background: var(--ink-3); animation: none; }
+      @keyframes pulse { 50% { opacity: 0.25; } }
+      .case { color: var(--ink-2); font-size: 13.5px; }
+      .elapsed { margin-left: auto; font-size: 22px; font-weight: 600; letter-spacing: 0.02em; }
+      .elapsed small { font-size: 12px; color: var(--ink-3); font-weight: 500; margin-right: 8px; letter-spacing: 0; }
+      .top select { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; color: var(--ink-2); font-size: 12.5px; max-width: 300px; }
+      .iconbtn { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 12px; color: var(--ink-2); font-size: 12.5px; cursor: pointer; }
 
-/* viewer */
-#view{position:relative;background:#000;border-radius:10px;overflow:hidden;aspect-ratio:16/9}
-#view video,#view canvas{width:100%;height:100%;display:block;object-fit:contain}
-#viewTag{position:absolute;left:10px;top:10px;font:11px ui-monospace,Menlo,monospace;color:#cfd6dd;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:4px}
-#qual{position:absolute;right:10px;top:10px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:4px}
+      /* main: image first, safety rail second */
+      .main { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 16px; padding: 16px 20px; min-height: 0; }
+      .view { position: relative; background: #000; border-radius: 18px; overflow: hidden; min-height: 0; outline: 3px solid transparent; transition: outline-color 0.2s; }
+      .view.alarm { outline-color: var(--bad); box-shadow: 0 0 40px rgba(255, 90, 79, 0.35); }
+      .view video, .view canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+      .ov { position: absolute; display: flex; gap: 8px; }
+      /* detection overlay: positioned over the visible image area, boxes in % of the image */
+      #boxes { position: absolute; pointer-events: none; }
+      .box { position: absolute; border: 2px solid var(--c); border-radius: 6px; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
+      .organ { position: absolute; transform: translate(-50%, -50%); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.75); text-shadow: 0 1px 6px rgba(0,0,0,.8); }
+      .box span { position: absolute; left: -2px; top: -22px; background: var(--c); color: #0a0c0e; font-size: 11.5px; font-weight: 700; padding: 2px 7px; border-radius: 6px 6px 6px 0; white-space: nowrap; }
+      .box.below span { top: 4px; left: 4px; border-radius: 6px; }
+      .ov.tl { top: 14px; left: 14px; }
+      .ov.tr { top: 14px; right: 14px; }
+      .ov.bl { bottom: 14px; left: 14px; right: 14px; flex-wrap: wrap; }
+      .tag { background: rgba(10, 12, 14, 0.66); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--line); padding: 6px 12px; border-radius: 999px; font-size: 13px; color: var(--ink); }
+      .tag.ok { color: var(--ok); }
+      .tag.warn { color: var(--warn); }
+      .tag.dimtag { color: var(--ink-2); font-size: 12px; padding: 4px 10px; }
 
-/* timeline */
-#tl{position:relative;height:42px;cursor:pointer}
-#bands{position:absolute;left:0;right:0;top:8px;height:18px;display:flex;border-radius:4px;overflow:hidden}
-#truthBand{position:absolute;left:0;right:0;top:30px;height:6px;border-radius:3px;background:#2a3038;overflow:hidden}
-#truthBand div{position:absolute;top:0;bottom:0;background:var(--ok)}
-#bands div{height:100%}
-.mark{position:absolute;top:0;transform:translateX(-50%);font-size:11px;line-height:1}
-#playhead{position:absolute;top:2px;bottom:2px;width:3px;background:#fff;border-radius:2px;transform:translateX(-1px);box-shadow:0 0 6px #fff}
-#legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-#legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-button{background:var(--accent);color:#06202e;border:0;border-radius:6px;padding:7px 14px;font-weight:600;cursor:pointer;font-size:13px}
-button.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-#time{font:13px ui-monospace,Menlo,monospace;color:var(--muted)}
+      .rail { display: flex; flex-direction: column; gap: 12px; min-height: 0; overflow: auto; }
+      .block { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+      .label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+      .state { font-size: 34px; font-weight: 700; letter-spacing: -0.01em; margin: 6px 0 14px; line-height: 1.05; }
+      .state.ok { color: var(--ok); }
+      .state.warn { color: var(--warn); }
+      .state.bad { color: var(--bad); }
 
-/* panel */
-.row{display:flex;justify-content:space-between;gap:10px;margin:4px 0}
-.chip{font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
-.ok{background:#173326;color:var(--ok)} .warn{background:#352914;color:var(--warn)} .bad{background:#3a1a1c;color:var(--bad)} .dim{background:#20262e;color:var(--muted)}
-.struct{display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line);font-size:13px}
-.struct.key{background:#18222a;border-radius:6px;padding:7px 8px;border:1px solid #24414f;margin-bottom:4px}
-.bar{height:6px;background:#242b33;border-radius:3px;overflow:hidden}
-.bar div{height:100%;background:var(--accent)}
-.note{color:var(--muted);font-size:12px;margin-top:4px}
-#alert{border:1px solid var(--bad);background:#241416;border-radius:8px;padding:12px;display:none}
-#alert b{color:var(--bad)}
-#alert input{width:100%;margin:8px 0;background:#121519;border:1px solid var(--line);color:var(--text);border-radius:6px;padding:6px 8px}
-#alert .btns{display:flex;gap:8px}
-#alert .done{margin-top:8px;font-size:13px}
-pre{background:#0f1215;border:1px solid var(--line);border-radius:6px;padding:10px;font-size:11.5px;max-height:260px;overflow:auto;margin:0;color:#b9c4cf}
-#log{font-size:12.5px;color:var(--muted);padding-left:18px;margin:0}
-#missing{padding:40px;color:var(--warn)}
+      .crit { display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
+      .dot { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; border: 2px solid var(--ink-3); color: var(--ink-3); }
+      .dot.ok { border-color: var(--ok); background: var(--ok); color: #06140d; }
+      .dot.warn { border-color: var(--warn); color: var(--warn); }
+      .crit .n { font-size: 17px; font-weight: 600; }
+      .crit .d { font-size: 12.5px; color: var(--ink-3); }
+      .crit .v { text-align: right; }
+      .crit .pct { font-size: 20px; font-weight: 650; }
+      .crit .ref { font-size: 11.5px; color: var(--ink-3); display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
+      .refdot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); display: inline-block; }
+      .refdot.ok { background: var(--ok); }
+      .refnote { font-size: 12px; color: var(--ink-3); margin-top: 8px; }
 
-@media (max-width:980px){
-  body{grid-template-columns:1fr}
-  aside{border-left:0;border-top:1px solid var(--line);max-height:none}
-  #pipe{grid-template-columns:repeat(2,1fr)}
-}
-</style>
-</head>
-<body>
-<main>
-  <header>
-    <h1>Second Look</h1>
-    <span class="sub">Laparoscopic cholecystectomy · decision support only, the surgeon decides</span>
-  </header>
+      .duct { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 6px; }
+      .duct b { font-size: 22px; }
+      .duct span { color: var(--ink-2); font-size: 14px; }
+      .sightings { display: flex; gap: 6px; margin: 12px 0 10px; }
+      .sightings i { flex: 1; height: 6px; border-radius: 3px; background: var(--panel-2); border: 1px solid var(--line); }
+      .sightings i.on { background: var(--ok); border-color: var(--ok); }
+      .why { font-size: 13px; color: var(--ink-2); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .inview { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+      .chip { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); border: 1px solid var(--line); }
 
-  <div id="pipe">
-    <div class="step" id="s1"><b>1 · Frame</b><span>one frame every <span id="every">2</span> s from the video</span></div>
-    <div class="step" id="s2"><b>2 · Gemini labels</b><span>anatomy, tools, phase, view quality, confidence</span></div>
-    <div class="step" id="s3"><b>3 · World state</b><span>what has been seen, how sure, how often</span></div>
-    <div class="step" id="s4"><b>4 · Safety rule</b><span>clipping before the duct is confirmed → alert</span></div>
-  </div>
+      /* alert: the only loud thing on the screen */
+      .alert { background: var(--bad-bg); border: 1.5px solid var(--bad); border-radius: 18px; padding: 18px; }
+      .alert .state { color: var(--bad); font-size: 28px; margin: 4px 0 8px; }
+      .alert p { margin: 0 0 6px; color: var(--ink); }
+      .alert .ev { font-size: 12.5px; color: var(--ink-2); }
+      .alert input { width: 100%; margin: 12px 0 10px; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--line); background: rgba(0,0,0,.3); }
+      .alert .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .big { min-height: 56px; border-radius: 14px; border: 0; font-weight: 700; font-size: 16px; cursor: pointer; }
+      .big.primary { background: var(--bad); color: #fff; }
+      .big.secondary { background: var(--panel-2); color: var(--ink); border: 1px solid var(--line); }
+      .done { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
 
-  <div id="view">
-    <video id="video" hidden muted playsinline></video>
-    <canvas id="canvas" width="960" height="540"></canvas>
-    <div id="viewTag"></div>
-    <div id="qual"></div>
-  </div>
+      /* voice: phase 2 preview */
+      .voice .head { display: flex; justify-content: space-between; align-items: center; }
+      .soon { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); border: 1px solid var(--line); letter-spacing: 0; text-transform: none; }
+      .wave { height: 26px; display: flex; align-items: center; gap: 2px; margin: 12px 0 10px; }
+      .wave b { flex: 1; background: var(--ink-3); border-radius: 2px; opacity: 0.35; }
+      .wave b.past { opacity: 0.9; background: var(--ink-2); }
+      .utter { font-size: 15px; }
+      .utter .who { font-size: 12px; color: var(--ink-3); margin-bottom: 2px; }
+      .cue { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
+      .cue.warn { background: var(--warn-bg); color: var(--warn); }
+      .cue.bad { background: var(--bad-bg); color: var(--bad); }
 
-  <div id="tl"><div id="bands"></div><div id="truthBand" hidden></div><div id="playhead"></div></div>
-  <div id="legend"></div>
+      /* bottom: playback for review and demo */
+      .bottom { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 10px 20px 16px; }
+      .play { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink); color: var(--bg); display: grid; place-items: center; cursor: pointer; }
+      .play svg { width: 16px; height: 16px; }
+      .tlwrap { position: relative; cursor: pointer; padding: 6px 0; }
+      .lane { position: relative; height: 10px; border-radius: 5px; background: var(--panel-2); overflow: hidden; }
+      .lane + .lane { margin-top: 5px; }
+      .lane.thin { height: 4px; }
+      .lane div { position: absolute; top: 0; bottom: 0; }
+      .playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--ink); border-radius: 2px; pointer-events: none; }
+      .pin { position: absolute; top: -2px; transform: translateX(-50%); width: 8px; height: 8px; border-radius: 50%; }
+      .time { color: var(--ink-2); font-size: 13px; white-space: nowrap; }
 
-  <div class="controls">
-    <button id="play">Play</button>
-    <button id="restart" class="ghost">Restart</button>
-    <span id="time"></span>
-    <span class="sub">Space: play/pause · click the timeline to jump</span>
-  </div>
-</main>
+      /* details drawer for review: stats, raw output, decision log */
+      dialog { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 18px; padding: 22px; width: min(620px, 92vw); max-height: 86vh; }
+      dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+      dialog h3 { margin: 18px 0 8px; font-size: 13px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; }
+      dialog h3:first-of-type { margin-top: 0; }
+      .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat { background: var(--panel-2); border-radius: 12px; padding: 12px; }
+      .stat .k { font-size: 12px; color: var(--ink-3); }
+      .stat .v { font-size: 20px; font-weight: 650; }
+      pre { background: var(--bg); border-radius: 12px; padding: 12px; font: 11.5px/1.5 ui-monospace, Menlo, monospace; max-height: 260px; overflow: auto; white-space: pre-wrap; margin: 0; color: var(--ink-2); }
+      ol { margin: 0; padding-left: 20px; color: var(--ink-2); font-size: 13px; }
+      #missing { max-width: 560px; margin: 15vh auto; text-align: center; }
 
-<aside>
-  <h3>Right now</h3>
-  <div class="row"><span>Phase</span><span id="phase" class="chip dim"></span></div>
-  <div class="row"><span>Anatomy</span><span id="confirm" class="chip"></span></div>
-  <div class="note" id="reason"></div>
+      @media (max-width: 1000px) {
+        body { height: auto; overflow: auto; }
+        .main { grid-template-columns: 1fr; }
+        .view { aspect-ratio: 16 / 9; }
+        .top { flex-wrap: wrap; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <div class="mark">Second Look</div><span class="live"><i></i>LIVE</span>
+      <div class="case" id="caseinfo"></div>
+      <div class="elapsed"><small>dissection</small><span id="clock">0:00</span></div>
+      <button class="iconbtn" id="boxBtn" hidden>Structures: on</button>
+      <button class="iconbtn" id="detailsBtn">Details</button>
+    </div>
 
-  <div id="truthBox" hidden>
-    <h3>Surgeons' ground truth (Endoscapes)</h3>
-    <div class="row"><span>C1 · two structures enter gallbladder</span><span id="c1" class="chip"></span></div>
-    <div class="row"><span>C2 · hepatocystic triangle cleared</span><span id="c2" class="chip"></span></div>
-    <div class="row"><span>C3 · lower gallbladder off liver bed</span><span id="c3" class="chip"></span></div>
-    <div class="row"><span><b>Critical view of safety</b></span><span id="cvs" class="chip"></span></div>
-    <div class="note" id="truthNote"></div>
-  </div>
+    <div class="main">
+      <div class="view" id="view">
+        <video id="video" hidden muted playsinline></video>
+        <canvas id="canvas" width="960" height="540"></canvas>
+        <div id="boxes"></div>
+        <div class="ov tl"><span class="tag" id="phaseTag"></span></div>
+        <div class="ov tr"><span class="tag" id="qual"></span></div>
+        <div class="ov bl"><span class="tag dimtag" id="viewTag"></span></div>
+      </div>
 
-  <h3>World state: what the system believes so far</h3>
-  <div id="structs"></div>
-  <div class="note" id="rule"></div>
+      <div class="rail">
+        <div class="alert" id="alert" hidden>
+          <div class="label" style="color: var(--bad)">Safety alert</div>
+          <div class="state">Check before clipping</div>
+          <p id="alertMsg"></p>
+          <div class="ev" id="alertEv"></div>
+          <div id="alertAsk">
+            <input id="why" placeholder="Reason (optional, logged)" />
+            <div class="row">
+              <button class="big primary" id="ack">Re-check</button>
+              <button class="big secondary" id="ovr">Proceed</button>
+            </div>
+          </div>
+          <div class="done" id="alertDone"></div>
+        </div>
 
-  <h3>Safety alert</h3>
-  <div id="noAlert" class="note">No alert yet.</div>
-  <div id="alert">
-    <b>⚠ Check before clipping</b>
-    <div id="alertMsg"></div>
-    <div class="note" id="alertEv"></div>
-    <div id="alertAsk">
-      <input id="why" placeholder="Reason (optional, logged)">
-      <div class="btns">
-        <button id="ack">Acknowledge: re-check</button>
-        <button id="ovr" class="ghost">Override: proceed</button>
+        <div class="block">
+          <div class="label">Critical view of safety</div>
+          <div class="state" id="cvsState"></div>
+          <div id="crits"></div>
+        </div>
+
+        <div class="block">
+          <div class="label">Cystic duct</div>
+          <div class="duct"><b id="ductState"></b><span id="ductCount"></span></div>
+          <div class="sightings" id="sightings"></div>
+          <div class="why" id="reason"></div>
+          <div class="inview" id="inview"></div>
+        </div>
+
+        <div class="block voice">
+          <div class="head"><div class="label">Voice</div><span class="soon">Phase 2 preview</span></div>
+          <div class="wave" id="wave"></div>
+          <div class="utter" id="utter"></div>
+        </div>
       </div>
     </div>
-    <div class="done" id="alertDone"></div>
-  </div>
 
-  <h3>Raw model output for this frame</h3>
-  <pre id="raw"></pre>
+    <div class="bottom">
+      <button class="play" id="play" title="Play / pause (space)"></button>
+      <div class="tlwrap" id="tl">
+        <div class="lane" id="bands"></div>
+        <div class="playhead" id="playhead"></div>
+      </div>
+      <div class="time" id="time"></div>
+    </div>
 
-  <h3>Decision log</h3>
-  <ol id="log"><li>Nothing logged yet.</li></ol>
-</aside>
+    <dialog id="details">
+      <h3>This run</h3>
+      <select id="run" title="Labelled run" style="width:100%;margin-bottom:10px"></select>
+      <div class="stats">
+        <div class="stat"><div class="k">Model · prompt</div><div class="v" id="stModel"></div></div>
+        <div class="stat"><div class="k">Agreement with surgeons</div><div class="v" id="stAgree"></div></div>
+        <div class="stat"><div class="k">Surgeon "yes" moments caught</div><div class="v" id="stCaught"></div></div>
+        <div class="stat"><div class="k">Safety alerts</div><div class="v" id="stAlerts"></div></div>
+      </div>
+      <h3>World state</h3>
+      <div id="structs" class="inview" style="margin: 0"></div>
+      <h3>Raw model output for this frame</h3>
+      <pre id="raw"></pre>
+      <h3>Decision log</h3>
+      <ol id="log"><li>Nothing logged yet.</li></ol>
+      <h3>Timeline key</h3>
+      <div class="refnote" id="legend" style="margin: 0"></div>
+      <p style="margin: 18px 0 0; text-align: right"><button class="iconbtn" onclick="this.closest('dialog').close()">Close</button></p>
+    </dialog>
 
-<script src="timeline.js"></script>
-<script>
-const $ = id => document.getElementById(id);
-const D = window.TIMELINE;
-if (!D) document.body.innerHTML = '<div id="missing">No timeline.js found. Run <code>python label.py --mock</code> (or with a clip) in this folder, then reload.</div>';
-const F = D.frames, STEP = D.every, END = F.at(-1).t + STEP, REQ = D.rules.confirm_frames;
-const nice = s => (s || 'unknown').replaceAll('_', ' ');
-const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-$('every').textContent = STEP;
+    <script src="outputs/runs.js"></script>
+    <script>
+      // index.html?run=v2_argon loads outputs/v2_argon.js; default outputs/timeline.js
+      const RUN = (new URLSearchParams(location.search).get("run") || "timeline").replace(/[^\w.-]/g, "");
+      document.write(`<script src="outputs/${RUN}.js"><\/script>`);
+    </script>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const D = window.TIMELINE;
+      if (!D)
+        document.body.innerHTML = `<div id="missing">No outputs/${RUN}.js found. Run <code>python label.py --mock</code> (or with a clip) in this folder, then reload.</div>`;
+      const F = D.frames,
+        STEP = D.every,
+        END = Math.max(F.at(-1).t + STEP, ...(D.truth || []).map((k) => k.t + 5)),
+        REQ = D.rules.confirm_frames,
+        T = D.truth || [],
+        A = D.agreement;
+      const nice = (s) => (s || "unknown").replaceAll("_", " ");
+      const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+      const pct = (x) => Math.round(x * 100) + "%";
+      const yes = (v) => Number(v) >= 0.5; // booleans (prompt v1) or probabilities (v2)
+      const met = (k) => k && k.C1 >= 0.5 && k.C2 >= 0.5 && k.C3 >= 0.5;
+      const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg>';
+      const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+      const PHASE_COL = {
+        preparation: "#3b4f63",
+        calot_triangle_dissection: "#4a5866",
+        clipping_and_cutting: "#a8433d",
+        gallbladder_dissection: "#5a4f6e",
+        retrieval: "#55553f",
+        cleaning: "#3f4247",
+        unknown: "#2a2f35",
+      };
 
-const PHASE_COL = { preparation: '#3c5a73', calot_triangle_dissection: '#2f7d6d', clipping_and_cutting: '#8a5a2b',
-  gallbladder_dissection: '#5d4f8a', retrieval: '#6b6b3a', cleaning: '#4a4a4a', unknown: '#333' };
+      // ---------- header, run picker, details ----------
+      const op = (D.video || "").match(/endo(\d+)/)?.[1];
+      $("caseinfo").textContent = op ? `Operation ${op} · Laparoscopic cholecystectomy` : "Demo case · Laparoscopic cholecystectomy";
+      (window.RUNS || [{ name: RUN, model: D.model, prompt: D.prompt, frames: F.length }]).forEach((r) => {
+        const o = new Option(`${r.model} · ${(r.prompt || "v1").replace(".txt", "")} · ${r.frames} frames`, r.name);
+        o.selected = r.name === RUN;
+        $("run").append(o);
+      });
+      $("run").onchange = (e) => (location.search = "?run=" + e.target.value);
+      $("detailsBtn").onclick = () => $("details").showModal();
 
-// ---------- video or schematic ----------
-const video = $('video'), canvas = $('canvas'), ctx = canvas.getContext('2d');
-const useVideo = !!D.video;
-if (useVideo) { video.src = D.video; video.hidden = false; canvas.hidden = true; }
-$('viewTag').textContent = !useVideo ? 'SCHEMATIC stand-in for the video · mock labels'
-  : D.model === 'none' ? `${D.video} · not labelled yet (no Gemini key)` : `${D.video} · labels by ${D.model}`;
+      $("stModel").textContent = `${D.model} · ${(D.prompt || "").replace(".txt", "")}`;
+      if (A) {
+        const sum = (i) => ["C1", "C2", "C3"].reduce((s, c) => s + A[c + "_caught"][i], 0);
+        $("stAgree").textContent = `${pct((A.C1 + A.C2 + A.C3) / 3)} of ${A.keyframes}`;
+        $("stCaught").textContent = `${sum(0)} / ${sum(1)}`;
+      } else $("stAgree").textContent = $("stCaught").textContent = "-";
+      $("stAlerts").textContent = F.filter((f) => f.alert).length;
 
-let clock = 0, playing = false, last = performance.now(), idx = -1;
-const decisions = {};   // alert t -> {choice, reason}
-const now = () => useVideo ? video.currentTime : clock;
-function seek(t) { t = Math.max(0, Math.min(END - 0.01, t)); if (useVideo) video.currentTime = t; else clock = t; }
-function setPlaying(p) {
-  playing = p; $('play').textContent = p ? 'Pause' : 'Play';
-  if (useVideo) p ? video.play() : video.pause();
-}
-$('play').onclick = () => { if (now() >= END - 0.05) seek(0); setPlaying(!playing); };
-$('restart').onclick = () => { seek(0); setPlaying(true); };
-addEventListener('keydown', e => { if (e.code === 'Space' && e.target.tagName !== 'INPUT') { e.preventDefault(); $('play').click(); } });
+      // ---------- video or schematic ----------
+      const video = $("video"), canvas = $("canvas"), ctx = canvas.getContext("2d");
+      const useVideo = !!D.video;
+      if (useVideo) { video.src = D.video; video.hidden = false; canvas.hidden = true; }
+      $("viewTag").textContent = !useVideo ? "Schematic stand-in · mock labels" : D.model === "none" ? "Not labelled yet" : `AI: ${D.model} · decision support only`;
 
-// ---------- timeline strip ----------
-F.forEach(f => {
-  const d = document.createElement('div');
-  d.style.width = (STEP / END * 100) + '%';
-  d.style.background = PHASE_COL[f.label.phase] || '#333';
-  if (f.label.view_quality !== 'clear') d.style.backgroundImage = 'repeating-linear-gradient(45deg,rgba(255,255,255,.28) 0 3px,transparent 3px 7px)';
-  d.title = `${fmt(f.t)} ${nice(f.label.phase)} · ${f.label.view_quality}`;
-  $('bands').append(d);
-});
-const firstOk = F.find(f => f.duct_confirmed);
-const addMark = (t, txt, title) => { const m = document.createElement('div'); m.className = 'mark'; m.style.left = (t / END * 100) + '%'; m.textContent = txt; m.title = title; $('tl').append(m); };
-F.filter(f => f.alert).forEach(f => addMark(f.t, '🔺', 'Safety alert'));
-if (firstOk) addMark(firstOk.t, '🟢', 'Cystic duct confirmed');
-// surgeons' CVS labels: one keyframe every 5 s, criterion met if >= 0.5 (majority of 3 surgeons)
-const T = D.truth || [], met = k => k && k.C1 >= .5 && k.C2 >= .5 && k.C3 >= .5;
-if (T.length) {
-  $('truthBox').hidden = $('truthBand').hidden = false;
-  T.forEach((k, n) => { if (!met(k)) return; const d = document.createElement('div'); const end = T[n + 1]?.t ?? END;
-    d.style.left = (k.t / END * 100) + '%'; d.style.width = ((end - k.t) / END * 100) + '%'; $('truthBand').append(d); });
-}
-function renderTruth(t) {
-  if (!T.length) return;
-  const k = [...T].reverse().find(x => x.t <= t);
-  const chip = (id, v) => { $(id).className = 'chip ' + (v == null ? 'dim' : v >= .5 ? 'ok' : 'bad'); $(id).textContent = v == null ? '-' : v >= .5 ? 'yes' : 'no'; };
-  chip('c1', k?.C1); chip('c2', k?.C2); chip('c3', k?.C3);
-  $('cvs').className = 'chip ' + (!k ? 'dim' : met(k) ? 'ok' : 'bad'); $('cvs').textContent = !k ? 'not labelled yet' : met(k) ? 'achieved' : 'not achieved';
-  $('truthNote').textContent = k ? `Consensus of 3 surgeons at ${fmt(k.t)}. Labelled every 5 s.` : 'First surgeon label comes later in the clip.';
-}
-$('tl').onclick = e => { const r = $('tl').getBoundingClientRect(); seek((e.clientX - r.left) / r.width * END); };
-$('legend').innerHTML = [...new Set(F.map(f => f.label.phase))].map(p => `<span><i style="background:${PHASE_COL[p] || '#333'}"></i>${nice(p)}</span>`).join('')
-  + '<span><i style="background:repeating-linear-gradient(45deg,#888 0 2px,#333 2px 4px)"></i>view not clear</span><span>🔺 alert</span><span>🟢 duct confirmed</span>'
-  + (D.truth ? '<span><i style="background:var(--ok)"></i>thin bar: surgeons say CVS achieved</span>' : '');
+      let clock = 0, playing = false, last = performance.now(), idx = -1;
+      const decisions = {}; // alert t -> {choice, reason}
+      const now = () => (useVideo ? video.currentTime : clock);
+      function seek(t) {
+        t = Math.max(0, Math.min(END - 0.01, t));
+        if (useVideo) video.currentTime = t; else clock = t;
+      }
+      function setPlaying(p) {
+        playing = p;
+        document.querySelector(".live").classList.toggle("paused", !p);
+        $("play").innerHTML = p ? ICON_PAUSE : ICON_PLAY;
+        if (useVideo) p ? video.play() : video.pause();
+      }
+      setPlaying(false);
+      const T0 = Number(new URLSearchParams(location.search).get("t")) || 0; // ?t=140 opens at 2:20
+      if (useVideo) video.addEventListener("loadedmetadata", () => seek(T0), { once: true }); else clock = T0;
+      $("play").onclick = () => { if (now() >= END - 0.05) seek(0); setPlaying(!playing); };
+      addEventListener("keydown", (e) => {
+        if (e.code === "Space" && e.target.tagName !== "INPUT") { e.preventDefault(); $("play").click(); }
+      });
 
-// ---------- panel ----------
-function flashPipeline(alarm) {
-  ['s1', 's2', 's3', 's4'].forEach((id, k) => setTimeout(() => {
-    const el = $(id); el.classList.add('on'); if (id === 's4' && alarm) el.classList.add('alarm');
-    setTimeout(() => el.classList.remove('on', 'alarm'), alarm && id === 's4' ? 1800 : 450);
-  }, k * 160));
-}
+      // ---------- timeline ----------
+      F.forEach((f, i) => {
+        const d = document.createElement("div");
+        // each label covers until the next labelled frame (keyframe-only runs have gaps)
+        d.style.left = (f.t / END) * 100 + "%";
+        d.style.width = (((F[i + 1]?.t ?? END) - f.t) / END) * 100 + "%";
+        d.style.background = PHASE_COL[f.label.phase] || PHASE_COL.unknown;
+        if (f.label.view_quality !== "clear")
+          d.style.backgroundImage = "repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 3px,transparent 3px 7px)";
+        d.title = `${fmt(f.t)} ${nice(f.label.phase)} · ${f.label.view_quality}`;
+        $("bands").append(d);
+      });
+      const pin = (t, color, title) => {
+        const m = document.createElement("div");
+        m.className = "pin"; m.style.left = (t / END) * 100 + "%"; m.style.background = color; m.title = title;
+        $("tl").append(m);
+      };
+      F.filter((f) => f.alert).forEach((f) => pin(f.t, "var(--bad)", "Safety alert"));
+      const firstOk = F.find((f) => f.duct_confirmed);
+      if (firstOk) pin(firstOk.t, "var(--ok)", "Cystic duct confirmed");
+      $("tl").onclick = (e) => {
+        const r = $("tl").getBoundingClientRect();
+        seek(((e.clientX - r.left) / r.width) * END);
+      };
+      $("legend").textContent =
+        "Top lane: model phase per labelled frame, hatched when the view is not clear. Red pin: safety alert. Green pin: cystic duct confirmed.";
 
-function render(i) {
-  const f = F[i], lab = f.label, inView = new Set((lab.visible_structures || []).map(s => s.name));
-  $('phase').textContent = nice(lab.phase);
-  $('confirm').className = 'chip ' + (f.can_confirm ? 'ok' : 'warn');
-  $('confirm').textContent = f.can_confirm ? 'Can confirm' : "Can't confirm";
-  $('reason').textContent = f.can_confirm ? '' : (lab.reason_if_not || 'View not clear enough to confirm anatomy.');
-  const q = lab.view_quality || 'unknown';
-  $('qual').textContent = 'view: ' + q; $('qual').className = 'chip ' + (q === 'clear' ? 'ok' : 'warn');
+      // ---------- voice preview (phase 2) ----------
+      const WAVE_N = 64;
+      $("wave").innerHTML = Array.from({ length: WAVE_N }, (_, i) =>
+        `<b style="height:${20 + 75 * Math.abs(Math.sin(i * 0.37) * Math.cos(i * 0.11 + 1))}%"></b>`, // ponytail: decorative until real audio exists
+      ).join("");
+      const waveBars = [...$("wave").children];
+      // example lines placed around this case's surgeon labels, always marked as examples
+      const cvsAt = T.find(met)?.t ?? END * 0.75;
+      const EXAMPLES = [
+        { t: Math.max(5, cvsAt - 40), text: "Let's open up the triangle a bit more." },
+        { t: Math.max(10, cvsAt - 15), text: "Is that the artery behind the duct?", cue: ["Anatomy question", "warn"] },
+        { t: cvsAt, text: "Okay, two structures, plate is clear. Clip, please.", cue: ["Clip requested", "bad"] },
+      ];
 
-  const names = Object.keys(f.state).sort((a, b) => (b === 'cystic_duct') - (a === 'cystic_duct') || f.state[b].best - f.state[a].best);
-  $('structs').innerHTML = names.map(n => {
-    const s = f.state[n], key = n === 'cystic_duct';
-    const status = key ? (f.duct_confirmed ? '<span class="chip ok">confirmed</span>' : `<span class="chip warn">${s.hits}/${REQ} sightings</span>`)
-      : inView.has(n) ? '<span class="chip ok">in view</span>' : `<span class="chip dim">last ${fmt(s.last)}</span>`;
-    return `<div class="struct${key ? ' key' : ''}"><span>${nice(n)}</span><div class="bar" title="best confidence ${s.best}"><div style="width:${s.best * 100}%"></div></div>${status}</div>`;
-  }).join('') || '<div class="note">Nothing identified yet.</div>';
-  $('rule').textContent = `Bars show best confidence so far. The cystic duct counts as confirmed after ${REQ} sightings at ≥ ${D.rules.confirm_conf} confidence in clear frames.`;
+      // ---------- safety rail ----------
+      const CRITS = [
+        ["c1", "C1", "Two structures", "Only duct and artery enter the gallbladder"],
+        ["c2", "C2", "Triangle cleared", "See-through windows in the triangle"],
+        ["c3", "C3", "Cystic plate", "Lower gallbladder off the liver bed"],
+      ];
+      $("crits").innerHTML = CRITS.map(
+        ([c, , n, d], i) => `<div class="crit"><div class="dot" id="dot_${c}">${i + 1}</div><div><div class="n">${n}</div><div class="d">${d}</div></div><div class="v"><div class="pct" id="pct_${c}"></div></div></div>`,
+      ).join("");
+      $("sightings").innerHTML = Array.from({ length: REQ }, () => "<i></i>").join("");
 
-  $('raw').textContent = JSON.stringify(lab, null, 2);
+      function renderLive(t) {
+        const labelled = t >= F[0].t;
+        const g = labelled ? F[idx]?.label.cvs : null;
+        let all = !!g;
+        CRITS.forEach(([c, C]) => {
+          const v = g?.[c], on = g ? yes(v) : false;
+          all = all && on;
+          $("dot_" + c).className = "dot " + (!g ? "" : on ? "ok" : "warn");
+          $("pct_" + c).textContent = !g ? "–" : typeof v === "number" ? pct(v) : on ? "yes" : "no";
+          $("pct_" + c).style.color = !g ? "var(--ink-3)" : on ? "var(--ok)" : "var(--warn)";
+        });
+        $("cvsState").textContent = !g ? "Waiting" : all ? "Achieved" : "Not yet";
+        $("cvsState").className = "state " + (!g ? "" : all ? "ok" : "warn");
 
-  const a = [...F.slice(0, i + 1)].reverse().find(x => x.alert)?.alert;
-  $('alert').style.display = a ? 'block' : 'none'; $('noAlert').style.display = a ? 'none' : 'block';
-  if (a) {
-    $('alertMsg').textContent = a.message; $('alertEv').textContent = `At ${fmt(a.t)}. ${a.evidence}`;
-    const d = decisions[a.t];
-    $('alertAsk').style.display = d ? 'none' : 'block';
-    $('alertDone').textContent = d ? `Surgeon chose: ${d.choice}${d.reason ? ` (“${d.reason}”)` : ''}` : '';
-  }
-  flashPipeline(!!f.alert);
-}
+        const p = Math.min(1, t / END);
+        waveBars.forEach((b, i) => b.classList.toggle("past", i / WAVE_N <= p));
+        const u = [...EXAMPLES].reverse().find((l) => l.t <= t);
+        $("utter").innerHTML = u
+          ? `<div class="who">Surgeon · ${fmt(u.t)} · example line</div>“${u.text}”${u.cue ? `<br><span class="cue ${u.cue[1]}">${u.cue[0]}</span>` : ""}`
+          : '<div class="who">Listening for "clip", "cut" or anatomy questions</div>';
+        $("clock").textContent = fmt(t);
+      }
 
-function decide(choice) {
-  const a = [...F.slice(0, idx + 1)].reverse().find(x => x.alert)?.alert; if (!a) return;
-  decisions[a.t] = { choice, reason: $('why').value.trim() };
-  if (Object.keys(decisions).length === 1) $('log').innerHTML = '';
-  const li = document.createElement('li');
-  li.textContent = `${fmt(a.t)} alert → ${choice}${decisions[a.t].reason ? ` (“${decisions[a.t].reason}”)` : ''} · logged ${new Date().toLocaleTimeString()}`;
-  $('log').append(li);
-  render(idx); setPlaying(true);   // ponytail: log lives in the page; goes to the acknowledgements collection in Atlas later
-}
-$('ack').onclick = () => decide('acknowledged, re-checking anatomy');
-$('ovr').onclick = () => decide('override, proceeding');
+      // ---------- detection overlay (from the second, detection-only model) ----------
+      const BOX = {
+        cystic_duct: ["Cystic duct", "#f5b544"],
+        cystic_artery: ["Cystic artery", "#ff7a6b"],
+        hepatocystic_window: ["Window", "#6fd3ff"],
+        cystic_plate: ["Cystic plate", "#c7a6ff"],
+        gallbladder: ["Gallbladder", null],
+        liver: ["Liver", null],
+      };
+      const hasBoxes = F.some((f) => f.label.boxes?.length);
+      let showBoxes = hasBoxes;
+      $("boxBtn").hidden = !hasBoxes;
+      $("boxBtn").onclick = () => { showBoxes = !showBoxes; $("boxBtn").textContent = "Structures: " + (showBoxes ? "on" : "off"); drawBoxes(); };
+      function drawBoxes() {
+        const el = $("boxes"), f = F[idx];
+        const r = $("view").getBoundingClientRect();
+        const vw = useVideo ? video.videoWidth || 16 : canvas.width, vh = useVideo ? video.videoHeight || 9 : canvas.height;
+        const k = Math.min(r.width / vw, r.height / vh); // object-fit: contain
+        Object.assign(el.style, { width: vw * k + "px", height: vh * k + "px", left: (r.width - vw * k) / 2 + "px", top: (r.height - vh * k) / 2 + "px" });
+        const fresh = f && now() - f.t < 1.5; // boxes belong to one frame; hide them on gaps in keyframe-only runs
+        el.innerHTML = !showBoxes || !fresh ? "" : (f.label.boxes || [])
+          .filter((b) => BOX[b.label] && (b.confidence ?? 1) >= 0.5 && b.box_2d?.length === 4)
+          .map((b) => {
+            let [name, col] = BOX[b.label];
+            if (b.label === "cystic_duct" && f.duct_confirmed) col = "#3ecf8e";
+            const [y0, x0, y1, x1] = b.box_2d.map((v) => v / 10);
+            if (!col) return `<div class="organ" style="left:${(x0 + x1) / 2}%;top:${(y0 + y1) / 2}%">${name}</div>`;
+            return `<div class="box${y0 < 6 ? " below" : ""}" style="--c:${col};left:${x0}%;top:${y0}%;width:${x1 - x0}%;height:${y1 - y0}%"><span>${name}</span></div>`;
+          }).join("");
+      }
+      addEventListener("resize", drawBoxes);
+      if (useVideo) video.addEventListener("loadedmetadata", drawBoxes);
 
-// ---------- schematic laparoscopic view (stand-in until a real clip is loaded) ----------
-function draw(f, time) {
-  const W = canvas.width, H = canvas.height, lab = f.label;
-  const c = n => (lab.visible_structures || []).find(s => s.name === n)?.confidence || 0;
-  const tools = new Set(lab.instruments || []), sway = Math.sin(time * 1.3) * 8;
-  ctx.save(); ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#1a0807'; ctx.fillRect(0, 0, W, H);
+      function render(i) {
+        const f = F[i], lab = f.label, s = f.state.cystic_duct;
+        $("phaseTag").textContent = nice(lab.phase);
+        const q = lab.view_quality || "unknown";
+        $("qual").textContent = q === "clear" ? "View clear" : "View: " + q;
+        $("qual").className = "tag " + (q === "clear" ? "ok" : "warn");
 
-  const blob = (x, y, rx, ry, rot, col, a) => { if (a <= 0) return; ctx.globalAlpha = a; ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, 7); ctx.fill(); ctx.globalAlpha = 1; };
-  const tag = (x, y, n) => { const v = c(n); if (!v) return; ctx.font = '600 15px system-ui'; const s = `${nice(n)} ${v.toFixed(2)}`, w = ctx.measureText(s).width + 12;
-    ctx.fillStyle = 'rgba(0,0,0,.65)'; ctx.fillRect(x, y, w, 22); ctx.fillStyle = n === 'cystic_duct' ? (f.duct_confirmed ? '#48c78e' : '#f0b04a') : '#e7e9ec'; ctx.fillText(s, x + 6, y + 16); };
+        $("ductState").textContent = f.duct_confirmed ? "Confirmed" : "Not confirmed";
+        $("ductState").style.color = f.duct_confirmed ? "var(--ok)" : "var(--warn)";
+        $("ductCount").textContent = `${Math.min(s?.hits || 0, REQ)} of ${REQ} clear sightings`;
+        [...$("sightings").children].forEach((b, n) => b.classList.toggle("on", n < (s?.hits || 0)));
+        $("reason").textContent = f.can_confirm ? "Anatomy can be confirmed in this view." : lab.reason_if_not || "View not clear enough to confirm anatomy.";
+        $("inview").innerHTML = (lab.visible_structures || [])
+          .filter((x) => x.confidence >= 0.5).slice(0, 6)
+          .map((x) => `<span class="chip">${nice(x.name)}</span>`).join("");
 
-  // tissue
-  blob(480, 40, 560, 190, 0, '#6e1c1a', 0.4 + c('liver') * 0.6);                    // liver
-  blob(560, 230, 190, 85, -0.35, '#7f8f58', 0.3 + c('gallbladder') * 0.7);           // gallbladder
-  if (c('cystic_duct')) {                                                            // cystic duct
-    ctx.globalAlpha = c('cystic_duct'); ctx.strokeStyle = '#e8d8a4'; ctx.lineWidth = 22; ctx.lineCap = 'round';
-    ctx.beginPath(); ctx.moveTo(400, 290); ctx.quadraticCurveTo(320, 340, 250, 430); ctx.stroke(); ctx.globalAlpha = 1;
-  }
-  const fat = c('fat') * (1 - c('cystic_duct') * 0.6);                              // fat hides the duct until dissected
-  blob(330, 360, 150, 80, 0.4, '#c8ad55', fat * 0.9); blob(240, 420, 110, 60, 0, '#b89a45', fat * 0.8);
-  if (c('connective_tissue')) blob(380, 320, 90, 40, 0.2, '#d9b7a0', c('connective_tissue') * 0.5);
-  if (c('blood')) { blob(360, 340, 120, 70, 0.3, '#a00000', 0.85); blob(300, 420, 70, 40, 0, '#8a0000', 0.8); }
+        $("structs").innerHTML = Object.entries(f.state)
+          .sort((a, b) => b[1].best - a[1].best)
+          .map(([n, v]) => `<span class="chip">${nice(n)} · best ${v.best.toFixed(2)} · ${v.hits} clear</span>`).join("");
+        $("raw").textContent = JSON.stringify(lab, null, 2);
 
-  // instruments
-  const shaft = (x1, y1, x2, y2) => { ctx.strokeStyle = '#9aa3ab'; ctx.lineWidth = 26; ctx.lineCap = 'butt'; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
-    ctx.strokeStyle = '#d5dbe0'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(x1, y1 - 7); ctx.lineTo(x2, y2 - 7); ctx.stroke(); };
-  if (tools.has('grasper')) { shaft(-20, 60, 470 + sway, 215); ctx.strokeStyle = '#c0c7cd'; ctx.lineWidth = 7;
-    ctx.beginPath(); ctx.moveTo(470 + sway, 215); ctx.lineTo(530 + sway, 205); ctx.moveTo(470 + sway, 215); ctx.lineTo(525 + sway, 240); ctx.stroke(); }
-  if (tools.has('hook')) { shaft(W + 20, H - 40, 440 - sway, 330); ctx.strokeStyle = '#d5dbe0'; ctx.lineWidth = 6;
-    ctx.beginPath(); ctx.moveTo(440 - sway, 330); ctx.lineTo(405 - sway, 318); ctx.lineTo(400 - sway, 300); ctx.stroke(); }
-  if (tools.has('clipper')) { shaft(W + 20, H - 120, 420 - sway / 2, 315); ctx.strokeStyle = '#c0c7cd'; ctx.lineWidth = 8;
-    ctx.beginPath(); ctx.moveTo(420, 315); ctx.lineTo(360, 290); ctx.moveTo(420, 315); ctx.lineTo(365, 335); ctx.stroke();
-    ctx.fillStyle = '#e9eef2'; ctx.fillRect(352, 296, 10, 34); }
-  if (tools.has('irrigator')) shaft(W + 20, 40, 520, 300);
+        const a = [...F.slice(0, i + 1)].reverse().find((x) => x.alert)?.alert;
+        const open = a && !decisions[a.t];
+        $("alert").hidden = !a;
+        $("view").classList.toggle("alarm", !!open);
+        if (a) {
+          $("alertMsg").textContent = a.message;
+          $("alertEv").textContent = `At ${fmt(a.t)} · ${a.evidence}`;
+          const d = decisions[a.t];
+          $("alertAsk").hidden = !!d;
+          $("alertDone").textContent = d ? `Surgeon chose: ${d.choice}${d.reason ? ` (“${d.reason}”)` : ""}` : "";
+        }
+      }
 
-  // labels: what the model said it sees, with confidence
-  tag(640, 70, 'liver'); tag(620, 190, 'gallbladder'); tag(120, 330, 'cystic_duct'); tag(120, 470, 'fat'); tag(330, 470, 'blood');
+      function decide(choice) {
+        const a = [...F.slice(0, idx + 1)].reverse().find((x) => x.alert)?.alert;
+        if (!a) return;
+        decisions[a.t] = { choice, reason: $("why").value.trim() };
+        if (Object.keys(decisions).length === 1) $("log").innerHTML = "";
+        const li = document.createElement("li");
+        li.textContent = `${fmt(a.t)} alert → ${choice}${decisions[a.t].reason ? ` (“${decisions[a.t].reason}”)` : ""} · logged ${new Date().toLocaleTimeString()}`;
+        $("log").append(li);
+        render(idx);
+        setPlaying(true); // ponytail: log lives in the page; goes to the acknowledgements collection in Atlas later
+      }
+      $("ack").onclick = () => decide("re-checking anatomy");
+      $("ovr").onclick = () => decide("proceeding");
 
-  // view problems
-  const q = lab.view_quality;
-  if (q === 'smoke') { ctx.filter = 'blur(40px)'; for (let k = 0; k < 7; k++) blob(200 + k * 110 + Math.sin(time + k) * 30, 260 + Math.cos(time * .7 + k) * 60, 200, 140, 0, '#cfcfcf', 0.55); ctx.filter = 'none'; }
-  if (q === 'glare') { const g = ctx.createRadialGradient(480, 260, 0, 480, 260, 300); g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
+      // ---------- schematic laparoscopic view (mock runs only) ----------
+      function draw(f, time) {
+        const W = canvas.width, H = canvas.height, lab = f.label;
+        const c = (n) => (lab.visible_structures || []).find((s) => s.name === n)?.confidence || 0;
+        const tools = new Set(lab.instruments || []), sway = Math.sin(time * 1.3) * 8;
+        ctx.save();
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "#1a0807"; ctx.fillRect(0, 0, W, H);
+        const blob = (x, y, rx, ry, rot, col, a) => {
+          if (a <= 0) return;
+          ctx.globalAlpha = a; ctx.fillStyle = col; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+        };
+        blob(480, 40, 560, 190, 0, "#6e1c1a", 0.4 + c("liver") * 0.6);
+        blob(560, 230, 190, 85, -0.35, "#7f8f58", 0.3 + c("gallbladder") * 0.7);
+        if (c("cystic_duct")) {
+          ctx.globalAlpha = c("cystic_duct"); ctx.strokeStyle = "#e8d8a4"; ctx.lineWidth = 22; ctx.lineCap = "round";
+          ctx.beginPath(); ctx.moveTo(400, 290); ctx.quadraticCurveTo(320, 340, 250, 430); ctx.stroke(); ctx.globalAlpha = 1;
+        }
+        const fat = c("fat") * (1 - c("cystic_duct") * 0.6); // fat hides the duct until dissected
+        blob(330, 360, 150, 80, 0.4, "#c8ad55", fat * 0.9);
+        blob(240, 420, 110, 60, 0, "#b89a45", fat * 0.8);
+        if (c("connective_tissue")) blob(380, 320, 90, 40, 0.2, "#d9b7a0", c("connective_tissue") * 0.5);
+        if (c("blood")) { blob(360, 340, 120, 70, 0.3, "#a00000", 0.85); blob(300, 420, 70, 40, 0, "#8a0000", 0.8); }
+        const shaft = (x1, y1, x2, y2) => {
+          ctx.strokeStyle = "#9aa3ab"; ctx.lineWidth = 26; ctx.lineCap = "butt";
+          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+          ctx.strokeStyle = "#d5dbe0"; ctx.lineWidth = 5;
+          ctx.beginPath(); ctx.moveTo(x1, y1 - 7); ctx.lineTo(x2, y2 - 7); ctx.stroke();
+        };
+        if (tools.has("grasper")) {
+          shaft(-20, 60, 470 + sway, 215);
+          ctx.strokeStyle = "#c0c7cd"; ctx.lineWidth = 7; ctx.beginPath();
+          ctx.moveTo(470 + sway, 215); ctx.lineTo(530 + sway, 205); ctx.moveTo(470 + sway, 215); ctx.lineTo(525 + sway, 240); ctx.stroke();
+        }
+        if (tools.has("hook")) {
+          shaft(W + 20, H - 40, 440 - sway, 330);
+          ctx.strokeStyle = "#d5dbe0"; ctx.lineWidth = 6; ctx.beginPath();
+          ctx.moveTo(440 - sway, 330); ctx.lineTo(405 - sway, 318); ctx.lineTo(400 - sway, 300); ctx.stroke();
+        }
+        if (tools.has("clipper")) {
+          shaft(W + 20, H - 120, 420 - sway / 2, 315);
+          ctx.strokeStyle = "#c0c7cd"; ctx.lineWidth = 8; ctx.beginPath();
+          ctx.moveTo(420, 315); ctx.lineTo(360, 290); ctx.moveTo(420, 315); ctx.lineTo(365, 335); ctx.stroke();
+          ctx.fillStyle = "#e9eef2"; ctx.fillRect(352, 296, 10, 34);
+        }
+        if (tools.has("irrigator")) shaft(W + 20, 40, 520, 300);
+        const q = lab.view_quality;
+        if (q === "smoke") {
+          ctx.filter = "blur(40px)";
+          for (let k = 0; k < 7; k++) blob(200 + k * 110 + Math.sin(time + k) * 30, 260 + Math.cos(time * 0.7 + k) * 60, 200, 140, 0, "#cfcfcf", 0.55);
+          ctx.filter = "none";
+        }
+        if (q === "glare") {
+          const gr = ctx.createRadialGradient(480, 260, 0, 480, 260, 300);
+          gr.addColorStop(0, "rgba(255,255,255,.9)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+          ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
+        }
+        const v = ctx.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, W * 0.62);
+        v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.95)");
+        ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+        ctx.restore();
+      }
 
-  // scope vignette
-  const v = ctx.createRadialGradient(W / 2, H / 2, H * 0.35, W / 2, H / 2, W * 0.62);
-  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.95)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
-  ctx.restore();
-}
-
-// ---------- loop ----------
-function frame(t) {
-  const dt = Math.max(0, Math.min(0.1, (t - last) / 1000)); last = t;
-  if (!useVideo && playing) clock += dt;
-  if (now() >= END) { seek(END - 0.01); setPlaying(false); }
-  let i = 0; while (i + 1 < F.length && F[i + 1].t <= now()) i++;
-  if (i !== idx) {
-    idx = i; render(i);
-    if (F[i].alert && !decisions[F[i].t]) setPlaying(false);   // the system stops and waits for the surgeon
-  }
-  if (!useVideo) draw(F[idx], t / 1000);
-  renderTruth(now());
-  $('playhead').style.left = (now() / END * 100) + '%';
-  $('time').textContent = `${fmt(now())} / ${fmt(END)}`;
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);
-</script>
-</body>
+      // ---------- loop ----------
+      function frame(t) {
+        const dt = Math.max(0, Math.min(0.1, (t - last) / 1000));
+        last = t;
+        if (!useVideo && playing) clock += dt;
+        if (now() >= END) { seek(END - 0.01); setPlaying(false); }
+        let i = 0;
+        while (i + 1 < F.length && F[i + 1].t <= now()) i++;
+        if (i !== idx) {
+          idx = i;
+          render(i);
+          if (F[i].alert && !decisions[F[i].t]) setPlaying(false); // the system stops and waits for the surgeon
+        }
+        if (!useVideo) draw(F[idx], t / 1000);
+        renderLive(now());
+        if (hasBoxes && Math.floor(now() * 4) !== drawBoxes.q) { drawBoxes.q = Math.floor(now() * 4); drawBoxes(); }
+        $("playhead").style.left = (now() / END) * 100 + "%";
+        $("time").textContent = `${fmt(now())} / ${fmt(END)}`;
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    </script>
+  </body>
 </html>
