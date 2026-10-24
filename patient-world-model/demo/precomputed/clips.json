@@ -1,0 +1,79 @@
+[
+ {
+  "video_id": "endo166",
+  "source": "endoscapes",
+  "op": 166,
+  "video": "endo166.mp4",
+  "t_start": 0,
+  "t_end": 93,
+  "n_frames": 94,
+  "model": "gemini-4-argon",
+  "detect_model": "gemini-3.8-flash",
+  "prompt": "v2.txt",
+  "experts_cvs_t": 64,
+  "agreement": {
+   "keyframes": 13,
+   "C1": 0.7692307692307693,
+   "C1_caught": [
+    4,
+    7
+   ],
+   "C2": 0.7692307692307693,
+   "C2_caught": [
+    3,
+    6
+   ],
+   "C3": 0.8461538461538461,
+   "C3_caught": [
+    4,
+    5
+   ]
+  },
+  "credit": "Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0) \u00b7 run by Igor Lima (Second Look prototype)"
+ },
+ {
+  "video_id": "endo198",
+  "source": "endoscapes",
+  "op": 198,
+  "video": "endo198.mp4",
+  "t_start": 0,
+  "t_end": 153,
+  "n_frames": 154,
+  "model": "gemini-4-argon",
+  "detect_model": "gemini-3.8-flash",
+  "prompt": "v2.txt",
+  "experts_cvs_t": 139,
+  "agreement": {
+   "keyframes": 25,
+   "C1": 0.92,
+   "C1_caught": [
+    4,
+    6
+   ],
+   "C2": 0.88,
+   "C2_caught": [
+    3,
+    6
+   ],
+   "C3": 0.92,
+   "C3_caught": [
+    0,
+    2
+   ]
+  },
+  "credit": "Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0) \u00b7 run by Igor Lima (Second Look prototype)"
+ },
+ {
+  "video_id": "VID74",
+  "n_frames": 91,
+  "t_start": 381,
+  "t_end": 561,
+  "watch_patients": [
+   "P1",
+   "P3"
+  ],
+  "branch_t": 435,
+  "video": "VID74_381-561.mp4",
+  "source": "cholect50"
+ }
+]

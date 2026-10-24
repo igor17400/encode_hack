@@ -1,0 +1,43 @@
+[
+ {
+  "patient_id": "P1",
+  "name": "Routine",
+  "story": "Elective cholecystectomy for uncomplicated gallstones.",
+  "modifiers": {},
+  "risk_factors": []
+ },
+ {
+  "patient_id": "P2",
+  "name": "Acute cholecystitis",
+  "story": "Inflamed, thickened gallbladder; tissue planes are oedematous and bleed easily.",
+  "modifiers": {
+   "skeletonise_factor": 1.8,
+   "bleed_factor": 2.0
+  },
+  "risk_factors": [
+   "inflammation"
+  ]
+ },
+ {
+  "patient_id": "P3",
+  "name": "Prior surgery",
+  "story": "Adhesions from an old abdominal operation obscure Calot's triangle at the start.",
+  "modifiers": {
+   "adhesions_at_start": true
+  },
+  "risk_factors": [
+   "adhesions"
+  ]
+ },
+ {
+  "patient_id": "P4",
+  "name": "Short cystic duct",
+  "story": "Short cystic duct; the common bile duct lies close to the clip site.",
+  "modifiers": {
+   "cvs_violation_is_injury": true
+  },
+  "risk_factors": [
+   "short_cystic_duct"
+  ]
+ }
+]

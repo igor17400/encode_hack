@@ -1,0 +1,219 @@
+{
+ "name": "E5_world_model",
+ "metrics": {
+  "P2": {
+   "lessons": [],
+   "agent": {
+    "episodes": 5,
+    "mean_violations": 0.0,
+    "injury_rate": 0.0,
+    "completion_rate": 0.2,
+    "mean_reward": -25.4,
+    "violations_per_episode": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "completed_per_episode": [
+     false,
+     false,
+     false,
+     false,
+     true
+    ],
+    "step_sources": {
+     "argon": 122
+    },
+    "mean_violations_check": 0.0
+   },
+   "agent_lessons": {
+    "episodes": 5,
+    "mean_violations": 0.0,
+    "injury_rate": 0.0,
+    "completion_rate": 0.8,
+    "mean_reward": -14.4,
+    "violations_per_episode": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "completed_per_episode": [
+     true,
+     true,
+     false,
+     true,
+     true
+    ],
+    "step_sources": {
+     "argon": 106
+    },
+    "mean_violations_check": 0.0
+   },
+   "random": {
+    "episodes": 5,
+    "mean_violations": 3.8,
+    "injury_rate": 0.4,
+    "completion_rate": 0.0,
+    "mean_reward": -99.0,
+    "violations_per_episode": [
+     3,
+     4,
+     6,
+     3,
+     5
+    ],
+    "completed_per_episode": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "step_sources": {
+     "argon": 90
+    },
+    "mean_violations_check": 4.2
+   },
+   "expert_replay": {
+    "episodes": 10,
+    "mean_violations": 0.2,
+    "injury_rate": 0.0,
+    "completion_rate": 1.0,
+    "mean_reward": -8.4,
+    "violations_per_episode": [
+     0,
+     0,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "note": "from the rules-dynamics run"
+   }
+  },
+  "P4": {
+   "lessons": [],
+   "agent": {
+    "episodes": 5,
+    "mean_violations": 0.0,
+    "injury_rate": 0.0,
+    "completion_rate": 0.8,
+    "mean_reward": -9.8,
+    "violations_per_episode": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "completed_per_episode": [
+     true,
+     true,
+     false,
+     true,
+     true
+    ],
+    "step_sources": {
+     "argon": 86
+    },
+    "mean_violations_check": 0.0
+   },
+   "agent_lessons": {
+    "episodes": 5,
+    "mean_violations": 0.0,
+    "injury_rate": 0.0,
+    "completion_rate": 0.8,
+    "mean_reward": -11.4,
+    "violations_per_episode": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "completed_per_episode": [
+     true,
+     true,
+     false,
+     true,
+     true
+    ],
+    "step_sources": {
+     "argon": 94
+    },
+    "mean_violations_check": 0.0
+   },
+   "random": {
+    "episodes": 5,
+    "mean_violations": 2.2,
+    "injury_rate": 1.0,
+    "completion_rate": 0.0,
+    "mean_reward": -94.0,
+    "violations_per_episode": [
+     2,
+     2,
+     4,
+     3,
+     5
+    ],
+    "completed_per_episode": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "step_sources": {
+     "argon": 31
+    },
+    "mean_violations_check": 3.2
+   },
+   "expert_replay": {
+    "episodes": 10,
+    "mean_violations": 0.0,
+    "injury_rate": 0.0,
+    "completion_rate": 1.0,
+    "mean_reward": 0.4,
+    "violations_per_episode": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "note": "from the rules-dynamics run"
+   }
+  }
+ },
+ "created_at": 1792854985.038503,
+ "config": {
+  "episodes": 5,
+  "dynamics": "world_model",
+  "max_steps": 25,
+  "parts": [
+   "E5wm_P2_agent_1792852395",
+   "E5wm_P2_agent_lessons_1792852313",
+   "E5wm_P2_random_1792854104",
+   "E5wm_P4_agent_1792852395",
+   "E5wm_P4_agent_lessons_1792852313",
+   "E5wm_P4_random_1792854104"
+  ],
+  "step_sources": {
+   "argon": 529
+  }
+ },
+ "note": "In-context learning through lessons stored in Atlas; no weights are trained."
+}

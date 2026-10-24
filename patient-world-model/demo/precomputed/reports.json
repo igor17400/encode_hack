@@ -1,0 +1,114 @@
+[
+ {
+  "_id": "0c6b820abb6d469db6ce3b905a6e641a",
+  "session_id": "recording_VID74_P1",
+  "kind": "watch",
+  "patient_id": "P1",
+  "text": "During this watch session for an elective cholecystectomy simulation, a 'clip_before_cvs' alert was triggered at t=391 and automatically acknowledged by the human operator for recording purposes. Between t=411 and t=561, the system logged numerous verification contradictions where anatomical structures (cystic duct, cystic artery, cystic plate, and gallbladder) were prematurely marked as skeletonised or clipped despite ongoing hook dissection and out-of-order clipping and cutting sequences. Specifically, the cystic duct underwent an unusual sequence of repeated dissections, cutting, and re-clipping (reaching 8 clips total), while the cystic artery was left clipped (4 clips) but uncut during the gallbladder dissection phase. No frames were held back during the session, which concluded with a final state indicating no bleeding, a 3/3 CVS score, and the common bile duct marked as at risk.",
+  "key_events": [
+   "t=391: 'clip_before_cvs' alert triggered and automatically acknowledged for recording.",
+   "t=411\u2013441: Verification contradictions logged for premature skeletonised/clipped states of the gallbladder, cystic plate, duct, and artery while hook dissection continued.",
+   "t=441: Cystic duct engaged with scissors (t=417) after a single clip (t=415) and further dissected with a hook (t=423).",
+   "t=471\u2013501: System phase marked as clipping-and-cutting despite observations showing exclusive hook dissection of Calot's triangle structures.",
+   "t=531\u2013561: Anomalous sequences recorded on the cystic duct, including repeated dissection, cutting (t=537, t=539), and subsequent re-clipping (t=551\u2013557), alongside progression to gallbladder-dissection before cutting the cystic artery."
+  ],
+  "violations": [
+   "clip_before_cvs"
+  ],
+  "n_events": 19,
+  "created_at": 1792855020.658976,
+  "model": "gemini-4-argon"
+ },
+ {
+  "_id": "e40eeedc0e054fbc98b1237dafaab5f8",
+  "session_id": "recording_VID74_P3",
+  "kind": "watch",
+  "patient_id": "P3",
+  "text": "During this watch session for synthetic patient P3 (characterised by adhesions from prior surgery), two safety alerts for clipping before achieving the Critical View of Safety (CVS) were triggered at t=391 and t=415. Both alerts were automatically acknowledged by the system due to the recording mode. Throughout the procedure (from t=411 to t=561), numerous verification contradictions occurred, indicating ongoing hook and scissors dissection of the cystic duct, artery, and plate despite these structures already being marked as skeletonised, clipped, or cut. The session concluded in the gallbladder-dissection phase with an incomplete CVS (2/3), no bleeding, and the common bile duct marked as at risk.",
+  "key_events": [
+   "t=391: Alert for clipping before CVS triggered and auto-acknowledged.",
+   "t=411: Verification contradictions noted for ongoing dissection of structures already marked as skeletonised or clipped.",
+   "t=415: Second alert for clipping before CVS triggered and auto-acknowledged.",
+   "t=441-531: Multiple verification contradictions recorded as hook and scissors dissection continued on the cystic duct, artery, and plate despite their clipped/skeletonised status.",
+   "t=561: Impossible sequence contradiction logged where the cystic duct was cut (t=537-539) prior to further dissection (t=543) and clipping (t=551-557)."
+  ],
+  "violations": [
+   "clip_before_cvs"
+  ],
+  "n_events": 20,
+  "created_at": 1792855028.0882828,
+  "model": "gemini-4-argon"
+ },
+ {
+  "_id": "eb0fb96109d0428c8183b5cf0151eb31",
+  "session_id": "recording_P2_agent",
+  "kind": "episodes",
+  "patient_id": "P2",
+  "text": "The agent conducted a 10-episode simulation on synthetic patient P2, presenting with acute cholecystitis and an inflamed, thickened gallbladder. Throughout the session, the agent successfully completed the procedure in three episodes (episodes 1, 5, and 6), while the remaining seven episodes timed out at 25 steps without completion. No safety violations or tissue injuries occurred in any of the episodes, requiring no corrective handling for adverse events. Additionally, no lessons were utilized or written during the entire simulation.",
+  "key_events": [
+   "Episode 1: Completed successfully in 24 steps with a reward of -17 and no violations or injuries.",
+   "Episodes 2-4: Failed to complete after reaching 25 steps, with rewards ranging from -31 to -28 and no safety violations.",
+   "Episode 5: Completed successfully in 23 steps, achieving the highest session reward of -16 with no injuries.",
+   "Episode 6: Completed successfully in 24 steps with a reward of -17 and zero violations.",
+   "Episodes 7-10: Ended without completion at 25 steps each, maintaining zero violations and zero injuries."
+  ],
+  "violations": [],
+  "n_events": 10,
+  "created_at": 1792855045.744587,
+  "model": "gemini-4-argon"
+ },
+ {
+  "_id": "3e9602cb188a4184a30dd579d5bc70d9",
+  "session_id": "recording_P2_agent_lessons",
+  "kind": "episodes",
+  "patient_id": "P2",
+  "text": "During this 10-episode research simulation of laparoscopic cholecystectomy for a synthetic patient with acute cholecystitis, the agent successfully completed 5 episodes (1, 3, 5, 6, and 8) and failed to complete the remaining 5 episodes. No safety events occurred throughout the session, as there were zero violations and no injuries recorded across all attempts. The agent did not utilize or write any lessons during these episodes to handle the incomplete attempts. Overall, rewards ranged from -11 in the most efficient completed episode to -31 in several incomplete episodes.",
+  "key_events": [
+   "Episode 1: Completed in 23 steps with a reward of -13, no violations, and no injury.",
+   "Episode 2: Incomplete at 25 steps with a reward of -28, no violations, and no injury.",
+   "Episode 6: Completed in 21 steps with a reward of -14, no violations, and no injury.",
+   "Episode 8: Achieved the highest reward (-11) while completing the task in 21 steps without injury or violations.",
+   "Episode 10: Ended incomplete at 25 steps with a reward of -31, maintaining zero violations and no injury."
+  ],
+  "violations": [],
+  "n_events": 10,
+  "created_at": 1792855052.579755,
+  "model": "gemini-4-argon"
+ },
+ {
+  "_id": "87f42e1cad694731895e761febf6bdf3",
+  "session_id": "recording_P4_agent",
+  "kind": "episodes",
+  "patient_id": "P4",
+  "text": "The agent conducted 10 simulation episodes on synthetic patient P4, characterized by a short cystic duct where the common bile duct lies close to the clip site. Across the entire session, there were no safety violations or injuries recorded. The agent successfully completed 9 out of the 10 episodes, only failing to complete episode 7 after reaching 25 steps. No lessons were used or written by the agent during the handling of these episodes.",
+  "key_events": [
+   "Episodes 1-3: Completed in 15 steps each with a reward of -5 and no violations.",
+   "Episode 4: Completed in 21 steps with a reward of -11 and no safety incidents.",
+   "Episode 7: Failed to complete within 25 steps, resulting in a reward of -31, though no injuries or violations occurred.",
+   "Episode 8: Completed in 25 steps with a reward of -18 and no violations.",
+   "Episode 10: Returned to optimal performance, completing in 15 steps with a reward of -5."
+  ],
+  "violations": [],
+  "n_events": 10,
+  "created_at": 1792855080.98293,
+  "model": "gemini-4-argon"
+ },
+ {
+  "_id": "2ddcd12745524695b819d98569c0da29",
+  "session_id": "recording_P4_agent_lessons",
+  "kind": "episodes",
+  "patient_id": "P4",
+  "text": "During this simulation session involving synthetic patient P4 with a short cystic duct, the agent successfully completed all 10 episodes. Despite the common bile duct lying close to the clip site, no safety events, violations, or injuries occurred in any of the trials. Because there were no adverse events to handle, the agent did not write or utilize any lessons throughout the session. Step counts per episode ranged from 15 to 24, with rewards ranging between -21 and -5.",
+  "key_events": [
+   "Episode 1: Completed in 15 steps with a reward of -5, the highest efficiency of the session.",
+   "Episode 3: Completed in 24 steps with a reward of -14, representing the highest step count.",
+   "Episode 4: Completed in 22 steps with the lowest session reward of -21, with no violations or injuries.",
+   "Episodes 5 and 6: Both completed in 16 steps with a reward of -6 and no safety incidents.",
+   "Episode 10: Final episode completed safely in 16 steps with a reward of -6 and zero lessons used."
+  ],
+  "violations": [],
+  "n_events": 10,
+  "created_at": 1792855087.357292,
+  "model": "gemini-4-argon"
+ }
+]

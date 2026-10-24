@@ -1,0 +1,25 @@
+{
+ "models": {
+  "world_model": "gemini-4-argon",
+  "perception_agent": "gemini-3.8-flash",
+  "embedding": "gemini-embedding-2",
+  "embedding_dim": 768
+ },
+ "n_transitions": 4505,
+ "n_reference_frames": 10178,
+ "n_videos": 50,
+ "n_labelled_seconds": 100863,
+ "split": {
+  "train": 35,
+  "val": 5,
+  "test": 10
+ },
+ "e4": {
+  "videos": 50,
+  "clip_before_cvs": 0.2
+ },
+ "phase_check": {
+  "frames": 1128,
+  "accuracy": 0.783
+ }
+}
