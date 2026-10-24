@@ -37,6 +37,10 @@ Demo specifics:
 - **Train the robot:** policies are `random`, `expert_replay`, `agent`, `agent_lessons`. The offline recordings only have `random` and `expert_replay` until the live run.
 
 More routes:
+- `GET /clips` now lists **Endoscapes clips** (`source: "endoscapes"`, `op`, `video`, `experts_cvs_t`, `model_cvs_t`, `agreement`) alongside the CholecT50 clip. Watch on an Endoscapes clip replays Igor's recorded run (no model calls) and ends with `state.decision_point: true`.
+- `GET /clip_video/{name}`: mp4 for a clip (`clips[i].video`).
+- `GET /expert_views?clip=&t=`: how surgeons judged visually similar views (nearest cached second; verdicts per criterion, `score`, `source`).
+- `GET /recorded/{name}`: a recorded demo file from `demo/precomputed` (used by the Story screen), read-only.
 - `GET /similar_frames?path=VID74/000501.png&k=3`: closest real train frames by image similarity (`score`, `path`, `video_id`, `t`).
 - `GET /reports?session_id=`: Argon session and batch reports.
 - `GET /episodes?patient_id=&dynamics=rules|world_model` and `GET /episodes/{episode_id}` (full `trace`).

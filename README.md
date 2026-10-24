@@ -82,10 +82,13 @@ python -m eval.next_step_eval --split val --n 50          # prompt tuning (never
 python -m eval.next_step_eval --split test --n 200        # E1 + E2 headline number
 python -m eval.perception_eval --n 200                    # E3 perception
 python -m eval.agent_eval --patients P2 P4 --episodes 10  # E5 robot safety (biggest Gemini job)
+python pipeline/06_image_embed.py                         # image embeddings for multimodal frame search
+python pipeline/07_expert_views.py                        # cache "how surgeons judged similar views" (Igor's library, read-only)
 python demo/record.py --mode live                         # record every demo path for the fallback
+python demo/record_endoscapes.py                          # world-model steps from Endoscapes decision moments
 uvicorn backend.api:app --reload                          # API on :8000 (docs at /docs)
 ```
-Tests that need no credentials: `pytest`. Offline demo (no Wi-Fi, no keys): `DEMO_MODE=precomputed uvicorn backend.api:app`.
+`.env` also takes `EXPERT_MONGODB_URI` (Igor's expert library; a read-only Atlas user is best). Tests that need no credentials: `pytest`. Offline demo (no Wi-Fi, no keys): `DEMO_MODE=precomputed uvicorn backend.api:app`.
 
 Frontend (Vite + React + Tailwind, `frontend/`):
 ```bash
@@ -152,12 +155,15 @@ Reading these honestly:
 
 | Feature | What it does here |
 | --- | --- |
-| Vector Search: `transitions` | Retrieves the real transitions the world model must cite (filtered to train split + phase) |
-| Vector Search: `frames` | Finds the closest real frame to an imagined state |
-| Vector Search: `lessons` | Robot agent memory (milestone M6) |
-| Atlas Search: `reports`, `lessons` | "Search past runs" box |
-| Change streams | Push `world_state`, `predictions` and `alerts` to the browser over SSE |
+| Vector Search: `transitions` | Retrieves the real transitions the world model must cite (filtered to the train split + phase) |
+| Vector Search: `frames` | Closest real frame to an imagined state |
+| Vector Search: `frames.image_embedding` (`frames_img_vec`) | Multimodal search: real frames visually similar to a Watch frame (gemini-embedding-2 image embeddings) |
+| Vector Search: `lessons`, `reports` | Robot agent memory; semantic search over session reports |
+| Hybrid search (`$rankFusion` of `$search` + `$vectorSearch`) | "Search past runs" box, showing which pipeline matched each hit |
+| Atlas Search: `reports`, `lessons` | The full-text half of hybrid search |
+| Change streams | Push `world_state`, `predictions`, `alerts`, `observations`, episode steps and reports to the browser over SSE |
 | Binary vectors | Embeddings stored as float32 `BinData` to keep storage small |
+| Igor's `expert_frames` (separate cluster, read-only) | "How surgeons judged similar views": filtered vector search over 3,437 surgeon-labelled Endoscapes frames |
 
 ## Honest notes
 
@@ -172,4 +178,7 @@ Reading these honestly:
   - **CholecT50** (CAMMA, University of Strasbourg), CC BY-NC-SA 4.0, via the [Hugging Face copy](https://huggingface.co/datasets/Voxel51/cholect50) and the official Challenge Validation set.
   - Cite: C.I. Nwoye et al., *Rendezvous: Attention Mechanisms for the Recognition of Surgical Action Triplets in Endoscopic Videos*, Medical Image Analysis 78 (2022) 102433.
   - Split: C.I. Nwoye, N. Padoy, *Data Splits and Metrics for Benchmarking Methods on Surgical Action Triplet Datasets*, arXiv:2204.05235.
+  - **Endoscapes2023** (CAMMA), CC BY-NC-SA 4.0: Murali et al., arXiv:2312.12429; Mascagni et al., *Scientific Data* 12:331 (2025). Used through Igor Lima's precomputed CVS runs (Second Look prototype, `main` branch), vendored in `demo/endoscapes/`, and his expert library (read-only).
+  - Pixel world-model clip: Igor's Wan 2.2 preview (AI-generated, labelled as such).
 - Patients are synthetic and hand-written. No real patient data.
+- Future iterations: see [CLAUDE.md](CLAUDE.md) for layout, commands, invariants and gotchas.
