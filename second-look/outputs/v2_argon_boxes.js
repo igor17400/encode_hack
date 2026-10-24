@@ -132,7 +132,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 1.0,
@@ -240,7 +259,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 2.0,
@@ -374,7 +412,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 3.0,
@@ -498,7 +555,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 4.0,
@@ -622,7 +698,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 5.0,
@@ -746,7 +841,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 6.0,
@@ -870,7 +984,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 7.0,
@@ -994,7 +1127,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 8.0,
@@ -1138,7 +1290,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 9.0,
@@ -1252,7 +1423,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 10.0,
@@ -1366,7 +1556,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 11.0,
@@ -1510,7 +1719,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 12.0,
@@ -1644,7 +1872,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 13.0,
@@ -1768,7 +2015,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 14.0,
@@ -1912,7 +2178,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 15.0,
@@ -2042,7 +2327,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 16.0,
@@ -2166,7 +2470,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 17.0,
@@ -2310,7 +2633,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 18.0,
@@ -2465,7 +2807,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 19.0,
@@ -2596,7 +2957,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 20.0,
@@ -2745,7 +3125,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 21.0,
@@ -2880,7 +3279,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 22.0,
@@ -3019,7 +3437,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 23.0,
@@ -3168,7 +3605,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 24.0,
@@ -3323,7 +3779,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 25.0,
@@ -3484,7 +3959,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 26.0,
@@ -3625,7 +4119,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 27.0,
@@ -3784,7 +4297,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": false,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 28.0,
@@ -3929,7 +4461,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 29.0,
@@ -4094,7 +4645,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 30.0,
@@ -4245,7 +4815,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 31.0,
@@ -4388,7 +4977,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 32.0,
@@ -4536,7 +5144,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 33.0,
@@ -4683,7 +5310,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 34.0,
@@ -4840,7 +5486,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 35.0,
@@ -4987,7 +5652,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 36.0,
@@ -5150,7 +5834,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 37.0,
@@ -5321,7 +6024,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 38.0,
@@ -5472,7 +6194,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 39.0,
@@ -5623,7 +6364,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 40.0,
@@ -5778,7 +6538,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 41.0,
@@ -5915,7 +6694,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 42.0,
@@ -6076,7 +6874,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 43.0,
@@ -6223,7 +7040,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 44.0,
@@ -6378,7 +7214,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 45.0,
@@ -6525,7 +7380,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 46.0,
@@ -6682,7 +7556,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 47.0,
@@ -6833,7 +7726,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 48.0,
@@ -7018,7 +7930,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 49.0,
@@ -7195,7 +8126,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 50.0,
@@ -7366,7 +8316,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 51.0,
@@ -7537,7 +8506,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 52.0,
@@ -7704,7 +8692,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 53.0,
@@ -7865,7 +8872,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 54.0,
@@ -8030,7 +9056,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 55.0,
@@ -8211,7 +9256,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 56.0,
@@ -8396,7 +9460,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 57.0,
@@ -8571,7 +9654,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 58.0,
@@ -8760,7 +9862,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 59.0,
@@ -8945,7 +10066,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 60.0,
@@ -9118,7 +10258,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 61.0,
@@ -9291,7 +10450,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 62.0,
@@ -9482,7 +10660,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 63.0,
@@ -9673,7 +10870,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 64.0,
@@ -9860,7 +11076,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 65.0,
@@ -10037,7 +11272,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 66.0,
@@ -10218,7 +11472,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 67.0,
@@ -10395,7 +11668,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 68.0,
@@ -10572,7 +11864,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 69.0,
@@ -10755,7 +12066,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 70.0,
@@ -10946,7 +12276,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 71.0,
@@ -11116,7 +12465,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 72.0,
@@ -11292,7 +12660,32 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": true,
+     "since": 70.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": [
+    {
+     "what": "c2",
+     "on": true,
+     "since": 70.0
+    }
+   ]
   },
   {
    "t": 73.0,
@@ -11454,7 +12847,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": true,
+     "since": 70.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 74.0,
@@ -11616,7 +13028,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": true,
+     "since": 70.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 75.0,
@@ -11811,7 +13242,31 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": [
+    {
+     "what": "c2",
+     "on": false
+    }
+   ]
   },
   {
    "t": 76.0,
@@ -11994,7 +13449,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 77.0,
@@ -12163,7 +13637,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 78.0,
@@ -12340,7 +13833,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 79.0,
@@ -12499,7 +14011,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 80.0,
@@ -12678,7 +14209,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 81.0,
@@ -12861,7 +14411,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 82.0,
@@ -13038,7 +14607,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 83.0,
@@ -13239,7 +14827,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 84.0,
@@ -13412,7 +15019,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 85.0,
@@ -13603,7 +15229,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 86.0,
@@ -13780,7 +15425,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 87.0,
@@ -13943,7 +15607,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 88.0,
@@ -14124,7 +15807,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 89.0,
@@ -14311,7 +16013,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 90.0,
@@ -14500,7 +16221,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 91.0,
@@ -14695,7 +16435,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 92.0,
@@ -14888,7 +16647,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 93.0,
@@ -15073,7 +16851,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 94.0,
@@ -15242,7 +17039,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 95.0,
@@ -15439,7 +17255,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 96.0,
@@ -15636,7 +17471,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 97.0,
@@ -15813,7 +17667,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 98.0,
@@ -15990,7 +17863,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 99.0,
@@ -16167,7 +18059,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 100.0,
@@ -16344,7 +18255,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 101.0,
@@ -16487,7 +18417,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 102.0,
@@ -16650,7 +18599,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 103.0,
@@ -16814,7 +18782,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 104.0,
@@ -16973,7 +18960,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 105.0,
@@ -17118,7 +19124,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 106.0,
@@ -17263,7 +19288,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 107.0,
@@ -17408,7 +19452,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 108.0,
@@ -17573,7 +19636,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 109.0,
@@ -17741,7 +19823,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 110.0,
@@ -17956,7 +20057,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 111.0,
@@ -18129,7 +20249,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 112.0,
@@ -18310,7 +20449,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 113.0,
@@ -18495,7 +20653,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 114.0,
@@ -18692,7 +20869,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 115.0,
@@ -18875,7 +21071,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 116.0,
@@ -19066,7 +21281,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 117.0,
@@ -19249,7 +21483,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 118.0,
@@ -19448,7 +21701,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 119.0,
@@ -19621,7 +21893,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 120.0,
@@ -19800,7 +22091,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 121.0,
@@ -19983,7 +22293,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 122.0,
@@ -20170,7 +22499,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 123.0,
@@ -20353,7 +22701,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 124.0,
@@ -20536,7 +22903,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 125.0,
@@ -20727,7 +23113,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 126.0,
@@ -20904,7 +23309,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 127.0,
@@ -21071,7 +23495,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 128.0,
@@ -21246,7 +23689,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 129.0,
@@ -21433,7 +23895,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 130.0,
@@ -21612,7 +24093,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 131.0,
@@ -21791,7 +24291,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 132.0,
@@ -21982,7 +24501,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 133.0,
@@ -22173,7 +24711,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 134.0,
@@ -22350,7 +24907,37 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": true,
+     "since": 132.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": [
+    {
+     "what": "c1",
+     "on": true,
+     "since": 132.0
+    },
+    {
+     "what": "c2",
+     "on": true,
+     "since": 132.0
+    }
+   ]
   },
   {
    "t": 135.0,
@@ -22525,7 +25112,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": true,
+     "since": 132.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 136.0,
@@ -22707,7 +25313,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": true,
+     "since": 132.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 137.0,
@@ -22893,7 +25518,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": true,
+     "since": 132.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 138.0,
@@ -23081,7 +25725,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": true,
+     "since": 132.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 139.0,
@@ -23257,7 +25920,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": true,
+     "since": 132.0
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 140.0,
@@ -23439,7 +26121,31 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": [
+    {
+     "what": "c2",
+     "on": false
+    }
+   ]
   },
   {
    "t": 141.0,
@@ -23625,7 +26331,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": true,
+     "since": 132.0
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 142.0,
@@ -23807,7 +26532,31 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": [
+    {
+     "what": "c1",
+     "on": false
+    }
+   ]
   },
   {
    "t": 143.0,
@@ -23997,7 +26746,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 144.0,
@@ -24173,7 +26941,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 145.0,
@@ -24347,7 +27134,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 146.0,
@@ -24514,7 +27320,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 147.0,
@@ -24707,7 +27532,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 148.0,
@@ -24879,7 +27723,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 149.0,
@@ -25062,7 +27925,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 150.0,
@@ -25225,7 +28107,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 151.0,
@@ -25405,7 +28306,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 152.0,
@@ -25572,7 +28492,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   },
   {
    "t": 153.0,
@@ -25749,7 +28688,26 @@ window.TIMELINE = {
     }
    },
    "duct_confirmed": true,
-   "alert": null
+   "alert": null,
+   "cvs_state": {
+    "c1": {
+     "on": false,
+     "since": null
+    },
+    "c2": {
+     "on": false,
+     "since": null
+    },
+    "c3": {
+     "on": false,
+     "since": null
+    },
+    "cvs": {
+     "on": false,
+     "since": null
+    }
+   },
+   "events": []
   }
  ],
  "truth": [

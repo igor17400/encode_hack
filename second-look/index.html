@@ -86,6 +86,23 @@
       .dot.warn { border-color: var(--warn); color: var(--warn); }
       .crit .n { font-size: 17px; font-weight: 600; }
       .crit .d { font-size: 12.5px; color: var(--ink-3); }
+      .crit .since { font-size: 12.5px; color: var(--ok); font-weight: 600; margin-top: 2px; }
+      .met { font-size: 14px; color: var(--ink-2); margin: -8px 0 12px; }
+      /* moments a condition is reached: toast over the image, labelled pin on the timeline */
+      #toasts { position: absolute; top: 64px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; align-items: center; pointer-events: none; }
+      .toast { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 14px; background: rgba(10,12,14,.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(62,207,142,.5); color: var(--ink); font-weight: 600; font-size: 15px; animation: toast 4.5s ease forwards; white-space: nowrap; }
+      .toast b { width: 24px; height: 24px; border-radius: 50%; background: var(--ok); color: #06140d; display: grid; place-items: center; font-size: 14px; }
+      .toast small { color: var(--ink-3); font-weight: 500; }
+      .toast.off { border-color: rgba(245,181,68,.5); }
+      .toast.off b { background: var(--warn); }
+      .toast.big { font-size: 20px; padding: 14px 22px; border-color: var(--ok); box-shadow: 0 0 40px rgba(62,207,142,.35); }
+      @keyframes toast { 0% { opacity: 0; transform: translateY(-8px); } 8%, 85% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+      .flag { position: absolute; top: -34px; transform: translateX(-1px); display: flex; align-items: flex-end; gap: 0; pointer-events: none; }
+      .flag i { width: 2px; height: 46px; background: var(--ink); border-radius: 1px; }
+      .flag span { margin-bottom: 26px; background: var(--ink); color: var(--bg); font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 0 6px 6px 0; white-space: nowrap; }
+      .toast.expert { border-color: var(--ink); }
+      .toast.expert b { background: var(--ink); color: var(--bg); }
+      .pin.lbl { width: auto; height: auto; top: -20px; padding: 1px 6px; border-radius: 6px; font-size: 10.5px; font-weight: 700; color: #06140d; }
       .crit .v { text-align: right; }
       .crit .pct { font-size: 20px; font-weight: 650; }
       .crit .ref { font-size: 11.5px; color: var(--ink-3); display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
@@ -115,17 +132,6 @@
       .big.secondary { background: var(--panel-2); color: var(--ink); border: 1px solid var(--line); }
       .done { margin-top: 10px; font-size: 13px; color: var(--ink-2); }
 
-      /* voice: phase 2 preview */
-      .voice .head { display: flex; justify-content: space-between; align-items: center; }
-      .soon { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); border: 1px solid var(--line); letter-spacing: 0; text-transform: none; }
-      .wave { height: 26px; display: flex; align-items: center; gap: 2px; margin: 12px 0 10px; }
-      .wave b { flex: 1; background: var(--ink-3); border-radius: 2px; opacity: 0.35; }
-      .wave b.past { opacity: 0.9; background: var(--ink-2); }
-      .utter { font-size: 15px; }
-      .utter .who { font-size: 12px; color: var(--ink-3); margin-bottom: 2px; }
-      .cue { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px; }
-      .cue.warn { background: var(--warn-bg); color: var(--warn); }
-      .cue.bad { background: var(--bad-bg); color: var(--bad); }
 
       /* bottom: playback for review and demo */
       .bottom { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 10px 20px 16px; }
@@ -175,6 +181,7 @@
         <video id="video" hidden muted playsinline></video>
         <canvas id="canvas" width="960" height="540"></canvas>
         <div id="boxes"></div>
+        <div id="toasts"></div>
         <div class="ov tl"><span class="tag" id="phaseTag"></span></div>
         <div class="ov tr"><span class="tag" id="qual"></span></div>
         <div class="ov bl"><span class="tag dimtag" id="viewTag"></span></div>
@@ -199,6 +206,7 @@
         <div class="block">
           <div class="label">Critical view of safety</div>
           <div class="state" id="cvsState"></div>
+          <div class="met" id="cvsMet"></div>
           <div id="crits"></div>
         </div>
 
@@ -210,11 +218,6 @@
           <div class="inview" id="inview"></div>
         </div>
 
-        <div class="block voice">
-          <div class="head"><div class="label">Voice</div><span class="soon">Phase 2 preview</span></div>
-          <div class="wave" id="wave"></div>
-          <div class="utter" id="utter"></div>
-        </div>
       </div>
     </div>
 
@@ -271,6 +274,7 @@
       const met = (k) => k && k.C1 >= 0.5 && k.C2 >= 0.5 && k.C3 >= 0.5;
       const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg>';
       const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+      const CNAME = { c1: "Two structures", c2: "Triangle cleared", c3: "Cystic plate" };
       const PHASE_COL = {
         preparation: "#3b4f63",
         calot_triangle_dissection: "#4a5866",
@@ -306,7 +310,7 @@
       if (useVideo) { video.src = D.video; video.hidden = false; canvas.hidden = true; }
       $("viewTag").textContent = !useVideo ? "Schematic stand-in · mock labels" : D.model === "none" ? "Not labelled yet" : `AI: ${D.model} · decision support only`;
 
-      let clock = 0, playing = false, last = performance.now(), idx = -1;
+      let prevT = 0, clock = 0, playing = false, last = performance.now(), idx = -1;
       const decisions = {}; // alert t -> {choice, reason}
       const now = () => (useVideo ? video.currentTime : clock);
       function seek(t) {
@@ -347,26 +351,29 @@
       F.filter((f) => f.alert).forEach((f) => pin(f.t, "var(--bad)", "Safety alert"));
       const firstOk = F.find((f) => f.duct_confirmed);
       if (firstOk) pin(firstOk.t, "var(--ok)", "Cystic duct confirmed");
+      // flag: first moment the surgeons' consensus says CVS is achieved, i.e. when clipping is allowed by the checklist
+      const SAFE_AT = T.find(met)?.t;
+      if (SAFE_AT != null) {
+        const fl = document.createElement("div");
+        fl.className = "flag"; fl.style.left = (SAFE_AT / END) * 100 + "%";
+        fl.innerHTML = `<i></i><span>Experts: safe to clip · ${fmt(SAFE_AT)}</span>`;
+        fl.title = "Surgeons' consensus: all three CVS criteria met";
+        $("tl").append(fl);
+      }
+      F.forEach((f) => f.events?.filter((e) => e.on).forEach((e, k) => {
+        const m = document.createElement("div");
+        m.className = "pin lbl"; m.style.left = (f.t / END) * 100 + "%";
+        m.style.transform = `translateX(${-50 + k * 105}%)`; // side by side when several land on the same second
+        m.style.background = "var(--ok)"; m.textContent = e.what === "cvs" ? "CVS" : e.what.toUpperCase();
+        m.title = `${e.what === "cvs" ? "Critical view of safety" : CNAME[e.what]} achieved at ${fmt(f.t)}`;
+        $("tl").append(m);
+      }));
       $("tl").onclick = (e) => {
         const r = $("tl").getBoundingClientRect();
         seek(((e.clientX - r.left) / r.width) * END);
       };
       $("legend").textContent =
         "Top lane: model phase per labelled frame, hatched when the view is not clear. Red pin: safety alert. Green pin: cystic duct confirmed.";
-
-      // ---------- voice preview (phase 2) ----------
-      const WAVE_N = 64;
-      $("wave").innerHTML = Array.from({ length: WAVE_N }, (_, i) =>
-        `<b style="height:${20 + 75 * Math.abs(Math.sin(i * 0.37) * Math.cos(i * 0.11 + 1))}%"></b>`, // ponytail: decorative until real audio exists
-      ).join("");
-      const waveBars = [...$("wave").children];
-      // example lines placed around this case's surgeon labels, always marked as examples
-      const cvsAt = T.find(met)?.t ?? END * 0.75;
-      const EXAMPLES = [
-        { t: Math.max(5, cvsAt - 40), text: "Let's open up the triangle a bit more." },
-        { t: Math.max(10, cvsAt - 15), text: "Is that the artery behind the duct?", cue: ["Anatomy question", "warn"] },
-        { t: cvsAt, text: "Okay, two structures, plate is clear. Clip, please.", cue: ["Clip requested", "bad"] },
-      ];
 
       // ---------- safety rail ----------
       const CRITS = [
@@ -375,30 +382,27 @@
         ["c3", "C3", "Cystic plate", "Lower gallbladder off the liver bed"],
       ];
       $("crits").innerHTML = CRITS.map(
-        ([c, , n, d], i) => `<div class="crit"><div class="dot" id="dot_${c}">${i + 1}</div><div><div class="n">${n}</div><div class="d">${d}</div></div><div class="v"><div class="pct" id="pct_${c}"></div></div></div>`,
+        ([c, , n, d], i) => `<div class="crit"><div class="dot" id="dot_${c}">${i + 1}</div><div><div class="n">${n}</div><div class="d">${d}</div><div class="since" id="since_${c}" hidden></div></div><div class="v"><div class="pct" id="pct_${c}"></div></div></div>`,
       ).join("");
       $("sightings").innerHTML = Array.from({ length: REQ }, () => "<i></i>").join("");
 
       function renderLive(t) {
         const labelled = t >= F[0].t;
-        const g = labelled ? F[idx]?.label.cvs : null;
-        let all = !!g;
-        CRITS.forEach(([c, C]) => {
-          const v = g?.[c], on = g ? yes(v) : false;
-          all = all && on;
+        const g = labelled ? F[idx]?.label.cvs : null, S = labelled ? F[idx]?.cvs_state : null;
+        CRITS.forEach(([c]) => {
+          const v = g?.[c], on = !!S?.[c]?.on;
           $("dot_" + c).className = "dot " + (!g ? "" : on ? "ok" : "warn");
-          $("pct_" + c).textContent = !g ? "–" : typeof v === "number" ? pct(v) : on ? "yes" : "no";
-          $("pct_" + c).style.color = !g ? "var(--ink-3)" : on ? "var(--ok)" : "var(--warn)";
+          $("dot_" + c).textContent = on ? "✓" : CRITS.findIndex((x) => x[0] === c) + 1;
+          $("pct_" + c).textContent = !g ? "–" : typeof v === "number" ? pct(v) : yes(v) ? "yes" : "no";
+          $("pct_" + c).style.color = !g ? "var(--ink-3)" : "var(--ink-2)"; // raw score this frame; the dot and verdict carry the held state
+          $("since_" + c).hidden = !on;
+          if (on) $("since_" + c).textContent = `Achieved at ${fmt(S[c].since)}`;
         });
+        const n = S ? CRITS.filter(([c]) => S[c].on).length : 0, all = !!S?.cvs.on;
         $("cvsState").textContent = !g ? "Waiting" : all ? "Achieved" : "Not yet";
         $("cvsState").className = "state " + (!g ? "" : all ? "ok" : "warn");
+        $("cvsMet").textContent = !g ? "First assessment at " + fmt(F[0].t) : all ? `All three criteria held since ${fmt(S.cvs.since)}` : `${n} of 3 criteria met`;
 
-        const p = Math.min(1, t / END);
-        waveBars.forEach((b, i) => b.classList.toggle("past", i / WAVE_N <= p));
-        const u = [...EXAMPLES].reverse().find((l) => l.t <= t);
-        $("utter").innerHTML = u
-          ? `<div class="who">Surgeon · ${fmt(u.t)} · example line</div>“${u.text}”${u.cue ? `<br><span class="cue ${u.cue[1]}">${u.cue[0]}</span>` : ""}`
-          : '<div class="who">Listening for "clip", "cut" or anatomy questions</div>';
         $("clock").textContent = fmt(t);
       }
 
@@ -434,6 +438,23 @@
       }
       addEventListener("resize", drawBoxes);
       if (useVideo) video.addEventListener("loadedmetadata", drawBoxes);
+
+      function toast(e) {
+        const el = document.createElement("div");
+        const big = e.what === "cvs" && e.on;
+        el.className = "toast" + (e.on ? "" : " off") + (big ? " big" : "") + (e.what === "expert" ? " expert" : "");
+        el.innerHTML = e.what === "expert"
+          ? `<b>⚑</b>Experts: critical view of safety achieved <small>surgeon may proceed to clip</small>`
+          : big
+          ? `<b>✓</b>Critical view of safety achieved`
+          : e.what === "cvs"
+            ? `<b>!</b>Critical view of safety lost`
+            : e.on
+              ? `<b>✓</b>${CNAME[e.what]} achieved <small>since ${fmt(e.since)}</small>`
+              : `<b>!</b>${CNAME[e.what]} no longer seen`;
+        $("toasts").append(el);
+        setTimeout(() => el.remove(), 4600);
+      }
 
       function render(i) {
         const f = F[i], lab = f.label, s = f.state.cystic_duct;
@@ -554,7 +575,10 @@
         if (now() >= END) { seek(END - 0.01); setPlaying(false); }
         let i = 0;
         while (i + 1 < F.length && F[i + 1].t <= now()) i++;
+        if (SAFE_AT != null && playing && prevT < SAFE_AT && now() >= SAFE_AT) toast({ what: "expert", on: true });
+        prevT = now();
         if (i !== idx) {
+          if (i > idx && i - idx <= 2) F.slice(idx + 1, i + 1).forEach((fr) => fr.events?.forEach(toast));
           idx = i;
           render(i);
           if (F[i].alert && !decisions[F[i].t]) setPlaying(false); // the system stops and waits for the surgeon

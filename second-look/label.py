@@ -30,6 +30,7 @@ MODEL = os.environ.get(
     "GEMINI_MODEL", "gemini-3.8-flash"
 )  # confirm exact name at the DeepMind booth
 CONFIRM_CONF = 0.7  # confidence that counts as a confident sighting
+CVS_HOLD = 3  # a criterion counts as achieved (or lost) only after this many labelled frames in a row agree
 CONFIRM_FRAMES = (
     2  # confident sightings, in clear frames, before the duct counts as confirmed
 )
@@ -125,7 +126,30 @@ def sample_frames(path, every):
 def build_timeline(labels):
     """Fold per-frame labels [(t, label)] into a running world state and apply the safety rule."""
     seen, out, alerted = {}, [], False
+    crit = {c: {"on": False, "since": None, "yes": 0, "no": 0, "start": None} for c in ("c1", "c2", "c3")}
+    cvs_on = False
     for t, lab in labels:
+        # CVS criteria with hysteresis, so one odd frame neither announces nor withdraws a criterion
+        events, cvs = [], lab.get("cvs")
+        if isinstance(cvs, dict):
+            for c, st in crit.items():
+                if is_yes(cvs.get(c)):
+                    st["start"] = t if st["yes"] == 0 else st["start"]
+                    st["yes"], st["no"] = st["yes"] + 1, 0
+                else:
+                    st["yes"], st["no"] = 0, st["no"] + 1
+                if not st["on"] and st["yes"] >= CVS_HOLD:
+                    st["on"], st["since"] = True, st["start"]
+                    events.append({"what": c, "on": True, "since": st["start"]})
+                elif st["on"] and st["no"] >= CVS_HOLD:
+                    st["on"], st["since"] = False, None
+                    events.append({"what": c, "on": False})
+            now_on = all(st["on"] for st in crit.values())
+            if now_on != cvs_on:
+                cvs_on = now_on
+                events.append({"what": "cvs", "on": now_on, "since": max(st["since"] for st in crit.values()) if now_on else None})
+        cvs_state = {c: {"on": st["on"], "since": st["since"]} for c, st in crit.items()}
+        cvs_state["cvs"] = {"on": cvs_on, "since": max(st["since"] for st in crit.values()) if cvs_on else None}
         clear = lab.get("view_quality") == "clear"
         for s in lab.get("visible_structures", []):
             st = seen.setdefault(
@@ -158,6 +182,8 @@ def build_timeline(labels):
                 "state": {k: dict(v) for k, v in seen.items()},
                 "duct_confirmed": duct_confirmed,
                 "alert": alert,
+                "cvs_state": cvs_state,
+                "events": events,
             }
         )
     return out
@@ -320,6 +346,13 @@ def selftest():
     tr = [{"t": 0, "C1": 1, "C2": 1, "C3": 0}, {"t": 5, "C1": 1, "C2": 1, "C3": 1}]
     assert cvs_agreement(fr, tr) == {"keyframes": 1, "C1": 1.0, "C2": 0.0, "C3": 1.0,
                                     "C1_caught": [1, 1], "C2_caught": [0, 1], "C3_caught": [0, 0]}
+    yes3 = {"cvs": {"c1": 0.9, "c2": 0.9, "c3": 0.9}}
+    no = {"cvs": {"c1": 0.1, "c2": 0.1, "c3": 0.1}}
+    tl = build_timeline([(0, no), (1, yes3), (2, no), (3, yes3), (4, yes3), (5, yes3), (6, no), (7, no), (8, no)])
+    assert not tl[1]["cvs_state"]["cvs"]["on"]                     # one odd frame is not enough
+    assert tl[5]["cvs_state"]["cvs"] == {"on": True, "since": 3}   # announced at 5, achieved since 3
+    assert [e["what"] for e in tl[5]["events"]] == ["c1", "c2", "c3", "cvs"]
+    assert not tl[8]["cvs_state"]["c1"]["on"] and tl[7]["cvs_state"]["c1"]["on"]
     print("selftest ok")
 
 
@@ -361,6 +394,7 @@ def main():
     )
     ap.add_argument("--prompt", help="prompt file (default prompts/v2.txt)")
     ap.add_argument("--provider", choices=["gemini", "openai"], default="gemini")
+    ap.add_argument("--rebuild", nargs="+", metavar="OUTPUT", help="re-apply the world-state rules to existing outputs/*.js (no model calls)")
     ap.add_argument("--detect-model", help="second Gemini model run in parallel for boxes, e.g. gemini-3.8-flash")
     ap.add_argument("--detect-prompt", default=os.path.join(HERE, "prompts", "detect_v1.txt"))
     a = ap.parse_args()
@@ -372,6 +406,16 @@ def main():
 
     if a.selftest:
         return selftest()
+    if a.rebuild:
+        for p in a.rebuild:
+            txt = open(p).read()
+            d = json.loads(txt[txt.index("{"):txt.rindex("}") + 1])
+            d["frames"] = build_timeline([(f["t"], f["label"]) for f in d["frames"]])
+            d["agreement"] = cvs_agreement(d["frames"], d.get("truth"))
+            with open(p, "w") as f:
+                f.write("window.TIMELINE = " + json.dumps(d, indent=1) + ";\n")
+            print(f"rebuilt {p}: " + ", ".join(f"{e['what']} {'on' if e['on'] else 'off'} at {fr['t']:g}" for fr in d["frames"] for e in fr["events"]))
+        return
     if a.mock:
         labels, video, model = mock_labels(), None, "mock"
     elif a.clip:
