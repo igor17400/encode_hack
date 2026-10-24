@@ -1,0 +1,2335 @@
+{
+ "clip": "VID74",
+ "every": 5,
+ "by_t": {
+  "381": [
+   {
+    "_id": "38_45850.jpg",
+    "video": 38,
+    "frame": 45850,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9884331226348877,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 38, frame 45850 (3 surgeons)"
+   },
+   {
+    "_id": "31_53525.jpg",
+    "video": 31,
+    "frame": 53525,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9870340824127197,
+    "retrieved_for": [
+     "C2 met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 31, frame 53525 (3 surgeons)"
+   },
+   {
+    "_id": "3_15650.jpg",
+    "video": 3,
+    "frame": 15650,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.3333333333333333,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.985703706741333,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 3, frame 15650 (3 surgeons)"
+   }
+  ],
+  "391": [
+   {
+    "_id": "23_28850.jpg",
+    "video": 23,
+    "frame": 28850,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9791510105133057,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 23, frame 28850 (3 surgeons)"
+   },
+   {
+    "_id": "57_35525.jpg",
+    "video": 57,
+    "frame": 35525,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9758071303367615,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 57, frame 35525 (3 surgeons)"
+   },
+   {
+    "_id": "60_37575.jpg",
+    "video": 60,
+    "frame": 37575,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9720863103866577,
+    "retrieved_for": [
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 60, frame 37575 (3 surgeons)"
+   },
+   {
+    "_id": "3_15650.jpg",
+    "video": 3,
+    "frame": 15650,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.3333333333333333,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9718649387359619,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 3, frame 15650 (3 surgeons)"
+   }
+  ],
+  "401": [
+   {
+    "_id": "38_44225.jpg",
+    "video": 38,
+    "frame": 44225,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9880258440971375,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 38, frame 44225 (3 surgeons)"
+   },
+   {
+    "_id": "28_24975.jpg",
+    "video": 28,
+    "frame": 24975,
+    "split": "train",
+    "cvs": {
+     "C1": 1.0,
+     "C2": 0.3333333333333333,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9868696928024292,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 1.0,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 28, frame 24975 (3 surgeons)"
+   },
+   {
+    "_id": "31_53525.jpg",
+    "video": 31,
+    "frame": 53525,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9859544634819031,
+    "retrieved_for": [
+     "C2 met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 31, frame 53525 (3 surgeons)"
+   }
+  ],
+  "411": [
+   {
+    "_id": "19_17475.jpg",
+    "video": 19,
+    "frame": 17475,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9898115992546082,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 19, frame 17475 (3 surgeons)"
+   },
+   {
+    "_id": "80_9975.jpg",
+    "video": 80,
+    "frame": 9975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9896509647369385,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 80, frame 9975 (3 surgeons)"
+   },
+   {
+    "_id": "104_35475.jpg",
+    "video": 104,
+    "frame": 35475,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9880841970443726,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 104, frame 35475 (3 surgeons)"
+   },
+   {
+    "_id": "31_53525.jpg",
+    "video": 31,
+    "frame": 53525,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9876606464385986,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 31, frame 53525 (3 surgeons)"
+   }
+  ],
+  "421": [
+   {
+    "_id": "7_40675.jpg",
+    "video": 7,
+    "frame": 40675,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9878562688827515,
+    "retrieved_for": [
+     "C1 met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 7, frame 40675 (3 surgeons)"
+   },
+   {
+    "_id": "19_35350.jpg",
+    "video": 19,
+    "frame": 35350,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9875071048736572,
+    "retrieved_for": [
+     "C1 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 19, frame 35350 (3 surgeons)"
+   },
+   {
+    "_id": "1_32850.jpg",
+    "video": 1,
+    "frame": 32850,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.9870631098747253,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 1, frame 32850 (3 surgeons)"
+   },
+   {
+    "_id": "41_975.jpg",
+    "video": 41,
+    "frame": 975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 1.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9867498874664307,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 41, frame 975 (3 surgeons)"
+   }
+  ],
+  "431": [
+   {
+    "_id": "31_53525.jpg",
+    "video": 31,
+    "frame": 53525,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9896178245544434,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 31, frame 53525 (3 surgeons)"
+   },
+   {
+    "_id": "19_25225.jpg",
+    "video": 19,
+    "frame": 25225,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9890334606170654,
+    "retrieved_for": [
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 19, frame 25225 (3 surgeons)"
+   },
+   {
+    "_id": "3_15650.jpg",
+    "video": 3,
+    "frame": 15650,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.3333333333333333,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9868912696838379,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 3, frame 15650 (3 surgeons)"
+   }
+  ],
+  "441": [
+   {
+    "_id": "19_25225.jpg",
+    "video": 19,
+    "frame": 25225,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9889489412307739,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 19, frame 25225 (3 surgeons)"
+   },
+   {
+    "_id": "31_49650.jpg",
+    "video": 31,
+    "frame": 49650,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.3333333333333333,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9878908395767212,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 31, frame 49650 (3 surgeons)"
+   },
+   {
+    "_id": "41_225.jpg",
+    "video": 41,
+    "frame": 225,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.9873799085617065,
+    "retrieved_for": [
+     "C1 met",
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 41, frame 225 (3 surgeons)"
+   }
+  ],
+  "451": [
+   {
+    "_id": "104_35975.jpg",
+    "video": 104,
+    "frame": 35975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9862156510353088,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 104, frame 35975 (3 surgeons)"
+   },
+   {
+    "_id": "4_22950.jpg",
+    "video": 4,
+    "frame": 22950,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.3333333333333333,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9854203462600708,
+    "retrieved_for": [
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 4, frame 22950 (3 surgeons)"
+   },
+   {
+    "_id": "79_32475.jpg",
+    "video": 79,
+    "frame": 32475,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9840794801712036,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 79, frame 32475 (3 surgeons)"
+   },
+   {
+    "_id": "76_56725.jpg",
+    "video": 76,
+    "frame": 56725,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9833239912986755,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 76, frame 56725 (3 surgeons)"
+   }
+  ],
+  "461": [
+   {
+    "_id": "24_18725.jpg",
+    "video": 24,
+    "frame": 18725,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9854764938354492,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 24, frame 18725 (3 surgeons)"
+   },
+   {
+    "_id": "7_37550.jpg",
+    "video": 7,
+    "frame": 37550,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9845699667930603,
+    "retrieved_for": [
+     "C1 met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 7, frame 37550 (3 surgeons)"
+   },
+   {
+    "_id": "106_54825.jpg",
+    "video": 106,
+    "frame": 54825,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 1.0,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.9826645255088806,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 106, frame 54825 (3 surgeons)"
+   }
+  ],
+  "471": [
+   {
+    "_id": "24_18725.jpg",
+    "video": 24,
+    "frame": 18725,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9894647598266602,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 24, frame 18725 (3 surgeons)"
+   },
+   {
+    "_id": "22_38175.jpg",
+    "video": 22,
+    "frame": 38175,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.3333333333333333,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9871188998222351,
+    "retrieved_for": [
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 22, frame 38175 (3 surgeons)"
+   },
+   {
+    "_id": "83_66425.jpg",
+    "video": 83,
+    "frame": 66425,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9870562553405762,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 83, frame 66425 (3 surgeons)"
+   },
+   {
+    "_id": "31_53025.jpg",
+    "video": 31,
+    "frame": 53025,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9863507747650146,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 31, frame 53025 (3 surgeons)"
+   }
+  ],
+  "481": [
+   {
+    "_id": "3_14025.jpg",
+    "video": 3,
+    "frame": 14025,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9883928894996643,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 3, frame 14025 (3 surgeons)"
+   },
+   {
+    "_id": "24_18350.jpg",
+    "video": 24,
+    "frame": 18350,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9876206517219543,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 24, frame 18350 (3 surgeons)"
+   },
+   {
+    "_id": "41_225.jpg",
+    "video": 41,
+    "frame": 225,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.987261950969696,
+    "retrieved_for": [
+     "C1 met",
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 41, frame 225 (3 surgeons)"
+   }
+  ],
+  "491": [
+   {
+    "_id": "4_24325.jpg",
+    "video": 4,
+    "frame": 24325,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.6666666666666666,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.9893444776535034,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 4, frame 24325 (3 surgeons)"
+   },
+   {
+    "_id": "24_18350.jpg",
+    "video": 24,
+    "frame": 18350,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9892258644104004,
+    "retrieved_for": [
+     "C2 not met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 24, frame 18350 (3 surgeons)"
+   },
+   {
+    "_id": "4_35950.jpg",
+    "video": 4,
+    "frame": 35950,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.3333333333333333,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9885004758834839,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 4, frame 35950 (3 surgeons)"
+   }
+  ],
+  "501": [
+   {
+    "_id": "110_38050.jpg",
+    "video": 110,
+    "frame": 38050,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9866610765457153,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 110, frame 38050 (3 surgeons)"
+   },
+   {
+    "_id": "110_37550.jpg",
+    "video": 110,
+    "frame": 37550,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.3333333333333333,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.986039936542511,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 110, frame 37550 (3 surgeons)"
+   },
+   {
+    "_id": "119_66625.jpg",
+    "video": 119,
+    "frame": 66625,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9859660863876343,
+    "retrieved_for": [
+     "C2 met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 119, frame 66625 (3 surgeons)"
+   }
+  ],
+  "511": [
+   {
+    "_id": "57_25150.jpg",
+    "video": 57,
+    "frame": 25150,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9862779378890991,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 57, frame 25150 (3 surgeons)"
+   },
+   {
+    "_id": "1_32850.jpg",
+    "video": 1,
+    "frame": 32850,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.9857763051986694,
+    "retrieved_for": [
+     "C1 met",
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 1, frame 32850 (3 surgeons)"
+   },
+   {
+    "_id": "41_975.jpg",
+    "video": 41,
+    "frame": 975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 1.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9852569103240967,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 41, frame 975 (3 surgeons)"
+   }
+  ],
+  "521": [
+   {
+    "_id": "24_16975.jpg",
+    "video": 24,
+    "frame": 16975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9914141893386841,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 24, frame 16975 (3 surgeons)"
+   },
+   {
+    "_id": "38_50600.jpg",
+    "video": 38,
+    "frame": 50600,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.3333333333333333,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9903231859207153,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 38, frame 50600 (3 surgeons)"
+   },
+   {
+    "_id": "57_28900.jpg",
+    "video": 57,
+    "frame": 28900,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9884864687919617,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 57, frame 28900 (3 surgeons)"
+   },
+   {
+    "_id": "41_975.jpg",
+    "video": 41,
+    "frame": 975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 1.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9875806570053101,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 41, frame 975 (3 surgeons)"
+   }
+  ],
+  "531": [
+   {
+    "_id": "119_86875.jpg",
+    "video": 119,
+    "frame": 86875,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 1.0
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.985867977142334,
+    "retrieved_for": [
+     "C1 met",
+     "C2 met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 1.0,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 119, frame 86875 (3 surgeons)"
+   },
+   {
+    "_id": "119_86125.jpg",
+    "video": 119,
+    "frame": 86125,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.3333333333333333,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9841378331184387,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.33,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 119, frame 86125 (3 surgeons)"
+   },
+   {
+    "_id": "119_67375.jpg",
+    "video": 119,
+    "frame": 67375,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9841330051422119,
+    "retrieved_for": [
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 119, frame 67375 (3 surgeons)"
+   }
+  ],
+  "541": [
+   {
+    "_id": "26_7500.jpg",
+    "video": 26,
+    "frame": 7500,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9903002381324768,
+    "retrieved_for": [
+     "C1 met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 26, frame 7500 (3 surgeons)"
+   },
+   {
+    "_id": "24_16975.jpg",
+    "video": 24,
+    "frame": 16975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9889310002326965,
+    "retrieved_for": [
+     "C1 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 24, frame 16975 (3 surgeons)"
+   },
+   {
+    "_id": "1_32850.jpg",
+    "video": 1,
+    "frame": 32850,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.3333333333333333
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": false
+    },
+    "score": 0.9877567887306213,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.33,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 1, frame 32850 (3 surgeons)"
+   },
+   {
+    "_id": "41_975.jpg",
+    "video": 41,
+    "frame": 975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 1.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9875175952911377,
+    "retrieved_for": [
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 41, frame 975 (3 surgeons)"
+   }
+  ],
+  "551": [
+   {
+    "_id": "24_16975.jpg",
+    "video": 24,
+    "frame": 16975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9908891320228577,
+    "retrieved_for": [
+     "C1 not met",
+     "C2 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 24, frame 16975 (3 surgeons)"
+   },
+   {
+    "_id": "76_55350.jpg",
+    "video": 76,
+    "frame": 55350,
+    "split": "train",
+    "cvs": {
+     "C1": 0.3333333333333333,
+     "C2": 0.6666666666666666,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": false,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9893085956573486,
+    "retrieved_for": [
+     "C2 met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.33,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 76, frame 55350 (3 surgeons)"
+   },
+   {
+    "_id": "41_975.jpg",
+    "video": 41,
+    "frame": 975,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 1.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.9889590740203857,
+    "retrieved_for": [
+     "C1 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 1.0,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 41, frame 975 (3 surgeons)"
+   }
+  ],
+  "561": [
+   {
+    "_id": "88_31700.jpg",
+    "video": 88,
+    "frame": 31700,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.0,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": false,
+     "C3": true
+    },
+    "score": 0.9866033792495728,
+    "retrieved_for": [
+     "C1 met",
+     "C2 not met",
+     "C3 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 88, frame 31700 (3 surgeons)"
+   },
+   {
+    "_id": "103_12475.jpg",
+    "video": 103,
+    "frame": 12475,
+    "split": "train",
+    "cvs": {
+     "C1": 0.6666666666666666,
+     "C2": 0.6666666666666666,
+     "C3": 0.6666666666666666
+    },
+    "met": {
+     "C1": true,
+     "C2": true,
+     "C3": true
+    },
+    "score": 0.985702395439148,
+    "retrieved_for": [
+     "C2 met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.67,
+      "met": true
+     },
+     "triangle cleared": {
+      "score": 0.67,
+      "met": true
+     },
+     "cystic plate": {
+      "score": 0.67,
+      "met": true
+     }
+    },
+    "source": "Endoscapes training video 103, frame 12475 (3 surgeons)"
+   },
+   {
+    "_id": "120_60850.jpg",
+    "video": 120,
+    "frame": 60850,
+    "split": "train",
+    "cvs": {
+     "C1": 0.0,
+     "C2": 0.0,
+     "C3": 0.0
+    },
+    "met": {
+     "C1": false,
+     "C2": false,
+     "C3": false
+    },
+    "score": 0.9856399297714233,
+    "retrieved_for": [
+     "C1 not met",
+     "C3 not met"
+    ],
+    "verdict": {
+     "two structures": {
+      "score": 0.0,
+      "met": false
+     },
+     "triangle cleared": {
+      "score": 0.0,
+      "met": false
+     },
+     "cystic plate": {
+      "score": 0.0,
+      "met": false
+     }
+    },
+    "source": "Endoscapes training video 120, frame 60850 (3 surgeons)"
+   }
+  ]
+ },
+ "source": "Igor's Endoscapes expert library (read-only), gemini-embedding-2"
+}

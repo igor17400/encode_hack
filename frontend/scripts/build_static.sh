@@ -16,7 +16,7 @@ done
   mkdir -p "public/frames/$(dirname "$rel")"; cp "$ROOT/demo/clips/frames/$rel" "public/frames/$rel"
 done
 # Real-time clip videos for the Watch player.
-mkdir -p public/clips && cp "$ROOT"/demo/clips/*.mp4 public/clips/ 2>/dev/null || true
+mkdir -p public/clips && cp "$ROOT"/demo/clips/*.mp4 "$ROOT"/demo/endoscapes/*.mp4 public/clips/ 2>/dev/null || true
 VITE_STATIC=1 npx vite build --base ./ --outDir dist-static >/dev/null
 # Artifact page: the publisher adds the document skeleton, so keep only head/body contents.
 python3 - <<'PY'

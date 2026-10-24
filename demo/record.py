@@ -101,9 +101,16 @@ def main() -> None:
 
     n_win = len(perception.clip_frames(a.video, t_from, t_to))
     video = Path(__file__).resolve().parent / "clips" / f"{a.video}_{t_from}-{t_to}.mp4"
-    write("clips", [{"video_id": a.video, "n_frames": n_win, "t_start": t_from, "t_end": t_to,
-                     "watch_patients": ["P1", "P3"], "branch_t": bp["t"],
-                     "video": video.name if video.exists() else None}])
+    from backend import endoscapes
+
+    # Igor's Endoscapes runs (precomputed real Argon CVS + Flash boxes): streams for the static demo.
+    for c in endoscapes.CLIPS:
+        ev = [[k, {kk: vv for kk, vv in d.items() if kk != "session_id"}] for k, d in endoscapes.events(c, pats["P1"])]
+        write(f"watch_{c}_P1", {"video_id": c, "patient_id": "P1", "source": "endoscapes_run", "events": ev,
+                                "frames": sum(1 for k, _ in ev if k == "observations")})
+    write("clips", [endoscapes.clip_info(c) for c in endoscapes.CLIPS] + [{
+        "video_id": a.video, "source": "cholect50", "n_frames": n_win, "t_start": t_from, "t_end": t_to,
+        "watch_patients": ["P1", "P3"], "branch_t": bp["t"], "video": video.name if video.exists() else None}])
 
     # Episodes per patient: random, expert replay, and (live only) agent without / with lessons.
     policies = ["random", "expert_replay"] + (["agent", "agent_lessons"] if LIVE else [])

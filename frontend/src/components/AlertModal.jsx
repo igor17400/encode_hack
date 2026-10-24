@@ -13,6 +13,7 @@ const TEXT = {
   clip_before_cvs: "Clip or cut before the critical view of safety is met.",
   cut_without_two_clips: "Cut with fewer than two clips on the structure.",
   cbd_injury: "Common bile duct injury.",
+  clip_without_confirmed_duct: "Clip applier in view while the cystic duct is not confirmed.",
   risk_high: "The world model predicts high risk.",
   risk_injury: "The world model predicts injury.",
 };

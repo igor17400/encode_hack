@@ -98,18 +98,28 @@ export async function get(path, params = {}) {
       ...reports.filter((r) => r.text.toLowerCase().includes(q)).map((r) => ({ ...r, _collection: "reports", matched: ["substring"] })),
     ];
   }
+  if (path === "/expert_views") {
+    const f = await load(`expert_views_${params.clip}`);
+    if (!f) return { t: null, views: [] };
+    const near = Object.keys(f.by_t).reduce((a, k) => (Math.abs(+k - params.t) < Math.abs(+a - params.t) ? k : a));
+    return { t: +near, views: f.by_t[near] };
+  }
   if (path === "/similar_frames") return ((await load("similar_frames")) ?? {})[params.path] ?? [];
   if (path.startsWith("/reports")) {
     const reports = (await load("reports")) ?? [];
     return reports.filter((r) => r.session_id === params.session_id);
   }
+  const rec = path.match(/^\/recorded\/([A-Za-z0-9_]+)$/);
+  if (rec) return (await load(rec[1])) ?? fail(`404: no recording ${rec[1]}`);
   if (path.startsWith("/transitions/")) return fail(LIVE_ONLY);
   return fail(`404: ${path}`);
 }
 
 // --- POST ---------------------------------------------------------------------------------------
 async function imagineStep(sid, sess, action, state) {
-  const rec = await load(`imagine_${sess.patient_id}_${key(action)}`);
+  // Recorded steps are keyed by patient + action, and for Endoscapes moments also by clip + second.
+  const rec = (sess.video_id && (await load(`imagine_${sess.patient_id}_${key(action)}_${sess.video_id}_${state?.t}`)))
+    || (await load(`imagine_${sess.patient_id}_${key(action)}`));
   if (!rec || rec.state_in?.t !== state?.t) return fail(LIVE_ONLY);
   publish(sid, "predictions", rec);
   publish(sid, "world_state", { t: rec.state_out.t, state: rec.state_out, source: rec.source });
@@ -126,8 +136,9 @@ async function imagineStep(sid, sess, action, state) {
 export async function post(path, body = {}) {
   if (path === "/sessions") {
     const sid = `static_${body.mode}_${uid()}`;
-    const states = body.video_id ? await load(`states_${body.video_id}`) : null;
-    const state = states?.[0] ?? (await load("branch_point"))?.state;
+    const endo = body.video_id?.startsWith("endo"); // Endoscapes clips start empty and are perceived second by second
+    const states = body.video_id && !endo ? await load(`states_${body.video_id}`) : null;
+    const state = body.video_id ? states?.[0] ?? null : (await load("branch_point"))?.state;
     sessions.set(sid, { ...body, session_id: sid, state });
     return { session_id: sid, state };
   }

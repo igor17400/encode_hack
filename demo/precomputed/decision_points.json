@@ -1,0 +1,209 @@
+[
+ {
+  "clip": "endo166",
+  "t": 60,
+  "state": {
+   "t": 60,
+   "phase": "carlot-triangle-dissection",
+   "phase_idx": 1,
+   "phase_inferred": false,
+   "structures": {
+    "gallbladder": {
+     "name": "gallbladder",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_duct": {
+     "name": "cystic_duct",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_artery": {
+     "name": "cystic_artery",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_plate": {
+     "name": "cystic_plate",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "common_bile_duct": {
+     "name": "common_bile_duct",
+     "status": "unseen",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    }
+   },
+   "cvs": {
+    "c3_two_structures": false,
+    "c1_triangle_cleared": false,
+    "c2_plate_exposed": false
+   },
+   "bleeding": false,
+   "view_quality": "clear",
+   "violations": [],
+   "injury": false,
+   "packed": false,
+   "gb_detach": 0.0,
+   "last_bleed_t": null,
+   "adhesion_last_seen": null,
+   "adhesion_load": 0.0,
+   "cvs_sensor": {
+    "c3_two_structures": false,
+    "c1_triangle_cleared": false,
+    "c2_plate_exposed": false
+   },
+   "cvs_source": "sensor"
+  },
+  "cvs": 0,
+  "experts_cvs_t": 64
+ },
+ {
+  "clip": "endo166",
+  "t": 93,
+  "state": {
+   "t": 93,
+   "phase": "clipping-and-cutting",
+   "phase_idx": 2,
+   "phase_inferred": false,
+   "structures": {
+    "gallbladder": {
+     "name": "gallbladder",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_duct": {
+     "name": "cystic_duct",
+     "status": "skeletonised",
+     "exposure": 1.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_artery": {
+     "name": "cystic_artery",
+     "status": "skeletonised",
+     "exposure": 1.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_plate": {
+     "name": "cystic_plate",
+     "status": "skeletonised",
+     "exposure": 1.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "common_bile_duct": {
+     "name": "common_bile_duct",
+     "status": "unseen",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    }
+   },
+   "cvs": {
+    "c3_two_structures": true,
+    "c1_triangle_cleared": true,
+    "c2_plate_exposed": true
+   },
+   "bleeding": false,
+   "view_quality": "clear",
+   "violations": [],
+   "injury": false,
+   "packed": false,
+   "gb_detach": 0.0,
+   "last_bleed_t": null,
+   "adhesion_last_seen": null,
+   "adhesion_load": 0.0,
+   "cvs_sensor": {
+    "c3_two_structures": true,
+    "c1_triangle_cleared": true,
+    "c2_plate_exposed": true
+   },
+   "cvs_source": "sensor"
+  },
+  "cvs": 3,
+  "experts_cvs_t": 64
+ },
+ {
+  "clip": "endo198",
+  "t": 153,
+  "state": {
+   "t": 153,
+   "phase": "clipping-and-cutting",
+   "phase_idx": 2,
+   "phase_inferred": false,
+   "structures": {
+    "gallbladder": {
+     "name": "gallbladder",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_duct": {
+     "name": "cystic_duct",
+     "status": "skeletonised",
+     "exposure": 1.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_artery": {
+     "name": "cystic_artery",
+     "status": "skeletonised",
+     "exposure": 1.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "cystic_plate": {
+     "name": "cystic_plate",
+     "status": "visible",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    },
+    "common_bile_duct": {
+     "name": "common_bile_duct",
+     "status": "unseen",
+     "exposure": 0.0,
+     "clips": 0,
+     "at_risk": false
+    }
+   },
+   "cvs": {
+    "c3_two_structures": false,
+    "c1_triangle_cleared": false,
+    "c2_plate_exposed": false
+   },
+   "bleeding": false,
+   "view_quality": "clear",
+   "violations": [],
+   "injury": false,
+   "packed": false,
+   "gb_detach": 0.0,
+   "last_bleed_t": null,
+   "adhesion_last_seen": null,
+   "adhesion_load": 0.0,
+   "cvs_sensor": {
+    "c3_two_structures": false,
+    "c1_triangle_cleared": false,
+    "c2_plate_exposed": false
+   },
+   "cvs_source": "sensor"
+  },
+  "cvs": 0,
+  "experts_cvs_t": 139
+ }
+]

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { get, API } from "./api";
 import { SimNote } from "./components/ui";
+import Story from "./tabs/Story";
 import Watch from "./tabs/Watch";
 import Imagine from "./tabs/Imagine";
 import Robot from "./tabs/Robot";
 import Evidence from "./tabs/Evidence";
 
 const TABS = [
+  ["story", "How it works"],
   ["watch", "Watch"],
   ["imagine", "Imagine"],
   ["robot", "Train the robot"],
@@ -16,9 +18,9 @@ const TABS = [
 export default function App() {
   const [tab, setTab] = useState(() => {
     try {
-      return localStorage.getItem("tab") || "watch";
+      return localStorage.getItem("tab") || "story";
     } catch {
-      return "watch";
+      return "story";
     }
   });
   const [patients, setPatients] = useState([]);
@@ -42,14 +44,14 @@ export default function App() {
       <header className="flex flex-wrap items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Second Look</h1>
-          <p className="text-ink-2">A patient world model for laparoscopic gallbladder removal.</p>
+          <p className="text-ink-2">Eyes that see the patient now, a world model that imagines what happens next.</p>
         </div>
-        <nav className="grid w-full grid-cols-2 gap-1 rounded-xl border border-line bg-surface-1 p-1 sm:ml-auto sm:flex sm:w-auto">
+        <nav className="grid w-full grid-cols-3 gap-1 rounded-xl border border-line bg-surface-1 p-1 sm:ml-auto sm:flex sm:w-auto">
           {TABS.map(([k, label]) => (
             <button
               key={k}
               onClick={() => setTab(k)}
-              className={`whitespace-nowrap rounded-lg px-4 py-2 font-medium transition ${tab === k ? "bg-accent text-white" : "text-ink-2 hover:bg-surface-2"}`}
+              className={`whitespace-nowrap rounded-lg px-4 py-2 font-medium transition ${tab === k ? "bg-accent text-surface-0" : "text-ink-2 hover:bg-surface-2"}`}
             >
               {label}
             </button>
@@ -63,6 +65,7 @@ export default function App() {
       </div>
 
       <main className="flex-1">
+        {tab === "story" && <Story onOpen={setTab} />}
         {tab === "watch" && (
           <Watch
             patients={patients}
@@ -78,7 +81,7 @@ export default function App() {
       </main>
 
       <footer className="text-center text-xs text-ink-3">
-        Research simulation on public data (CholecT50, CC BY-NC-SA 4.0). Synthetic patients. Not a medical device; not clinical advice.
+        Research simulation on public data: CholecT50 and Endoscapes2023 (CAMMA, CC BY-NC-SA 4.0); Endoscapes CVS runs by Igor Lima. Synthetic patients. Not a medical device; not clinical advice.
       </footer>
     </div>
   );

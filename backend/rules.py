@@ -80,6 +80,8 @@ def initial_state(modifiers: dict | None = None) -> State:
 
 
 def compute_cvs(st: State) -> dict[str, bool]:
+    if st.cvs_sensor is not None:  # perceived CVS (held judgement from frames) wins over the action proxy
+        return dict(st.cvs_sensor)
     s = st.structures
     c1 = _full(s[DUCT].exposure) and _full(s[ARTERY].exposure)
     c2 = _full(s[PLATE].exposure)
@@ -234,6 +236,10 @@ def apply_action(
     seconds = seconds or config.ACTION_SECONDS
     cur = state.model_copy(deep=True)
     cur.active = {}
+    # The first second is judged against the state's current CVS (sensed or proxy); afterwards a simulated
+    # future has no camera, so CVS continues from the anatomy.
+    cur.cvs_sensor = None
+    cur.cvs_source = "proxy"
     new_v: list[str] = []
     events: list[str] = []
     for _ in range(seconds):

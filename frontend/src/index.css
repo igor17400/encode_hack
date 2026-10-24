@@ -4,11 +4,11 @@
 
 :root {
   color-scheme: dark;
-  --surface-1: #1a1a19;
-  --text-primary: #f0efec;
-  --text-secondary: #c3c2b7;
-  --text-muted: #8f8e86;
-  --grid: #34342f;
+  --surface-1: #101923;
+  --text-primary: #e9eef4;
+  --text-secondary: #aab7c6;
+  --text-muted: #718196;
+  --grid: #24344a;
   --series-1: #3987e5; /* agent with lessons */
   --series-2: #d95926; /* random */
   --series-3: #199e70; /* expert replay */
@@ -20,8 +20,22 @@ html {
 }
 
 body {
-  background: #121211;
+  background: #0a1017;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
 }
+
+h1, h2, h3, .font-display {
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  text-wrap: balance;
+}
+
+@keyframes pulse-ring { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes flash-change { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes drip { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(14px); opacity: 0; } }
+.anim-pulse { animation: pulse-ring 1.4s ease-in-out infinite; }
+.anim-flash { animation: flash-change 1.8s ease-out forwards; }
+.anim-drip { animation: drip 1.2s ease-in infinite; }
+@media (prefers-reduced-motion: reduce) { .anim-pulse, .anim-flash, .anim-drip { animation: none; } }
 
 @layer components {
   .card {
@@ -31,12 +45,12 @@ body {
     @apply rounded-lg border border-line bg-surface-2 px-4 py-2 font-medium text-ink-1 transition hover:bg-surface-3 disabled:cursor-not-allowed disabled:opacity-40;
   }
   .btn-primary {
-    @apply rounded-lg bg-accent px-4 py-2 font-semibold text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40;
+    @apply rounded-lg bg-accent px-4 py-2 font-semibold text-surface-0 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40;
   }
   .select {
     @apply rounded-lg border border-line bg-surface-2 px-3 py-2 text-ink-1;
   }
   .label {
-    @apply text-sm uppercase tracking-wide text-ink-3;
+    @apply font-mono text-xs uppercase tracking-[0.12em] text-ink-3;
   }
 }

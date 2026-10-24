@@ -70,9 +70,9 @@ export function Frame({ path, label, caption, className = "" }) {
 
 export function Picker({ label, value, onChange, options, disabled }) {
   return (
-    <label className="flex flex-col gap-1">
+    <label className="flex min-w-0 max-w-full flex-col gap-1">
       <span className="label">{label}</span>
-      <select className="select" value={value ?? ""} disabled={disabled} onChange={(e) => onChange(e.target.value)}>
+      <select className="select max-w-full truncate" value={value ?? ""} disabled={disabled} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}

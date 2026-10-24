@@ -103,10 +103,11 @@ DEMO_FRAMES = config.ROOT / "demo" / "clips" / "frames"  # frames the recordings
 @app.get("/clip_video/{name}")
 def clip_video(name: str):
     """Real-time mp4 of a demo clip (made from the same frames the analysis uses)."""
-    f = (config.ROOT / "demo" / "clips" / name).resolve()
-    if f.suffix != ".mp4" or not f.is_file() or (config.ROOT / "demo" / "clips").resolve() not in f.parents:
-        raise HTTPException(404, "clip video not found")
-    return FileResponse(f, media_type="video/mp4")
+    for d in (config.ROOT / "demo" / "clips", config.ROOT / "demo" / "endoscapes"):
+        f = (d / name).resolve()
+        if f.suffix == ".mp4" and f.is_file() and d.resolve() in f.parents:
+            return FileResponse(f, media_type="video/mp4")
+    raise HTTPException(404, "clip video not found")
 
 
 @app.get("/frames/{path:path}")
@@ -217,13 +218,16 @@ def clips():
     """Demo clips: test-split videos that have frames on disk."""
     if (r := pc("clips")) is not None:
         return r
+    from backend import endoscapes
+
     split = json.loads(config.SPLIT.read_text())
-    out = []
+    out = [endoscapes.clip_info(c) for c in endoscapes.CLIPS]
     for v in split["test"]:
         d = config.FRAMES_DIR / v
         frames = sorted(int(p.stem) for p in d.glob("*.png")) if d.exists() else []
         if frames:
-            out.append({"video_id": v, "n_frames": len(frames), "t_start": frames[0], "t_end": frames[-1]})
+            out.append({"video_id": v, "source": "cholect50", "n_frames": len(frames), "t_start": frames[0],
+                        "t_end": frames[-1]})
     return out
 
 
@@ -254,7 +258,10 @@ class SessionIn(BaseModel):
 @app.post("/sessions")
 def create_session(body: SessionIn):
     patient = get_patient(body.patient_id)
-    st = video_state_at(body.video_id, 0) if body.video_id else rules.initial_state(patient.modifiers)
+    if body.video_id and body.video_id.startswith("endo"):  # Endoscapes: starts empty, perceived second by second
+        st = rules.initial_state(patient.modifiers)
+    else:
+        st = video_state_at(body.video_id, 0) if body.video_id else rules.initial_state(patient.modifiers)
     if PRECOMPUTED:
         sid = f"demo_{body.mode}_{patient.patient_id}_{body.video_id or 'none'}_{uuid.uuid4().hex[:6]}"
         memory_sessions[sid] = {"_id": sid, "session_id": sid, "mode": body.mode, "patient_id": patient.patient_id,
@@ -366,6 +373,12 @@ async def watch(sid: str, body: WatchIn):
     if not sess.get("video_id"):
         raise HTTPException(400, "watch needs a session with a video_id")
     patient = get_patient(sess["patient_id"])
+    if sess["video_id"].startswith("endo"):  # Igor's precomputed Endoscapes run: no model calls in either mode
+        from backend import endoscapes
+
+        sink = BusSink(sid) if PRECOMPUTED else perception.AtlasSink()
+        asyncio.create_task(endoscapes.replay(sid, sess["video_id"], patient, sink, body.speed))
+        return {"started": True, "source": "endoscapes_run", "frames": endoscapes.clip_info(sess["video_id"])["n_frames"]}
     if PRECOMPUTED:
         rec = pc(f"watch_{sess['video_id']}_{patient.patient_id}") or pc(f"watch_{sess['video_id']}_P1")
         if rec is not None:
@@ -494,6 +507,31 @@ def get_episode(eid: str):
     if not e:
         raise HTTPException(404)
     return e
+
+
+@app.get("/recorded/{name}")
+def recorded(name: str):
+    """A recorded demo file from demo/precomputed (real outputs of earlier live runs), read-only."""
+    import re
+
+    if not re.fullmatch(r"[A-Za-z0-9_]+", name):
+        raise HTTPException(400, "bad name")
+    p = config.PRECOMPUTED / f"{name}.json"
+    if not p.exists():
+        raise HTTPException(404, f"no recording {name}")
+    return json.loads(p.read_text())
+
+
+@app.get("/expert_views")
+def expert_views(clip: str, t: int):
+    """How surgeons judged visually similar views (Igor's Endoscapes library, queried read-only and cached by
+    pipeline/07_expert_views.py) for the cached frame nearest to t."""
+    p = config.PRECOMPUTED / f"expert_views_{clip}.json"
+    if not p.exists():
+        return {"t": None, "views": [], "note": "no cached expert views for this clip"}
+    by_t = json.loads(p.read_text())["by_t"]
+    near = min(by_t, key=lambda k: abs(int(k) - t))
+    return {"t": int(near), "views": by_t[near]}
 
 
 @app.get("/reports")

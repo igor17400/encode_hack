@@ -37,6 +37,10 @@ class State(BaseModel):
     last_bleed_t: int | None = None
     adhesion_last_seen: int | None = None
     adhesion_load: float = 0.0           # P3 starts at 1.0; dissecting adhesions clears it
+    # CVS perceived directly from pixels (e.g. the Endoscapes CVS judge). When set, it is the state's CVS;
+    # a simulated action clears it and the rules continue from the anatomy.
+    cvs_sensor: dict[str, bool] | None = None
+    cvs_source: str = "proxy"            # proxy (from actions) | sensor (perceived)
 
     def cvs_count(self) -> int:
         return sum(self.cvs.values())

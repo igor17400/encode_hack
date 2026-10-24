@@ -2,6 +2,27 @@
 
 Newest first. Each entry: what changed, why.
 
+## 2026-10-24 (pass 4: frontend redesign + Igor's "eyes")
+
+- **Combined with Igor's main-branch prototype.**
+  - Igor's precomputed Endoscapes runs and clips are vendored into `demo/endoscapes/` (credited, CC BY-NC-SA): Gemini Argon CVS judgement, Flash boxes, surgeons' truth.
+  - `backend/endoscapes.py` turns them into our Watch stream. CVS numbering is mapped (CAMMA C1 two structures → our c3; C2 triangle → c1; C3 plate → c2), and a test checks every second against Igor's held state.
+  - Reproduced Igor's results: op 166, model CVS at 1:09 vs surgeons 1:04; op 198, never declared.
+- **Sensed CVS in the rules.**
+  - `State.cvs_sensor` makes the perceived CVS the state's CVS.
+  - A simulated action is judged against it for its first second, then continues from anatomy, since a simulated future has no camera.
+  - Recorded results: op 166, "clip now" at 1:00 is high (injury for P4); at 1:33 it is low for all patients; op 198 at the end is high.
+- **Igor's expert library, read-only.**
+  - `backend/experts.py` exposes only `$vectorSearch` (no write stages) against his `expert_frames` (3,437 surgeon-labelled training frames).
+  - Results are precomputed by `pipeline/07_expert_views.py` (~5 s latency from London).
+  - His DB holds verdicts and embeddings but not images, so the UI shows verdicts.
+  - The credential lives only in `.env` (gitignored); Igor should rotate it after the event.
+- **Frontend redesign.**
+  - A 3D patient model (three.js, bundled) that assembles from the state stream: structures fade in when seen, a fatty sheath dissolves with exposure, clips pop on, a cut opens a gap, the bile duct pulses at risk.
+  - The video HUD overlays boxes, action chips, rule-engine change toasts, and alert / can't-confirm veils.
+  - An anatomy map, a state timeline (model vs surgeons), a state-space future tree and robot trajectories, and a Story screen built from one recorded decision.
+  - Veils only for real view problems (Igor's `can_confirm` means "anatomy not yet confirmable", not an obscured view).
+
 ## 2026-10-24 (pass 3: finishing the plan and deploying)
 
 - **Trained next-action baseline.**
