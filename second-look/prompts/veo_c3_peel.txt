@@ -1,0 +1,7 @@
+Continue this exact laparoscopic surgery footage. Keep the same camera, same viewpoint, same lighting, same colours, same image quality and the same anatomy as the input image for the whole clip. The view stays very close to the tissue with slight handheld camera drift.
+
+The grasper on the left keeps holding the gallbladder neck and slowly lifts it slightly up and away from the liver. The hook on the right, with its small tip touching the tissue, makes short, deliberate strokes along the junction between the lower gallbladder and the liver, peeling the lower gallbladder free. Thin tissue tents under the hook tip and springs back. In the last two seconds the hook slides straight back along its shaft and the camera holds still.
+
+At the end, beneath the lifted lower gallbladder, a strip of raw whitish-pink tissue on the liver side is visible, while the upper gallbladder stays attached. Everything already in the image, including the dark window and the structures at the gallbladder neck, remains intact and unchanged.
+
+Do not add new instruments, objects or structures. Do not change the colours, lighting or image quality. No smoke, no bleeding, no cutting, no camera cuts.

@@ -17,3 +17,10 @@ $PY generate.py --image frames/endo198_t139.png --out out/endo198_t139_wan.mp4 $
 # Takes about 3 minutes.
 $PY generate.py --image frames/endo166_t040.png --out out/endo166_t040_probe10s.mp4 --frames 121 --chain 2 $EXTRA \
     --prompt "$(cat prompts/probe_10s.txt)"
+
+# "Peel" prompt (prompts/peel_sd_512.txt, condensed from the original to fit the 512-token text encoder limit).
+# Works from the operation 198 frame; from the 166 frame or as pure text-to-video the model invents a black hole.
+# Hands and pens must be in the negative prompt or the model draws a bare hand holding the hook.
+$PY generate.py --image frames/endo198_t139.png --out out/endo198_t139_peel_sd_v2.mp4 --frames 121 --guidance 4 --seed 1 $EXTRA \
+    --negative-extra "human hand, fingers, glove, pen, pencil, stylus, needle, open surgery, hands in frame, instruments without shafts" \
+    --prompt "$(cat prompts/peel_sd_512.txt)"

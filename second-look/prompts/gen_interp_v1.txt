@@ -1,0 +1,10 @@
+Real laparoscopic cholecystectomy footage. The FIRST image is the opening frame and the SECOND image is the closing frame of the same continuous shot from the same endoscope, a few seconds apart. Generate only the motion that connects them: the clip must start exactly on the first image and end exactly on the second image.
+
+What is in the scene (taken from the real frames):
+{SCENE}
+
+Motion: slow, small, physically plausible movements only. The camera stays at the same distance and angle with very slight handheld drift. Instruments move along their own shafts or make small tip movements; they keep their exact shape, colour, size and entry side throughout. Tissue moves only where an instrument touches it, deforms slightly and springs back. Any instrument that is present in one frame but not the other slides smoothly in or out along its shaft from the edge of the view it enters from.
+
+Keep identical to the real frames for the whole clip: the colours (pale pinkish-white gallbladder wall with fine purple vessels, dark red-brown liver, yellow fat), the lighting, the image grain and sharpness, the circular endoscope vignette, and every anatomical structure already visible, including the dark dissected window and the tissue around it.
+
+Strictly forbidden: green, yellow-green or bile-coloured structures or fluid; a visible gallbladder fundus or any new sac or organ appearing; new, extra, swapped or reshaped instruments; metal wire retractors; smoke, bleeding, cutting, clips or fluid; changes of colour, exposure or image quality; zooms, camera cuts or jumps; text or overlays.
