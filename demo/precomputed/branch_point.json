@@ -1,0 +1,62 @@
+{
+ "video_id": "VID74",
+ "t": 435,
+ "first_clip_t": 501,
+ "state": {
+  "t": 435,
+  "phase": "carlot-triangle-dissection",
+  "phase_idx": 1,
+  "phase_inferred": true,
+  "structures": {
+   "gallbladder": {
+    "name": "gallbladder",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_duct": {
+    "name": "cystic_duct",
+    "status": "skeletonised",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_artery": {
+    "name": "cystic_artery",
+    "status": "dissecting",
+    "exposure": 0.8999999999999999,
+    "clips": 0,
+    "at_risk": false
+   },
+   "cystic_plate": {
+    "name": "cystic_plate",
+    "status": "visible",
+    "exposure": 1.0,
+    "clips": 0,
+    "at_risk": false
+   },
+   "common_bile_duct": {
+    "name": "common_bile_duct",
+    "status": "unseen",
+    "exposure": 0.0,
+    "clips": 0,
+    "at_risk": false
+   }
+  },
+  "cvs": {
+   "c1_triangle_cleared": false,
+   "c2_plate_exposed": true,
+   "c3_two_structures": false
+  },
+  "bleeding": false,
+  "view_quality": "clear",
+  "violations": [],
+  "injury": false,
+  "packed": false,
+  "gb_detach": 0.0,
+  "last_bleed_t": null,
+  "adhesion_last_seen": null,
+  "adhesion_load": 0.0
+ }
+}

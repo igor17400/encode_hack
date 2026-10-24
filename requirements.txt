@@ -1,0 +1,11 @@
+google-genai>=2.3.0
+pymongo>=4.10
+fastapi
+uvicorn
+sse-starlette
+pydantic>=2
+python-dotenv
+huggingface_hub
+numpy
+httpx
+pytest

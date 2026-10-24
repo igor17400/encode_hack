@@ -1,0 +1,19 @@
+[
+ "grasper,retract,gallbladder",
+ "hook,dissect,gallbladder",
+ "grasper,grasp,gallbladder",
+ "grasper,retract,liver",
+ "hook,dissect,cystic_duct",
+ "clipper,clip,cystic_duct",
+ "irrigator,aspirate,fluid",
+ "hook,dissect,cystic_artery",
+ "clipper,clip,cystic_artery",
+ "hook,dissect,cystic_plate",
+ "scissors,cut,cystic_duct",
+ "scissors,cut,cystic_artery",
+ "grasper,retract,cystic_plate",
+ "grasper,retract,omentum",
+ "bipolar,coagulate,liver",
+ "grasper,pack,gallbladder",
+ "bipolar,dissect,adhesion"
+]

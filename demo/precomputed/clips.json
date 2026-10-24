@@ -1,0 +1,13 @@
+[
+ {
+  "video_id": "VID74",
+  "n_frames": 91,
+  "t_start": 381,
+  "t_end": 561,
+  "watch_patients": [
+   "P1",
+   "P3"
+  ],
+  "branch_t": 435
+ }
+]

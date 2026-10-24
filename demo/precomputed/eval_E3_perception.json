@@ -1,0 +1,141 @@
+{
+ "name": "E3_perception",
+ "split": "test",
+ "metrics": {
+  "n_frames": 200,
+  "videos": [
+   "VID73",
+   "VID74"
+  ],
+  "frame_source": "CholecT50 Challenge Validation PNGs (706x396)",
+  "triplets_micro": {
+   "precision": 0.269,
+   "recall": 0.277,
+   "support": 264
+  },
+  "confirmed": {
+   "frames": 173,
+   "precision": 0.263,
+   "recall": 0.281,
+   "support": 231
+  },
+  "held_back": {
+   "frames": 27,
+   "precision": 0.333,
+   "recall": 0.242,
+   "support": 33
+  },
+  "view_quality": {
+   "clear": 185,
+   "blood": 7,
+   "smoke": 1,
+   "glare": 3,
+   "occluded": 4
+  },
+  "per_instrument": {
+   "bipolar": {
+    "precision": 0.958,
+    "recall": 0.397,
+    "support": 58
+   },
+   "clipper": {
+    "precision": 0.458,
+    "recall": 0.647,
+    "support": 17
+   },
+   "grasper": {
+    "precision": 0.745,
+    "recall": 0.745,
+    "support": 98
+   },
+   "hook": {
+    "precision": 0.353,
+    "recall": 0.857,
+    "support": 7
+   },
+   "irrigator": {
+    "precision": 0.851,
+    "recall": 0.667,
+    "support": 60
+   },
+   "scissors": {
+    "precision": 0.417,
+    "recall": 0.667,
+    "support": 15
+   }
+  },
+  "per_target": {
+   "cystic_duct": {
+    "precision": 0.321,
+    "recall": 0.529,
+    "support": 17
+   },
+   "abdominal_wall_cavity": {
+    "precision": null,
+    "recall": 0.0,
+    "support": 21
+   },
+   "blood_vessel": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "support": 2
+   },
+   "cystic_artery": {
+    "precision": 0.462,
+    "recall": 0.261,
+    "support": 23
+   },
+   "cystic_pedicle": {
+    "precision": 0.095,
+    "recall": 0.333,
+    "support": 6
+   },
+   "cystic_plate": {
+    "precision": 0.5,
+    "recall": 0.875,
+    "support": 16
+   },
+   "fluid": {
+    "precision": 0.44,
+    "recall": 0.5,
+    "support": 22
+   },
+   "gallbladder": {
+    "precision": 0.608,
+    "recall": 0.516,
+    "support": 93
+   },
+   "gut": {
+    "precision": null,
+    "recall": 0.0,
+    "support": 2
+   },
+   "liver": {
+    "precision": 0.195,
+    "recall": 0.471,
+    "support": 17
+   },
+   "omentum": {
+    "precision": 0.0,
+    "recall": null,
+    "support": 0
+   },
+   "peritoneum": {
+    "precision": 0.0,
+    "recall": null,
+    "support": 0
+   },
+   "specimen_bag": {
+    "precision": 1.0,
+    "recall": 0.6,
+    "support": 20
+   }
+  }
+ },
+ "created_at": 1792847201.511181,
+ "config": {
+  "model": "gemini-3.8-flash",
+  "min_conf": 0.6
+ },
+ "note": "Benchmark on public data, not clinical validation."
+}
