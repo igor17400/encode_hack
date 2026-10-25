@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { get, post, openStream, videoUrl} from "../api";
 import { actionShort } from "../lib/describe";
-import AnatomyMap, { CvsRing, diffStates } from "../components/AnatomyMap";
-import AlertModal from "../components/AlertModal";
+import AnatomyMap, { diffStates } from "../components/AnatomyMap";
+import AlertNote from "../components/AlertNote";
 import StateTimeline from "../components/StateTimeline";
 import ForecastPanel, { EyesOverlay } from "../components/ForecastOverlay";
 import { overlayState } from "../lib/forecast";
@@ -11,8 +11,10 @@ import PlayerBar from "../components/PlayerBar";
 import CvsCard from "../components/CvsCard";
 import World3D from "../components/World3D";
 import { fmtT } from "../components/AnatomyPanel";
-import { ErrorNote, Frame, Picker, RiskBadge, SourceTag, patientOptions } from "../components/ui";
+import { ErrorNote, Frame, PanelBoundary, Picker, RiskBadge, SourceTag, patientOptions } from "../components/ui";
 
+const SHORT_LABEL = (c) =>
+  c.source === "endoscapes" ? `Endoscapes op ${c.op} · CVS by Argon` : `CholecT50 ${c.video_id} · ${fmtT(c.t_start)}–${fmtT(c.t_end)}`;
 const CLIP_LABEL = (c) =>
   c.source === "endoscapes"
     ? `Endoscapes op ${c.op} · CVS judged by Gemini Argon · surgeons' truth`
@@ -78,6 +80,27 @@ export default function Watch({ patients, onBranch }) {
     const h = setTimeout(() => setHold(false), 1800);
     return () => clearTimeout(h);
   }, [pauseReveal, fstate.mode, fstate.locked, fstate.f?.id]);
+  // Stage height for the one-screen layout: from the stage's top to the bottom of the window (wide screens only).
+  const stageRef = useRef(null);
+  const [stage, setStage] = useState({ wide: false, h: null });
+  useEffect(() => {
+    const measure = () => {
+      const el = stageRef.current;
+      if (!el) return;
+      const wide = window.innerWidth >= 1280;
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      setStage((s) => {
+        const h = wide ? Math.max(480, Math.floor(window.innerHeight - top - 12)) : null;
+        return s.wide === wide && s.h === h ? s : { wide, h };
+      });
+    };
+    measure();
+    // Re-measure when anything above the stage changes height (controls wrapping, an error note) or the window resizes.
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+    window.addEventListener("resize", measure);
+    return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
+  }, []);
   const live = history[history.length - 1];
   // Everything shown is what the stream knew at the video's current time.
   let shownIdx = -1;
@@ -85,10 +108,10 @@ export default function Watch({ patients, onBranch }) {
   const shown = shownIdx >= 0 ? history[shownIdx] : null;
   const prevShown = shownIdx > 0 ? history[shownIdx - 1] : null;
   const obs = [...obsList].reverse().find((o) => o.t <= tNow + 0.25) ?? null;
-  const alert = alerts.find((a) => !a.decided && a.t <= tNow + 0.25) ?? null; // reached by the video, not yet decided
+  const reachedAlerts = alerts.filter((a) => a.t <= tNow + 0.25); // warnings the video has reached (never pause it)
   const banner = shown?.banner ?? null;
   const loadedTo = live?.t ?? t0;
-  const videoPlaying = status !== "idle" && playing && !alert && !hold && !atEnd;
+  const videoPlaying = status !== "idle" && playing && !hold && !atEnd;
   const seek = (t) => {
     lockedFor.current = null; // replaying a reveal pauses before it again
     setVideoEnded(false);
@@ -121,7 +144,7 @@ export default function Watch({ patients, onBranch }) {
     for (const n of ["cystic_duct", "cystic_artery"]) {
       const eyes = shown.state.structures[n].status;
       if (hard.has(eyes) && !hard.has(lab[n].status) && !hard.has(out[n].status))
-        return `The eyes currently read the ${n.replace("_", " ")} as ${eyes}; the surgeons' labels say it is not yet. The prediction engine starts from the labels, so its forecast is not affected by this misreading.`;
+        return `The eyes read the ${n.replace("_", " ")} as ${eyes}; the surgeons' labels say not yet. The engine starts from the labels.`;
     }
     return null;
   })();
@@ -197,118 +220,142 @@ export default function Watch({ patients, onBranch }) {
     ...alerts.filter((a) => a.t <= tNow + 0.25).map((a) => ({ t: a.t, kind: "alert", label: a.decided ? `${a.type} (${a.decision})` : a.type })),
   ];
 
+  const wide = stage.wide;
+  const endo = clip?.source === "endoscapes";
+  // Video width capped so the video, the player bar and at least ~220 px of 3D model fit the stage height.
+  const videoMaxW = wide && stage.h ? Math.max(360, (stage.h - 24 - 82 - 160) * 16 / 9) : undefined;
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="card flex flex-wrap items-end gap-4">
-        <Picker label="Operation" value={clipId} onChange={setClipId} options={clips.map((c) => ({ value: c.video_id, label: CLIP_LABEL(c) }))} />
-        <Picker label="Synthetic patient" value={patientId} onChange={setPatientId} options={patientOptions(patients)} />
-        <Picker label="Speed" value={speed} onChange={setSpeed} options={[1, 2, 4, 8].map((v) => ({ value: v, label: `${v}×` }))} />
+    <div className="flex flex-col gap-3">
+      <div className="card flex flex-wrap items-center gap-x-4 gap-y-2 !py-2.5">
+        <Picker compact label="Operation" value={clipId} onChange={setClipId} options={clips.map((c) => ({ value: c.video_id, label: wide ? SHORT_LABEL(c) : CLIP_LABEL(c) }))} />
+        <Picker compact label="Patient" value={patientId} onChange={setPatientId} options={patientOptions(patients)} />
+        <Picker compact label="Speed" value={speed} onChange={setSpeed} options={[1, 2, 4, 8].map((v) => ({ value: v, label: `${v}×` }))} />
         <button className="btn-primary" onClick={start} disabled={!clipId}>
           {status === "idle" ? "▶ Watch the model think" : "↻ Restart"}
         </button>
-        <button className="btn" disabled={!live} onClick={branch}>⑂ Imagine from this moment</button>
-        <SourceTag source={source} />
+        <button className="btn" disabled={!live} onClick={branch} title="Imagine from this moment">⑂ Imagine{wide ? "" : " from this moment"}</button>
+        {forecasts && (
+          <label className="flex items-center gap-1.5 text-xs text-ink-2">
+            <input type="checkbox" checked={pauseReveal} onChange={(e) => setPauseReveal(e.target.checked)} /> pause before each reveal
+          </label>
+        )}
+        <span className="ml-auto" title={clip?.credit || ""}><SourceTag source={source} />{clip?.credit && <span className="ml-1 cursor-help text-xs text-ink-3">ⓘ</span>}</span>
       </div>
-      {clip?.credit && <p className="-mt-2 text-xs text-ink-3">{clip.credit}</p>}
       <ErrorNote error={error} />
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-        <div className="min-w-0">
+      {/* The stage: on wide screens everything for the demo fits in one viewport, no page scroll. */}
+      <div ref={stageRef} style={wide && stage.h ? { height: stage.h } : undefined}
+        className="grid gap-3 xl:grid-cols-[260px_minmax(0,1fr)_400px] 2xl:grid-cols-[290px_minmax(0,1fr)_440px]">
+        <aside className="order-2 flex min-h-0 min-w-0 flex-col gap-2 xl:order-1 xl:overflow-y-auto">
+          <PanelBoundary resetKey={clipId}>
+          {status !== "idle" && shown ? (
+            <CvsCard state={shown.state} history={history} idx={shownIdx} obs={obs} obsList={obsList} tNow={tNow}
+              sensor={shown.state.cvs_source === "sensor"} ductConfirmed={!!shown.duct_confirmed} dense />
+          ) : (
+            <div className="rounded-2xl border-2 border-line bg-surface-0 p-3">
+              <div className="font-mono text-[11px] uppercase tracking-wider text-ink-3">Critical view of safety</div>
+              <p className="mt-1 text-sm text-ink-2">The 3 checks a surgeon makes before it is safe to clip. They fill in here as the video plays.</p>
+            </div>
+          )}
+          <AlertNote alerts={reachedAlerts} onDecided={(d) => {
+            setDecisions((x) => [...x, d]);
+            setAlerts((x) => x.map((a) => (a._id === d._id ? { ...a, decided: true, decision: d.decision } : a)));
+          }} />
+          </PanelBoundary>
+        </aside>
+
+        <div className="order-1 flex min-h-0 min-w-0 flex-col xl:order-2">
           <div className="mb-1 flex flex-wrap items-baseline gap-2">
             <span className="font-mono text-[11px] uppercase tracking-wider text-accent">Eyes</span>
-            <span className="text-xs text-ink-3">{clip?.source === "endoscapes" ? "Gemini Argon judges the critical view from each frame; Flash draws approximate boxes" : "Gemini Flash reads each frame: instruments, actions, approximate boxes"}</span>
+            <span className="truncate text-xs text-ink-3">{endo ? "Gemini Argon judges the critical view from each frame; Flash draws approximate boxes" : "Gemini Flash reads each frame: instruments, actions, approximate boxes"}</span>
           </div>
-          <VideoHUD
-            src={videoUrl(clip?.video)}
-            t0={clip?.t_start ?? 0}
-            obs={obs}
-            state={shown?.state}
-            changes={changes}
-            banner={banner}
-            alert={alert}
-            playing={videoPlaying}
-            speed={speed}
-            done={decisionPoint && atEnd}
-            onTime={(t) => { setVideoT(t); if (t < t1 - 0.4) setVideoEnded(false); }}
-            onEnded={() => setVideoEnded(true)}
-            seek={seekReq}
-            hold={hold}
-          >
-            <div className="rounded-xl border border-accent/60 bg-surface-1/95 px-5 py-3 text-center">
-              <div className="label">The camera stops before the first clip</div>
-              <p className="text-sm text-ink-2">What would each move do? See the predictions beside the video.</p>
-            </div>
-          </VideoHUD>
-          <PlayerBar t={videoT} t0={t0} t1={t1} playing={videoPlaying} disabled={status === "idle"}
-            onToggle={() => { if (atEnd) { seek(t0); setPlaying(true); } else setPlaying(!playing); }}
-            onSeek={seek} forecasts={forecasts} alerts={alerts} clip={clip?.source === "endoscapes" ? clip : null} ended={atEnd} />
+          <div className="mx-auto w-full" style={videoMaxW ? { maxWidth: videoMaxW } : undefined}>
+            <VideoHUD
+              src={videoUrl(clip?.video)}
+              t0={clip?.t_start ?? 0}
+              obs={obs}
+              state={shown?.state}
+              changes={changes}
+              banner={banner}
+              playing={videoPlaying}
+              speed={speed}
+              done={decisionPoint && atEnd}
+              onTime={(t) => { setVideoT(t); if (t < t1 - 0.4) setVideoEnded(false); }}
+              onEnded={() => setVideoEnded(true)}
+              seek={seekReq}
+              hold={hold}
+              mini={!wide}
+            >
+              <div className="rounded-xl border border-accent/60 bg-surface-1/95 px-5 py-3 text-center">
+                <div className="label">The camera stops before the first clip</div>
+                <p className="text-sm text-ink-2">What would each move do? See the predictions beside the video.</p>
+              </div>
+            </VideoHUD>
+            <PlayerBar t={videoT} t0={t0} t1={t1} playing={videoPlaying} disabled={status === "idle"}
+              onToggle={() => { if (atEnd) { seek(t0); setPlaying(true); } else setPlaying(!playing); }}
+              onSeek={seek} forecasts={forecasts} alerts={alerts} clip={endo ? clip : null} ended={atEnd} />
+          </div>
           {status !== "idle" && loadedTo < tNow - 2 && (
-            <p className="mt-1 text-xs text-ink-3">{alerts.some((a) => !a.decided) ? "The rest of the analysis is waiting for a decision on the alert." : `Analysis loaded up to ${fmtT(loadedTo)}…`}</p>
+            <p className="mt-1 text-xs text-ink-3">Analysis loaded up to {fmtT(loadedTo)}…</p>
           )}
-          {forecasts && (
-            <div className="mt-2 flex flex-col gap-2">
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-3">
-                <span>
-                  <b className="text-ink-2">Forecast → reality:</b> {clipId} is a held-out operation (never used for retrieval or training). Each forecast was made before the moment it predicts; the truth is the surgeons' recorded actions.
-                </span>
-                {e1?.metrics && (
-                  <span>
-                    Across {e1.metrics.n} held-out moments, next action in top 3: world model {Math.round(e1.metrics.model_top3 * 100)}% · trained model {Math.round(e1.metrics.trained_top3 * 100)}% · bigram {Math.round(e1.metrics.bigram_top3 * 100)}%.
-                  </span>
-                )}
-                <label className="flex items-center gap-1.5 text-ink-2">
-                  <input type="checkbox" checked={pauseReveal} onChange={(e) => setPauseReveal(e.target.checked)} /> pause before each reveal
-                </label>
+          <PanelBoundary resetKey={clipId}>
+          <div className="relative mt-2 min-h-[160px] flex-1">
+            {view === "3d" ? (
+              <World3D state={shown?.state} playing={videoPlaying} height={wide ? "100%" : 320} />
+            ) : (
+              <div className="h-full overflow-auto rounded-xl border border-line bg-surface-0 p-2"><AnatomyMap state={shown?.state} prev={prevShown?.state} /></div>
+            )}
+            <div className="pointer-events-none absolute inset-x-2 top-2 flex items-start justify-between gap-2">
+              <span className="rounded-md bg-surface-0/80 px-2 py-1 text-[11px] text-ink-2">
+                <span className="font-mono uppercase tracking-wider text-accent">Patient model</span> · built by the eyes{shown ? ` · ${fmtT(shown.t)}` : ""}
+              </span>
+              <div className="pointer-events-auto flex gap-1 rounded-lg border border-line bg-surface-0/80 p-0.5 text-xs">
+                {[["3d", "3D"], ["map", "Map"]].map(([k, l]) => (
+                  <button key={k} onClick={() => setView(k)} className={`rounded-md px-2.5 py-1 ${view === k ? "bg-accent text-surface-0" : "text-ink-2"}`}>{l}</button>
+                ))}
               </div>
             </div>
-          )}
+          </div>
+          </PanelBoundary>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-4">
-        {status !== "idle" && shown && (
-          <CvsCard state={shown.state} history={history} idx={shownIdx} obs={obs} obsList={obsList} tNow={tNow}
-            sensor={shown.state.cvs_source === "sensor"} ductConfirmed={!!shown.duct_confirmed} compact={!!forecasts} />
-        )}
-        {status !== "idle" && forecasts && disagreement && (
-          <div className="rounded-lg border border-status-warning/50 bg-status-warning/10 px-3 py-2 text-xs text-ink-1">{disagreement}</div>
-        )}
-        {status !== "idle" && forecasts && (
-          <ForecastPanel doc={forecasts} t={videoT} ended={atEnd} t0={t0} onSeek={seek} />
-        )}
-        {status !== "idle" && clip?.source === "endoscapes" && (decisionPoint && atEnd
-          ? <DecisionOverlay clip={clip} patientId={patientId} onBranch={branch} />
-          : <EyesOverlay clip={clip} t={videoT} ended={atEnd} history={history} idx={shownIdx} />)}
-        <div className="card flex min-w-0 flex-col gap-3">
-          <div className="flex items-start justify-between gap-2">
-            <div>
-              <div className="label">Patient model · built by the eyes from the video</div>
-              <div className="font-display text-xl">{shown ? `t ${fmtT(shown.t)}` : "waiting"}</div>
-            </div>
-            <CvsRing state={shown?.state} size={74} />
-          </div>
-          <div className="flex gap-1 self-start rounded-lg border border-line p-0.5 text-xs">
-            {[["3d", "3D model"], ["map", "Anatomy map"]].map(([k, l]) => (
-              <button key={k} onClick={() => setView(k)} className={`rounded-md px-2.5 py-1 ${view === k ? "bg-accent text-surface-0" : "text-ink-2"}`}>{l}</button>
-            ))}
-          </div>
-          {view === "3d" ? (
-            <World3D state={shown?.state} playing={videoPlaying} height={forecasts || clip?.source === "endoscapes" ? 260 : 360} />
-          ) : (
-            <AnatomyMap state={shown?.state} prev={prevShown?.state} />
+        <aside className="order-3 flex min-h-0 min-w-0 flex-col gap-2 xl:overflow-y-auto">
+          <PanelBoundary resetKey={clipId}>
+          {forecasts && (
+            <ForecastPanel doc={forecasts} t={status === "idle" ? null : videoT} ended={atEnd} t0={t0} onSeek={seek} dense
+              note={status !== "idle" ? disagreement : null} />
           )}
+          {endo && (status === "idle" ? (
+            <div className="rounded-xl border-2 border-accent/30 bg-surface-0 p-3 text-sm text-ink-3">
+              <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Eyes vs surgeons</div>
+              When was it safe to clip? The eyes' call and the surgeons' labels appear here as the video plays; at the end, the world model predicts what clipping would do.
+            </div>
+          ) : decisionPoint && atEnd
+            ? <DecisionOverlay clip={clip} patientId={patientId} onBranch={branch} />
+            : <EyesOverlay clip={clip} t={videoT} ended={atEnd} history={history} idx={shownIdx} />)}
           {lastExpert && (
-            <div className="rounded-lg border border-line bg-surface-2 p-2 text-sm">
-              <span className="label">Surgeons at {fmtT(lastExpert.t)} (3 annotators): </span>
-              {[["C2", "triangle"], ["C3", "plate"], ["C1", "two structures"]].map(([k, n]) => (
-                <span key={k} className={`ml-2 ${lastExpert[k] >= 0.5 ? "text-ink-1" : "text-ink-3"}`}>
-                  {lastExpert[k] >= 0.5 ? "●" : "○"} {n} {lastExpert[k].toFixed(2)}
-                </span>
+            <div className="rounded-xl border border-line bg-surface-0 px-3 py-2 text-xs">
+              <div className="text-ink-3">Surgeons' labels at {fmtT(lastExpert.t)} (3 annotators)</div>
+              {[["C1", "two structures"], ["C2", "triangle"], ["C3", "plate"]].map(([k, n]) => (
+                <div key={k} className={`flex justify-between ${lastExpert[k] >= 0.5 ? "text-ink-1" : "text-ink-3"}`}>
+                  <span>{lastExpert[k] >= 0.5 ? "●" : "○"} {n}</span><span className="font-mono">{lastExpert[k].toFixed(2)}</span>
+                </div>
               ))}
             </div>
           )}
-        </div>
-        </div>
+          </PanelBoundary>
+        </aside>
       </div>
+
+      {forecasts && (
+        <div className="card text-sm text-ink-2">
+          <b className="text-ink-1">Forecast → reality:</b> {clipId} is a held-out operation (never used for retrieval or training). Each forecast was made before the moment it predicts; the truth is the surgeons' recorded actions.
+          {e1?.metrics && (
+            <> Across {e1.metrics.n} held-out moments, next action in top 3: world model {Math.round(e1.metrics.model_top3 * 100)}% · trained model {Math.round(e1.metrics.trained_top3 * 100)}% · bigram {Math.round(e1.metrics.bigram_top3 * 100)}%.</>
+          )}
+        </div>
+      )}
 
       {history.length > 0 && (
         <div className="card">
@@ -383,7 +430,7 @@ export default function Watch({ patients, onBranch }) {
               <p className="mt-1 text-xs text-ink-3">written by Gemini Argon from this session's events</p>
             </div>
           ) : (
-            !decisions.length && <p className="text-sm text-ink-3">Every alert needs a logged human decision.</p>
+            !decisions.length && <p className="text-sm text-ink-3">Safety warnings appear beside the video; marking one as seen or a false alarm is optional and logged.</p>
           )}
           {obs?.cvs_evidence && (
             <div className="mt-3 rounded-lg bg-surface-2 p-2 text-sm">
@@ -394,13 +441,6 @@ export default function Watch({ patients, onBranch }) {
         </div>
       </div>
 
-      <AlertModal
-        alert={alert}
-        onClose={(d) => {
-          setDecisions((x) => [...x, d]);
-          setAlerts((x) => x.map((a) => (a._id === d._id ? { ...a, decided: true, decision: d.decision } : a)));
-        }}
-      />
     </div>
   );
 }

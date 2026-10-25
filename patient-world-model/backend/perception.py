@@ -218,6 +218,7 @@ async def run_watch(
 ) -> State:
     """speed: 0 = as fast as possible; 1 = real time (one frame every FRAME_EVERY_S seconds)."""
     log: list[tuple[str, dict]] = []  # everything this session emitted, for the end-of-session report
+    pending: list[tuple[int, str, str]] = []  # alerts raised: (t, type, id)
 
     def emit(collection: str, doc: dict) -> None:
         log.append((collection, doc))
@@ -286,10 +287,8 @@ async def run_watch(
             aid = uuid.uuid4().hex
             emit("alerts", {"_id": aid, "session_id": session_id, "t": t, "type": v, "created_at": time.time(),
                                  "frame_path": rel, "evidence": world_model.evidence_for(st), "decision": None, "reason": None,
-                                 "paused": True})
-            dec = await sink.wait_decision(aid)
-            if dec:
-                log.append(("decisions", {"t": t, "type": v, "decision": dec.get("decision"), "reason": dec.get("reason")}))
+                                 "paused": False})
+            pending.append((t, v, aid))  # the alert never stops the analysis; its decision is collected at the end
 
         if verify and source == "flash" and t - last_verify >= VERIFY_EVERY_S:
             last_verify = t
@@ -315,6 +314,13 @@ async def run_watch(
     emit("world_state", {"_id": uuid.uuid4().hex, "session_id": session_id, "t": prev_t,
                               "state": st.model_dump(exclude={"active"}), "source": "end", "confidence": 1.0,
                               "done": True, "created_at": time.time()})
+    for t_a, v, aid in pending:  # decisions made so far; an undecided alert is reported as undecided
+        try:
+            dec = await asyncio.wait_for(sink.wait_decision(aid), timeout=1.0)
+        except asyncio.TimeoutError:
+            dec = None
+        log.append(("decisions", {"t": t_a, "type": v, "decision": (dec or {}).get("decision") or "undecided",
+                                  "reason": (dec or {}).get("reason") or "no decision before the session ended"}))
     if report:
         from backend import reports
 

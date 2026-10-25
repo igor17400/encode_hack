@@ -96,6 +96,24 @@ cd frontend && npm install && npm run dev                 # http://localhost:517
 ```
 Set `VITE_API_BASE` if the API runs elsewhere. Routes, SSE events and shapes: [docs/API.md](docs/API.md).
 
+### Demo day (3 minutes, offline)
+```bash
+DEMO_MODE=precomputed uvicorn backend.api:app --port 8000   # recorded real runs: no Wi-Fi, no keys
+cd frontend && npm run dev                                  # http://localhost:5173 → Watch
+```
+- **Watch is the demo screen.** On a window ≥1280 px wide, one screen shows the critical view of safety card, the video with its player bar, the 3D patient model and the prediction engine (VID74) or eyes vs surgeons (Endoscapes). No page scroll. Checked at 1366×768, 1440×900 and 1920×1080; the details sit below the fold.
+- **Nothing stops the video.**
+  - Safety warnings are a small note beside the video ("Seen" / "False alarm" are optional, one click, logged).
+  - If the browser pauses the muted video by itself (for example when a screen recorder takes focus), it resumes.
+  - The only planned stop is "pause before each reveal" (~2 s at each forecast lock); untick it for an uninterrupted recording.
+- **Backup:** the static build (`frontend/scripts/build_static.sh`, served with a range-capable server such as `npx http-server frontend/dist-static`, so video seeking works), or the published Artifact (https://claude.ai/artifact/89gNTgccRYUVUdBMNfQqG5).
+- **Suggested path:**
+  1. Endoscapes op 166: CVS fills in; the eyes say safe at 1:09 vs the surgeons' 1:04, lose it at 1:13, regain it at 1:24.
+  2. The last frame: "clip now" vs "keep dissecting".
+  3. VID74: forecast → locked → revealed, with the running score.
+  4. Train the robot: agent vs random, and the dream-data episode.
+  5. Evidence.
+
 **No silent fallbacks in evaluation.** The evals and agent runs call the world model with `strict=True`. A failed Gemini or Atlas call stops the run instead of being scored as a prediction. The live app may fall back to a rules-only result; it is always labelled `source: rules_only`.
 
 ## Modes
@@ -105,14 +123,14 @@ Set `VITE_API_BASE` if the API runs elsewhere. Routes, SSE events and shapes: [d
   - Confident triplets (≥ 0.6) update the state through the rules.
   - If smoke, blood or glare hide the anatomy, the state is held and the UI shows "view obscured, can't confirm".
   - Every ~30 s, `gemini-4-argon` checks for contradictions. It can only move statuses forward; it can never un-cut a structure or mark CVS met.
-  - Safety violations raise an alert that pauses playback until a human Acknowledges or Overrides, with a reason.
+  - Safety violations raise a small warning beside the video. It never stops the video or the analysis; the viewer can mark it as seen or as a false alarm (logged).
 - **Forecast → reality** (Watch on VID74, a held-out test operation; `demo/record_forecasts.py`, `backend/forecast.py`):
   - Next to the playing video, the **prediction engine** shows each forecast in four plain-language steps:
     1. what the surgeon is doing now and the patient's state (from the surgeons' labels);
     2. what the rules say this action does;
     3. what surgeons did next in the 5 most similar real moments (Atlas vector search, training videos only);
     4. Gemini Argon's top-3 forecast of the next move.
-  - The video is the clock. Play/pause (or space) and drag the slider, which has forecast and alert markers: the eyes, the patient model and the engine panel all follow the video time. Alerts appear when the video reaches them.
+  - The video is the clock. Play/pause (or space) and drag the slider, which has forecast and alert markers: the eyes, the patient model and the engine panel all follow the video time. Warnings appear when the video reaches them and never pause it.
   - The video pauses briefly, then the surgeon's real next action is revealed with ✓ top pick, ✓ in top 3, or ✗ missed. A running score compares it with the trained model and the bigram.
   - Clip result: the real move was in the engine's top 3 for **6 of 11** forecasts (trained model 7, bigram 6). The predicted anatomy matched the real labels 10 of 11 times. The 200-item E1 numbers sit alongside; risk can't be checked (no complication labels).
   - The eyes (Flash) and the engine are labelled separately. When the eyes misread a clip or cut that the labels don't show, a note says so.

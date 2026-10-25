@@ -32,7 +32,7 @@ They will be re-recorded live with the same shapes. Show `source` in small print
 Demo specifics:
 
 - **Watch:** use `VID74` with patient **P1** (a safe operation, no alerts) or **P3** (adhesions). For P3, the same real actions trigger a `clip_before_cvs` alert at t=504.
-- **Alerts:** an alert **pauses** playback until you call `POST /alerts/{id}/decision {decision: "ack" | "override", reason}`. A reason is required.
+- **Alerts:** an alert never pauses playback or the analysis. Optionally log a reaction with `POST /alerts/{id}/decision {decision: "ack" | "override", reason}` (reason required). Alerts still undecided when a live session ends go into its report as "undecided".
 - **Imagine:** the demo buttons are "Clip duct now" (`clipper,clip,cystic_duct`) and "Keep dissecting plate" (`hook,dissect,cystic_plate`), from the branch point state. Recorded for P1, P2 and P4.
 - **Train the robot:** policies are `random`, `expert_replay`, `agent`, `agent_lessons`. The offline recordings only have `random` and `expert_replay` until the live run.
 

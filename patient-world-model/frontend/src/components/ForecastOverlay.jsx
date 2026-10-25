@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fmtT } from "./AnatomyPanel";
 import { isRevealed, overlayState, runningScore, verdict } from "../lib/forecast";
 import { actionPast, actionSentence, actionShort, changeLines, cvsCount, stateLines } from "../lib/describe";
@@ -17,9 +17,9 @@ const DOT = { hit: "#0ca30c", top3: "#fab219", miss: "#ec835a" };
 const TONE = { done: "text-ink-1", plain: "text-ink-2", good: "text-status-good", warn: "text-status-warning", bad: "text-status-serious" };
 const lower = (s) => (s ? s[0].toLowerCase() + s.slice(1) : s);
 
-function Block({ n, title, sub, on, children }) {
+function Block({ n, title, sub, on, children, dense }) {
   return (
-    <section className={`rounded-lg border p-2.5 transition-all duration-500 ${on ? "border-line bg-surface-1 opacity-100" : "border-transparent opacity-0"}`}>
+    <section className={`rounded-lg border ${dense ? "px-2.5 py-1.5" : "p-2.5"} transition-all duration-500 ${on ? "border-line bg-surface-1 opacity-100" : "border-transparent opacity-0"}`}>
       <div className="mb-1 flex items-baseline gap-2">
         <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent font-mono text-[11px] font-bold text-surface-0">{n}</span>
         <span className="text-sm font-semibold">{title}</span>
@@ -48,7 +48,9 @@ function useStage(key, animate) {
   return stage;
 }
 
-export function Engine({ s, animate = true }) {
+// dense: the one-screen demo layout. Steps 1-3 shrink to one line each (details on click); the forecast and the
+// reveal keep full size. note: a one-line eyes-vs-labels disagreement shown at the top.
+export function Engine({ s, animate = true, dense = false, note = null }) {
   const f = s.f;
   const wm = f.world_model;
   const reveal = s.mode === "reveal";
@@ -58,35 +60,61 @@ export function Engine({ s, animate = true }) {
   const changes = changeLines(f.state_before, wm.state_out);
   const v = verdict(f.scores.world_model.rank);
   const truthVotes = votes.find(([a]) => a === f.truth.next_action)?.[1] || 0;
+  // On short screens the side column scrolls: keep the forecast / reveal (the bottom of the engine) in view.
+  const box = useRef(null);
+  useEffect(() => {
+    const col = dense && box.current?.closest("aside");
+    if (col && col.scrollHeight > col.clientHeight) col.scrollTop = col.scrollHeight;
+  }, [dense, f.id, s.mode, s.locked, stage]);
   const border = s.locked ? "anim-glow border-accent"
     : reveal ? (v === "miss" ? "anim-shake border-status-serious" : v === "hit" ? "border-status-good" : "border-status-warning") : "border-accent/50";
   return (
-    <div className={`flex flex-col gap-2 rounded-xl border-2 bg-surface-0 p-3 ${border}`}>
-      <div>
-        <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Prediction engine</div>
-        <div className="text-xs text-ink-3">Forecasts the surgeon's next move from the current state, 5 similar real operations and Gemini Argon.</div>
-      </div>
+    <div ref={box} className={`flex flex-col ${dense ? "gap-1.5 p-2.5" : "gap-2 p-3"} rounded-xl border-2 bg-surface-0 ${border}`}>
+      {dense ? (
+        <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Prediction engine · the surgeon's next move</div>
+      ) : (
+        <div>
+          <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Prediction engine</div>
+          <div className="text-xs text-ink-3">Forecasts the surgeon's next move from the current state, 5 similar real operations and Gemini Argon.</div>
+        </div>
+      )}
+      {note && <div className="rounded-md bg-status-warning/15 px-2 py-1 text-[11px] text-ink-1">{note}</div>}
 
-      <Block n="1" title="Now" sub={`this action started at ${fmtT(Math.max(0, f.t))} · surgeons' labels`} on={stage >= 1}>
-        <p className="text-sm">The surgeon is <b>{lower(actionSentence(f.action, true))}</b>.</p>
-        <div className="mt-1 text-[11px] text-ink-3">Patient when this action began:</div>
-        <ul className="grid gap-x-3 text-xs sm:grid-cols-2">
-          {stateLines(f.state_before).map((l) => (
-            <li key={l.label}><span className="text-ink-3">{l.label}: </span><span className={TONE[l.tone]}>{l.text}</span></li>
-          ))}
-        </ul>
+      <Block n="1" title="Now" sub={`from ${fmtT(Math.max(0, f.t))} · surgeons' labels`} on={stage >= 1} dense={dense}>
+        <p className="text-sm">{dense ? <b>{actionSentence(f.action)}</b> : <>The surgeon is <b>{lower(actionSentence(f.action, true))}</b>.</>}
+          {dense && <span className="text-ink-3"> · CVS {cvsCount(f.state_before)} of 3</span>}</p>
+        {dense ? (
+          <details className="text-[11px] text-ink-3">
+            <summary className="cursor-pointer">patient when this action began</summary>
+            <ul className="text-xs">{stateLines(f.state_before).map((l) => <li key={l.label}><span className="text-ink-3">{l.label}: </span><span className={TONE[l.tone]}>{l.text}</span></li>)}</ul>
+          </details>
+        ) : (
+          <>
+            <div className="mt-1 text-[11px] text-ink-3">Patient when this action began:</div>
+            <ul className="grid gap-x-3 text-xs sm:grid-cols-2">
+              {stateLines(f.state_before).map((l) => (
+                <li key={l.label}><span className="text-ink-3">{l.label}: </span><span className={TONE[l.tone]}>{l.text}</span></li>
+              ))}
+            </ul>
+          </>
+        )}
       </Block>
 
-      <Block n="2" title="Rules: this action will…" sub="hard facts" on={stage >= 2}>
-        <ul className="text-sm">
-          {(changes.length ? changes : ["Leave the anatomy as it is"]).map((c) => <li key={c}>→ {c}</li>)}
-          {wm.rules_violations?.map((x) => <li key={x} className="text-status-serious">▲ Breaks a safety rule: {x.replaceAll("_", " ")}</li>)}
-        </ul>
+      <Block n="2" title="Rules: this action will…" sub="hard facts" on={stage >= 2} dense={dense}>
+        {dense ? (
+          <p className="text-sm">→ {(changes.length ? changes : ["leave the anatomy as it is"]).join(" · ")}
+            {wm.rules_violations?.map((x) => <span key={x} className="block text-status-serious">▲ breaks a safety rule: {x.replaceAll("_", " ")}</span>)}</p>
+        ) : (
+          <ul className="text-sm">
+            {(changes.length ? changes : ["Leave the anatomy as it is"]).map((c) => <li key={c}>→ {c}</li>)}
+            {wm.rules_violations?.map((x) => <li key={x} className="text-status-serious">▲ Breaks a safety rule: {x.replaceAll("_", " ")}</li>)}
+          </ul>
+        )}
       </Block>
 
-      <Block n="3" title="Memory: what surgeons did next" sub={`${total} similar real moments (Atlas)`} on={stage >= 3}>
+      <Block n="3" title={dense ? "Memory: surgeons did next" : "Memory: what surgeons did next"} sub={dense ? `${total} real moments · Atlas` : `${total} similar real moments (Atlas)`} on={stage >= 3} dense={dense}>
         <div className="flex flex-col gap-1">
-          {votes.map(([a, n]) => (
+          {(dense ? votes.slice(0, 3) : votes).map(([a, n]) => (
             <div key={a} className="flex items-center gap-2 text-sm">
               <span className="min-w-0 flex-1 truncate">{actionShort(a)}</span>
               <span className="flex gap-0.5">{Array.from({ length: n }).map((_, i) => <span key={i} className="h-3 w-3 rounded-sm bg-[#5aa9a0]" />)}</span>
@@ -94,8 +122,8 @@ export function Engine({ s, animate = true }) {
             </div>
           ))}
         </div>
-        <details className="mt-1 text-[11px] text-ink-3">
-          <summary className="cursor-pointer">the {total} real moments</summary>
+        <details className={`${dense ? "" : "mt-1 "}text-[11px] text-ink-3`}>
+          <summary className="cursor-pointer">{dense ? "which moments" : `the ${total} real moments`}</summary>
           {(wm.neighbours || []).map((n) => (
             <div key={n.id}>{n.video_id} · {Math.round(n.score * 100)}% similar · surgeon was {lower(actionSentence(n.action))}, then {lower(actionShort(n.next_action))}</div>
           ))}
@@ -103,7 +131,7 @@ export function Engine({ s, animate = true }) {
       </Block>
 
       {!reveal ? (
-        <Block n="4" title="Gemini Argon forecasts the next move"
+        <Block n="4" title={dense ? "Gemini Argon forecasts" : "Gemini Argon forecasts the next move"} dense={dense}
           sub={s.secondsLeft == null ? "truth after this clip" : s.locked ? "locked" : `revealed in ${Math.ceil(s.secondsLeft)} s`} on={stage >= 4}>
           {wm.top3.map((a, i) => (
             <div key={a.action} className="flex items-center gap-2 text-sm">
@@ -114,8 +142,10 @@ export function Engine({ s, animate = true }) {
             </div>
           ))}
           <p className="mt-1 text-[11px] text-ink-3">
-            {votes[0] && wm.top3[0]?.action === votes[0][0] ? "Its top pick follows the real cases. " : "Its top pick differs from the real cases' majority. "}
-            Trained model says: {actionShort(f.trained.top3[0])} · bigram: {actionShort(f.bigram.top3[0])}.
+            {dense
+              ? <>{votes[0] && wm.top3[0]?.action === votes[0][0] ? "follows the real cases" : "differs from the real cases"} · trained: {actionShort(f.trained.top3[0])} · bigram: {actionShort(f.bigram.top3[0])}</>
+              : <>{votes[0] && wm.top3[0]?.action === votes[0][0] ? "Its top pick follows the real cases. " : "Its top pick differs from the real cases' majority. "}
+                Trained model says: {actionShort(f.trained.top3[0])} · bigram: {actionShort(f.bigram.top3[0])}.</>}
           </p>
           {cvsCount(f.state_before) < 3 && wm.top3.some((a) => a.action.split(",")[1] === "clip") && (
             <p className="mt-1 text-xs font-semibold text-status-serious">⚠ It forecasts clipping while the critical view is only {cvsCount(f.state_before)} of 3.</p>
@@ -142,7 +172,7 @@ export function Engine({ s, animate = true }) {
           </p>
         </section>
       )}
-      <p className="text-[11px] text-ink-3">Risk ({wm.risk_level}) can't be checked: CholecT50 has no complication labels.</p>
+      {!dense && <p className="text-[11px] text-ink-3">Risk ({wm.risk_level}) can't be checked: CholecT50 has no complication labels.</p>}
     </div>
   );
 }
@@ -171,19 +201,26 @@ function ScoreLine({ doc, t, ended }) {
 }
 
 // Shown next to the video.
-export default function ForecastPanel({ doc, t, ended, t0, onSeek }) {
+export default function ForecastPanel({ doc, t, ended, t0, onSeek, dense = false, note = null }) {
   if (!doc) return null;
   const s = overlayState(doc.forecasts, t, { ended });
   return (
     <div className="flex flex-col gap-1.5">
       {s.mode === "idle" ? (
-        <div className="rounded-xl border-2 border-accent/30 bg-surface-0 p-3 text-sm text-ink-3">The prediction engine starts forecasting when the video plays.</div>
-      ) : <Engine s={s} />}
+        <div className="rounded-xl border-2 border-accent/30 bg-surface-0 p-3 text-sm text-ink-3">
+          <div className="font-mono text-[11px] uppercase tracking-wider text-accent">Prediction engine</div>
+          It starts forecasting the surgeon's next move when the video plays.
+        </div>
+      ) : <Engine s={s} dense={dense} note={note} />}
       <div className="flex flex-wrap items-center gap-2 rounded-lg bg-surface-1 px-2 py-1.5">
         <LedgerDots doc={doc} t={t} ended={ended} t0={t0} onSeek={onSeek} />
         <ScoreLine doc={doc} t={t} ended={ended} />
       </div>
-      <p className="text-[11px] text-ink-3">Forecast = the surgeon's next move. Critical view of safety = the 3 checks before it is safe to clip.</p>
+      <p className="text-[11px] text-ink-3">
+        {dense
+          ? `Forecast = the surgeon's next move, revealed when the video gets there. Risk (${s.f?.world_model?.risk_level ?? "per forecast"}) can't be checked: CholecT50 has no complication labels.`
+          : "Forecast = the surgeon's next move. Critical view of safety = the 3 checks before it is safe to clip."}
+      </p>
     </div>
   );
 }

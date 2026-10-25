@@ -39,12 +39,16 @@ export default function App() {
     }
   }, [tab]);
 
+  const watch = tab === "watch";
   return (
-    <div className="mx-auto flex min-h-screen max-w-[1500px] flex-col gap-5 px-4 py-5 sm:px-6">
+    // Watch is the demo screen: a slimmer header and a wider page so the video, the critical view, the prediction
+    // engine and the 3D model fit on one screen together.
+    <div className={`mx-auto flex min-h-screen flex-col px-4 sm:px-6 ${watch ? "max-w-[1880px] gap-3 py-3" : "max-w-[1500px] gap-5 py-5"}`}>
       <header className="flex flex-wrap items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Second Look</h1>
-          <p className="text-ink-2">Eyes that see the patient now, a world model that imagines what happens next.</p>
+        <div className={watch ? "flex flex-wrap items-center gap-x-3 gap-y-1" : ""}>
+          <h1 className={`${watch ? "text-2xl" : "text-3xl"} font-bold tracking-tight`}>Second Look</h1>
+          <p className={watch ? "hidden text-sm text-ink-3 2xl:block" : "text-ink-2"}>Eyes that see the patient now, a world model that imagines what happens next.</p>
+          {watch && <SimNote />}
         </div>
         <nav className="grid w-full grid-cols-3 gap-1 rounded-xl border border-line bg-surface-1 p-1 sm:ml-auto sm:flex sm:w-auto">
           {TABS.map(([k, label]) => (
@@ -58,8 +62,8 @@ export default function App() {
           ))}
         </nav>
       </header>
-      <div className="flex flex-wrap items-center gap-3 text-sm">
-        <SimNote />
+      <div className={`flex flex-wrap items-center gap-3 text-sm ${watch && health?.ok !== false ? "hidden" : ""}`}>
+        {!watch && <SimNote />}
         {health && !health.ok && <span className="text-status-serious">Backend not reachable at {API}</span>}
         {health?.demo_mode === "precomputed" && <span className="text-ink-3">offline demo mode (recorded runs)</span>}
       </div>

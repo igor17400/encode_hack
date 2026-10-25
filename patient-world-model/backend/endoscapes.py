@@ -141,11 +141,10 @@ def events(clip: str, patient: Patient) -> list[tuple[str, dict]]:
 
 
 async def replay(session_id: str, clip: str, patient: Patient, sink, speed: float = 1.0) -> None:
-    """Stream the clip through a sink (Atlas in live mode, the in-page bus offline), pausing on alerts."""
+    """Stream the clip through a sink (Atlas in live mode, the in-page bus offline). Alerts never pause the
+    stream; the viewer decides beside the video."""
     for coll, doc in events(clip, patient):
         doc = dict(doc, session_id=session_id)
         sink.emit(coll, doc)
-        if coll == "alerts":
-            await sink.wait_decision(doc["_id"])
         if coll == "world_state" and speed > 0:
             await asyncio.sleep(1.0 / speed)  # Igor's runs are 1 frame per second of video

@@ -13,7 +13,7 @@ const BOX_COLOR = {
 };
 
 export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner, alert, playing, speed, done, children,
-                                   overlay = null, onTime, hold = false, seek = null, onEnded }) {
+                                   overlay = null, onTime, hold = false, seek = null, onEnded, mini = true }) {
   const ref = useRef(null);
   const [toasts, setToasts] = useState([]);
 
@@ -24,6 +24,24 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
     if (playing && !hold) v.play().catch(() => {});
     else v.pause();
   }, [playing, speed, hold]);
+  // Chrome may pause a muted video on its own (tab or window loses focus, e.g. a screen recorder's controls).
+  // If the viewer still wants it playing, resume it instead of silently freezing everything that follows the video.
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || !playing || hold) return;
+    const resume = () => { if (v.paused && !v.ended && !document.hidden) v.play().catch(() => {}); };
+    const onPause = () => setTimeout(resume, 150);
+    v.addEventListener("pause", onPause);
+    document.addEventListener("visibilitychange", resume);
+    window.addEventListener("focus", resume);
+    const h = setInterval(resume, 1000);
+    return () => {
+      v.removeEventListener("pause", onPause);
+      document.removeEventListener("visibilitychange", resume);
+      window.removeEventListener("focus", resume);
+      clearInterval(h);
+    };
+  }, [playing, hold]);
   // The video is the clock: everything else follows its time. Seeks come from the player bar / timeline.
   useEffect(() => {
     const v = ref.current;
@@ -94,8 +112,8 @@ export default function VideoHUD({ src, t0 = 0, obs, state, changes = [], banner
           })()}
         </div>
 
-        {/* mini world model: CVS + anatomy picture-in-picture */}
-        {state && (
+        {/* mini world model: CVS + anatomy picture-in-picture (off when the full panels sit beside the video) */}
+        {state && mini && (
           <div className="absolute right-3 top-3 hidden w-32 flex-col items-center gap-1 rounded-lg border border-line bg-surface-0/80 p-1.5 sm:flex">
             <CvsRing state={state} size={46} showLabels={false} />
             <AnatomyMap state={state} mini className="rounded" />

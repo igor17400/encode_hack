@@ -2,6 +2,22 @@
 
 Newest first. Each entry: what changed, why.
 
+## 2026-10-25 (pass 7: one-screen Watch, non-blocking warnings)
+
+- **One screen.**
+  - Watch on wide screens (≥1280 px) is now a fixed-height stage: CVS card | video + player + 3D model | prediction engine (VID74) or eyes vs surgeons (Endoscapes).
+  - Dense modes for `CvsCard` and `Engine` support this layout.
+  - The explanatory text moved below the fold.
+- **Warnings never block.** The full-screen alert modal stopped the video, and the replay and live perception loop waited up to 10 minutes for a decision. While the demo was being recorded, this looked like the program freezing. Now:
+  - an alert is a small note beside the video (`AlertNote`), with optional one-click "Seen" / "False alarm", still logged through `POST /alerts/{id}/decision`;
+  - no replay or perception loop waits for decisions;
+  - a live session's report lists alerts that were never decided as "undecided".
+  - Test: `test_alert_never_pauses_the_analysis` uses a sink whose viewer never reacts.
+- **Video keeps playing.**
+  - Chrome can pause a muted video on its own when the window loses focus (for example a screen recorder's controls). `VideoHUD` now resumes it while the viewer wants it playing.
+  - Each side panel sits in an error boundary, so one failing panel can't unmount the page and stop the video.
+  - The remaining planned stop is "pause before each reveal" (≈1.8 s at each forecast lock); untick it for an uninterrupted recording.
+
 ## 2026-10-24 (pass 6: forecast → reality, the prediction engine shown next to the video)
 
 - **What is shown.**

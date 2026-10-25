@@ -1,3 +1,4 @@
+import { Component } from "react";
 import { frameUrl, niceName } from "../api";
 
 export const RISK = {
@@ -68,11 +69,11 @@ export function Frame({ path, label, caption, className = "" }) {
   );
 }
 
-export function Picker({ label, value, onChange, options, disabled }) {
+export function Picker({ label, value, onChange, options, disabled, compact = false }) {
   return (
-    <label className="flex min-w-0 max-w-full flex-col gap-1">
+    <label className={`flex min-w-0 max-w-full ${compact ? "flex-col gap-1 sm:flex-row sm:items-center sm:gap-2" : "flex-col gap-1"}`}>
       <span className="label">{label}</span>
-      <select className="select max-w-full truncate" value={value ?? ""} disabled={disabled} onChange={(e) => onChange(e.target.value)}>
+      <select className={`select max-w-full truncate ${compact ? "min-w-0 w-full sm:w-auto sm:max-w-[22rem]" : ""}`} value={value ?? ""} disabled={disabled} onChange={(e) => onChange(e.target.value)}>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
             {o.label}
@@ -92,3 +93,22 @@ export const patientOptions = (patients) =>
   patients.map((p) => ({ value: p.patient_id, label: `${p.patient_id} · ${p.name}` }));
 
 export { niceName };
+
+// One panel failing must never take down the page (and with it the video): show a small note instead.
+export class PanelBoundary extends Component {
+  state = { error: null };
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  componentDidCatch(error) {
+    console.error("panel error:", error);
+  }
+  componentDidUpdate(prev) {
+    if (prev.resetKey !== this.props.resetKey && this.state.error) this.setState({ error: null });
+  }
+  render() {
+    if (this.state.error)
+      return <div className="rounded-lg border border-line bg-surface-0 px-3 py-2 text-xs text-ink-3">This panel hit an error ({String(this.state.error.message || this.state.error)}); the video keeps playing.</div>;
+    return this.props.children;
+  }
+}
