@@ -32,10 +32,6 @@ export function openStream(sid, handlers) {
 const sessions = new Map();
 const alerts = new Map(); // id -> {doc, resolve}
 
-function waitDecision(doc) {
-  return new Promise((resolve) => alerts.set(doc._id, { doc, resolve }));
-}
-
 async function replayWatch(sid, rec, speed) {
   for (const [coll, d] of rec.events) {
     const doc = { ...d };
@@ -43,8 +39,8 @@ async function replayWatch(sid, rec, speed) {
       doc._id = uid();
       doc.decision = null;
     }
+    if (coll === "alerts") alerts.set(doc._id, { doc, resolve: () => {} }); // never pauses the replay
     publish(sid, coll, doc);
-    if (coll === "alerts") await waitDecision(doc);
     if (coll === "world_state" && speed > 0) await sleep(2000 / speed);
   }
 }

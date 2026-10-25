@@ -71,6 +71,14 @@ cluster), optional `GEMINI_MAX_CALLS`, `DEMO_MODE`.
 - **Forecast → reality.** Truth is shown only when the video reaches it (`lib/forecast.js`). Forecasts come from
   state_before + current action + train-split retrieval only; every forecast is shown, misses included.
 - **Plain language in the UI.** Use `lib/describe.js` (`actionShort`, `actionSentence`, `stateLines`), not raw triplets.
+- **Nothing pauses the video except the viewer.**
+  - Alerts are a side note (`AlertNote`); no replay or perception loop waits on `wait_decision`. A live report lists undecided alerts as "undecided" (`test_alert_never_pauses_the_analysis`).
+  - `VideoHUD` resumes a video the browser paused on its own. Side panels sit in `PanelBoundary`.
+  - The only deliberate stop is "pause before each reveal".
+- **Watch fits one screen (≥1280 px).**
+  - The stage height is measured (ResizeObserver), and the video width is capped so the 3D model keeps ≥160 px.
+  - Use the `dense` props on `CvsCard` / `Engine` / `ForecastPanel`; long text goes below the fold.
+  - Re-check with Playwright at 1366×768, 1440×900 and 1920×1080 after layout changes.
 - **Igor's database is read-only.** `experts._ReadOnly` exposes only `aggregate`, with no `$out`/`$merge`. Never write to it.
 
 ## Domain gotchas

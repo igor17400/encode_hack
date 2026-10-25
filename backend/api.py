@@ -375,7 +375,8 @@ class WatchIn(BaseModel):
 
 
 async def _replay(sid: str, events: list, speed: float, gap_s: float = perception.FRAME_EVERY_S) -> None:
-    """Replay recorded [collection, doc] events at the recorded pace; pause on alerts until a decision."""
+    """Replay recorded [collection, doc] events at the recorded pace. Alerts do not pause the replay: the viewer
+    decides beside the video while it keeps playing (the decision is still required and logged)."""
     sink = BusSink(sid)
     for coll, doc in events:
         doc = dict(doc)
@@ -383,8 +384,6 @@ async def _replay(sid: str, events: list, speed: float, gap_s: float = perceptio
             doc["_id"] = uuid.uuid4().hex
             doc["decision"] = None
         sink.emit(coll, doc)
-        if coll == "alerts":
-            await sink.wait_decision(doc["_id"])
         if coll == "world_state" and speed > 0:
             await asyncio.sleep(gap_s / speed)
 

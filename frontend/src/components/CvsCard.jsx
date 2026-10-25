@@ -40,49 +40,52 @@ export function ductSightings(obsList, tNow) {
   return n;
 }
 
-function Mark({ on, n }) {
+function Mark({ on, n, small }) {
+  const sz = small ? "h-7 w-7" : "h-8 w-8";
   return on ? (
-    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-status-good text-black">✓</span>
+    <span className={`grid ${sz} shrink-0 place-items-center rounded-full bg-status-good text-black`}>✓</span>
   ) : (
-    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border-2 border-status-warning font-mono text-sm text-status-warning">{n}</span>
+    <span className={`grid ${sz} shrink-0 place-items-center rounded-full border-2 border-status-warning font-mono text-sm text-status-warning`}>{n}</span>
   );
 }
 
-export default function CvsCard({ state, history, idx, obs, obsList, tNow, sensor, ductConfirmed, compact = false }) {
+// dense: the one-screen demo layout (no criterion descriptions, one-line duct card, reasoning shown elsewhere).
+export default function CvsCard({ state, history, idx, obs, obsList, tNow, sensor, ductConfirmed, compact = false, dense = false }) {
   if (!state) return null;
   const since = achievedSince(history, idx);
   const met = CRITERIA.filter((c) => state.cvs?.[c.key]).length;
   const safe = met === 3;
   const raw = obs?.cvs_raw;
+  const brief = compact || dense;
   return (
-    <div className="flex flex-col gap-3">
-      <div className={`rounded-2xl border-2 bg-surface-0 p-4 ${safe ? "border-status-good/70" : "border-status-warning/60"}`}>
-        <div className="font-mono text-[11px] uppercase tracking-wider text-ink-3">Critical view of safety · is it safe to clip?</div>
-        <div className={`font-display ${compact ? "text-3xl" : "text-4xl"} font-bold ${safe ? "text-status-good" : "text-status-warning"}`}>{safe ? "Safe to clip" : "Not yet"}</div>
-        <div className="text-sm text-ink-2">{met} of 3 criteria met · {sensor ? "judged by Gemini Argon from the video" : "derived from the actions the eyes see (a proxy: CholecT50 has no CVS labels)"}</div>
-        <div className="mt-3 flex flex-col divide-y divide-line">
+    <div className={`flex flex-col ${dense ? "gap-2" : "gap-3"}`}>
+      <div className={`rounded-2xl border-2 bg-surface-0 ${dense ? "p-3" : "p-4"} ${safe ? "border-status-good/70" : "border-status-warning/60"}`}>
+        <div className="font-mono text-[11px] uppercase tracking-wider text-ink-3">Critical view of safety{dense ? "" : " · is it safe to clip?"}</div>
+        <div className={`font-display ${brief ? "text-3xl" : "text-4xl"} font-bold ${safe ? "text-status-good" : "text-status-warning"}`}>{safe ? "Safe to clip" : "Not safe to clip yet"}</div>
+        <div className={`${dense ? "text-xs" : "text-sm"} text-ink-2`}>{met} of 3 criteria met · {sensor ? (dense ? "judged by Gemini Argon" : "judged by Gemini Argon from the video") : dense ? "proxy from the actions the eyes see" : "derived from the actions the eyes see (a proxy: CholecT50 has no CVS labels)"}</div>
+        <div className={`${dense ? "mt-2" : "mt-3"} flex flex-col divide-y divide-line`}>
           {CRITERIA.map((c, i) => {
             const on = !!state.cvs?.[c.key];
             const p = raw?.[c.raw];
             return (
-              <div key={c.key} className="flex items-center gap-3 py-2.5">
-                <Mark on={on} n={i + 1} />
+              <div key={c.key} className={`flex items-center gap-3 ${dense ? "py-1.5" : "py-2.5"}`}>
+                <Mark on={on} n={i + 1} small={dense} />
                 <div className="min-w-0 flex-1">
-                  <div className="font-semibold">{c.name}</div>
-                  {!compact && <div className="text-xs text-ink-3">{c.desc}</div>}
+                  <div className="font-semibold leading-tight">{c.name}</div>
+                  {!brief && <div className="text-xs text-ink-3">{c.desc}</div>}
                   {on && since[c.key] != null && (
                     <div className="text-xs font-semibold text-status-good">
-                      {history[0] && since[c.key] <= history[0].t ? "Already met when the clip starts" : `Achieved at ${fmtT(Math.round(since[c.key]))}`}
+                      {history[0] && since[c.key] <= history[0].t ? (dense ? "met from the start" : "Already met when the clip starts") : `${dense ? "since" : "Achieved at"} ${fmtT(Math.round(since[c.key]))}`}
                     </div>
                   )}
                 </div>
-                {p != null && <span className="font-display text-xl text-ink-2" title="Gemini Argon's confidence on this frame">{Math.round(p * 100)}%</span>}
+                {p != null && <span className={`font-display ${dense ? "text-lg" : "text-xl"} text-ink-2`} title="Gemini Argon's confidence on this frame">{Math.round(p * 100)}%</span>}
               </div>
             );
           })}
         </div>
-        {raw && <p className="text-[11px] text-ink-3">% = Argon's confidence on this frame. A criterion counts once it holds over several frames in a row.</p>}
-        {obs?.cvs_evidence && !compact && (
+        {raw && <p className="text-[11px] text-ink-3">{dense ? "% = Argon's confidence on this frame; a criterion counts once it holds over several frames." : "% = Argon's confidence on this frame. A criterion counts once it holds over several frames in a row."}</p>}
+        {obs?.cvs_evidence && !brief && (
           <details className="mt-1 text-xs text-ink-2">
             <summary className="cursor-pointer text-ink-1">Argon's reasoning on this frame</summary>
             <p className="mt-1">{obs.cvs_evidence}</p>
@@ -90,15 +93,31 @@ export default function CvsCard({ state, history, idx, obs, obsList, tNow, senso
         )}
       </div>
       {sensor && (
-        <DuctCard confirmed={ductConfirmed} sightings={ductSightings(obsList, tNow)} obs={obs} plateMet={!!state.cvs?.c2_plate_exposed} />
+        <DuctCard confirmed={ductConfirmed} sightings={ductSightings(obsList, tNow)} obs={obs} plateMet={!!state.cvs?.c2_plate_exposed} dense={dense} />
       )}
     </div>
   );
 }
 
-function DuctCard({ confirmed, sightings, obs, plateMet }) {
+function DuctCard({ confirmed, sightings, obs, plateMet, dense }) {
   const n = Math.min(CONFIRM_FRAMES, sightings);
   const seen = (obs?.structures || []).filter((s) => (s.confidence ?? 0) >= 0.5).map((s) => s.name.replaceAll("_", " "));
+  if (dense)
+    return (
+      <div className="rounded-xl border border-line bg-surface-0 px-3 py-2">
+        <div className="flex items-baseline justify-between gap-2">
+          <span className="text-sm"><span className="text-ink-3">Cystic duct · </span>
+            <b className={confirmed ? "text-status-good" : "text-status-warning"}>{confirmed ? "confirmed ✓" : "not confirmed"}</b></span>
+          <span className="text-xs text-ink-2">{n}/{CONFIRM_FRAMES} clear sightings</span>
+        </div>
+        <div className="mt-1.5 flex gap-1.5">
+          {Array.from({ length: CONFIRM_FRAMES }).map((_, i) => (
+            <span key={i} className={`h-1.5 flex-1 rounded-full ${i < n ? "bg-status-good" : "bg-surface-3"}`} />
+          ))}
+        </div>
+        {!confirmed && <p className="mt-1 text-[11px] text-ink-3">Clipping before the duct is confirmed raises an alert.</p>}
+      </div>
+    );
   return (
     <div className="rounded-2xl border border-line bg-surface-0 p-4">
       <div className="font-mono text-[11px] uppercase tracking-wider text-ink-3">Cystic duct</div>

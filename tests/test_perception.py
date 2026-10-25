@@ -35,6 +35,22 @@ def test_adhesions_patient_raises_alert_with_evidence():
     assert alerts and alerts[0]["type"] == rules.V_CLIP_BEFORE_CVS and alerts[0]["evidence"]
 
 
+class NeverDecides(perception.MemorySink):
+    """A viewer who never reacts to the warning."""
+
+    async def wait_decision(self, alert_id):
+        await asyncio.sleep(3600)
+
+
+def test_alert_never_pauses_the_analysis():
+    sink = NeverDecides()
+    asyncio.run(asyncio.wait_for(perception.run_watch("s", "VID74", P3, sink, t_from=381, t_to=561, source="labels"), 30))
+    alerts = [(i, d) for i, (c, d) in enumerate(sink.events) if c == "alerts"]
+    assert alerts and all(d["paused"] is False for _, d in alerts)
+    after = [d for c, d in sink.events[alerts[0][0] + 1:] if c == "world_state"]
+    assert after and after[-1].get("done")  # the stream ran on past the warning to the end of the clip
+
+
 def test_obscured_view_holds_anatomy(monkeypatch):
     calls = {"n": 0}
 
